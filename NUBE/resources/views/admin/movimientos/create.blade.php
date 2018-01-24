@@ -26,15 +26,15 @@
                     <div class="form-group"><label class="col-sm-3 control-label">Concepto</label>
                         <div class="col-sm-9 controls">
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-10">
                                     <div class="input-icon right">
-                                        <select  style="width: 100%"  name="costo" id="costo_id" placeholder="campo requerido"  class="select2 form-control">
-                                            {{$costos = $servicios}}
-                                            @foreach($costos as $costo)
-                                                <option value="{{$costo->id}}">{{$costo->nombre}}</option>
+                                        <select  style="width: 100%"  name="concepto" id="concepto" placeholder="campo requerido"  class="select2 form-control">
+                                            {{$conceptos = $servicios}}
+                                            @foreach($conceptos as $concepto)
+                                                <option value="{{$concepto->nombre}}{{--$concepto->id--}}">{{$concepto->nombre}}</option>
                                             @endforeach
                                             <option value="0">Otro</option>
-                                            <input name="descripcion" class="form-control hide" placeholder="campo requerido" required>
+                                            <input id="descripcion" name="descripcion" class="form-control hide animated shake" placeholder="ingrese el motivo del movimiento" >
                                         </select>
                                     </div>
                                 </div>
@@ -70,8 +70,8 @@
                     <div class="form-group"><label class="col-sm-3 control-label">Tipo</label>
                         <div class="col-sm-9 controls">
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <select  style="width: 100%"  name="pais_id" id="pais_id" placeholder="campo requerido"  class="select2 form-control">
+                                <div class="col-xs-10">
+                                    <select  style="width: 100%"  name="tipo_movimiento" id="tipo_movimiento" placeholder="campo requerido"  class="select2 form-control">
                                         <option value="entrada">Entrada</option>
                                         <option value="salida">Salida</option>
                                     </select>
@@ -82,10 +82,10 @@
                     <div class="form-group"><label class="col-sm-3 control-label">Monto</label>
                         <div class="col-sm-9 controls">
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-10">
                                     <div class="input-icon right">
 
-                                        <input name="monto" type="text" placeholder="campo requerido" class="form-control pull-right">
+                                        <input id="monto" name="monto" type="text" placeholder="campo requerido" class="form-control pull-right">
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                 </form>
                     <br>
             </div>
-            <br>
+            <br><br><br><br>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">volver</button>
                 <button type="button" class="btn btn-primary" onclick="$('#boton_submit_crear').click()">registrar Movimiento</button>

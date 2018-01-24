@@ -38,10 +38,15 @@ class MovimientosController extends Controller
      */
     public function store(Request $request) //agregar movimiento a CC y/o a Caja
     {
+        dd($request);
         $movimiento = new Movimiento($request->all());
         $movimiento->fecha_hora = \Carbon\Carbon::now('America/Buenos_Aires');
         $movimiento->usuario_id = Auth::user()->id;
-
+        if($request->concepto == 0){                # hardcodeado | 0="Otro"
+            $movimiento->descripcion = $request->descripcion;
+        }else{
+            $movimiento->descripcion = $request->concepto;
+        }
         $movimiento->save();
         Session::flash('message', 'Se ha registrado un movimiento exitosamente.');
         return redirect()->route('contabilidad.index');

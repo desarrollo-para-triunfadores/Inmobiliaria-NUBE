@@ -67,28 +67,27 @@ var pieOptions = {
 //Create pie or douhnut chart
 // You can switch between pie and douhnut using the method below.
 pieChart.Doughnut(PieData, pieOptions);
-/**
- * Created by jpaul on 17/1/2018.
- */
+/******************************************************************************************************************* */
+
 
 
 /** En seccion TABLA MOVIMIENTOS **/
 //Datatable - instaciación del plugin
-var table = $('#example').DataTable({
+var table_mov = $('#tabla_movimientos').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
 });
 //Datatable - instaciación del plugin
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
-$('#example tbody').on('mouseenter', 'td', function () {
-    var colIdx = table.cell(this).index().column;
-    $(table.cells().nodes()).removeClass('highlight');
-    $(table.column(colIdx).nodes()).addClass('highlight');
+$('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
+    var colIdx = table_mov.cell(this).index().column;
+    $(table_mov.cells().nodes()).removeClass('highlight');
+    $(table_mov.column(colIdx).nodes()).addClass('highlight');
 });
 
-instaciar_filtros();
-function instaciar_filtros() {
+instaciar_filtros_movimientos();
+function instaciar_filtros_movimientos() {
     //Datatables | filtro individuales - instanciación de los filtros
-    $('#example tfoot th').each(function () {
+    $('#tabla_movimientos tfoot th').each(function () {
         var title = $(this).text();
         if (title !== "") {
             if (title !== 'Acciones') { //ignoramos la columna de los botones
@@ -97,7 +96,7 @@ function instaciar_filtros() {
         }
     });
 //Datatables | filtro individuales - búsqueda
-    table.columns().every(function () {
+    table_mov.columns().every(function () {
         var that = this;
         $('input', this.footer()).on('keyup change', function () {
             if (that.search() !== this.value) {
@@ -110,35 +109,36 @@ function instaciar_filtros() {
 $('a.toggle-vis').on('click', function (e) {
     e.preventDefault();
     // Get the column API object
-    var column = table.column($(this).attr('data-column'));
+    var column = table_mov.column($(this).attr('data-column'));
     // Toggle the visibility
     column.visible(!column.visible());
-    instaciar_filtros();
+    instaciar_filtros_movimientos();
 });
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
-$('#example tbody').on('mouseenter', 'td', function () {
-    var colIdx = table.cell(this).index().column;
-    $(table.cells().nodes()).removeClass('highlight');
-    $(table.column(colIdx).nodes()).addClass('highlight');
+$('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
+    var colIdx = table_mov.cell(this).index().column;
+    $(table_mov.cells().nodes()).removeClass('highlight');
+    $(table_mov.column(colIdx).nodes()).addClass('highlight');
 });
-
+/******************************************************************************************************************* */
 
 
 /** TABLA CLIENTES **/
-/*
-var tabla_clientes = $('#tabla_clientes').DataTable({
+/** En seccion TABLA CLIENTES **/
+//Datatable - instaciación del plugin
+var table_c = $('#tabla_clientes').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
 });
 //Datatable - instaciación del plugin
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_clientes tbody').on('mouseenter', 'td', function () {
-    var colIdx = tabla_clientes.cell(this).index().column;
-    $(tabla_clientes.cells().nodes()).removeClass('highlight');
-    $(tabla_clientes.column(colIdx).nodes()).addClass('highlight');
+    var colIdx = table_c.cell(this).index().column;
+    $(table_c.cells().nodes()).removeClass('highlight');
+    $(table_c.column(colIdx).nodes()).addClass('highlight');
 });
 
-instaciar_filtros();
-function instaciar_filtros() {
+instaciar_filtros_clientes();
+function instaciar_filtros_clientes() {
     //Datatables | filtro individuales - instanciación de los filtros
     $('#tabla_clientes tfoot th').each(function () {
         var title = $(this).text();
@@ -149,7 +149,7 @@ function instaciar_filtros() {
         }
     });
 //Datatables | filtro individuales - búsqueda
-    tabla_clientes.columns().every(function () {
+    table_c.columns().every(function () {
         var that = this;
         $('input', this.footer()).on('keyup change', function () {
             if (that.search() !== this.value) {
@@ -159,37 +159,30 @@ function instaciar_filtros() {
     });
 }
 
-//Datatables | ocultar/visualizar columnas dinámicamente
-$('a.toggle-vis').on('click', function (e) {
-    e.preventDefault();
-    // Get the column API object
-    var column = tabla_clientes.column($(this).attr('data-column'));
-    // Toggle the visibility
-    column.visible(!column.visible());
-    instaciar_filtros();
-});
-
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_clientes tbody').on('mouseenter', 'td', function () {
-    var colIdx = tabla_clientes.cell(this).index().column;
-    $(tabla_clientes.cells().nodes()).removeClass('highlight');
-    $(tabla_clientes.column(colIdx).nodes()).addClass('highlight');
+    var colIdx = table_c.cell(this).index().column;
+    $(table_c.cells().nodes()).removeClass('highlight');
+    $(table_c.column(colIdx).nodes()).addClass('highlight');
 });
-/********************************************************************************************** */
 
 
-$("#costo_id").change(function () {
-    if ($('#costo_id').val() === '0') {
-        $('#descripcion').show();
+/**** Oculta o Mustra el campo personalizado para "Concepto" ****/
+$("#concepto").change(function () {
+    if ($('#concepto').val() == 0) {
+        //alert('se selecciono otro');
+        $('#descripcion').removeClass('hide');
     }
-    if ($('#costo_id').val() != '0') {
+    if ($('#concepto').val() != 0) {
         $("#descripcion").hide();
     }
-})
-/*
-if ($('#costo_id').val(0)) {
-    $('#descripcion').removeClass('hide');
-} else {
-    $('#descripcion').hide();
+});
+/************************************************************** */
+
+/*****  Mascaras para decimales  ******/
+$('#monto').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});
+/***************************************************************************************************************** */
+
+function buscar_entre_fechas() {
+    
 }
-*/

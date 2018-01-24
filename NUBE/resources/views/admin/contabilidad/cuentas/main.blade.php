@@ -25,7 +25,7 @@
 
         <section class="content animated fadeIn">
             @include('admin.contabilidad.cuentas.boleta')   <!-- ULTIMA boleta hecha desde sistema (resumida) -->
-            @include('admin.contabilidad.cuentas.tabla_movimientos')
+            @include('admin.contabilidad.cuentas.tabla_pagos')
 
         </section>
     </div>

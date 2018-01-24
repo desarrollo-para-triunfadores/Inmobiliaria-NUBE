@@ -1,0 +1,121 @@
+
+
+$rol = ['nombre' => 'Administrador', 'modulos'=>'Todos']
+				\App\Rol::create($rol); 
+
+$user = ['name' => 'Juan Pablo Caceres', 'imagen' => 'sin imagen', 'email' => 'jpcaceres.nea@gmail.com', 'password' => bcrypt('123123'), 'rol_id'=>'1'];
+                \App\User::create($user); 
+
+$pais = ['nombre' => 'Argentina'] 
+                \App\Pais::create($pais);
+
+$provincia = ['nombre' => 'Chaco', 'pais_id' => '1'] 
+                \App\Provincia::create($provincia);
+                $provincia = ['nombre' => 'Misiones', 'pais_id' => '1'] 
+                \App\Provincia::create($provincia);
+$provincia = ['nombre' => 'Misiones', 'pais_id' => '1'] 
+                \App\Provincia::create($provincia);
+
+$localidad = ['nombre' => 'Resistencia', 'cod_postal' => '3500', 'provincia_id' => '1'] 
+				\App\Localidad::create($localidad);
+$localidad = ['nombre' => 'Barranqueras', 'cod_postal' => '3510', 'provincia_id' => '1'] 
+				\App\Localidad::create($localidad);
+$localidad = ['nombre' => 'Villa Angela', 'cod_postal' => '3513', 'provincia_id' => '1'] 
+				\App\Localidad::create($localidad);
+$localidad = ['nombre' => 'Fontana', 'cod_postal' => '3519', 'provincia_id' => '1'] 
+				\App\Localidad::create($localidad);
+
+$barrio = ['nombre'=>'Centro', 'localidad_id'=>'1', 'privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'Don Rafael', 'localidad_id'=>'1', 'privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'Prosperidad', 'localidad_id'=>'1','privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'Centenario', 'localidad_id'=>'1',  'privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'J.B. Alberdi', 'localidad_id'=>'1',  'privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'Centenario', 'localidad_id'=>'1',  'privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'Güiraldes', 'localidad_id'=>'1',  'privado'=>false]
+				\App\Barrio::create($barrio);
+$barrio = ['nombre'=>'La California', 'localidad_id'=>'1',  'privado'=>true]
+				\App\Barrio::create($barrio);
+
+$tipo = ['nombre' =>'Barrio', 'descripcion'=>'']
+                \App\Tipo::create($tipo);
+$tipo = ['nombre' =>'Inmueble', 'descripcion'=>'']
+                \App\Tipo::create($tipo);
+$tipo = ['nombre' =>'Condominio', 'descripcion'=>'']
+                \App\Tipo::create($tipo);
+$tipo = ['nombre' =>'Habiracion', 'descripcion'=>'']
+                \App\Tipo::create($tipo);
+$tipo = ['nombre' =>'Departamento', 'descripcion'=>'']
+                \App\Tipo::create($tipo);
+$tipo = ['nombre' =>'Casa', 'descripcion'=>'']
+                \App\Tipo::create($tipo);
+
+
+$edificio = ['nombre'=>'Juan Pablo I']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo II']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo III']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo IV']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo V']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo VI']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo VII']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo VIII']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo IX']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Juan Pablo X']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Condominio del Este']
+				\App\Edificio::create($edificio);
+$edificio = ['nombre'=>'Belgrano']
+				\App\Edificio::create($edificio);	
+$edificio = ['nombre'=>'Sarmiento']
+				\App\Edificio::create($edificio);	
+
+$ambiente = ['nombre' => 'Dormitorio', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Baño', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Lobby', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Living', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Comedor', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Terraza', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Cocina', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Cochera', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Patio Trasero', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+$ambiente = ['nombre' => 'Patio Frontal', 'superficie' => '', 'descripcion' => ''] 
+				\App\Ambiente::create($ambiente);
+
+
+
+
+
+$inquilino = ['nombre'=>'Juan Pablo', 'apellido'=>'Caceres', 'dni'=>'34478385', 'fecha_nac'=>'10/05/1989', 'telefono'=>'34478385', 'descripcion'=>'']
+				\App\Inquilino::create($inquilino);
+$inquilino = ['nombre'=>'Alexander Daniel', 'apellido'=>'Gomez', 'dni'=>'36778385', 'fecha_nac'=>'13/08/1991', 'telefono'=>'34478546', 'descripcion'=>'']
+				\App\Inquilino::create($inquilino);	
+$inquilino = ['nombre'=>'Marcelo', 'apellido'=>'Shmetzel', 'dni'=>'29978412', 'fecha_nac'=>'21/11/1971', 'telefono'=>'3624542112', 'descripcion'=>'']
+				\App\Inquilino::create($inquilino);		
+
+$garante = ['nombre'=>'Juan', 'apellido'=>'Rubio', 'dni'=>'38685011', 'fecha_nac'=>'02/03/1995', 'telefono'=>'3624108530', 'descripcion'=>'']
+				\App\Garante::create($garante);	
+
+

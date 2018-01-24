@@ -31,12 +31,10 @@
 			@include('admin.contabilidad.tabla_movimientos')
 			@include('admin.contabilidad.tabla_clientes')
 
-
 		</section>
 	</div>
 
 
 @endsection @section('script')
-	<script src="{{ asset('js/camara.js') }}"></script>
 	<script src="{{ asset('js/contabilidad.js') }}"></script>
 @endsection
