@@ -6,34 +6,34 @@
 	<div class="box-body ">
 		<table id="example" class="display" cellspacing="0" width="100%">
 			<thead>
-				<tr>
-					<th>Inmueble</th>
-					<th>Inquilino</th>
-					<th>Concepto</th>
-					<th>Periodo</th>
-					<th>Monto</th>
-					<th>1º fecha de vencimiento</th>
-					<th>2º fecha de vencimiento</th>
-					<th>Estado</th>
-				</tr>
+			<tr>
+				<th>Inmueble</th>
+				<th>Inquilino</th>
+				<th>Concepto</th>
+				<th>Periodo</th>
+				<th>Monto</th>
+				<th>1º fecha de vencimiento</th>
+				<th>2º fecha de vencimiento</th>
+				<th>Estado</th>
+			</tr>
 			</thead>
 			<tfoot>
-				<tr>
-					<th>Inmueble</th>
-					<th>Inquilino</th>
-					<th>Concepto</th>
-					<th>Periodo</th>
-					<th>Monto</th>
-					<th>1º fecha de vencimiento</th>
-					<th>2º fecha de vencimiento</th>
-					<th>Estado</th>
-				</tr>
+			<tr>
+				<th>Inmueble</th>
+				<th>Inquilino</th>
+				<th>Concepto</th>
+				<th>Periodo</th>
+				<th>Monto</th>
+				<th>1º fecha de vencimiento</th>
+				<th>2º fecha de vencimiento</th>
+				<th>Estado</th>
+			</tr>
 			</tfoot>
 			<tbody>
-				@foreach($servicios_contratos as $servicio_contrato)
+			@foreach($servicios_contratos as $servicio_contrato)
 				<tr>
 					<td class="text-center text-bold">{{$servicio_contrato->contrato->inmueble->tipo->nombre}} en {{$servicio_contrato->contrato->inmueble->direccion}} ({{$servicio_contrato->contrato->inmueble->localidad->nombre}})</td>
-					<td class="text-center">{{$servicio_contrato->contrato->inquilino->persona->apellido}}, {{$servicio_contrato->contrato->inquilino->persona->nombre}}</td>
+					<td class="text-center">{{$servicio_contrato->contrato->inquilino->persona->nombrecompleto}}</td>
 					<td>{{$servicio_contrato->servicio->nombre}}</td>
 					<td>
 						<select id="periodo{{$servicio_contrato->id}}" class="select_periodos" size="1" id="row-3-office" name="row-3-office" onchange="carga_lineas({{$servicio_contrato->id}})">
@@ -42,7 +42,11 @@
 					<td>
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
-							<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+							@if ($servicio_contrato->contrato->sujeto_a_gastos_compartidos && $servicio_contrato->servicio->servicio_compartido)
+								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="{{$servicio_contrato->determinar_valor()}}" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+							@else
+								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+							@endif
 						</div>
 					</td>
 					<td>
@@ -68,11 +72,9 @@
 						</select>
 					</td>
 				</tr>
-				@endforeach
+			@endforeach
 			</tbody>
 		</table>
-
-
 	</div>
 	<div class="box-footer">
 		<div class="row">

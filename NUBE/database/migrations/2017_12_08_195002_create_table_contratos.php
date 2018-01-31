@@ -45,4 +45,3 @@ class CreateTableContratos extends Migration
         Schema::dropIfExists('contratos');
     }
 }
-

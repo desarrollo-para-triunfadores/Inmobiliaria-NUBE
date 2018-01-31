@@ -83,3 +83,8 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/AdminLTE/sacado_KAdmin/main.css') }}">
+
+
+<!--Estilos propios-->
+<link type="text/css" rel="stylesheet" href="{{ asset('css/estilos_propios.css') }}">
+

@@ -141,12 +141,23 @@ class ContratosController extends Controller
 
 
         /*** Servicios del Inmueble ** */
-        $cantidad_servicios = (int) $request->cantidad_servicios;
-        for ($i = 1; $i <= $cantidad_servicios; $i++) {
-            $servicio = new ServicioContrato();
-            $servicio->servicio_id = $request["servicio" . $i];
-            $servicio->contrato_id = $contrato->id;
-            $servicio->save();
+
+        if($request[$servicio->nombre]){
+            $servicio_contrato = new ServicioContrato();
+            $servicio_contrato->servicio_id = $servicio->id;
+            $servicio_contrato->contrato_id = $contrato->id;
+            $servicio_contrato->save();
+        }
+
+        $servicios = Servicio::all();
+
+        foreach ($servicios as $servicio) {
+            if($request[$servicio->nombre]){
+                $servicio_contrato = new ServicioContrato();
+                $servicio_contrato->servicio_id = $servicio->id;
+                $servicio_contrato->contrato_id = $contrato->id;
+                $servicio_contrato->save();
+            }
         }
 
         $inmueble = Inmueble::find($request->inmueble_id);

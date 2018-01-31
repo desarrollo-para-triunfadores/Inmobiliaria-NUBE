@@ -183,6 +183,3 @@ $("#concepto").change(function () {
 $('#monto').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});
 /***************************************************************************************************************** */
 
-function buscar_entre_fechas() {
-    
-}

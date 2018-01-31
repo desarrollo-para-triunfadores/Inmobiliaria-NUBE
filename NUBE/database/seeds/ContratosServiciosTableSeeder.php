@@ -62,7 +62,16 @@ class ContratosServiciosTableSeeder extends Seeder
             'servicio_id' => '10',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-
+        DB::table('contratos_servicios')->insert([
+            'contrato_id' => '1',
+            'servicio_id' => '11',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('contratos_servicios')->insert([
+            'contrato_id' => '1',
+            'servicio_id' => '12',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
 
 
         DB::table('contratos_servicios')->insert([
@@ -97,23 +106,33 @@ class ContratosServiciosTableSeeder extends Seeder
         ]);
         //Gastos compartidos
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '2',
             'servicio_id' => '7',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '2',
             'servicio_id' => '8',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '2',
             'servicio_id' => '9',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '2',
             'servicio_id' => '10',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('contratos_servicios')->insert([
+            'contrato_id' => '2',
+            'servicio_id' => '11',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('contratos_servicios')->insert([
+            'contrato_id' => '2',
+            'servicio_id' => '12',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
@@ -151,26 +170,35 @@ class ContratosServiciosTableSeeder extends Seeder
         ]);
         //Gastos compartidos
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '3',
             'servicio_id' => '7',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '3',
             'servicio_id' => '8',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '3',
             'servicio_id' => '9',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('contratos_servicios')->insert([
-            'contrato_id' => '1',
+            'contrato_id' => '3',
             'servicio_id' => '10',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-
+        DB::table('contratos_servicios')->insert([
+            'contrato_id' => '3',
+            'servicio_id' => '11',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('contratos_servicios')->insert([
+            'contrato_id' => '3',
+            'servicio_id' => '12',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
 
 
         DB::table('contratos_servicios')->insert([

@@ -150,4 +150,3 @@ class UsersRolesPermisosTableSeeder extends Seeder
         $user_3->assignRole('Administrador');
     }
 }
-

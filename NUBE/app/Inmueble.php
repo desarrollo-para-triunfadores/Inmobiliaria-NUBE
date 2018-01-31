@@ -9,7 +9,7 @@ class Inmueble extends Model {
     protected $table = "inmuebles";
     protected $fillable = [
         'condicion',
-        'valorVenta', 
+        'valorVenta',
         'valorAlquiler',
         'valorReal',
         'superficie',
@@ -20,9 +20,9 @@ class Inmueble extends Model {
         'linkVideo',
         'longitud',
         'latitud',
-        'cantidadAmbientes', 
-        'cantidadBaños', 
-        'cantidadGarages', 
+        'cantidadAmbientes',
+        'cantidadBaños',
+        'cantidadGarages',
         'cantidadDormitorios',
         'disponible',
         'descripcion',
@@ -47,42 +47,8 @@ class Inmueble extends Model {
         return $this->hasMany('App\Contrato');
     }
 
-
-
-
-    public function contrato_vigente(){// este método queda obsoleto si se usa las relaciones
-        if($this->contratos()){         #si el inmueble tuvo alguna vez algun contrato (historicamente)
-            $fecha_hoy = \Carbon\Carbon::now('America/Buenos_Aires');
-            $historico_contratos_inmueble = Contrato::where('inmueble_id',$this->id)->get();
-            foreach ($historico_contratos_inmueble as $contrato){
-                $fecha_hasta = \Carbon\Carbon::createFromFormat('d/m/Y', $contrato->fecha_hasta);
-                if($fecha_hasta > $fecha_hoy){      #verificamos, si el contrato esta en vigencia, es porque es el actual contrato sobre el inmueble (le faltaria verificar si se cancelo, pero de momento no se puede cancelar un contrato)
-                    $contrato_vigente = $contrato;
-                    return $contrato_vigente;
-                }
-            }
-        }
-    }
-
-
-
     public function ultimo_contrato(){
-        return $this->contratos()->get()->sortByDesc('id')->first();              
-    }
-
-
-
-    public function fecha_fin_contrato_actual(){
-        if($this->contratos()){         #si el inmueble tuvo alguna vez algun contrato (historicamente)
-            $fecha_hoy = \Carbon\Carbon::now('America/Buenos_Aires');
-            $historico_contratos_inmueble = Contrato::where('inmueble_id',$this->id)->get();
-            foreach ($historico_contratos_inmueble as $contrato){
-                $fecha_hasta = \Carbon\Carbon::createFromFormat('d/m/Y', $contrato->fecha_hasta);
-                if($fecha_hasta > $fecha_hoy){      #verificamos, si el contrato esta en vigencia, es porque es el actual contrato sobre el inmueble (le faltaria verificar si se cancelo, pero de momento no se puede cancelar un contrato)
-                    return $fecha_hasta;
-                }
-            }
-        }
+        return $this->contratos()->get()->sortByDesc('id')->first();
     }
 
     public function tipo() {
@@ -101,8 +67,8 @@ class Inmueble extends Model {
     public function propietario() {
         return $this->belongsTo('App\Propietario');
     }
-    
-      public function edificio() {
+
+    public function edificio() {
         return $this->belongsTo('App\Edificio');
     }
 
@@ -110,11 +76,11 @@ class Inmueble extends Model {
         return $this->hasMany('App\ImagenInmueble');
     }
 
-    public function foto_slider(){           
+    public function foto_slider(){
         return $this->fotos()->where('seccion_imagen','slider')->get()->first();
     }
 
-     public function caracteristicas() {
+    public function caracteristicas() {
         return $this->hasMany('App\CaracteristicaInmueble');
     }
 

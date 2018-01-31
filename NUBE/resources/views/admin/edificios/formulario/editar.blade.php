@@ -38,6 +38,15 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <br>
+                                        <label class="form-check-label">
+                                            <input type="checkbox" name="administrado_por_sistema" id="administrado_por_sistema" class="form-check-input">
+                                            Edificio administrado por el sistema
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -158,8 +167,8 @@
                         </div>
                     </div>
                     <button id="boton_submit_update" type="submit" class="btn btn-primary hide"></button>
-                </form>  
-                <br>               
+                </form>
+                <br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">volver</button>

@@ -23,4 +23,18 @@ class Movimiento extends Model
     	return $this->belongsTo('App\Propietario');
     }
 
+
+
+    public static function totalSalida()
+    {
+        $total = 0;
+
+        foreach ($this as $movimiento) {
+            if ($movimiento->tipo == 'salida'){
+                $total = $total + $movimiento->monto;
+            }
+        }
+        return $total;
+    }
+
 }

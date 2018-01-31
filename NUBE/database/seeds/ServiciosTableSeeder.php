@@ -35,7 +35,7 @@ class ServiciosTableSeeder extends Seeder
         DB::table('servicios')->insert([
             'nombre' => 'Telefonía',
             'servicio_compartido' => false,
-            'descripcion' => 'Servicio de telefono (fijo)',
+            'descripcion' => 'Servicio de telefonía fija',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
@@ -86,6 +86,13 @@ class ServiciosTableSeeder extends Seeder
             'nombre' => 'Mantenimiento infraestructura',
             'servicio_compartido' => true,
             'descripcion' => 'Contempla el mantenimiento de los ascensores y otros arreglos circunstanciales',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('servicios')->insert([
+            'nombre' => 'Sueldo personal',
+            'servicio_compartido' => true,
+            'descripcion' => 'Sueldo para el sereno y otros empleados del edificio',
             'created_at' => date('Y-m-d H:m:s')
         ]);
     }

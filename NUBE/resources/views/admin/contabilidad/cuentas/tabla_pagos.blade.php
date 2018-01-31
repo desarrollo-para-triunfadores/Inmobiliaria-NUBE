@@ -81,11 +81,19 @@
                     @endif
                     <td class="text-center text-bold">{{$liquidacion->vencimiento}}</td>
                     <td class="text-center" width="100">
+                        {{--
                         <button onclick="mostrar_recibo($liquidacion)" title="Ver detalle de recibo" class="btn">
                            Ver
                         </button>
                         <button class="btn-bitbucket" onclick="escargar_recibo({{$liquidacion}})">Descargar
                         </button>
+                        --}}
+                        <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                            <i class="fa fa-list"></i>
+                        </a>
+                        <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
+                            <i class="fa fa-download"></i>
+                        </a>
                         {{--
                         <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
                             <i class="fa fa-list"></i>

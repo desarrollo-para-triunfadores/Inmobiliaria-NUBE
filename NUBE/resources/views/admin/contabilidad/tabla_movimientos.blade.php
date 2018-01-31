@@ -57,3 +57,21 @@
         </table>
     </div>
 </div>
+
+<script>
+    function buscar_entre_fechas() {
+        $.ajax({
+            dataType: 'json', url: "/admin/contabilidad/",
+            data: {
+                fecha_inicio: $('#fechaInicio'),
+                fecha_fin: $('#fechaFin'),
+            },
+            success: function (data) {
+                var recibido = JSON.parse(data);
+
+                console.log(recibido);
+
+            }
+        });
+    }
+</script>

@@ -15,13 +15,15 @@ class CreateTableLiquidacionesMensuales extends Migration
     {
         Schema::create('liquidaciones_mensuales', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('periodo')->nullable();
             $table->double('alquiler', 10, 2)->nullable();
+            $table->double('gastos_administrativos', 10, 2)->nullable();
             $table->timestamp('fecha_pago')->nullable();
             $table->date('vencimiento')->nullable();
             $table->double('total', 10, 2)->nullable();
             $table->double('subtotal', 10, 2)->nullable();
             $table->double('saldo_periodo', 10, 2)->nullable();
-            $table->boolean('abono')->nullable(); 
+            $table->boolean('abono')->nullable();
             $table->integer('contrato_id')->unsigned()->nullable();
             $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');
             $table->timestamps();

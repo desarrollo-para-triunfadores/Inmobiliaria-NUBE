@@ -68,6 +68,10 @@ class Contrato extends Model {
         return $this->hasMany('App\ServicioContrato');
     }
 
+    public function liquidaciones() {
+        return $this->hasMany('App\LiquidacionMensual');
+    }
+
     public function periodos_contrato() {
         return $this->hasMany('App\PeriodoContrato');
     }

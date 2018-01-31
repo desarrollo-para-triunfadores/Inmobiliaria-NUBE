@@ -8,7 +8,6 @@ function completar_campos(edificio) {
     $('#valor_ascensores').val(edificio.valor_ascensores);
     $('#cant_ascensores').val(edificio.cant_ascensores);
     $('#costo_limpieza').val(edificio.costo_limpieza);
-
     $('#form-update').attr('action', '/admin/edificios/' + edificio.id);
     $('#boton-modal-update').click();
 }
@@ -48,7 +47,7 @@ function readFile(input) {
     }
 }
 
-//evento sobre el bot�n subir
+//evento sobre el botón subir
 $('.actionUpload-nuevo input').on('change', function () {
     $('#main-cropper_nuevo').removeClass('hide');
     if (MediaStream_nuevo !== "") {
@@ -119,113 +118,113 @@ function mandar(tipo_form) { //tipo_form puede ser create o update
     var token = $("#token-" + tipo_form).val();
     var formData = new FormData(document.getElementById("form-" + tipo_form));
 
-/*
-    if (tipo_form === 'create') {
-        if (basic_nuevo_cam === "") {
-            if ($('#imagen-nuevo').val() === '') {
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            } else {
-                basic_nuevo.croppie('result', 'blob').then(function (html) {
-                    formData.append('imagen', html);
-                    $.ajax(url, {
-                        headers: {"X-CSRF-TOKEN": token},
-                        method: "POST",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
-                            window.location.href = redireccion;
-                        },
-                        error: function () {
-                            console.log('Upload error');
-                        }
-                    });
-                });
-            }
-        } else {
-            basic_nuevo_cam.croppie('result', 'blob').then(function (html) {
-                formData.append('imagen', html);
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            });
-        }
-    } else {
-        if (basic_update_cam === "") {
-            if ($('#imagen-update').val() === '') {
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            } else {
-                basic_update.croppie('result', 'blob').then(function (html) {
-                    formData.append('imagen', html);
-                    $.ajax(url, {
-                        headers: {"X-CSRF-TOKEN": token},
-                        method: "POST",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
-                            window.location.href = redireccion;
-                        },
-                        error: function () {
-                            console.log('Upload error');
-                        }
-                    });
-                });
-            }
-        } else {
-            basic_update_cam.croppie('result', 'blob').then(function (html) {
-                formData.append('imagen', html);
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            });
-        }
-    }
-    */
+    /*
+     if (tipo_form === 'create') {
+     if (basic_nuevo_cam === "") {
+     if ($('#imagen-nuevo').val() === '') {
+     $.ajax(url, {
+     headers: {"X-CSRF-TOKEN": token},
+     method: "POST",
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+     window.location.href = redireccion;
+     },
+     error: function () {
+     console.log('Upload error');
+     }
+     });
+     } else {
+     basic_nuevo.croppie('result', 'blob').then(function (html) {
+     formData.append('imagen', html);
+     $.ajax(url, {
+     headers: {"X-CSRF-TOKEN": token},
+     method: "POST",
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+     window.location.href = redireccion;
+     },
+     error: function () {
+     console.log('Upload error');
+     }
+     });
+     });
+     }
+     } else {
+     basic_nuevo_cam.croppie('result', 'blob').then(function (html) {
+     formData.append('imagen', html);
+     $.ajax(url, {
+     headers: {"X-CSRF-TOKEN": token},
+     method: "POST",
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+     window.location.href = redireccion;
+     },
+     error: function () {
+     console.log('Upload error');
+     }
+     });
+     });
+     }
+     } else {
+     if (basic_update_cam === "") {
+     if ($('#imagen-update').val() === '') {
+     $.ajax(url, {
+     headers: {"X-CSRF-TOKEN": token},
+     method: "POST",
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+     window.location.href = redireccion;
+     },
+     error: function () {
+     console.log('Upload error');
+     }
+     });
+     } else {
+     basic_update.croppie('result', 'blob').then(function (html) {
+     formData.append('imagen', html);
+     $.ajax(url, {
+     headers: {"X-CSRF-TOKEN": token},
+     method: "POST",
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+     window.location.href = redireccion;
+     },
+     error: function () {
+     console.log('Upload error');
+     }
+     });
+     });
+     }
+     } else {
+     basic_update_cam.croppie('result', 'blob').then(function (html) {
+     formData.append('imagen', html);
+     $.ajax(url, {
+     headers: {"X-CSRF-TOKEN": token},
+     method: "POST",
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+     window.location.href = redireccion;
+     },
+     error: function () {
+     console.log('Upload error');
+     }
+     });
+     });
+     }
+     }
+     */
 }
 
 

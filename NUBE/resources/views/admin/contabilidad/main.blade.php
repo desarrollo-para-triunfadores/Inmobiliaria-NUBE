@@ -37,4 +37,5 @@
 
 @endsection @section('script')
 	<script src="{{ asset('js/contabilidad.js') }}"></script>
+
 @endsection

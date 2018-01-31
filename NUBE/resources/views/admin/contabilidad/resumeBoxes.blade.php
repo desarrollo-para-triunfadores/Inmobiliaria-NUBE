@@ -30,7 +30,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>$ xx<sup style="font-size: 20px">%</sup></h3>
+                <h3>$ xx<sup style="font-size: 20px"></sup></h3>
                 <p>Entradas</p>
             </div>
             <div class="icon">
@@ -44,7 +44,8 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>$ xx</h3>
+                {{-- $movimientos = \App\Movimiento::all() --}}
+                <h3>$ xx{{-- $movimientos->totalSalida() --}}</h3>
 
                 <p>Salidas</p>
             </div>

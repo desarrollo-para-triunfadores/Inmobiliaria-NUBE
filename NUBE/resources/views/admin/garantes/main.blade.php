@@ -111,7 +111,7 @@
                                 <div class="col-md-12">
                                     <div class="pull-right">
                                         <button title="Registrar un garante" type="button" id="boton-modal-crear" class="btn btn-primary" data-toggle="modal" data-target="#modal-crear">
-                                            <i class="fa fa-plus-circle"></i> &nbsp;Registrar Garante
+                                            <i class="fa fa-plus-circle"></i> &nbsp;registrar garante
                                         </button>
                                     </div>
                                 </div>
@@ -133,4 +133,5 @@
     <script src="{{ asset('js/garante.js') }}"></script>
     <script src="{{ asset('js/camara.js') }}"></script>
 @endsection
+
 

@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
+use Illuminate\Support\Facades\DB;
 
 class LiquidacionMensual extends Model
 {
@@ -11,6 +14,8 @@ class LiquidacionMensual extends Model
     protected $fillable = [
         'contrato_id',
         'alquiler',
+        'gastos_administrativos',
+        'periodo',
         'vencimiento',
         'fecha_pago',
         'sub_total',
@@ -29,6 +34,23 @@ class LiquidacionMensual extends Model
         return $this->fecha_pago->format('d/m/Y');
     }
 
+    public function comprobar_vencimiento() {
+        $fecha_hoy = Carbon::now();
+        if($this->vencimiento < $fecha_hoy){
+            return true;
+        }
+    }
+
+    public function calcular_mora() {
+        $fecha_hoy = Carbon::now();
+        if($this->vencimiento > $fecha_hoy){
+            return 0;
+        }else{
+            $cantidad_dias = $fecha_hoy->diffInDays($this->vencimiento);
+            return ($this->contrato->monto_basico * 2 /100) * $cantidad_dias;
+        }
+    }
+
     public function contrato() {
         return $this->belongsTo('App\Contrato');
     }
@@ -38,15 +60,9 @@ class LiquidacionMensual extends Model
     }
 
     public function calcular_total(){ // este método calcula el valor total por los servicios asociados (por ahora no cuenta las expensas del edificio)
-        $total = 0;
-        foreach ($this->conceptos() as $concepto) {
-            $total = $total + $concepto->monto;
-        }
+        $total = DB::table('conceptos_liquidaciones_mensuales')
+            ->where('liquidacion_mensual_id', $this->id)
+            ->sum('monto');
         return $total;
-    }
-
-    public function calcular_valor_expensas(){ //este método es previsional hasta que aclaremos el tema de los gastos compartidos del edificio
-        $total_conceptos = $this->calcular_total();
-        return $this->total - $total_conceptos - $this->alquiler;
     }
 }

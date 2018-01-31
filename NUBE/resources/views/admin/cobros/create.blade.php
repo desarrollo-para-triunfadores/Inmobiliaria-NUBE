@@ -25,44 +25,44 @@
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-md-12">
-								
-						<div class="box box-primary">
-							<div class="box-body">
-								<br>
-								<legend>Detalles del registro</legend>
-								<br>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="control-group">
-											<label>Nombre del cliente</label>
-											<div class="controls">
-												<select style="width: 100%"  id="inquilino_id"  placeholder="campo requerido" required class="select2 form-control">
-													@foreach($inquilinos as $inquilino)
-													<option value="{{$inquilino->id}}">{{$inquilino->persona->nombrecompleto}} (DNI: {{$inquilino->persona->dni}})</option>                                                    
-													@endforeach
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<br>
-										<div class="control-group">										
-											<button type="submit" class="btn btn-primary" onclick="traer_resumen()" title="Buscar detalle"><i class="fa fa-search" aria-hidden="true"></i> buscar detalle del cliente</button>
-										</div>
+			<div class="col-md-12">							
+				<div class="box box-primary">
+					<div class="box-body">						
+						<legend>Clientes</legend>						
+						<div class="row">
+							<div class="col-md-6">
+								<div class="control-group">
+									<label>Nombre del cliente</label>
+									<div class="controls">
+										<select style="width: 100%"  id="inquilino_id"  placeholder="campo requerido" required class="select2 form-control">
+											@foreach($inquilinos as $inquilino)
+											<option value="{{$inquilino->id}}">{{$inquilino->persona->nombrecompleto}} (DNI: {{$inquilino->persona->dni}})</option>                                                    
+											@endforeach
+										</select>
 									</div>
 								</div>
-                                <br><br>
-                                <legend>Permisos</legend>								
-									<div id="tabla_deudas"></div>								
-                            </div>
-                            <div class="box-footer">
-                                <p class="pull-left form-text text-muted"><strong>Información:</strong> los roles proporcionan permisos para las acciones disponibles en el <b>sistema</b>.</p>
-                                <button type="submit" class="btn btn-primary pull-right" title="Registrar un rol"><i class="fa fa-plus-circle"></i> registrar rol</button>
-                            </div>
-						</div>														
+							</div>
+							<div class="col-md-6">
+								<br>
+								<div class="control-group">										
+									<button type="submit" class="btn btn-primary" onclick="traer_resumen()" title="Buscar detalle"><i class="fa fa-search" aria-hidden="true"></i> buscar boletas</button>
+								</div>
+							</div>
+						</div> 
+						<br>                             							
+					</div>
+					<div class="box-footer">
+						<p class="pull-left form-text text-muted"><strong>Información:</strong> al buscar las boletas del cliente se desplegará un listado con las boletas a pagar por el <b>cliente</b>.</p>                                
+					</div>
+				</div>														
 			</div>
+			<br><br>
+				
+								
+				<div id="tabla_deudas">
+			
 		</div>
+	</div>
 	</section>
 </div>
 

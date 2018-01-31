@@ -48,6 +48,24 @@ $('#example tbody').on('mouseenter', 'td', function () {
 });
 
 
+function calcular_cambio(){
+    $("#leyenda_vuelto").addClass("hide");
+    if($("#abono").val() !== ""){
+        var saldo_periodo = 0,
+            abono = parseFloat($("#abono").val()),
+            total = parseFloat($("#total").val());
+        if(abono >= total){
+            saldo_periodo = abono - total;
+            $("#saldo_periodo").val(saldo_periodo);
+            $("#leyenda_vuelto").html("Diferencia: $"+saldo_periodo);
+            $("#leyenda_vuelto").removeClass("hide");
+        }
+
+    }
+
+    console.log("sali");
+}
+
 function traer_resumen(){
     console.log($('#inquilino_id').val());
     $.ajax({
@@ -58,7 +76,6 @@ function traer_resumen(){
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log(data);
             $('#tabla_deudas').html(data)
         }
     })
