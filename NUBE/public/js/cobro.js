@@ -50,12 +50,12 @@ $('#example tbody').on('mouseenter', 'td', function () {
 
 function calcular_cambio(){
     $("#leyenda_vuelto").addClass("hide");
-    if($("#abono").val() !== ""){
+    if($("#abonado").val() !== ""){
         var saldo_periodo = 0,
-            abono = parseFloat($("#abono").val()),
+            abonado = parseFloat($("#abonado").val()),
             total = parseFloat($("#total").val());
-        if(abono >= total){
-            saldo_periodo = abono - total;
+        if(abonado >= total){
+            saldo_periodo = abonado - total;
             $("#saldo_periodo").val(saldo_periodo);
             $("#leyenda_vuelto").html("Diferencia: $"+saldo_periodo);
             $("#leyenda_vuelto").removeClass("hide");

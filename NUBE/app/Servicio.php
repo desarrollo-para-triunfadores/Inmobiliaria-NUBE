@@ -14,8 +14,12 @@ class Servicio extends Model
         return $this->belongsTo('App\Edificio');
     }
 
-    public function servicios_contrato() {
+    public function servicioscontrato() {
         return $this->hasMany('App\ServicioContrato');
+    }
+
+    public function conceptosliquidacion(){
+        return $this->hasMany('App\ConceptoLiquidacion');
     }
 
 }

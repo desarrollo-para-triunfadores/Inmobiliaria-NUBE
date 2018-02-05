@@ -19,6 +19,9 @@ class ServicioContrato extends Model
         return $this->belongsTo('App\Servicio');
     }
 
+    public function conceptosliquidacion(){
+        return $this->hasMany('App\ConceptoLiquidacion');
+    }
 
     public function determinar_valor() {
         $fecha_hoy = Carbon::now();

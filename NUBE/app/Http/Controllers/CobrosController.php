@@ -32,17 +32,15 @@ class CobrosController extends Controller
         $contrato_id = $inquilino->ultimo_contrato()->id;
         $saldo_cuenta = 0;
 
-        $liquidaciones = LiquidacionMensual::all()->where("fecha_pago", null)->where("alquiler", "<>", null)->where("contrato_id", $contrato_id);
+        $liquidaciones = LiquidacionMensual::all()->where("fecha_pago", null)->where("abonado", null)->where("alquiler", "<>", null)->where("contrato_id", $contrato_id);
 
         $liquidacion_posterior = LiquidacionMensual::all() //este se utiliza para comprobar que el saldo diponible no hay asido utilizado.
         ->where("contrato_id",$contrato_id)
-            ->where("abono",'<>', null)
+            ->where("abonado",'<>', null)
             ->sortBy('id')->first();
 
-
-
         if(!is_null($liquidacion_posterior) && !is_null($liquidacion_posterior->saldo_periodo)){
-            $saldo_cuenta = $liquidacion_con_saldo->saldo_periodo;
+            $saldo_cuenta = $liquidacion_posterior->saldo_periodo;
         }
 
         return response()->json(view('admin.cobros.tabla_liquidaciones', compact('liquidaciones', 'saldo_cuenta'))->render());
@@ -102,33 +100,19 @@ class CobrosController extends Controller
     public function update(Request $request, $id)
     {
 
-
         $liquidacion = LiquidacionMensual::find($id);
-        $liquidacion->fill($request->all());
+        $liquidacion->fill($request->all());        
         $liquidacion->save();
-
-        /*      $idusuario = Auth::user()->id;
-                $movimiento = new Movimiento();
-
-                $movimiento->usuario_id = $idusuario;
-                $movimiento->fecha_hora = Carbon::now();
-                $movimiento->tipo_movimiento = "entrada";
-                $movimiento->monto = $liquidacion->abono;
-                $movimiento->descripcion = "Se recibe pago por $".$liquidacion->abono.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
-                $movimiento->inquilino_id = $liquidacion->contrato->inquilino->id;
-
-                $movimiento->usuario_id = $idusuario;
-                $movimiento->fecha_hora = Carbon::now();
-                $movimiento->tipo_movimiento = "salida";
-
-                $liquidacion->contrato->
-
-                $movimiento->monto = $liquidacion->abono;
-                $movimiento->descripcion = "Se recibibe pago por $".$liquidacion->abono.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
-                $movimiento->inquilino_id = $liquidacion->contrato->inquilino->id;
-        */
-
-
+  
+        $movimiento = new Movimiento();
+        $movimiento->usuario_id = Auth::user()->id;
+        $movimiento->fecha_hora = Carbon::now();
+        $movimiento->tipo_movimiento = "entrada";
+        $movimiento->monto = $liquidacion->abonado;
+        $movimiento->descripcion = "Se recibe pago por $".$liquidacion->abonado.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
+        $movimiento->liquidacion_id = $liquidacion->id;
+        $movimiento->save();
+           
         Session::flash('message', 'Se ha actualizado la información');
         return redirect()->route('cobros.create');
     }

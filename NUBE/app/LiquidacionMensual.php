@@ -20,7 +20,8 @@ class LiquidacionMensual extends Model
         'fecha_pago',
         'sub_total',
         'total',
-        'abono',
+        'abonado',
+        'pagado_al_propietario',
         'saldo_periodo'
     ];
 
@@ -56,12 +57,13 @@ class LiquidacionMensual extends Model
     }
 
     public function conceptos(){
-        return $this->hasMany('App\ConceptoLiquidacion');
+        $conceptos= ConceptoLiquidacion::all()->where('liquidacionmensual_id', $this->id);
+        return $conceptos;
     }
 
     public function calcular_total(){ // este método calcula el valor total por los servicios asociados (por ahora no cuenta las expensas del edificio)
         $total = DB::table('conceptos_liquidaciones_mensuales')
-            ->where('liquidacion_mensual_id', $this->id)
+            ->where('liquidacionmensual_id', $this->id)
             ->sum('monto');
         return $total;
     }

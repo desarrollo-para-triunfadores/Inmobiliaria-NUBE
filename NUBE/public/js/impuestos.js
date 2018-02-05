@@ -56,7 +56,7 @@ function carga_lineas (id) { // este proceso se encarga de registrar y actualiza
     if ($('#monto' + id).val() !== '') {
         if ( (id, monto)) {
             lineas[id] = {
-                servicio_contrato_id: id,
+                serviciocontrato_id: id,
                 periodo: periodo,
                 monto: monto,
                 primer_vencimiento: venc1,
@@ -212,12 +212,12 @@ function control_monto (id, valor_dato) {
     return valor_valido
 }
 
-function control_redundancia_periodos (periodo, servicio_contrato_id) {
+function control_redundancia_periodos (periodo, serviciocontrato_id) {
     console.log("redun");
     $.ajax({
         url: '/admin/conceptosliquidaciones',
         data: {
-            servicio_contrato_id: servicio_contrato_id,
+            serviciocontrato_id: serviciocontrato_id,
             periodo: periodo
         },
         type: 'GET',
@@ -236,7 +236,7 @@ function control_redundancia_periodos (periodo, servicio_contrato_id) {
                     }
                 })
 
-                lineas.splice(lineas.indexOf(lineas[servicio_contrato_id]), 1)
+                lineas.splice(lineas.indexOf(lineas[serviciocontrato_id]), 1)
             }
         }
     })

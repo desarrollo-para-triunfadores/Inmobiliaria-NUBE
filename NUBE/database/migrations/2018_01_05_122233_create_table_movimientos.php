@@ -24,7 +24,9 @@ class CreateTableMovimientos extends Migration
             $table->integer('inquilino_id')->unsigned()->nullable();
             $table->foreign('inquilino_id')->references('id')->on('inquilinos')->onDelete('cascade'); 
             $table->integer('propietario_id')->unsigned()->nullable();
-            $table->foreign('propietario_id')->references('id')->on('propietarios')->onDelete('cascade');             
+            $table->foreign('propietario_id')->references('id')->on('propietarios')->onDelete('cascade');     
+            $table->integer('liquidacion_id')->unsigned()->nullable();
+            $table->foreign('liquidacion_id')->references('id')->on('movimientos')->onDelete('cascade');                     
             $table->timestamps();
         });
     }

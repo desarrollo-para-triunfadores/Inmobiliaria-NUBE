@@ -12,8 +12,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
     public function run()
     {
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '1',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '1',
             'monto'=> '345.50',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -23,8 +23,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '2',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '2',
             'monto'=> '240.00',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -34,8 +34,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '3',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '3',
             'monto'=> '1180.60',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -45,8 +45,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '4',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '4',
             'monto'=> '500.25',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -56,8 +56,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '5',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '5',
             'monto'=> '180.15',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -67,8 +67,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '6',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '6',
             'monto'=> '98.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -78,8 +78,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '7',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '7',
             'monto'=> '198.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -89,8 +89,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '8',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '8',
             'monto'=> '88.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -100,8 +100,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '9',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '9',
             'monto'=> '106.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -111,8 +111,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '10',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '10',
             'monto'=> '298.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -122,8 +122,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '11',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '11',
             'monto'=> '106.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -133,8 +133,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '1',
-            'servicio_contrato_id'=> '12',
+            'liquidacionmensual_id'=> '1',
+            'serviciocontrato_id'=> '12',
             'monto'=> '298.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -149,8 +149,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
 
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '13',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '13',
             'monto'=> '550.60',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -160,8 +160,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '14',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '14',
             'monto'=> '240.00',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -171,8 +171,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '15',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '15',
             'monto'=> '1550.00',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -182,8 +182,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '16',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '16',
             'monto'=> '400.00',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -193,8 +193,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '17',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '17',
             'monto'=> '180.15',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -204,8 +204,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '18',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '18',
             'monto'=> '136.40',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -215,8 +215,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '19',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '19',
             'monto'=> '198.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -226,8 +226,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '20',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '20',
             'monto'=> '88.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -237,8 +237,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '21',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '21',
             'monto'=> '106.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',
@@ -248,8 +248,8 @@ class ConceptosLiquidacionesMensualesTableSeeder extends Seeder
         ]);
 
         DB::table('conceptos_liquidaciones_mensuales')->insert([
-            'liquidacion_mensual_id'=> '2',
-            'servicio_contrato_id'=> '22',
+            'liquidacionmensual_id'=> '2',
+            'serviciocontrato_id'=> '22',
             'monto'=> '298.75',
             'periodo'=> '12/2017',
             'primer_vencimiento'=> '2018-01-10',

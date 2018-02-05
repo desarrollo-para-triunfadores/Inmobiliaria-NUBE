@@ -23,7 +23,8 @@ class CreateTableLiquidacionesMensuales extends Migration
             $table->double('total', 10, 2)->nullable();
             $table->double('subtotal', 10, 2)->nullable();
             $table->double('saldo_periodo', 10, 2)->nullable();
-            $table->boolean('abono')->nullable();
+            $table->double('abonado', 10, 2)->nullable();
+            $table->boolean('pagado_al_propietario')->nullable();
             $table->integer('contrato_id')->unsigned()->nullable();
             $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');
             $table->timestamps();

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movimiento extends Model
 {
     protected $table =  "movimientos";
-    protected $fillable = ['fecha_hora', 'tipo_movimiento', 'monto', 'descripcion', 'usuario_id', 'inquilino_id', 'propietario_id'];
+    protected $fillable = ['fecha_hora', 'tipo_movimiento', 'monto', 'descripcion', 'usuario_id', 'inquilino_id', 'propietario_id', 'liquidacion_id'];
 
     protected $dates = ['fecha_hora'];
 
@@ -23,9 +23,11 @@ class Movimiento extends Model
     	return $this->belongsTo('App\Propietario');
     }
 
+    public function liquidacion(){
+    	return $this->belongsTo('App\LiquidacionMensual');
+    }
 
-
-    public static function totalSalida()
+   /* public static function totalSalida()
     {
         $total = 0;
 
@@ -35,6 +37,6 @@ class Movimiento extends Model
             }
         }
         return $total;
-    }
+    }*/
 
 }

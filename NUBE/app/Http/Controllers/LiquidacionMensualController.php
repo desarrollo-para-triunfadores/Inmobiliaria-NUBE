@@ -93,6 +93,7 @@ class LiquidacionMensualController extends Controller
         if ($request->ajax()) {
             $conceptos = [];
             $ids_servicios_contratos = [];
+            
             foreach ($request->lista_conceptos as $liquidacion) {
                 $concepto_liquidacion = LiquidacionMensual::find($liquidacion["id_liquidacion"]);
                 $concepto_liquidacion->gastos_administrativos = $liquidacion["gastos_administrativos"];
@@ -100,13 +101,10 @@ class LiquidacionMensualController extends Controller
                 $concepto_liquidacion->total = $liquidacion["total"];
                 $concepto_liquidacion->subtotal = $liquidacion["subtotal"];
                 $concepto_liquidacion->periodo = $liquidacion["periodo"];
-
                 if (!is_null($liquidacion["vencimiento"])){ //si se cargó una fecha de vencimiento se formatea para guardar en la base
                     $vencimiento = str_replace('/', '-', $liquidacion["vencimiento"]);
                     $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
-
-
                 $concepto_liquidacion->save();
             }
             return response()->json('ok'); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
@@ -117,7 +115,7 @@ class LiquidacionMensualController extends Controller
 
         foreach ($liquidaciones_mensuales as $liquidacion) {
             $cantidad_conceptos_cargados =  ConceptoLiquidacion::all()
-                ->where('liquidacion_mensual_id', $liquidacion->id)
+                ->where('liquidacionmensual_id', $liquidacion->id)
                 ->count();
 
 
@@ -130,19 +128,19 @@ class LiquidacionMensualController extends Controller
             $servicios_contratos_array = array_map('intval', explode(',', $servicios_contratos_claves));
 
             $conceptos_liquidaciones = ConceptoLiquidacion::all()
-                ->where('liquidacion_mensual_id', $liquidacion->id) //filtramos todos los conceptos que no hayan sido liquidados
-                ->whereIn('servicio_contrato_id', $servicios_contratos_array); //filtramos los concetos de contratos que tengan de servicio_contrato_id a cualquiera de los ids de la coleccion de servicios_contratos filtrados
+                ->where('liquidacionmensual_id', $liquidacion->id) //filtramos todos los conceptos que no hayan sido liquidados
+                ->whereIn('serviciocontrato_id', $servicios_contratos_array); //filtramos los concetos de contratos que tengan de servicio_contrato_id a cualquiera de los ids de la coleccion de servicios_contratos filtrados
 
             $conceptos_para_factura = [];
             $valor_total_conceptos = 0;
 
             foreach ($conceptos_liquidaciones as $valor) {
                 $dato =[
-                    "concepto" => $valor->servicio_contrato->servicio->nombre,
+                    "concepto" => $valor->serviciocontrato->servicio->nombre,
                     "monto" => $valor->monto,
                 ];
                 array_push($conceptos_para_factura, $dato);
-                $valor_total_conceptos =  $valor_total_conceptos +  $valor->monto;
+                $valor_total_conceptos =  $valor_total_conceptos +  $valor->monto;               
             }
 
 

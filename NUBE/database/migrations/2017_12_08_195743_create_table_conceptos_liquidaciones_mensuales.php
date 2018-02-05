@@ -20,10 +20,10 @@ class CreateTableConceptosLiquidacionesMensuales extends Migration
             $table->date('primer_vencimiento')->nullable();
             $table->date('segundo_vencimiento')->nullable();
             $table->boolean('servicio_abonado')->nullable();
-            $table->integer('liquidacion_mensual_id')->unsigned()->nullable();
-            $table->foreign('liquidacion_mensual_id')->references('id')->on('liquidaciones_mensuales')->onDelete('cascade');
-            $table->integer('servicio_contrato_id')->unsigned()->nullable();
-            $table->foreign('servicio_contrato_id')->references('id')->on('contratos_servicios')->onDelete('cascade');
+            $table->integer('liquidacionmensual_id')->unsigned()->nullable();
+            $table->foreign('liquidacionmensual_id')->references('id')->on('liquidaciones_mensuales')->onDelete('cascade');
+            $table->integer('serviciocontrato_id')->unsigned()->nullable();
+            $table->foreign('serviciocontrato_id')->references('id')->on('contratos_servicios')->onDelete('cascade');
 
             $table->timestamps();
         });

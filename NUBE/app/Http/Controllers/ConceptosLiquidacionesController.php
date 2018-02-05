@@ -36,9 +36,9 @@ class ConceptosLiquidacionesController extends Controller
         if ($request->ajax()) {
 
             //Este es el control para periodo en la carga de impuestos
-            if(!is_null($request->servicio_contrato_id)&&(!is_null($request->periodo))){
+            if(!is_null($request->serviciocontrato_id)&&(!is_null($request->periodo))){
                 $concepto= ConceptoLiquidacion::all()
-                    ->where('servicio_contrato_id', $request->servicio_contrato_id)
+                    ->where('serviciocontrato_id', $request->serviciocontrato_id)
                     ->where('periodo', $request->periodo)
                     ->count();
                 return response()->json($concepto);
@@ -85,7 +85,7 @@ class ConceptosLiquidacionesController extends Controller
                 $servicios_contratos_claves = $servicios_contratos->implode('id', ', '); //obtenemos de la coleccion de objetos de contratos un string de todos los ids de contratos de la colección filtrada
                 $servicios_contratos_array = array_map('intval', explode(',', $servicios_contratos_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
 
-                $conceptos_liquidaciones = ConceptoLiquidacion::all()->whereIn('servicio_contrato_id', $servicios_contratos_array);
+                $conceptos_liquidaciones = ConceptoLiquidacion::all()->whereIn('serviciocontrato_id', $servicios_contratos_array);
 
                 if ($request->desde !== null) {
                     $fecha = str_replace('/', '-', $request->desde);
@@ -146,7 +146,7 @@ class ConceptosLiquidacionesController extends Controller
                     $concepto_liquidacion->segundo_vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
                 $concepto_liquidacion->save();
-                array_push($ids_servicios_contratos, $concepto_liquidacion->servicio_contrato_id); //en este array todos los ids de los servicios asociados a contratos que cargó el usuario
+                array_push($ids_servicios_contratos, $concepto_liquidacion->serviciocontrato_id); //en este array todos los ids de los servicios asociados a contratos que cargó el usuario
             }
 
             $contratos_claves = ServicioContrato::all()
@@ -159,9 +159,6 @@ class ConceptosLiquidacionesController extends Controller
             $contratos= Contrato::all()->whereIn('id', $ids_contratos); //traemos todos los contratos que se ven involucrados en la carga
 
             foreach ($contratos as $contrato) {
-
-
-
                 $servicios_contratos = ServicioContrato::all()  //por cada contrato identificado se hace lo de abajo...
                 ->where('contrato_id', $contrato->id);
 
@@ -169,18 +166,9 @@ class ConceptosLiquidacionesController extends Controller
                 $servicios_contratos_array = array_map('intval', explode(',', $servicios_contratos_claves)); //convertimos en collection para poder operar después
                 $cantidad_servicios = count($servicios_contratos_array); //obtenemos la cantidad de servicios que tiene asociado el contrato
 
-                /* if($contrato->sujeto_a_gastos_compartidos){
-                     $cantidad_servicios = 0;
-                     foreach ($servicios_contratos as $servicio_contrato) {
-                         if(!$servicio_contrato->servicio->servicio_compartido){
-                             $cantidad_servicios++;
-                         }
-                     }
-                 }*/
-
                 $conceptos_liquidaciones = ConceptoLiquidacion::all()
-                    ->where('liquidacion_mensual_id', null) //filtramos todos los conceptos que no hayan sido liquidados
-                    ->whereIn('servicio_contrato_id', $servicios_contratos_array); //filtramos los concetos de contratos que tengan de servicio_contrato_id a cualquiera de los ids de la coleccion de servicios_contratos filtrados
+                    ->where('liquidacionmensual_id', null) //filtramos todos los conceptos que no hayan sido liquidados
+                    ->whereIn('serviciocontrato_id', $servicios_contratos_array); //filtramos los concetos de contratos que tengan de serviciocontrato_id a cualquiera de los ids de la coleccion de servicios_contratos filtrados
 
                 $periodos_claves = trim($conceptos_liquidaciones->implode('periodo', ',')); //obtenemos los periodos de todos los conceptos que no esten asociados a una liquidación para la comprobación para saber si se puede generar ya liquidación
                 $periodos_array =  array_unique(explode(",", $periodos_claves)); //convertimos en array para operar y eliminamos los duplicados
@@ -194,7 +182,7 @@ class ConceptosLiquidacionesController extends Controller
                         $liquidacion->contrato_id = $contrato->id;
                         $liquidacion->save();
                         foreach ($conceptos_periodo as $concepto_liquidacion) { //por cada concepto que pertenece al periodo le asociamos el id de liquidacion que recién creamos
-                            $concepto_liquidacion->liquidacion_mensual_id = $liquidacion->id;
+                            $concepto_liquidacion->liquidacionmensual_id = $liquidacion->id;
                             $concepto_liquidacion->save();
                         }
                     }
