@@ -1,4 +1,7 @@
-@extends('admin.partes.index') @section('title') Inmuebles Registrados @endsection @section('content')
+@extends('admin.partes.index') 
+@section('title') Inmuebles Registrados 
+@endsection 
+@section('content')
 <div class="content-wrapper" style="min-height: 916px;" xmlns="http://www.w3.org/1999/html">
 	<section class="content-header">
 		<h1>

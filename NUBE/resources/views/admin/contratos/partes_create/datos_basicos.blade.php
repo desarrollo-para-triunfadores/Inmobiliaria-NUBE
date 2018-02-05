@@ -26,7 +26,11 @@
                             <select style="width: 100%"  name="inmueble_id" id="inmueble_id"  placeholder="campo requerido" class="select2 form-control">
                                 <option></option>
                                 @foreach($inmuebles as $inmueble)
-                                    <option objeto="{{$inmueble}}" value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}) |  <b>Valor: ${{$inmueble->valorReal}} </b></option>
+                                    @if($inmueble->numDepto)
+                                        <option objeto="{{$inmueble}}" value="{{$inmueble->id}}">{{$inmueble->direccion}} <b> "{{$inmueble->edificio->nombre}}" - P{{$inmueble->piso}} N° {{$inmueble->numDepto}}</b> ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}) |  <b>Valor: ${{$inmueble->valorReal}} </b></option>
+                                    @else
+                                        <option objeto="{{$inmueble}}" value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}) |  <b>Valor: ${{$inmueble->valorReal}} </b></option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -40,7 +44,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             @if (isset($contrato))
-                                <input name="fecha_desde" id="fecha_desde" value="{{$contrato->fecha_desde}}" type="text" placeholder="campo requerido" class="form-control pull-right datepicker_desde" required>
+                                <input name="fecha_desde" id="fecha_desde" value="{{$contrato->fecha_desde}}" type="text" placeholder="campo requerido" class="form-control pull-right" required>
                             @else
                             <input name="fecha_desde" id="fecha_desde"type="text" placeholder="campo requerido"  class="form-control pull-right datepicker_desde" required>
                             @endif
@@ -55,7 +59,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             @if (isset($contrato))
-                                <input name="fecha_hasta" id="fecha_hasta" value="{{$contrato->fecha_hasta}}" type="text" placeholder="campo requerido" class="form-control pull-right datepicker_hasta" required>
+                                <input name="fecha_hasta" id="fecha_hasta" value="{{$contrato->fecha_hasta}}" type="text" placeholder="campo requerido" class="form-control pull-right" required>
                             @else
                             <input name="fecha_hasta" id="fecha_hasta"type="text" placeholder="campo requerido" class="form-control pull-right datepicker_hasta" required>
                             @endif
@@ -72,9 +76,9 @@
                     <div class="controls">
                         <div class="input-group">                            
                             @if (isset($contrato))
-                            <input name="comision_garante" max="999" min="1" id="comision_garante" type="number" value="{{$contrato->comisionPropietario}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input name="comision_propietario" max="999" min="1" id="comision_propietario" type="text" value="{{$contrato->comisionPropietario}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
                             @else
-                            <input name="comision_garante" max="999" min="1" id="comision_garante" type="number" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input name="comision_propietario" max="999" min="1" id="comision_propietario" type="text" placeholder="campo requerido" max="999999999" class="form-control" required>
                             @endif
                             <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
                         </div>
@@ -87,9 +91,9 @@
                     <div class="controls">
                         <div class="input-group">                            
                             @if (isset($contrato))
-                            <input name="comision_inquilino" max="999" min="1" id="comision_inquilino" type="number" value="{{$contrato->comisionInquilino}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input name="comision_inquilino" max="999" min="1" id="comision_inquilino" type="text" value="{{$contrato->comisionInquilino}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
                             @else
-                            <input name="comision_inquilino" max="999" min="1" id="comision_inquilino" type="number" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input name="comision_inquilino" max="999" min="1" id="comision_inquilino" type="text" placeholder="campo requerido" max="999999999" class="form-control" required>
                             @endif        
                             <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
                         </div>
@@ -179,9 +183,9 @@
                     <div class="controls">
                         <div class="input-group">                              
                             @if (isset($contrato))
-                            <input name="incremento" id="incremento" max="999" min="1" type="number" value="{{$contrato->incremento}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>                                                                                   
+                            <input name="incremento" id="incremento" max="999" min="1" type="text" value="{{$contrato->incremento}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>                                                                                   
                             @else
-                            <input name="incremento" id="incremento" max="999" min="1" type="number" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>                                                                                   
+                            <input name="incremento" id="incremento" max="999" min="1" type="text" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>                                                                                   
                             @endif
                             <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
                         </div>

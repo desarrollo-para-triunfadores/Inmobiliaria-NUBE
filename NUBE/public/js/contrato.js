@@ -176,7 +176,7 @@ function mostrar_panel_garante () {
 $('.datepicker_desde').datepicker({
   autoclose: true,
   startView: 1,
-  startDate: '-1d',
+  /*startDate: '-1d',*/
   todayHighlight: true,
   orientation: 'bottom auto',
   format: 'dd/mm/yyyy',
@@ -502,3 +502,12 @@ function agregar_a_tabla (servicio, num_fila) {
   cell3.innerHTML = '<input type="button" class="borrar" value="Eliminar" />'
   cell4.innerHTML = '<input type="text" name="servicio' + num_fila + '" class="hide" value="' + servicio.id + '" />'
 }
+
+
+
+/*****  Mascaras para decimales  ******/
+$('#comision_inquilino').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+$('#comision_propietario').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+$('#monto_basico').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+$('#incremento').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+/***************************************************************************************************************** */

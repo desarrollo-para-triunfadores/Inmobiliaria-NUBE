@@ -19,7 +19,7 @@
                 <div class="form-check">
                     <br>
                     <label class="form-check-label">
-                        <input type="checkbox" id="{{$servicio->nombre}}" name="{{$servicio->nombre}}" value="{{$servicio->nombre}}" class="form-check-input"> {{$servicio->nombre}} ({{$servicio->descripcion}})
+                        <input type="checkbox" id="{{$servicio->nombre}}" name="servicios[]" value="{{$servicio->nombre}}" class="form-check-input"> {{$servicio->nombre}} ({{$servicio->descripcion}})
                     </label>
                 </div>
             </div>

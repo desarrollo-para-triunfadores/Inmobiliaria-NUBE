@@ -64,7 +64,7 @@ class ContratosController extends Controller
 
     public function store(Request $request)
     {
-        $contrato = new Contrato($request->all());
+        $contrato = new Contrato();
         /*** Datos del Inquilino ** */
         if (!is_null($request->inquilino_nuevo)) {     //*si no se recibe una persona asignada como propietario, crear una
             $nombreImagen = 'sin imagen';
@@ -114,17 +114,23 @@ class ContratosController extends Controller
             $contrato->garante_id = $garante->id;
         }
 
-
         //si se cargó una fecha de vencimiento se formatea para guardar en la base
         $fecha_desde = str_replace('/', '-', $request->fecha_desde);
         $contrato->fecha_desde = date('Y-m-d', strtotime($fecha_desde));
-
         $fecha_hasta = str_replace('/', '-', $request->fecha_hasta);
         $contrato->fecha_hasta = date('Y-m-d', strtotime($fecha_hasta));
+        $contrato->inmueble_id = $request->inmueble_id;
+        //$contrato->comision_garante = $request->comision_garante;
+        $contrato->comision_inquilino = $request->comision_inquilino;
+        //$contrato->gastos_administrativos = $request->gastos_administrativos;
+       // $contrato->tasa_gastos_admin = $request->tasa_gastos_admin;
+        $contrato->tipo_renta = $request->tipo_renta;
+        $contrato->monto_basico = $request->monto_basico;
+        $contrato->periodos = $request->periodos;
+        $contrato->incremento = $request->incremento;
 
 
         $contrato->save();
-
         /*** Periodos pagos contrato ** */
 
         $periodos = json_decode($request->periodos_pagos, true);
@@ -139,26 +145,19 @@ class ContratosController extends Controller
             $periodo->save();
         }
 
-
         /*** Servicios del Inmueble ** */
-
-        if($request[$servicio->nombre]){
-            $servicio_contrato = new ServicioContrato();
-            $servicio_contrato->servicio_id = $servicio->id;
-            $servicio_contrato->contrato_id = $contrato->id;
-            $servicio_contrato->save();
-        }
-
-        $servicios = Servicio::all();
-
-        foreach ($servicios as $servicio) {
-            if($request[$servicio->nombre]){
+        //dd($request->servicios);
+        if($request->servicios){
+            foreach($request->servicios as $servicio){
                 $servicio_contrato = new ServicioContrato();
-                $servicio_contrato->servicio_id = $servicio->id;
+                $servicio_contrato->servicio_id = Servicio::where('nombre', $servicio)->first()->id;        //$servicio->id;
                 $servicio_contrato->contrato_id = $contrato->id;
                 $servicio_contrato->save();
             }
+            
         }
+    
+
 
         $inmueble = Inmueble::find($request->inmueble_id);
         $inmueble->disponible = null;

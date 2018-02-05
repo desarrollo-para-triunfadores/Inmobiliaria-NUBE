@@ -106,6 +106,8 @@ Inmuebles Registrados
 
 @endsection
 @section('script') 
+<!-- Mascara para manejo de dinero (MaskMoney) -->
+<script src="{{ asset('plantillas/ADMINLTE/maskmoney/src/jquery.maskMoney.js') }}" type="text/javascript"></script>
 
 <script src="http://momentjs.com/downloads/moment.min.js"></script>
 <script src="{{ asset('js/camara.js') }}"></script>
