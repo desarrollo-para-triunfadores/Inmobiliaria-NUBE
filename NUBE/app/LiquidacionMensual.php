@@ -17,7 +17,6 @@ class LiquidacionMensual extends Model
         'gastos_administrativos',
         'periodo',
         'vencimiento',
-        'fecha_pago',
         'sub_total',
         'total',
         'abonado',
@@ -25,14 +24,10 @@ class LiquidacionMensual extends Model
         'saldo_periodo'
     ];
 
-    protected $dates = ['vencimiento', 'fecha_pago'];
+    protected $dates = ['vencimiento'];
 
     public function getVencimientoFormateadoAttribute(){
         return $this->vencimiento->format('d/m/Y');
-    }
-
-    public function getFechaPagoFormateadoAttribute(){
-        return $this->fecha_pago->format('d/m/Y');
     }
 
     public function comprobar_vencimiento() {

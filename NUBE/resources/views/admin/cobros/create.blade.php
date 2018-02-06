@@ -19,15 +19,10 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<a href="/admin/roles" title="volver a la pantalla anterior" class="btn btn-default btn-sm">
-					<i class="fa fa-arrow-left"></i> volver</a>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-md-12">							
+				<br>						
 				<div class="box box-primary">
-					<div class="box-body">						
+					<div class="box-body">
+						@include('admin.partes.msj_acciones')						
 						<legend>Clientes</legend>						
 						<div class="row">
 							<div class="col-md-6">
@@ -56,11 +51,8 @@
 					</div>
 				</div>														
 			</div>
-			<br><br>
-				
-								
-				<div id="tabla_deudas">
-			
+			<br><br>								
+			<div id="tabla_deudas">			
 		</div>
 	</div>
 	</section>

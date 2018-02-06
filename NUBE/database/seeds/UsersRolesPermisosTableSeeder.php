@@ -95,6 +95,8 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         Permission::create(['name' => 'cobro de liquidaciones']);
 
+        Permission::create(['name' => 'pagos de liquidaciones']);
+
         //Asignación de permisos a los roles
 
         $role->givePermissionTo('acceso a usuarios');
@@ -140,6 +142,8 @@ class UsersRolesPermisosTableSeeder extends Seeder
         $role->givePermissionTo('alta de liquidaciones');
 
         $role->givePermissionTo('cobro de liquidaciones');
+
+        $role->givePermissionTo('pagos de liquidaciones');
 
         //Asignación de roles a usuarios
 

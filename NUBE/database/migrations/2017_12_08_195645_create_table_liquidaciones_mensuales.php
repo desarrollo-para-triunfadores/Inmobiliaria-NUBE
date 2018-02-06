@@ -18,7 +18,6 @@ class CreateTableLiquidacionesMensuales extends Migration
             $table->string('periodo')->nullable();
             $table->double('alquiler', 10, 2)->nullable();
             $table->double('gastos_administrativos', 10, 2)->nullable();
-            $table->timestamp('fecha_pago')->nullable();
             $table->date('vencimiento')->nullable();
             $table->double('total', 10, 2)->nullable();
             $table->double('subtotal', 10, 2)->nullable();

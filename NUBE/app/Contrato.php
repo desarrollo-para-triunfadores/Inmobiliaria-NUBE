@@ -52,10 +52,7 @@ class Contrato extends Model {
     public function inmueble() {
         return $this->belongsTo('App\Inmueble');
     }
-    public function propietario() {
-        return $this->belongsTo('App\Propietario');
-    }
-
+  
     public function fotos() {
         return $this->hasMany('App\ImagenInmueble');
     }

@@ -222,6 +222,9 @@
                         @can('cobro de liquidaciones')
                             <li id="side-ele-cobros"><a data-toggle="tooltip" title="cargar el cobro de una liquidación mensual a un cliente" href="/admin/cobros/create"><i class="fa fa-usd" aria-hidden="true"></i> Cobro de servicios</a></li>
                         @endcan
+                        @can('pagos de liquidaciones')
+                            <li id="side-ele-pagos"><a data-toggle="tooltip" title="listado de pagos pendientes a clientes" href="/admin/pagos"><i class="fa fa-usd" aria-hidden="true"></i> Pagos pendientes</a></li>
+                        @endcan
                     </ul>
                 </li>
         @endcan

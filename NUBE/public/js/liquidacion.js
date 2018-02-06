@@ -1,3 +1,8 @@
+$("#side-liquidaciones-li").addClass("active");
+$("#side-liquidaciones-ul").addClass("menu-open");
+$("#side-ele-generar-liquidacion").addClass("active");
+
+
 var table = $('#example').DataTable({
     'language': tabla_traducida // esta variable esta instanciada donde están declarados todos los js.
 })

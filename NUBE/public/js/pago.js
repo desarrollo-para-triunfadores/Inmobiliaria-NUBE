@@ -1,19 +1,11 @@
-$("#side-general-li").addClass("active");
-$("#side-general-ul").addClass("menu-open");
-$("#side-ele-lugares-ul").addClass("menu-open");
-$("#side-ele-lugares-li").addClass("active");
-$("#side-ele-lugares-paises").addClass("active");
+$("#side-liquidaciones-li").addClass("active");
+$("#side-liquidaciones-ul").addClass("menu-open");
+$("#side-ele-pagos").addClass("active");
 
 
-function completar_campos(pais) {
-    $('#nombre').val(pais.nombre);
-    $('#form-update').attr('action', '/admin/paises/' + pais.id);
+function abrir_modal_confirmar(id) {  
+    $('#form-update').attr('action', '/admin/pagos/' + id);
     $('#boton-modal-update').click();
-}
-
-function abrir_modal_borrar(id) {
-    $('#form-borrar').attr('action', '/admin/paises/' + id);
-    $('#boton-modal-borrar').click();
 }
 
 
@@ -32,7 +24,6 @@ $('a.toggle-vis').on('click', function (e) {
 
 $('#example tbody').on('mouseenter', 'td', function () {
     var colIdx = table.cell(this).index().column;
-
     $(table.cells().nodes()).removeClass('highlight');
     $(table.column(colIdx).nodes()).addClass('highlight');
 });

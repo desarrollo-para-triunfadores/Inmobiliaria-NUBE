@@ -6,44 +6,26 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Inquilino;
 use App\Movimiento;
 use App\Notificacion;
 use App\LiquidacionMensual;
-use App\ConceptoLiquidacion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InquilinoRequestCreate;
 use App\Http\Requests\InquilinoRequestEdit;
 use Session;
 
-
-class CobrosController extends Controller
+class PagosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        $inquilino = Inquilino::find($request->inquilino);
-        $contrato_id = $inquilino->ultimo_contrato()->id;
-        $saldo_cuenta = 0;
-
-        $liquidaciones = LiquidacionMensual::all()->where("fecha_pago", null)->where("abonado", null)->where("alquiler", "<>", null)->where("contrato_id", $contrato_id);
-
-        $liquidacion_posterior = LiquidacionMensual::all() //este se utiliza para comprobar que el saldo diponible no hay asido utilizado.
-        ->where("contrato_id",$contrato_id)
-            ->where("abonado",'<>', null)
-            ->sortBy('id')->first();
-
-        if(!is_null($liquidacion_posterior) && !is_null($liquidacion_posterior->saldo_periodo)){
-            $saldo_cuenta = $liquidacion_posterior->saldo_periodo;
-        }
-
-        return response()->json(view('admin.cobros.tabla_liquidaciones', compact('liquidaciones', 'saldo_cuenta'))->render());
+        $liquidaciones = LiquidacionMensual::all()->where("abonado", "<>",null)->where("pagado_al_propietario", false);
+        return view('admin.pagos.main')->with('liquidaciones', $liquidaciones);
     }
 
     /**
@@ -53,8 +35,7 @@ class CobrosController extends Controller
      */
     public function create()
     {
-        $inquilinos = Inquilino::all();
-        return view('admin.cobros.create')->with('inquilinos', $inquilinos);
+        //
     }
 
     /**
@@ -76,7 +57,7 @@ class CobrosController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -100,21 +81,21 @@ class CobrosController extends Controller
     public function update(Request $request, $id)
     {
         $liquidacion = LiquidacionMensual::find($id);
-        $liquidacion->fill($request->all()); 
-        $liquidacion->pagado_al_propietario = false;       
+        $liquidacion->pagado_al_propietario = true;       
         $liquidacion->save();
-  
+
         $movimiento = new Movimiento();
         $movimiento->usuario_id = Auth::user()->id;
         $movimiento->fecha_hora = Carbon::now();
-        $movimiento->tipo_movimiento = "entrada";
+        $movimiento->tipo_movimiento = "salida";
         $movimiento->monto = $liquidacion->abonado;
-        $movimiento->descripcion = "Se recibe pago por $".$liquidacion->abonado.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
+        $movimiento->descripcion = "Se realiza el pago por $".$liquidacion->abonado." al propietario. Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
         $movimiento->liquidacion_id = $liquidacion->id;
         $movimiento->save();
-           
-        Session::flash('message', 'Se ha actualizado la información');
-        return redirect()->route('cobros.create');
+
+        Session::flash('message', '¡Se ha registrado el pago al cliente con éxito!');
+        return redirect()->route('pagos.index');
+
     }
 
     /**

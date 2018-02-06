@@ -56,8 +56,8 @@ function calcular_cambio(){
             total = parseFloat($("#total").val());
         if(abonado >= total){
             saldo_periodo = abonado - total;
-            $("#saldo_periodo").val(saldo_periodo);
-            $("#leyenda_vuelto").html("Diferencia: $"+saldo_periodo);
+            $("#saldo_periodo").val(saldo_periodo.toFixed(2));
+            $("#leyenda_vuelto").html("Diferencia: $"+saldo_periodo.toFixed(2));
             $("#leyenda_vuelto").removeClass("hide");
         }
 

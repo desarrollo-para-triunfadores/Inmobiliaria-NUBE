@@ -39,10 +39,6 @@ class Inmueble extends Model {
         return $this->fechaHabilitacion->format('d/m/Y');
     }
 
-    public function garante() {
-        return $this->belongsTo('App\Garante');
-    }
-
     public function contratos(){        #devuelve el historial de contratos de un inmueble
         return $this->hasMany('App\Contrato');
     }
@@ -54,7 +50,6 @@ class Inmueble extends Model {
     public function tipo() {
         return $this->belongsTo('App\Tipo');
     }
-
 
     public function localidad() {
         return $this->belongsTo('App\Localidad');

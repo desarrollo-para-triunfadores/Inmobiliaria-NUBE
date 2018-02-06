@@ -52,6 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('movimientos', 'MovimientosController');
     Route::resource('cobros', 'CobrosController');
+    Route::resource('pagos', 'PagosController');
     Route::resource('contabilidad', 'EstadisticasController');
 
     //Oportunidades
