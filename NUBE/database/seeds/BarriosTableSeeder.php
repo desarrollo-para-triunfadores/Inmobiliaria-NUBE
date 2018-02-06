@@ -11,6 +11,7 @@ class BarriosTableSeeder extends Seeder
      */
     public function run()
     {
+        ################################### Barrios RESISTENCIA ####################################
         DB::table('barrios')->insert([
             'nombre' => '13 de Diciembre',
             'privado' => false,
@@ -832,6 +833,32 @@ class BarriosTableSeeder extends Seeder
             'privado' => false,
             'localidad_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
-        ]);      
+        ]);   
+        
+        ################################## Barrios POSADAS ##############################
+        DB::table('barrios')->insert([
+            'nombre' => 'Centro',
+            'privado' => false,
+            'localidad_id' => '5',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);  
+        DB::table('barrios')->insert([
+            'nombre' => 'Itaimbe Mini',
+            'privado' => false,
+            'localidad_id' => '5',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);  
+        DB::table('barrios')->insert([
+            'nombre' => 'Villa Sarita',
+            'privado' => false,
+            'localidad_id' => '5',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);  
+        DB::table('barrios')->insert([
+            'nombre' => 'Ñu Porá',
+            'privado' => false,
+            'localidad_id' => '5',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);   
     }
 }

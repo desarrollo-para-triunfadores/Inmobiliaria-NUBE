@@ -10,11 +10,11 @@
                             <select style="width: 100%"  name="inmueble_id" id="inmueble_id"  placeholder="campo requerido" class="select2 form-control">
                                 <option></option>
                                 @foreach($inmuebles as $inmueble)
-                                @if ($inmueble->id === $contrato->inmueble_id)
-                                <option objeto="{{$inmueble}}" selected value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}). Valor: ${{$inmueble->valorReal}}</option>
-                                @else
-                                <option objeto="{{$inmueble}}" value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}). Valor: ${{$inmueble->valorReal}}</option>
-                                @endif
+                                    @if ($inmueble->id === $contrato->inmueble_id)
+                                        <option objeto="{{$inmueble}}" selected value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}). Valor: ${{$inmueble->valorReal}}</option>
+                                    @else
+                                        <option objeto="{{$inmueble}}" value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}, {{$inmueble->localidad->provincia->nombre}}). Valor: ${{$inmueble->valorReal}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -76,9 +76,9 @@
                     <div class="controls">
                         <div class="input-group">                            
                             @if (isset($contrato))
-                            <input name="comision_propietario" max="999" min="1" id="comision_propietario" type="text" value="{{$contrato->comisionPropietario}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input name="comision_propietario" id="comision_propietario" type="text" value="{{$contrato->comisionPropietario}}" placeholder="campo requerido" class="form-control" required>
                             @else
-                            <input name="comision_propietario" max="999" min="1" id="comision_propietario" type="text" placeholder="campo requerido" max="999999999" class="form-control" required>
+                            <input name="comision_propietario" id="comision_propietario" type="text" placeholder="campo requerido" class="form-control" required>
                             @endif
                             <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
                         </div>
@@ -91,9 +91,9 @@
                     <div class="controls">
                         <div class="input-group">                            
                             @if (isset($contrato))
-                            <input name="comision_inquilino" max="999" min="1" id="comision_inquilino" type="text" value="{{$contrato->comisionInquilino}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input name="comision_inquilino" id="comision_inquilino" type="text" value="{{$contrato->comisionInquilino}}" placeholder="campo requerido" class="form-control" required>
                             @else
-                            <input name="comision_inquilino" max="999" min="1" id="comision_inquilino" type="text" placeholder="campo requerido" max="999999999" class="form-control" required>
+                            <input name="comision_inquilino" id="comision_inquilino" type="text" placeholder="campo requerido" class="form-control" required>
                             @endif        
                             <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
                         </div>
@@ -108,7 +108,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
                             @if (isset($contrato))
-                            <input style="width: 100%" max="999999999" min="1" name="gastos_administrativos" id="gastos_administrativos" type="number" value="{{$contrato->gastos_administrativos}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
+                            <input style="width: 100%" name="gastos_administrativos" id="gastos_administrativos" type="number" value="{{$contrato->gastos_administrativos}}" placeholder="campo requerido" class="form-control" required>
                             @else
                             <input style="width: 100%" name="gastos_administrativos" data-toggle="tooltip" title="Gastos administrativos mensuales, aproximadamente 2% del alquiler mensual" id="gastos_administrativos" type="number" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>
                             @endif
@@ -154,9 +154,9 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-dollar" aria-hidden="true"></i></span>
                             @if (isset($contrato))
-                            <input style="width: 100%" max="999999999" data-toggle="tooltip" title="monto base del alquiler" min="1" name="monto_basico" id="monto_basico" value="{{$contrato->inmueble->valorAlquiler}}" type="text" class="form-control">
+                            <input style="width: 100%" data-toggle="tooltip" title="monto base del alquiler" name="monto_basico" id="monto_basico" value="{{$contrato->inmueble->valorAlquiler}}" type="text" class="form-control">
                             @else
-                            <input style="width: 100%" max="999999999" data-toggle="tooltip" title="monto base del alquiler" min="1" name="monto_basico" id="monto_basico" value="" type="text" placeholder="campo requerido" class="form-control">
+                            <input style="width: 100%" data-toggle="tooltip" title="monto base del alquiler" name="monto_basico" id="monto_basico" value="" type="text" placeholder="campo requerido" class="form-control">
                             @endif
                         </div>
                     </div>
@@ -183,9 +183,9 @@
                     <div class="controls">
                         <div class="input-group">                              
                             @if (isset($contrato))
-                            <input name="incremento" id="incremento" max="999" min="1" type="text" value="{{$contrato->incremento}}" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>                                                                                   
+                            <input name="incremento" id="incremento" type="text" value="{{$contrato->incremento}}" placeholder="campo requerido" class="form-control" required>                                                                                   
                             @else
-                            <input name="incremento" id="incremento" max="999" min="1" type="text" placeholder="campo requerido" max="999999999" min="1" class="form-control" required>                                                                                   
+                            <input name="incremento" id="incremento" type="text" placeholder="campo requerido" class="form-control" required>                                                                                   
                             @endif
                             <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
                         </div>
