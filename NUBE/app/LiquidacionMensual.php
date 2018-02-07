@@ -15,19 +15,37 @@ class LiquidacionMensual extends Model
         'contrato_id',
         'alquiler',
         'gastos_administrativos',
+        'comision_a_propietario',
         'periodo',
+        'fecha_cobro_inquilino',
+        'fecha_pago_propietario',
+        'fecha_cobro_propietario',
         'vencimiento',
         'sub_total',
         'total',
         'abonado',
-        'pagado_al_propietario',
         'saldo_periodo'
     ];
 
-    protected $dates = ['vencimiento'];
+    protected $dates = ['vencimiento',
+        'fecha_cobro_inquilino',
+        'fecha_pago_propietario',
+        'fecha_cobro_propietario'];
 
     public function getVencimientoFormateadoAttribute(){
         return $this->vencimiento->format('d/m/Y');
+    }
+
+    public function getFechaCobroInquilinoFormateadoAttribute(){
+        return $this->fecha_cobro_inquilino->format('d/m/Y');
+    }
+
+    public function getFechaPagoPropietarioFormateadoAttribute(){
+        return $this->fecha_pago_propietario->format('d/m/Y');
+    }
+
+    public function getFechaCobroPropietarioVencimientoFormateadoAttribute(){
+        return $this->fecha_cobro_propietario->format('d/m/Y');
     }
 
     public function comprobar_vencimiento() {

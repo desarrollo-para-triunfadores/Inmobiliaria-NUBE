@@ -74,13 +74,12 @@
 									</tfoot>
 								</table>
 							@else
-								<div class="alert alert-info alert-dismissible">
-									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-									<h4><i class="icon fa fa-exclamation-circle"></i><strong>No hay nada que liquidar</strong></h4>
-									Actualmente no existen registros en condición de poder ser liquidados.
-								</div>
-							@endif
-
+							<div class="callout callout-info animated fadeIn">
+								<h4><i class="icon fa fa-exclamation-circle"></i><strong> No hay nada que liquidar</strong></h4>            
+								<p>Actualmente no existen registros en condición de poder ser liquidados.</p>
+							  </div>                       
+							@endif 
+								
 
 						</div>
 						<div class="box-footer">

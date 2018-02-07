@@ -17,4 +17,8 @@ class Propietario extends Model {
         return $this->hasMany('App\Movimientos');
     }
 
+    public function inmuebles(){
+        return $this->hasMany('App\Inmueble');
+    }
+
 }

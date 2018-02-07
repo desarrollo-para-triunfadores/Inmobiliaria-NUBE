@@ -105,6 +105,7 @@ class LiquidacionMensualController extends Controller
                     $vencimiento = str_replace('/', '-', $liquidacion["vencimiento"]);
                     $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
+                $concepto_liquidacion->comision_a_propietario = ($liquidacion["monto_alquiler"] * $concepto_liquidacion->contrato->comision_propietario) / 100;
                 $concepto_liquidacion->save();
             }
             return response()->json('ok'); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.

@@ -29,10 +29,17 @@
 								<div class="control-group">
 									<label>Nombre del cliente</label>
 									<div class="controls">
-										<select style="width: 100%"  id="inquilino_id"  placeholder="campo requerido" required class="select2 form-control">
-											@foreach($inquilinos as $inquilino)
-											<option value="{{$inquilino->id}}">{{$inquilino->persona->nombrecompleto}} (DNI: {{$inquilino->persona->dni}})</option>                                                    
-											@endforeach
+										<select style="width: 100%"  id="cliente_id"  placeholder="campo requerido" required class="select2 form-control">										
+											<optgroup label="Inquilinos">
+												@foreach($inquilinos as $inquilino)
+													<option value="['{{$inquilino->id}}', 'I']">{{$inquilino->persona->nombrecompleto}} (DNI: {{$inquilino->persona->dni}})</option>                                                    
+												@endforeach
+											</optgroup>
+											<optgroup label="Propietarios">
+												@foreach($propietarios as $propietario)
+													<option value="['{{$propietario->id}}', 'P']">{{$propietario->persona->nombrecompleto}} (DNI: {{$propietario->persona->dni}})</option>                                                    
+												@endforeach
+											</optgroup>											
 										</select>
 									</div>
 								</div>

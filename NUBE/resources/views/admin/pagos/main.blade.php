@@ -59,10 +59,10 @@ Pagos pendientes
                             </tfoot>
                         </table>
                         @else
-                        <div class="alert alert-info alert-dismissible animated fadeIn">                          
-                            <h4><i class="icon fa fa-exclamation-circle"></i><strong>No hay pagos pendientes</strong></h4>
-                            Actualmente el no existen pagos pendientes a clientes de la empresa.                                                                                  
-                        </div>
+                        <div class="callout callout-info animated fadeIn">
+                            <h4><i class="icon fa fa-exclamation-circle"></i><strong> No hay pagos pendientes</strong></h4>            
+                            <p>Actualmente el no existen pagos pendientes a clientes de la empresa.</p>
+                          </div>                       
                         @endif                                                                                  
                     </div>                   
                 </div>

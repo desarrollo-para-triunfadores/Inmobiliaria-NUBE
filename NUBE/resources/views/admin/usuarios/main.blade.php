@@ -28,7 +28,7 @@ Usuarios registrados
                                     <div class="form-group">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                         <label>&nbsp;Filtrar usuarios</label>
-                                        <select  style="width: 100%"id="select_filtro" class="select2 form-control form-control-sm" multiple="multiple">
+                                        <select style="width: 100%"id="select_filtro" class="select2 form-control form-control-sm" multiple="multiple">
                                             @foreach($usuarios as $usuario)
                                             <option value="{{$usuario->id}}">{{$usuario->name}}</option>                                                    
                                             @endforeach

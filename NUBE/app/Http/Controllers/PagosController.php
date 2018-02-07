@@ -24,7 +24,7 @@ class PagosController extends Controller
      */
     public function index()
     {
-        $liquidaciones = LiquidacionMensual::all()->where("abonado", "<>",null)->where("pagado_al_propietario", false);
+        $liquidaciones = LiquidacionMensual::all()->where("abonado", "<>",null)->where("fecha_pago_propietario", null);
         return view('admin.pagos.main')->with('liquidaciones', $liquidaciones);
     }
 
@@ -81,7 +81,7 @@ class PagosController extends Controller
     public function update(Request $request, $id)
     {
         $liquidacion = LiquidacionMensual::find($id);
-        $liquidacion->pagado_al_propietario = true;       
+        $liquidacion->fecha_pago_propietario = Carbon::now();      
         $liquidacion->save();
 
         $movimiento = new Movimiento();
