@@ -15,7 +15,6 @@ class CreateTableMovimientos extends Migration
     {
         Schema::create('movimientos', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('fecha_hora');
             $table->enum('tipo_movimiento', ['entrada', 'salida']);
             $table->double('monto', 10, 2);
             $table->string('descripcion')->nullable();

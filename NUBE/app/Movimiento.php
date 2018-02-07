@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movimiento extends Model
 {
     protected $table =  "movimientos";
-    protected $fillable = ['fecha_hora', 'tipo_movimiento', 'monto', 'descripcion', 'usuario_id', 'inquilino_id', 'propietario_id', 'liquidacion_id'];
+    protected $fillable = ['tipo_movimiento', 'monto', 'descripcion', 'usuario_id', 'inquilino_id', 'propietario_id', 'liquidacion_id'];
 
     protected $dates = ['fecha_hora'];
 

@@ -134,13 +134,23 @@ class CobrosController extends Controller
         if($request->cobro_propietario){
             $liquidacion->fecha_cobro_propietario = Carbon::now();     
             $liquidacion->save();
-
+           
+            //Movimiento para el propietario
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;
-            $movimiento->fecha_hora = Carbon::now();
+            $movimiento->usuario_id = Auth::user()->id;            
+            $movimiento->tipo_movimiento = "salida";
+            $movimiento->propietario_id = $liquidacion->contrato->inmueble->propietario->id;
+            $movimiento->monto = $liquidacion->comision_a_propietario;
+            $movimiento->descripcion = "Se realiza un pago por $".$liquidacion->comision_a_propietario.". Correspondiente a la comisión por la liquidación del periodo ".$liquidacion->periodo.".";
+            $movimiento->liquidacion_id = $liquidacion->id;
+            $movimiento->save();
+            
+            //Movimiento de la empresa
+            $movimiento = new Movimiento();
+            $movimiento->usuario_id = Auth::user()->id;            
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->comision_a_propietario;
-            $movimiento->descripcion = "Se recibe pago por $".$liquidacion->comision_a_propietario.". Correspondiente a la comisión al propietario por la liquidación del periodo ".$liquidacion->periodo.".";
+            $movimiento->descripcion = "Se recibe un pago por $".$liquidacion->comision_a_propietario.". Correspondiente a la comisión al propietario por la liquidación del periodo ".$liquidacion->periodo.".";
             $movimiento->liquidacion_id = $liquidacion->id;
             $movimiento->save();
         }else{
@@ -148,12 +158,12 @@ class CobrosController extends Controller
             $liquidacion->fecha_cobro_inquilino = Carbon::now();     
             $liquidacion->save();
 
+            //Movimiento de la empresa
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;
-            $movimiento->fecha_hora = Carbon::now();
+            $movimiento->usuario_id = Auth::user()->id;            
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->abonado;
-            $movimiento->descripcion = "Se recibe pago por $".$liquidacion->abonado.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
+            $movimiento->descripcion = "Se recibe un pago por $".$liquidacion->abonado.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
             $movimiento->liquidacion_id = $liquidacion->id;
             $movimiento->save();
         }
