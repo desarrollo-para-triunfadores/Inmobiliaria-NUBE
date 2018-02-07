@@ -47,7 +47,7 @@ class ContratosController extends Controller
     {
         $garantes = Garante::all();
         $inquilinos = Inquilino::all();
-        $inmuebles = Inmueble::where('disponible', 'si')->get();
+        $inmuebles = Inmueble::where('disponible', '1')->get();
         $paises = Pais::all();
         $localidades = Localidad::all();
         $servicios = Servicio::all();

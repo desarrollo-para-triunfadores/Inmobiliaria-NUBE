@@ -506,8 +506,8 @@ function agregar_a_tabla (servicio, num_fila) {
 
 
 /*****  Mascaras para decimales  ******/
-$('#comision_inquilino').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-$('#comision_propietario').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-$('#monto_basico').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-$('#incremento').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+$('#comision_inquilino').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:'.', affixesStay: false});
+$('#comision_propietario').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:'.', affixesStay: false});
+$('#monto_basico').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:',', affixesStay: false});
+$('#incremento').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:',', affixesStay: false});
 /***************************************************************************************************************** */

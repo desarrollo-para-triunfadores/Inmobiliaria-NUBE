@@ -47,8 +47,18 @@
 								@foreach($inmuebles as $inmueble)
 								<tr>
 									<td class="text-center">{{$inmueble->condicion}}</td>
-									<td class="text-center bold">{{$inmueble->tipo->nombre}}</td>
+									@if($inmueble->piso || $inmueble->numDepto)
+										<td class="text-center bold">{{$inmueble->tipo->nombre}} <b>P {{$inmueble->piso}} | N° {{$inmueble->numDepto}}</b></td>
+									@else
+										<td class="text-center bold">{{$inmueble->tipo->nombre}}</td>
+									@endif
+
+									@if($inmueble->edificio)
+									<td class="text-center bold"><b>{{$inmueble->edificio->nombre}}</b> | {{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
+									@else
 									<td class="text-center bold">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
+									@endif
+									
 									<td class="text-center">{{$inmueble->cantidadAmbientes}}</td>
 									@if($inmueble->condicion!=='alquiler')
 									<td class="text-center">${{$inmueble->valorVenta}}</td>

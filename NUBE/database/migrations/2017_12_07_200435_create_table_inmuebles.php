@@ -31,7 +31,7 @@ class CreateTableInmuebles extends Migration
             $table->integer('cantidadBaños');
             $table->integer('cantidadGarages');
             $table->integer('cantidadDormitorios');
-            $table->boolean('disponible');            
+            $table->boolean('disponible')->nullable();            
             $table->string('descripcion',500)->nullable();           
             $table->integer('edificio_id')->unsigned()->nullable();
             $table->foreign('edificio_id')->references('id')->on('edificios')->onDelete('cascade');
