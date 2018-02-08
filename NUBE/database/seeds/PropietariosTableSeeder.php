@@ -60,5 +60,14 @@ class PropietariosTableSeeder extends Seeder
             'persona_id' => '30',
             'created_at' => date('Y-m-d H:m:s')
         ]);
+
+        DB::table('propietarios')->insert([ ## Propietaria deptos de HORACIO
+            'persona_id' => '39',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('propietarios')->insert([ ## Propietaria depto de JUAMPY
+            'persona_id' => '40',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
     }
 }

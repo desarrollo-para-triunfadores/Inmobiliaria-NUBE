@@ -19,10 +19,10 @@ class CreateTableContratos extends Migration
             $table->integer('periodos')->nullable();
             $table->date('fecha_desde')->nullable();
             $table->date('fecha_hasta')->nullable();
-            $table->double('incremento', 10, 2)->nullable();
-            $table->double('comision_propietario', 10, 2)->nullable();
-            $table->double('comision_inquilino', 10, 2)->nullable();
-            $table->double('monto_basico', 10, 2)->nullable();
+            $table->double('incremento'/*, 10, 2*/)->nullable();
+            $table->double('comision_propietario'/*, 10, 2*/)->nullable();
+            $table->double('comision_inquilino'/*, 10, 2*/)->nullable();
+            $table->double('monto_basico'/*, 10, 2*/)->nullable();
             $table->boolean('sujeto_a_gastos_compartidos')->nullable();
             $table->string('descripcion')->nullable();
             $table->integer('inquilino_id')->unsigned()->nullable();

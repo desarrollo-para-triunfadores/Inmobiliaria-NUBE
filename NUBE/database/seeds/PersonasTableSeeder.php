@@ -150,7 +150,7 @@ class PersonasTableSeeder extends Seeder
         ]);
 
         DB::table('personas')->insert([
-            'nombre' => 'Juan A D J',
+            'nombre' => 'Jose',
             'apellido' => 'Espinoza',
             'sexo' => 'Masculino',
             'dni' => '23230565',
@@ -169,7 +169,7 @@ class PersonasTableSeeder extends Seeder
 //Inicio Personas que sirven para garantes (11-20)
 
         DB::table('personas')->insert([
-            'nombre' => 'Hector R',
+            'nombre' => 'Hector Ruben',
             'apellido' => 'Espinoza',
             'sexo' => 'Masculino',
             'dni' => '78682726',
@@ -185,8 +185,8 @@ class PersonasTableSeeder extends Seeder
         ]);
 
         DB::table('personas')->insert([
-            'nombre' => 'Aguistina',
-            'apellido' => 'Galarza',
+            'nombre' => 'Martha',
+            'apellido' => 'Werle',
             'sexo' => 'Femenino',
             'dni' => '12270734',
             'fecha_nac' => '1981-04-05',
@@ -217,8 +217,8 @@ class PersonasTableSeeder extends Seeder
         ]);
 
         DB::table('personas')->insert([
-            'nombre' => 'Carlos A',
-            'apellido' => 'Galarza',
+            'nombre' => 'Carlos',
+            'apellido' => 'Gonzalez',
             'sexo' => 'Masculino',
             'dni' => '16351202',
             'fecha_nac' => '1989-08-08',
@@ -508,6 +508,144 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
+        ###
+        DB::table('personas')->insert([
+            'nombre' => 'Juan Pablo',
+            'apellido' => 'Cáceres',
+            'sexo' => 'Masculino',
+            'dni' => '34478385',
+            'fecha_nac' => '1989-05-10',
+            'telefono' => '3743499820',
+            'telefono_contacto' => '3743499820',
+            'email'   => 'jpaulnava@gmail.com',    
+            'direccion' => 'Monteagudo 695',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('personas')->insert([
+            'nombre' => 'Horacio Alejandro',
+            'apellido' => 'Kuszniruk',
+            'sexo' => 'Masculino',
+            'dni' => '35777888',
+            'fecha_nac' => '1991-12-16',
+            'telefono' => '3752499820',
+            'telefono_contacto' => '3752499820',
+            'email'   => 'hacho.kuszniruk@gmail.com',    
+            'direccion' => 'Corientes 2247',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('personas')->insert([
+            'nombre' => 'Marcelo',
+            'apellido' => 'Marin',
+            'sexo' => 'Masculino',
+            'dni' => '32444888',
+            'fecha_nac' => '1987-12-16',
+            'telefono' => '3752499740',
+            'telefono_contacto' => '3752499740',
+            'email'   => 'marcemarin@gmail.com',    
+            'direccion' => 'Corientes 2247',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('personas')->insert([
+            'nombre' => 'Alejandro',
+            'apellido' => 'Rodriguez',
+            'sexo' => 'Masculino',
+            'dni' => '36777888',
+            'fecha_nac' => '1991-10-21',
+            'telefono' => '3752887411',
+            'telefono_contacto' => '3752887411',
+            'email'   => 'ale.rodriguez@gmail.com',    
+            'direccion' => 'Corientes 2247',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('personas')->insert([
+            'nombre' => 'Damian',
+            'apellido' => 'Freidenberger',
+            'sexo' => 'Masculino',
+            'dni' => '33223882',
+            'fecha_nac' => '1987-03-06',
+            'telefono' => '3752112233',
+            'telefono_contacto' => '3752112233',
+            'email'   => 'damian.freidenberger@gmail.com',    
+            'direccion' => 'Corientes 2247',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('personas')->insert([
+            'nombre' => 'Alejandro',
+            'apellido' => 'Alba Posse',
+            'sexo' => 'Masculino',
+            'dni' => '36005888',
+            'fecha_nac' => '1991-04-16',
+            'telefono' => '3752895623',
+            'telefono_contacto' => '3752895623',
+            'email'   => 'ale.alba@gmail.com',    
+            'direccion' => 'Corientes 2247',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('personas')->insert([
+            'nombre' => 'Sergio',
+            'apellido' => 'Sanabria',
+            'sexo' => 'Masculino',
+            'dni' => '36021954',
+            'fecha_nac' => '1991-08-20',
+            'telefono' => '3752748596',
+            'telefono_contacto' => '3752748596',
+            'email'   => 'sergio.sanab@gmail.com',    
+            'direccion' => 'Corientes 2247',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([ #PROPIETARIA DEPTOS DE EDIFICIO --HORACIO
+            'nombre' => 'Mirtha',
+            'apellido' => 'Larsson',
+            'sexo' => 'Femenino',
+            'dni' => '28555614',
+            'fecha_nac' => '1979-08-03',
+            'telefono' => '3752002233',
+            'telefono_contacto' => '3752002233',
+            'email'   => 'm.larsson@gmail.com',    
+            'direccion' => 'Remedios de Escalada 555',                  
+            'foto_perfil' => 'sin imagen',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([ #PROPIETARIA DEPTO JUAMPY
+        'nombre' => 'Claudia',
+        'apellido' => 'Menéndez',
+        'sexo' => 'Femenino',
+        'dni' => '27555614',
+        'fecha_nac' => '1967-11-15',
+        'telefono' => '3743002233',
+        'telefono_contacto' => '3743002233',
+        'email'   => 'claudiana@gmail.com',    
+        'direccion' => 'San Luis 387',                  
+        'foto_perfil' => 'sin imagen',
+        'localidad_id' => '1',
+        'pais_id' => '1',
+        'created_at' => date('Y-m-d H:m:s')
+        ]);
 
     }
 }

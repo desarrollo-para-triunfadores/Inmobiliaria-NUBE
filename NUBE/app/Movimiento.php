@@ -38,5 +38,25 @@ class Movimiento extends Model
         }
         return $total;
     }*/
+    public static function totalEntrada(){
+        $total = 0;
+        $movimientos = Movimiento::all();
+        foreach ($movimientos as $movimiento) {
+            if ($movimiento->tipo == 'entrada'){
+                $total = $total + $movimiento->monto;
+            }
+        }
+        return $total;
+    }
+    public static function totalSalida(){
+        $total = 0;
+        $movimientos = Movimiento::all();
+        foreach ($movimientos as $movimiento) {
+            if ($movimiento->tipo == 'salida'){
+                $total = $total + $movimiento->monto;
+            }
+        }
+        return $total;
+    }
 
 }

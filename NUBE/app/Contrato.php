@@ -72,4 +72,16 @@ class Contrato extends Model {
     public function periodos_contrato() {
         return $this->hasMany('App\PeriodoContrato');
     }
+
+    #### MUTADORES ####
+    public function setMontoBasicoAttribute($value)
+    {
+        $this->attributes['monto_basico'] = ($value);
+    }
+    public function setIncrementoAttribute($value)
+    {
+        $this->attributes['incremento'] = number_format($value , 2);
+    }
+    
+
 }

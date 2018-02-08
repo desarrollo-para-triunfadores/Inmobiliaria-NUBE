@@ -66,7 +66,7 @@ class ContratosController extends Controller
     {
         $contrato = new Contrato();
         /*** Datos del Inquilino ** */
-        if (!is_null($request->inquilino_nuevo)) {     //*si no se recibe una persona asignada como propietario, crear una
+        if (!is_null($request->inquilino_id)) {     //*si no se recibe una persona asignada como propietario, crear una
             $nombreImagen = 'sin imagen';
             if ($request->file('imagen')) {
                 $file = $request->file('imagen');
@@ -81,8 +81,10 @@ class ContratosController extends Controller
             $inquilino = new Inquilino($request->all());
             $inquilino->persona_id = $persona->id;
             $inquilino->save();
-            $contrato->inquilino_id = $inquilino->id;
         }
+        $contrato->inquilino_id = $inquilino->id;
+
+        
         /*         * * Datos del Garante ** */
         if (!is_null($request->inquilino_nuevo)) {     //*si no se recibe una persona asignada como propietario, crear una
             $nombreImagen = 'sin imagen';
@@ -121,6 +123,7 @@ class ContratosController extends Controller
         $contrato->fecha_hasta = date('Y-m-d', strtotime($fecha_hasta));
         $contrato->inmueble_id = $request->inmueble_id;
         //$contrato->comision_garante = $request->comision_garante;
+        $contrato->comision_propietario = $request->comision_propietario;
         $contrato->comision_inquilino = $request->comision_inquilino;
         //$contrato->gastos_administrativos = $request->gastos_administrativos;
        // $contrato->tasa_gastos_admin = $request->tasa_gastos_admin;
@@ -128,8 +131,7 @@ class ContratosController extends Controller
         $contrato->monto_basico = $request->monto_basico;
         $contrato->periodos = $request->periodos;
         $contrato->incremento = $request->incremento;
-
-
+        $contrato->sujeto_a_gastos_compartidos = $request->sujeto_a_gastos_compartidos;
         $contrato->save();
         /*** Periodos pagos contrato ** */
 
@@ -160,7 +162,7 @@ class ContratosController extends Controller
 
 
         $inmueble = Inmueble::find($request->inmueble_id);
-        $inmueble->disponible = null;
+        $inmueble->disponible = 0;
         $inmueble->save();
 
         /*** Envio de EMAIL a interesados en el inmueble, notificacion de que inmueble se alquilo (capturados desde la Oportunidad) **/

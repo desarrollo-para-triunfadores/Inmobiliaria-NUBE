@@ -30,15 +30,9 @@ class MovimientosController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) //agregar movimiento a CC y/o a Caja
     {
-        dd($request);
+        //dd($request);
         $movimiento = new Movimiento($request->all());
         $movimiento->fecha_hora = \Carbon\Carbon::now('America/Buenos_Aires');
         $movimiento->usuario_id = Auth::user()->id;

@@ -378,12 +378,12 @@ function calcular_renta () {
     var cantidad_incrementos = parseInt(datos_calculo_renta.meses_de_alquiler / datos_calculo_renta.periodo_incremento),
       resto = datos_calculo_renta.meses_de_alquiler % datos_calculo_renta.periodo_incremento,
       valor_tasa = 0,
-      valor_actualizado = parseFloat($('#monto_basico').val()),
+      valor_actualizado = $('#monto_basico').maskMoney('unmasked')[0],
       num_mes = 1,
       sumatoria = 0
 
     for (var n = 1; n <= cantidad_incrementos; n++) {
-      datos_calculo_renta.valor_alquiler = valor_actualizado
+      datos_calculo_renta.valor_alquiler = valor_actualizado;
       if (n > 1) {
         valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
       }
@@ -392,11 +392,11 @@ function calcular_renta () {
         var mes = {
           numero: num_mes++,
           tasa_fija: 0,
-          tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa
+          tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa,
         }
         valor_actualizado = mes.tasa_creciente
         datos_calculo_renta.meses.push(mes)
-        sumatoria = sumatoria + valor_actualizado
+        sumatoria = parseFloat(sumatoria) + valor_actualizado
       }
     }
 
@@ -508,6 +508,6 @@ function agregar_a_tabla (servicio, num_fila) {
 /*****  Mascaras para decimales  ******/
 $('#comision_inquilino').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:'.', affixesStay: false});
 $('#comision_propietario').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:'.', affixesStay: false});
-$('#monto_basico').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:',', affixesStay: false});
+$('#monto_basico').maskMoney({prefix:'$ ', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});
 $('#incremento').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:',', affixesStay: false});
 /***************************************************************************************************************** */

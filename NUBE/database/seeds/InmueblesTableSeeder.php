@@ -169,8 +169,8 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Depto de Juan Pablo Cáceres',      
             'edificio_id'  => '2',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '6',      
-            'barrio_id'       => '14', 
+            'propietario_id'  => '12',      
+            'barrio_id'  => '14', 
             'localidad_id'=> '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
@@ -278,7 +278,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Departamento de prueba HACHO -- Edificio CloudProp',      
             'edificio_id'  => '6',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '7',      
+            'propietario_id'  => '11',      
             'barrio_id'       => '138', 
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')
@@ -304,7 +304,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Departamento de prueba HACHO -- Edificio CloudProp',      
             'edificio_id'  => '6',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '7',      
+            'propietario_id'  => '11',      
             'barrio_id'       => '138', 
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')
@@ -330,7 +330,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Departamento de prueba HACHO -- Edificio CloudProp',      
             'edificio_id'  => '6',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '7',      
+            'propietario_id'  => '11',      
             'barrio_id'       => '138', 
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')
@@ -356,7 +356,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Departamento de prueba HACHO -- Edificio CloudProp',      
             'edificio_id'  => '6',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '7',      
+            'propietario_id'  => '11',      
             'barrio_id'       => '138', 
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')
@@ -382,7 +382,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Departamento de prueba HACHO -- Edificio CloudProp',      
             'edificio_id'  => '6',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '7',      
+            'propietario_id'  => '11',      
             'barrio_id'       => '138', 
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')
@@ -408,7 +408,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Departamento de prueba HACHO -- Edificio CloudProp',      
             'edificio_id'  => '6',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '7',      
+            'propietario_id'  => '11',      
             'barrio_id'       => '138', 
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')

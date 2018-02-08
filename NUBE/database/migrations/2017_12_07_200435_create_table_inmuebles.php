@@ -16,10 +16,10 @@ class CreateTableInmuebles extends Migration
         Schema::create('inmuebles', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('condicion', ['alquiler', 'venta', 'alquiler/venta']);            
-            $table->double('valorReal', 10, 2);
-            $table->double('valorVenta', 10, 2);
-            $table->double('valorAlquiler', 10, 2);
-            $table->double('superficie', 10, 2);
+            $table->double('valorReal'/*, 10, 2*/);
+            $table->double('valorVenta'/*, 10, 2*/);
+            $table->double('valorAlquiler'/*, 10, 2*/);
+            $table->double('superficie'/*, 10, 2*/);
             $table->string('direccion');
             $table->string('piso');
             $table->string('numDepto');            
