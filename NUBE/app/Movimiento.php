@@ -42,17 +42,18 @@ class Movimiento extends Model
         $total = 0;
         $movimientos = Movimiento::all();
         foreach ($movimientos as $movimiento) {
-            if ($movimiento->tipo == 'entrada'){
+            if ($movimiento->tipo_movimiento == 'entrada'){
                 $total = $total + $movimiento->monto;
             }
         }
         return $total;
     }
+
     public static function totalSalida(){
         $total = 0;
         $movimientos = Movimiento::all();
         foreach ($movimientos as $movimiento) {
-            if ($movimiento->tipo == 'salida'){
+            if ($movimiento->tipo_movimiento == 'salida'){
                 $total = $total + $movimiento->monto;
             }
         }

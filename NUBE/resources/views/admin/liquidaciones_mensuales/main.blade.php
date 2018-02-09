@@ -1,4 +1,8 @@
-@extends('admin.partes.index') @section('title') Garantes registrados @endsection @section('content')
+@extends('admin.partes.index') 
+@section('title') 
+	Garantes registrados 
+@endsection 
+@section('content')
 	<div class="content-wrapper" style="min-height: 916px;">
 		<section class="content-header">
 			<h1>
@@ -24,7 +28,6 @@
 						</div>
 						<div class="box-body ">
 							@include('admin.partes.msj_acciones')
-
 							@if (count($liquidaciones) > 0)
 								<table id="example" class="display" cellspacing="0" width="100%">
 									<thead>
@@ -54,7 +57,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input type="text" class="form-control mascara_vencimiento" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" onkeyup="carga_lineas({{json_encode($liquidacion)}}, this.value)">
+													<input type="text" id='fecha_vencimiento' class="form-control mascara_vencimiento" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" onkeyup="carga_lineas({{json_encode($liquidacion)}}, this.value)">
 												</div>
 											</td>
 										</tr>

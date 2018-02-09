@@ -38,7 +38,7 @@
                                                     </div>
                                                     <div class="product-info">
                                                         <a href="javascript:void(0)" class="product-title">{{$concepto->serviciocontrato->servicio->nombre}}
-                                                            <span class="label label-warning pull-right">${{$concepto->monto}}</span>
+                                                            <span class="label label-warning pull-right">$ {{number_format($concepto->monto, 2) }} </span>
                                                         </a>
                                                         <span class="product-description">{{$concepto->serviciocontrato->servicio->descripcion}}</span>
                                                     </div>
@@ -53,7 +53,7 @@
                             <span class="info-box-icon bg-green"><i class="fa fa-building-o" aria-hidden="true"></i></span>            
                             <div class="info-box-content">
                                 <span class="info-box-text">Alquiler</span>
-                                <span class="info-box-number">Monto: ${{$liquidacion->alquiler}}</span>
+                                <span class="info-box-number">Monto: ${{ number_format($liquidacion->alquiler , 2)}}</span>
                                 <span class="product-description"> 
                                         El monto del alquiler corresponde al periodo: <b>{{$liquidacion->periodo}}</b>.
                                 </span>
