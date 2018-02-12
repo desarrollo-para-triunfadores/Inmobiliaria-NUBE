@@ -156,6 +156,15 @@ class VisitasController extends Controller {
         }
 
         $visita->save();
+
+        if($request->oportunidad_id){
+            $oportunidad = Oportunidad::find($request->oportunidad_id);
+            $oportunidad->solicitud_atendida = true;
+            $oportunidad->save();
+        }
+
+
+
         $historia = new Historia_Oportunidad();
         $historia->titulo = 'Visita agendada';
         $fecha = $visita->inicio;

@@ -20,4 +20,14 @@ class Visita extends Model {
         return $this->belongsTo('App\Oportunidad');
     }
 
+    protected $dates = ['inicio', 'fin'];
+
+    public function getInicioFormateadoAttribute(){
+        return $this->inicio->format('d/m/Y');
+    }
+
+    public function getFinFormateadoAttribute(){
+        return $this->fin->format('d/m/Y');
+    }
+
 }

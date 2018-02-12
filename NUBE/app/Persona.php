@@ -22,7 +22,7 @@ class Persona extends Model {
         'direccion',
         'pais_id',
         'foto_perfil',
-        'usuario_id'
+        'user_id'
     ];
 
     protected $dates = ['fecha_nac'];
@@ -43,7 +43,7 @@ class Persona extends Model {
         return $this->belongsTo('App\Localidad');
     }
 
-    public function usuario(){
+    public function user(){
         return $this->belongsTo('App\User');
     }
 

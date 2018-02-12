@@ -90,23 +90,30 @@ class LiquidacionMensualController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->ajax()) {
-            $conceptos = [];
-            $ids_servicios_contratos = [];
-            
-            foreach ($request->lista_conceptos as $liquidacion) {
+        if ($request->ajax()) {           
+            foreach ($request->lista_conceptos as $liquidacion) {//$request->lista_conceptos llegan todas las liquidaciones que el usuario le haya colocado fecha de vencimiento
+                //Una por una las liquidaciones son actualizadas y guardadas
                 $concepto_liquidacion = LiquidacionMensual::find($liquidacion["id_liquidacion"]);
                 $concepto_liquidacion->gastos_administrativos = $liquidacion["gastos_administrativos"];
                 $concepto_liquidacion->alquiler = $liquidacion["monto_alquiler"];
                 $concepto_liquidacion->total = $liquidacion["total"];
-                $concepto_liquidacion->subtotal = $liquidacion["subtotal"];
-                $concepto_liquidacion->periodo = $liquidacion["periodo"];
+                $concepto_liquidacion->subtotal = $liquidacion["subtotal"];       
                 if (!is_null($liquidacion["vencimiento"])){ //si se cargó una fecha de vencimiento se formatea para guardar en la base
                     $vencimiento = str_replace('/', '-', $liquidacion["vencimiento"]);
                     $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
                 $concepto_liquidacion->comision_a_propietario = ($liquidacion["monto_alquiler"] * $concepto_liquidacion->contrato->comision_propietario) / 100;
                 $concepto_liquidacion->save();
+
+                //Se crea la notificación para el inquilino
+                $notificacion = new Notificacion();
+                $notificacion->mensaje = "Estimado cliente le informamos que la boleta correspondiente al periodo ".$concepto_liquidacion->periodo." ya se encuentra lista. La misma vence el ".$concepto_liquidacion->vencimiento.".";
+                $notificacion->ocultar = false;
+                $notificacion->tipo = "pago";
+                $notificacion->estado_leido = false;
+                $notificacion->user_id = $concepto_liquidacion->contrato->inquilino->persona->user->id;
+                $notificacion->save();
+
             }
             return response()->json('ok'); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
         }
@@ -147,11 +154,10 @@ class LiquidacionMensualController extends Controller
 
             //Calculo de valor del mes de alquiler
 
-            $fecha_hoy = Carbon::now();
-            $periodo = $fecha_hoy->format('m/Y');
+            $fecha_periodo = Carbon::createFromFormat('d/m/Y',"1/".$liquidacion->periodo); //se setea al primero del mes del periodo de la liquidación así se puede determinar cuanto se debe pagar por el alquiler.  
             $gastos_administrativos = $liquidacion->contrato->monto_basico * $liquidacion->contrato->comision_inquilino / 100;
 
-            $diferencia = $liquidacion->contrato->fecha_desde->diff($fecha_hoy);
+            $diferencia = $liquidacion->contrato->fecha_desde->diff($fecha_periodo);
             $mes_alquiler =  ( $diferencia->y * 12 ) + $diferencia->m + 1; //se suma 1 porque al momento de entrar (momento cero) ya está corriendo el monto para el mes 1
 
             $periodo_contrato = PeriodoContrato::all()
@@ -173,7 +179,7 @@ class LiquidacionMensualController extends Controller
                 "id_liquidacion" => $liquidacion->id,
                 "inquilino" => $liquidacion->contrato->inquilino->persona->apellido ." ".$liquidacion->contrato->inquilino->persona->nombre,
                 "monto_alquiler" => $monto_alquiler,
-                'periodo'=> $periodo,
+                'periodo'=> $liquidacion->periodo,
                 "gastos_administrativos" => $gastos_administrativos,
                 "valor_total_conceptos" => $valor_total_conceptos,
                 "total" =>  $total,

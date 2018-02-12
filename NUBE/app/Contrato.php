@@ -69,6 +69,10 @@ class Contrato extends Model {
         return $this->hasMany('App\LiquidacionMensual');
     }
 
+    public function ultima_liquidacion(){
+        return $this->liquidaciones()->get()->sortByDesc('id')->first(); 
+    }
+
     public function periodos_contrato() {
         return $this->hasMany('App\PeriodoContrato');
     }

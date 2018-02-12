@@ -15,6 +15,12 @@ class CreateTableNotificaciones extends Migration
     {
         Schema::create('notificaciones', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('mensaje',500)->nullable();
+            $table->enum('tipo', ['agenda', 'oportunidad','pago', 'vencimiento']);
+            $table->boolean('estado_leido')->nullable();
+            $table->boolean('ocultar')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             $table->timestamps();
         });
     }

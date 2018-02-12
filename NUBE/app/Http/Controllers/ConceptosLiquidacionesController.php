@@ -179,8 +179,7 @@ class ConceptosLiquidacionesController extends Controller
 
                     if($conceptos_periodo->count() === $cantidad_servicios){ // si la cantidad de conceptos con ids de  servicioscontratos que están asociados al contrato que estamos refiriendonos en este momento es igual a la cantidad de servicios asociados al contrato quiere decir que el periodo tiene cargado todos los servicios correspondientes y está lista para liquidar.
                         $liquidacion = new LiquidacionMensual(); //creamos la liquidación
-                        $fecha_periodo = "01/". Carbon::createFromFormat('m/Y',$liquidacion->periodo);
-
+                        $liquidacion->periodo = $periodo;
                         $liquidacion->contrato_id = $contrato->id;
                         $liquidacion->save();
                         foreach ($conceptos_periodo as $concepto_liquidacion) { //por cada concepto que pertenece al periodo le asociamos el id de liquidacion que recién creamos

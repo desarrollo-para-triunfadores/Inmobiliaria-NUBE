@@ -22,6 +22,15 @@ class User extends Authenticatable
         return $this->hasOne('App\Persona');
     }
 
+    public function notificaciones() {
+        return $this->hasMany('App\Notificacion');
+    }
+    
+    public function cantidad_notificaciones_nuevas() {
+        return $this->notificaciones()->where("tipo", "<>", true)->where("estado_leido", "<>", true)->count();
+    }
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
