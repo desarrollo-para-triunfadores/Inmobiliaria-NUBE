@@ -522,6 +522,7 @@ class PersonasTableSeeder extends Seeder
             'foto_perfil' => 'sin imagen',
             'localidad_id' => '1',
             'pais_id' => '1',
+            'user_id' =>'2',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('personas')->insert([
@@ -537,6 +538,7 @@ class PersonasTableSeeder extends Seeder
             'foto_perfil' => 'sin imagen',
             'localidad_id' => '5',
             'pais_id' => '1',
+            'user_id' =>'1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('personas')->insert([

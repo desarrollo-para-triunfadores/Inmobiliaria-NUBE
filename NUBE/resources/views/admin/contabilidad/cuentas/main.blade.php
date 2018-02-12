@@ -24,7 +24,10 @@
         </section>
 
         <section class="content animated fadeIn">
-            @include('admin.contabilidad.cuentas.boleta')   <!-- ULTIMA boleta hecha desde sistema (resumida) -->
+            @include('admin.contabilidad.cuentas.boleta')   {{-- --}} ULTIMA boleta hecha desde sistema (resumida) -->
+            @if(Auth::user()->persona->propietario == !null)
+                @include('admin.contabilidad.cuentas.tabla_propietarios')
+            @endif
             @include('admin.contabilidad.cuentas.tabla_pagos')
 
         </section>

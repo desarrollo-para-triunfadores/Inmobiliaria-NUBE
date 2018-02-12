@@ -22,13 +22,17 @@ class Persona extends Model {
         'direccion',
         'pais_id',
         'foto_perfil',
-        'usuario_id'
+        'user_id'
     ];
 
     protected $dates = ['fecha_nac'];
 
     public function inquilino() {
         return $this->hasOne('App\Inquilino');
+    }
+
+    public function propietario() {
+        return $this->hasOne('App\Propietario');
     }
 
     public function garante() {
@@ -45,6 +49,11 @@ class Persona extends Model {
 
     public function usuario(){
         return $this->belongsTo('App\User');
+    }
+
+    public function es_cliente(){
+        if($this->inquilino || $this->propietario)
+            return true;
     }
 
     public function getNombreCompletoAttribute(){

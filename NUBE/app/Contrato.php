@@ -69,9 +69,28 @@ class Contrato extends Model {
         return $this->hasMany('App\LiquidacionMensual');
     }
 
+    public function ultima_liquidacion() {
+        return $this->liquidaciones->last();
+    }
+    
     public function periodos_contrato() {
         return $this->hasMany('App\PeriodoContrato');
     }
+
+    ### -- METODOS -- ###
+    public function total_boletas_impagas(){
+        $liquidaciones = $this->hasMany('App\LiquidacionMensual')->where('abonado', null)->get();
+        $deuda = 0;
+        foreach($liquidaciones as $liquidacion){
+            $deuda = $deuda + $liquidacion->total;
+        }
+        return number_format($deuda , 2);
+    }
+
+    public function no_tiene_liquidaciones(){
+        $liquidaciones = $this->liquidaciones();
+    }
+    ### --/- METODOS 
 
     #### MUTADORES ####
     public function setMontoBasicoAttribute($value)

@@ -32,6 +32,7 @@ class LiquidacionMensual extends Model
         'fecha_pago_propietario',
         'fecha_cobro_propietario'];
 
+    ############ -- MUTADORES-- #########    
     public function getVencimientoFormateadoAttribute(){
         return $this->vencimiento->format('d/m/Y');
     }
@@ -47,6 +48,7 @@ class LiquidacionMensual extends Model
     public function getFechaCobroPropietarioVencimientoFormateadoAttribute(){
         return $this->fecha_cobro_propietario->format('d/m/Y');
     }
+     ########## --/ MUTADORES-- ##########    
 
     public function comprobar_vencimiento() {
         $fecha_hoy = Carbon::now();
@@ -80,4 +82,6 @@ class LiquidacionMensual extends Model
             ->sum('monto');
         return $total;
     }
+
+    
 }

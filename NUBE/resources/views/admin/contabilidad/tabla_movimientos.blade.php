@@ -24,7 +24,6 @@
             </thead>
             <tbody>
             @foreach($movimientos as $movimiento)
-
                 <tr>
                     <td class="text-center text-bold">{{$movimiento->descripcion}}</td>
                     @if($movimiento->inquilino)
@@ -39,8 +38,8 @@
                         <td class="text-center text-bold text-red">{{ $movimiento->tipo_movimiento }}</td>
                         <td class="text-center text-bold text-red">$ {{ $movimiento->monto }}</td>
                     @endif
-                    <td class="text-center text-bold text-green">{{ $movimiento->fecha }}</td>
-                    <td class="text-center text-bold text-green">{{ $movimiento->usuario->name }}</td>
+                    <td class="text-center text-bold text-green">{{ $movimiento->fecha_hora->format('d/m/Y') }}</td>
+                    <td class="text-center text-bold text-facebook">{{ $movimiento->usuario }}</td>
 
                 </tr>
             @endforeach

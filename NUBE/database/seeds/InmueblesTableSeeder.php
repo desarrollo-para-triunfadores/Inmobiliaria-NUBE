@@ -60,7 +60,7 @@ class InmueblesTableSeeder extends Seeder
             'descripcion'   => 'Excelente departamento Torre MAIOR BARRANCAS 3 Ambientes con 2 Suites, Amplio estar comedor con 2 salidas a balcon con vista al Rio en piso Alto, Toilette de recepcion, Gran cocina comedor mas lavadero independiente, Cochera fija en Subsuelo mas amplia baulera. Amenities: Gran Piscina con solarium , Jacuzzi , Gimnasio - Sauna , Spa. , Pergolas en sector d ePiscina, S.U.M. Comedor para reuniones familiares, Microcine, Amplio jardín en Planta Baja rodeando el SUM con parrilla.',      
             'edificio_id'  => '1',       
             'tipo_id'     => '1',   
-            'propietario_id'  => '2',      
+            'propietario_id'  => '13',      
             'barrio_id'       => '14', 
             'localidad_id'=> '1',
             'created_at' => date('Y-m-d H:m:s')

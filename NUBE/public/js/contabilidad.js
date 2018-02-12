@@ -168,14 +168,17 @@ $('#tabla_clientes tbody').on('mouseenter', 'td', function () {
 
 
 /**** Oculta o Mustra el campo personalizado para "Concepto" ****/
-$("#concepto").change(function () {
+$("#concepto_mov").change(function () {
+    alert('se selecciono');
+    /*
     if ($('#concepto').val() == 0) {
-        //alert('se selecciono otro');
+        alert('se selecciono otro');
         $('#descripcion').removeClass('hide');
     }
     if ($('#concepto').val() != 0) {
         $("#descripcion").hide();
     }
+    */
 });
 /************************************************************** */
 

@@ -28,8 +28,8 @@
                             <div class="row">
                                 <div class="col-xs-10">
                                     <div class="input-icon right">
-                                        <select  style="width: 100%"  name="concepto" id="concepto" placeholder="campo requerido"  class="select2 form-control">
-                                            {{$conceptos = $servicios}}
+                                        <select  style="width: 100%"  name="concepto" id="concepto_mov" placeholder="campo requerido"  class="select2 form-control">
+                                            {{$conceptos = \App\Servicio::all()}}
                                             @foreach($conceptos as $concepto)
                                                 <option value="{{$concepto->nombre}}{{--$concepto->id--}}">{{$concepto->nombre}}</option>
                                             @endforeach
@@ -41,32 +41,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{--
-                    <div class="form-group"><label class="col-sm-3 control-label">Fecha</label>
-                        <div class="col-sm-9 controls">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="input-icon right date">
-
-                                        <input name="fecha" type="text" readonly placeholder="campo requerido" class="form-control pull-right datepicker">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-3 control-label">Hora</label>
-                        <div class="col-sm-9 controls">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="input-icon right">
-                                        <input name="hora" type="text" readonly placeholder="campo requerido" class="form-control pull-right datepicker">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    --}}
                     <div class="form-group"><label class="col-sm-3 control-label">Tipo</label>
                         <div class="col-sm-9 controls">
                             <div class="row">

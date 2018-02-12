@@ -35,7 +35,7 @@ class MovimientosController extends Controller
         //dd($request);
         $movimiento = new Movimiento($request->all());
         $movimiento->fecha_hora = \Carbon\Carbon::now('America/Buenos_Aires');
-        $movimiento->usuario_id = Auth::user()->id;
+        $movimiento->user_id = Auth::user()->id;
         if($request->concepto == 0){                # hardcodeado | 0="Otro"
             $movimiento->descripcion = $request->descripcion;
         }else{

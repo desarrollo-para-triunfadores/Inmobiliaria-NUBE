@@ -1,6 +1,8 @@
+{{-- RESUMEN para INQUILINO --}}
+@if(Auth::user()->inquilino)
 <div class="box box-default">
     <div class="box-header with-border">
-        <h3 class="box-title">Resimen de Cuenta</h3>
+        <h3 class="box-title">Cuenta de <b>{{ $inquilino->persona->nombre}} {{ $inquilino->persona->apellido}} </b></h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -16,11 +18,11 @@
             <tbody>
                 <tr>
                     <th class="text-center text-bold" style="font-size: 50px">Total a pagar</th>
-                    <th class="text-center text-bold text-underline" style="font-size: 50px">$ xx.xx</th>
+                    <th class="text-center text-bold text-underline" style="font-size: 50px">$ {{ $inquilino->ultimo_contrato()->total_boletas_impagas()}}</th>
                 </tr>
                 <tr>
                     <th class="text-center" style="font-size: 30px">Vencimiento</th>
-                    <th class="text-center text-bold" style="font-size: 30px">dd/mm/aaaa</th>
+                    <th class="text-center text-bold" style="font-size: 30px">-</th>
                 </tr>
             </tbody>
             <tfoot>
@@ -34,30 +36,17 @@
                 <th class="text-center">CONCEPTO</th>
                 <th class="text-center">MONTO</th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
-                <td class="text-center text-bold">Facturas Anteriores</td>
-                <td class="text-center text-bold">Pagos Realizados</td>
+                <th class="text-center">Monto Alquiler</th>
+                <th class="text-center">$ {{ $inquilino->ultimo_contrato()->ultima_liquidacion()->alquiler}}</th>
             </tr>
-            </tbody>
-            <tfoot>
-
-            </tfoot>
+            </thead>
         </table>
     </div>
-    <!-- /.box-body -->
-{{--
-<div class="box-footer no-padding">
-    <ul class="nav nav-pills nav-stacked">
-        <li><a href="#">United States of America
-                <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-        <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-        </li>
-        <li><a href="#">China
-                <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-    </ul>
 </div>
---}}
-<!-- /.footer -->
-</div>
+@endif
+
+
+@if($propietario)
+
+@endif
