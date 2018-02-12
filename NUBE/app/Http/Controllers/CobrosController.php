@@ -137,8 +137,9 @@ class CobrosController extends Controller
            
             //Movimiento para el propietario
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;  
+            $movimiento->user_id = Auth::user()->id;  
             $movimiento->fecha_hora = Carbon::now();          
+            $movimiento->monto = $liquidacion->abonado;          
             $movimiento->tipo_movimiento = "salida";
             $movimiento->propietario_id = $liquidacion->contrato->inmueble->propietario->id;
             $movimiento->monto = $liquidacion->comision_a_propietario;
@@ -148,8 +149,10 @@ class CobrosController extends Controller
             
             //Movimiento de la empresa
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;  
+            $movimiento->user_id = Auth::user()->id;  
             $movimiento->fecha_hora = Carbon::now();          
+            $movimiento->user_id = Auth::user()->id;     
+            $movimiento->monto = $liquidacion->abonado;       
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->comision_a_propietario;
             $movimiento->descripcion = "Se recibe un pago por $".$liquidacion->comision_a_propietario.". Correspondiente a la comisión al propietario por la liquidación del periodo ".$liquidacion->periodo.".";
@@ -162,8 +165,10 @@ class CobrosController extends Controller
 
             //Movimiento de la empresa
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;     
+            $movimiento->user_id = Auth::user()->id;     
             $movimiento->fecha_hora = Carbon::now();        
+            $movimiento->user_id = Auth::user()->id;
+            $movimiento->fecha_hora = Carbon::now();            
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->abonado;
             $movimiento->descripcion = "Se recibe un pago por $".$liquidacion->abonado.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
@@ -180,22 +185,7 @@ class CobrosController extends Controller
             $notificacion->save();
         }
 
-        
-           
-
-
         Session::flash('message', 'Se ha actualizado la información');
         return redirect()->route('cobros.create');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

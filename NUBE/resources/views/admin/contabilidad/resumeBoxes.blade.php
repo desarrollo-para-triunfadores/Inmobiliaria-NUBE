@@ -3,7 +3,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>$ xx</h3>
+                <h3>$ {{ App\Movimiento::totalEntrada() - App\Movimiento::totalSalida() }}</h3>
                 <p>Saldo</p>
             </div>
             <div class="icon">
@@ -31,7 +31,7 @@
         <div class="small-box bg-green">
             <div class="inner">
                 @if(App\Movimiento::totalEntrada())
-                    <h3>$ App\Movimiento::totalEntrada()<sup style="font-size: 20px"></sup></h3>
+                    <h3>$ {{ App\Movimiento::totalEntrada() }}<sup style="font-size: 20px"></sup></h3>
                 @else
                     <h3>-<sup style="font-size: 20px"></sup></h3>
                 @endif    
@@ -48,12 +48,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                {{-- $movimientos = \App\Movimiento::all() --}}
-                @if(App\Movimiento::totalSalida())
-                    <h3>${{ $movimientos->totalSalida() }}</h3>
-                @else    
-                    <h3>-</h3>
-                @endif
+                    <h3>${{App\Movimiento::totalSalida() }}</h3>
                 <p>Salidas</p>
             </div>
             <div class="icon">

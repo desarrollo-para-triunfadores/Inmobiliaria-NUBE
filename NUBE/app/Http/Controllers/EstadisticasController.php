@@ -43,14 +43,10 @@ class EstadisticasController extends Controller
                     array_push($movimientos_entre_fechas, $movimiento);
                 }
             }
-
             $datos_para_contabilidad_entre_fechas = array("movimientos"=>$movimientos_entre_fechas, "iquilinos"=>$inquilinos, "servicios"=>$servicios);
             return response()->json(json_encode($datos_para_contabilidad_entre_fechas, true));
-
-
-
-
-        }else {
+        }
+        else {
             #################################
             $fecha1 = "";
             $fecha2 = "";
@@ -65,12 +61,14 @@ class EstadisticasController extends Controller
                 $fecha2 = $fechahoy->format('d/m/Y');
             }
             #################################
+            /*
             foreach ($movimientos as $movimiento) {
                 $fechaMovimiento = $movimiento->fecha_hora; //\Carbon\Carbon::createFromFormat('d/m/Y', $movimiento->fecha_hora);
                 if (($fechaMovimiento >= date_create($fecha1)) && ($fechaMovimiento <= date_create($fecha2))) {
                     array_push($movimientos_entre_fechas, $movimiento);
                 }
-            }
+            }*/
+            $movimientos_entre_fechas = $movimientos;
 
             return view('admin.contabilidad.main')
                 ->with('servicios', $servicios)

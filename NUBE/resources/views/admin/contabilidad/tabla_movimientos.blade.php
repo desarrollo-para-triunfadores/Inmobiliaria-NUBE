@@ -24,6 +24,7 @@
             </thead>
             <tbody>
             @foreach($movimientos as $movimiento)
+
                 <tr>
                     <td class="text-center text-bold">{{$movimiento->descripcion}}</td>
                     @if($movimiento->inquilino)

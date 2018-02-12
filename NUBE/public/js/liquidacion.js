@@ -36,6 +36,9 @@ function carga_lineas (liquidacion, vencimiento) {
 }
 
 function enviar () {
+    //Aca voy a meter un validador de fecha de vencimiento (vencimiento no nulo y mayor que periodo de emision)
+
+    //
     var conceptos = []
     lineas.forEach(function (valor) { // se convierte el array en una coleccion de objetos
         conceptos.push(valor)

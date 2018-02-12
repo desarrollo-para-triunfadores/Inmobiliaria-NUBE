@@ -104,6 +104,7 @@ class LiquidacionMensualController extends Controller
                 }
                 $concepto_liquidacion->comision_a_propietario = ($liquidacion["monto_alquiler"] * $concepto_liquidacion->contrato->comision_propietario) / 100;
                 $concepto_liquidacion->save();
+<<<<<<< HEAD
 
                 //Se crea la notificación para el inquilino
                 $notificacion = new Notificacion();
@@ -114,8 +115,31 @@ class LiquidacionMensualController extends Controller
                 $notificacion->user_id = $concepto_liquidacion->contrato->inquilino->persona->user->id;
                 $notificacion->save();
 
+=======
+                ##########   Una vez liquidada boleta en el sistema, notificamos por email al cliente inquilino   #########
+                $conceptos = $liquidacion["conceptos"];
+                $inquilino = Inquilino::find($concepto_liquidacion->contrato->inquilino_id);
+                $cliente = $inquilino->persona->apellido.", ".$inquilino->persona->nombre;
+                $monto_alquiler = $liquidacion["monto_alquiler"];
+                $expensas = $liquidacion["expensas"];
+                $monto_expensas = $liquidacion["monto_expensas"];
+                $total = $liquidacion["total"];
+                $vencimiento = $liquidacion["vencimiento"];
+                try{
+                    Mail::send('emails.boleta.boleta', ['cliente'=>$cliente,'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'expensas'=>$expensas, 'monto_alquiler'=>$monto_alquiler, 'monto_expensas'=>$monto_expensas, 'total'=>$total], function($msj){
+                        $msj->subject('Nube Propiedades | Boleta de Servicio');
+                        $msj->to('jpcaceres.nea@gmail.com');
+                    });
+                    return response()->json(json_encode("Se envio el email", true));
+                }catch (Exception $e){
+                    $respuesta = array("excepcion"=>$e);
+                    return response()->json(json_encode($respuesta, true));
+                    $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
+                }
+                #################### --FIN Email de boletas -- ####################
+>>>>>>> origin/master
             }
-            return response()->json('ok'); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
+            return response()->json('Se realizaron las liquidaciones y se enviaron emails a inquilino con boleta'); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
         }
 
         $liquidaciones = [];
@@ -190,61 +214,5 @@ class LiquidacionMensualController extends Controller
         }
         return view('admin.liquidaciones_mensuales.main')
             ->with('liquidaciones', $liquidaciones);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
