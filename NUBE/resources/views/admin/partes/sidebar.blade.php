@@ -18,7 +18,7 @@
                             <li id="side-ele-usuarios"><a href="/admin/usuarios"><i class="fa fa-user-circle"></i> Usuarios</a></li>
                         @endcan
                         @can('acceso a roles')
-                            <li id="side-ele-roles"><a data-toggle="tooltip" title="roles de los usuarios, util para restringir el acceso a determinadas funciones dentro del sistema" href="/admin/roles"><i class="fa fa-group"></i> Roles</a></li>
+                            <li id="side-ele-roles"><a data-toggle="tooltip" data-placement="right"  title="roles de los usuarios, util para restringir el acceso a determinadas funciones dentro del sistema" href="/admin/roles"><i class="fa fa-group"></i> Roles</a></li>
                         @endcan
                     </ul>
                 </li>
@@ -117,7 +117,7 @@
                     <ul id="side-inmueble-ul" class="treeview-menu">
 
                         @can('acceso a inmuebles')
-                            <li id="side-ele-propiedades"><a data-toggle="tooltip" title="añadir, editar, eliminar y consultar informacion sobre los inmuebles" href="/admin/inmuebles"><i class="fa fa-building"></i> Propiedades</a></li>
+                            <li id="side-ele-propiedades"><a data-toggle="tooltip" data-placement="right"  title="añadir, editar, eliminar y consultar informacion sobre los inmuebles" href="/admin/inmuebles"><i class="fa fa-building"></i> Propiedades</a></li>
                         @endcan
                         @can('acceso a edificios')
                             <li id="side-ele-edificios"><a href="/admin/edificios"><i class="fa fa-building-o"></i> Edificios</a></li>
@@ -154,7 +154,7 @@
                     <ul id="side-oportunidades-ul" class="treeview-menu">
 
                         @can('acceso a oportunidades')
-                            <li id="side-ele-opotunidades"><a data-toggle="tooltip" title="ver las oportunidades de negocio" href="/admin/oportunidades"><i class="fa fa-eye"></i> Oportunidades</a></li>
+                            <li id="side-ele-opotunidades"><a data-toggle="tooltip" data-placement="right"  title="ver las oportunidades de negocio" href="/admin/oportunidades"><i class="fa fa-eye"></i> Oportunidades</a></li>
                         @endcan
                         @can('acceso a agenda')
                             <li id="side-ele-agenda"><a href="/admin/agenda"><i class="fa fa-calendar"></i> Agenda</a></li>
@@ -193,10 +193,10 @@
                     </a>
                     <ul id="side-impuestos-ul" class="treeview-menu">
                         @can('acceso a impuestos')
-                            <li id="side-ele-visualizar-impuestos"><a data-toggle="tooltip" title="visualizar una lista filtrada de todos los impuestos y servicios cargados" href="/admin/conceptosliquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros de impuestos</a></li>
+                            <li id="side-ele-visualizar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista filtrada de todos los impuestos y servicios cargados" href="/admin/conceptosliquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros de impuestos</a></li>
                         @endcan
                         @can('alta de impuestos')
-                            <li id="side-ele-cargar-impuestos"><a data-toggle="tooltip" title="cargar los montos para los impuestos asociados a los contratos" href="/admin/conceptosliquidaciones/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carga de impuestos</a></li>
+                            <li id="side-ele-cargar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="cargar los montos para los impuestos asociados a los contratos" href="/admin/conceptosliquidaciones/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carga de impuestos</a></li>
                         @endcan
 
                     </ul>
@@ -217,13 +217,13 @@
                     </a>
                     <ul id="side-liquidaciones-ul" class="treeview-menu">
                         @can('alta de liquidaciones')
-                            <li id="side-ele-generar-liquidacion"><a data-toggle="tooltip" title="visualizar una lista de todos los registros de liquidación mensual que ya están listos para poder ser liquidados" href="/admin/liquidaciones/create"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros listos para liquidar</a></li>
+                            <li id="side-ele-generar-liquidacion"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista de todos los registros de liquidación mensual que ya están listos para poder ser liquidados" href="/admin/liquidaciones/create"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros listos para liquidar</a></li>
                         @endcan
                         @can('cobro de liquidaciones')
-                            <li id="side-ele-cobros"><a data-toggle="tooltip" title="cargar el cobro de una liquidación mensual a un cliente" href="/admin/cobros/create"><i class="fa fa-usd" aria-hidden="true"></i> Cobro de servicios</a></li>
+                            <li id="side-ele-cobros"><a data-toggle="tooltip" data-placement="right"  title="cargar el cobro de una liquidación mensual a un cliente" href="/admin/cobros/create"><i class="fa fa-usd" aria-hidden="true"></i> Cobro de servicios</a></li>
                         @endcan
                         @can('pagos de liquidaciones')
-                            <li id="side-ele-pagos"><a data-toggle="tooltip" title="listado de pagos pendientes a clientes" href="/admin/pagos"><i class="fa fa-usd" aria-hidden="true"></i> Pagos pendientes</a></li>
+                            <li id="side-ele-pagos"><a data-toggle="tooltip" data-placement="right"  title="listado de pagos pendientes a clientes" href="/admin/pagos"><i class="fa fa-usd" aria-hidden="true"></i> Pagos pendientes</a></li>
                         @endcan
                     </ul>
                 </li>
@@ -231,7 +231,7 @@
 
         <!--CONTABILIDAD -->
             <li id="li14">
-                <a data-toggle="tooltip" data-placement="top" title="Acceso a resumenes de movimienos en la empresa"   href="/admin/contabilidad/">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Acceso a resumenes de movimienos en la empresa"   href="/admin/contabilidad/">
                     <i class="fa fa-bar-chart">
                         <div class="icon-bg bg-orange"></div>
                     </i>
@@ -242,7 +242,7 @@
 
         <!--Backup de Datos -->
             <li id="li14">
-                <a data-toggle="tooltip" data-placement="top" title="Backup de la información almacenada" onclick="backup()"  href="{{--  route('admin.backup.index') --}}">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Backup de la información almacenada" onclick="backup()"  href="{{--  route('admin.backup.index') --}}">
                     <i class="fa fa-database">
                         <div class="icon-bg bg-orange"></div>
                     </i>

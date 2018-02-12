@@ -15,7 +15,8 @@ class CreateTableOportunidades extends Migration
     {
         Schema::create('oportunidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_interesado');         
+            $table->string('nombre_interesado'); 
+            $table->boolean('solicitud_atendida')->nullable();  
             $table->string('telefono')->nullable();
             $table->string('mensaje')->nullable();
             $table->string('email')->nullable();                                  

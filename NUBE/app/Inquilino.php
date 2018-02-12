@@ -25,13 +25,4 @@ class Inquilino extends Model {
     public function movimientos(){
         return $this->hasMany('App\Movimientos');
     }
-
-   
-
-    /*
-    public function saldo(){    #metodo para detectar pagos pendientes por parte del inquilino
-        $liquidaciones_inquilino = \App\LiquidacionMensual::where('')
-    }
-    */
-
 }

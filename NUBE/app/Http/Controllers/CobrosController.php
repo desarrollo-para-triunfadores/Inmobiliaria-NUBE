@@ -131,13 +131,14 @@ class CobrosController extends Controller
     {
         $liquidacion = LiquidacionMensual::find($id);
 
-        if($request->cobro_propietario){
+        if($request->cobro_propietario){ //Se verifica a quien se le cobró en la vista, si a un inquilino o un propietario
             $liquidacion->fecha_cobro_propietario = Carbon::now();     
             $liquidacion->save();
            
             //Movimiento para el propietario
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;  
+            $movimiento->user_id = Auth::user()->id;  
+            $movimiento->fecha_hora = Carbon::now();          
             $movimiento->monto = $liquidacion->abonado;          
             $movimiento->tipo_movimiento = "salida";
             $movimiento->propietario_id = $liquidacion->contrato->inmueble->propietario->id;
@@ -148,7 +149,9 @@ class CobrosController extends Controller
             
             //Movimiento de la empresa
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;     
+            $movimiento->user_id = Auth::user()->id;  
+            $movimiento->fecha_hora = Carbon::now();          
+            $movimiento->user_id = Auth::user()->id;     
             $movimiento->monto = $liquidacion->abonado;       
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->comision_a_propietario;
@@ -162,13 +165,24 @@ class CobrosController extends Controller
 
             //Movimiento de la empresa
             $movimiento = new Movimiento();
-            $movimiento->usuario_id = Auth::user()->id;
+            $movimiento->user_id = Auth::user()->id;     
+            $movimiento->fecha_hora = Carbon::now();        
+            $movimiento->user_id = Auth::user()->id;
             $movimiento->fecha_hora = Carbon::now();            
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->abonado;
             $movimiento->descripcion = "Se recibe un pago por $".$liquidacion->abonado.". Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
             $movimiento->liquidacion_id = $liquidacion->id;
             $movimiento->save();
+
+            //Se crea la notificación para el propietario
+            $notificacion = new Notificacion();
+            $notificacion->mensaje = "Estimado cliente le informamos que se encuentra disponible el pago de la mensualidad correspondiente al periodo ".$ultima_liquidacion->periodo.". Le invitamos a acercarse a nuestras instalaciones para poder retirar el saldo correspondiente.";
+            $notificacion->ocultar = false;
+            $notificacion->tipo = "pago";
+            $notificacion->estado_leido = false;
+            $notificacion->user_id = $liquidacion->contrato->inmueble->propietario->persona->user->id;
+            $notificacion->save();
         }
 
         Session::flash('message', 'Se ha actualizado la información');

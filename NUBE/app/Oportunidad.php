@@ -14,7 +14,8 @@ class Oportunidad extends Model
             'fecha_comienzo',
             'email',
             'mensaje',
-            'inmueble_id'
+            'inmueble_id',
+            'solicitud_atendida'
             ];
 
     /**  */

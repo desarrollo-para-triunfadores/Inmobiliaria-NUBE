@@ -178,6 +178,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * View Composer 
+         */
+        App\Providers\ComposerServiceProvider::class,
+
     ],
 
     /*

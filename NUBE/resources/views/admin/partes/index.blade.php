@@ -6,7 +6,7 @@
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
             <!-- top nav -->
-            @include('admin.partes.navTop') 
+            @include('admin.partes.navtop.main') 
             <!-- logo and sidebar -->
             @include('admin.partes.sidebar') 
             <!-- page content -->

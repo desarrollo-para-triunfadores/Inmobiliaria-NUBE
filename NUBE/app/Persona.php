@@ -47,7 +47,7 @@ class Persona extends Model {
         return $this->belongsTo('App\Localidad');
     }
 
-    public function usuario(){
+    public function user(){
         return $this->belongsTo('App\User');
     }
 
