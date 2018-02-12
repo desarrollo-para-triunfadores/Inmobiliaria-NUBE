@@ -37,7 +37,19 @@ class UsersRolesPermisosTableSeeder extends Seeder
             'imagen' => 'usuario_1499775474.jpg'
         ]);
 
-        //Creación del rol de usuario
+        $user_4 = User::create([
+            'name' => 'Andrea Ríos López',
+            'email' => 'rioslopezandrea@gmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'andrea_rioslopez.png'
+        ]);
+
+        $user_5 = User::create([
+            'name' => 'Mirta Larsson',
+            'email' => 'm.larsson@hotmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'mirta_larsson.png'
+        ]);
 
         $role = Role::create(['name' => 'Administrador']);
 

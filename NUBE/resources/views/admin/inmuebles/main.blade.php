@@ -34,12 +34,12 @@
 									<th class="text-center">Condición</th>
 									<th class="text-center">Tipo</th>
 									<th class="text-center">Dirección</th>
-									<th class="text-center">Cant.Ambientes</th>
+									{{--<th class="text-center">Cant.Ambientes</th> --}}
 									<th class="text-center">Precio venta</th>
 									<th class="text-center">Precio alquiler</th>
 									<th class="text-center">F.Habilitación</th>
 									<th class="text-center">Contrato de alquiler</th>
-									<th class="text-center">Fecha de Registro</th>
+									<th class="text-center">Propietario</th>
 									<th class="text-center">Acciones</th>
 								</tr>
 							</thead>
@@ -48,7 +48,7 @@
 								<tr>
 									<td class="text-center">{{$inmueble->condicion}}</td>
 									@if($inmueble->piso || $inmueble->numDepto)
-										<td class="text-center bold">{{$inmueble->tipo->nombre}} <b>P {{$inmueble->piso}} | N° {{$inmueble->numDepto}}</b></td>
+										<td class="text-center bold" data-toggle="tooltip" title="Ambientes: "{{$inmueble->cantidadAmbientes}}>{{$inmueble->tipo->nombre}} <b>P {{$inmueble->piso}} | N° {{$inmueble->numDepto}}</b></td>
 									@else
 										<td class="text-center bold">{{$inmueble->tipo->nombre}}</td>
 									@endif
@@ -59,7 +59,7 @@
 									<td class="text-center bold">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
 									@endif
 									
-									<td class="text-center">{{$inmueble->cantidadAmbientes}}</td>
+									{{--<td class="text-center">{{$inmueble->cantidadAmbientes}}</td>	--}}
 									@if($inmueble->condicion!=='alquiler')
 									<td class="text-center">${{$inmueble->valorVenta}}</td>
 									@else
@@ -77,7 +77,7 @@
 									@else
 										<td class="text-center text-red">Inmueble libre</td>
 									@endif
-									<td class="text-center">{{$inmueble->created_at->format('d/m/Y')}}</td>
+									<td class="text-center">{{$inmueble->propietario->persona->nombre}} {{$inmueble->propietario->persona->apellido}}</td>
                                     <td class="text-center">
                                         <a title="Ver este inmueble" href="{{ route('inmuebles.edit', $inmueble->id) }}" class="btn btn-social-icon btn-warning btn-sm">
                                             <i class="fa fa-eye"></i>

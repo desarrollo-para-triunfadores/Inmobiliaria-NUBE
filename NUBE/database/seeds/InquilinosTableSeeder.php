@@ -60,5 +60,34 @@ class InquilinosTableSeeder extends Seeder
             'persona_id' => '10',
             'created_at' => date('Y-m-d H:m:s')
         ]);
+
+        DB::table('inquilinos')->insert([  
+            'persona_id' => '32',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('inquilinos')->insert([  
+            'persona_id' => '33',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('inquilinos')->insert([  
+            'persona_id' => '34',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('inquilinos')->insert([  
+            'persona_id' => '35',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('inquilinos')->insert([  
+            'persona_id' => '36',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('inquilinos')->insert([   
+            'persona_id' => '37',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+        DB::table('inquilinos')->insert([   
+            'persona_id' => '38',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
     }
 }

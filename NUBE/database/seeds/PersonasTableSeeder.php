@@ -31,8 +31,8 @@ class PersonasTableSeeder extends Seeder
         ]);
 
         DB::table('personas')->insert([
-            'nombre' => 'Gabriela',
-            'apellido' => 'De La Cruz Rodriguez',
+            'nombre' => 'Andrea',
+            'apellido' => 'Ríos López',
             'sexo' => 'Femenino',
             'dni' => '40673760',
             'fecha_nac' => '1967-02-22',
@@ -42,6 +42,7 @@ class PersonasTableSeeder extends Seeder
             'foto_perfil' => 'sin imagen',
             'localidad_id' => '1',
             'pais_id' => '1',
+            'user_id'=>'4',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
@@ -350,11 +351,11 @@ class PersonasTableSeeder extends Seeder
         ]);
 
         DB::table('personas')->insert([
-            'nombre' => 'Teresita Candida',
-            'apellido' => 'Hazurun',
-            'sexo' => 'Femenino',
+            'nombre' => 'Juan',
+            'apellido' => 'Rubio',
+            'sexo' => 'Masculino',
             'dni' => '17333490',
-            'fecha_nac' => '1968-06-13',
+            'fecha_nac' => '1994-06-13',
             'telefono' => '(362) 444 - 6866',
             'telefono_contacto' => '(362) 448 - 8882',
             'email'   => 'kristian_siempre_azul@hotmail.com',   
@@ -362,6 +363,7 @@ class PersonasTableSeeder extends Seeder
             'foto_perfil' => 'sin imagen',
             'localidad_id' => '1',
             'pais_id' => '1',
+            'user_id' => '3',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
@@ -509,7 +511,6 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        ###
         DB::table('personas')->insert([
             'nombre' => 'Juan Pablo',
             'apellido' => 'Cáceres',
@@ -619,7 +620,7 @@ class PersonasTableSeeder extends Seeder
         ]);
 
         DB::table('personas')->insert([ #PROPIETARIA DEPTOS DE EDIFICIO --HORACIO
-            'nombre' => 'Mirtha',
+            'nombre' => 'Mirta',
             'apellido' => 'Larsson',
             'sexo' => 'Femenino',
             'dni' => '28555614',
@@ -631,6 +632,7 @@ class PersonasTableSeeder extends Seeder
             'foto_perfil' => 'sin imagen',
             'localidad_id' => '5',
             'pais_id' => '1',
+            'user_id' => '5',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
