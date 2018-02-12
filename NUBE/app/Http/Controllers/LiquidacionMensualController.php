@@ -104,7 +104,6 @@ class LiquidacionMensualController extends Controller
                 }
                 $concepto_liquidacion->comision_a_propietario = ($liquidacion["monto_alquiler"] * $concepto_liquidacion->contrato->comision_propietario) / 100;
                 $concepto_liquidacion->save();
-<<<<<<< HEAD
 
                 //Se crea la notificación para el inquilino
                 $notificacion = new Notificacion();
@@ -115,7 +114,6 @@ class LiquidacionMensualController extends Controller
                 $notificacion->user_id = $concepto_liquidacion->contrato->inquilino->persona->user->id;
                 $notificacion->save();
 
-=======
                 ##########   Una vez liquidada boleta en el sistema, notificamos por email al cliente inquilino   #########
                 $conceptos = $liquidacion["conceptos"];
                 $inquilino = Inquilino::find($concepto_liquidacion->contrato->inquilino_id);
@@ -137,7 +135,6 @@ class LiquidacionMensualController extends Controller
                     $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
                 #################### --FIN Email de boletas -- ####################
->>>>>>> origin/master
             }
             return response()->json('Se realizaron las liquidaciones y se enviaron emails a inquilino con boleta'); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
         }
