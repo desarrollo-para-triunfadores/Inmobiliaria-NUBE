@@ -20,7 +20,7 @@ class EstadisticasController extends Controller
 
     public function index(Request $request)
     {
-        if(is_null(Auth::user()->persona)){   #Si el usuario es un administrador CloudProp
+        if((Auth::user()->persona) && (Auth::user()->rol_id == 1 )){   #Si el usuario es un administrador CloudProp
             $inquilinos = Inquilino::all();
             $propietarios = Propietario::all();
 
@@ -76,27 +76,42 @@ class EstadisticasController extends Controller
                     ->with('inmuebles', $inmuebles)
                     ->with('localidades', $localidades); // se devuelven los registros;
         }
-        if(Auth::user()->persona){
-            #### si nuestro vera la vista como INQUILINO
+        else{   #--Si el usuario NO ES ADMINISTRADOR CloudProp      
+            ########### si nuestro vera la vista como --INQUILINO ############
             if(Auth::user()->persona->inquilino){
-                $inquilino = Auth::user()->persona->inquilino;
-                return view('admin.contabilidad.cuentas.main')
-                    ->with('inquilino',$inquilino);           
-            }
-            #### si nuestro vera la vista como PROPIETARIO
-            if(Auth::user()->persona->propietario){
-                $propietario = Auth::user()->persona->propietario;
-                
-                $contratos = $propietario->contratos_vigentes();
+                $inquilino = Auth::user()->persona->inquilino;                
+                /* 
+                ##Lineas comentadas --> Por ahora un inquilino solo podra tener un contrato vigente a la vez
+                $contratos = $inquilino->ultimo_contrato();
                 if($contratos!=null){
+                    $liquidaciones= [];
                     foreach($contratos as $contrato){
                         $liquidacion_de_contrato = LiquidacionMensual::where('contrato_id',$contrato->id)->get();
-                        $liquidaciones->put('liquidaciones',$liquidacion_de_contrato);
+                        array_push($liquidaciones , $liquidacion_de_contrato);
                     }
                 }
-                
-                
-
+                */
+                $contrato = $inquilino->ultimo_contrato();
+                if($contrato->vigente()){
+                    $liquidaciones= $contrato->liquidaciones;
+                    //dd($contrato->id/*ultima_liquidacion()*/);
+                }
+                return view('admin.contabilidad.cuentas.main')
+                    ->with('contrato',$contrato)
+                    ->with('liquidaciones',$liquidaciones)
+                    ->with('inquilino',$inquilino);           
+            }
+            ########### si nustro vera la vista como --PROPIETARIO #############
+            if(Auth::user()->persona->propietario){
+                $propietario = Auth::user()->persona->propietario;
+                $contratos = $propietario->contratos_vigentes();
+                if($contratos!=null){
+                    $liquidaciones= [];
+                    foreach($contratos as $contrato){
+                        $liquidacion_de_contrato = LiquidacionMensual::where('contrato_id',$contrato->id)->get();
+                        array_push($liquidaciones , $liquidacion_de_contrato);
+                    }
+                }
                 return view('admin.contabilidad.cuentas.main')
                     ->with('contratos',$contratos)
                     ->with('liquidaciones',$liquidaciones)
@@ -105,18 +120,8 @@ class EstadisticasController extends Controller
             ##---------------------------------------------
             //$liquidaciones = LiquidacionMensual::where
         }
-        else{
-         #############  No mostrar vista global de la contabilidad de la empresa, solo detalle del usuario (cliente) ######
-         $inquilino = Inquilino::find($id);
-         $movimientos = Movimiento::where('inquilino_id' , $id)->get();
-         $servicios = Servicio::all();
-         $liquidaciones = LiquidacionMensual::all(); 
-         return view('admin.contabilidad.cuentas.main')
-             ->with('inquilino',$inquilino)
-             ->with('servicios',$servicios)
-             ->with('movimientos', $movimientos)
-             ->with('liquidaciones',$liquidaciones);
-        }     
+       
+        
         ######################################################################################################### ##########
     }
 

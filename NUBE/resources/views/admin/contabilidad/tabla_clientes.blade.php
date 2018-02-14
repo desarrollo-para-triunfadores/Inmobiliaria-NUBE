@@ -35,13 +35,14 @@
                                         <i class="fa fa-list"></i>
                                 </a>    
                             </td>                                               
-                        @endif        
-                    @elseif($cliente->propietario)   <!-- Si es Propietario-->                        
+                        @endif  
+                    @endif          
+                    @if($cliente->propietario)   <!-- Si es Propietario-->                        
                         @if($cliente->propietario->contratos_vigentes() != null)              
                             <td class="text-center text-bold text-blue">{{$cliente->nombrecompleto}} [P]</td>                          
                             <td class="text-center text-bold text-red">$ {{$cliente->propietario->total_comisiones_pendientes_pago()}}</td>
-                            <td class="text-center text-bold text-green">$ {{$cliente->propietario->cobros_alquiler_pendientes()}}</td>
-                            <td class="text-center text-bold text-blue">$ {{$cliente->propietario->saldo()}}</td>
+                            <td class="text-center text-bold text-green">$ {{$cliente->propietario/*->cobros_alquiler_pendientes()*/}}</td>
+                            <td class="text-center text-bold text-blue">$ {{$cliente->propietario/*->saldo()*/}}</td>
                             <td class="text-center">
                                 <a href="{{ route('contabilidad.show', $cliente->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
                                         <i class="fa fa-list"></i>

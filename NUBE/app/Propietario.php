@@ -51,23 +51,24 @@ class Propietario extends Model {
 
     
     public function contratos_vigentes(){   #Solo devuelve los contratos que involucran al Propietario en la actualidad
-        $respuesta = null;
+        $respuesta = [];
         foreach($this->inmuebles as $inmueble){ #Obtener todos los inmuebles de este propietario
-            if($inmueble->ultimo_contrato() && $inmueble->ultimo_contrato()->vigente() ){
-                $respuesta->put('contratos',$inmueble->ultimo_contrato()); 
+            if($inmueble->ultimo_contrato() /* && $inmueble->ultimo_contrato()->vigente()*/ ){
+                array_push($respuesta, $inmueble->ultimo_contrato()); 
             }    
         }
         return $respuesta;
     }
-    
 
     public function total_comisiones_pendientes_pago(){      #Dinero que el propietario adeuda a la inmobiliaria en concepto de servicio por uso del sistema
         $contratos_vigentes[] = $this->contratos_vigentes();          #Obtener todos los contratos vigentes que tienen relacion con este propietario
         $total_x_pagar = 0;
-        foreach($contratos_vigentes as $contrato_vigente){        
-            $liquidaciones= \App\LiquidacionMensual::where('contrato_id',$contrato_vigente->id)->where('fecha_pago_propietario',!null)->get();            
+        foreach($contratos_vigentes as $contrato_vigente){   
+            //$liquidaciones = $contrato_vigente->liquidaciones;
+            dd($contrato_vigente->liquidaciones);
+            //$liquidaciones= LiquidacionMensual::where('contrato_id',$contrato_vigente->id)/*->where('fecha_pago_propietario',null)*/->get();            
             foreach($liquidaciones as $liquidacion){
-                $total_x_pagar = $liquidacion->gastos_administrativos;
+                $total_x_pagar = $total_x_pagar + $liquidacion->comision_propietario;
             }            
         } 
         return number_format($total_x_pagar , 2);

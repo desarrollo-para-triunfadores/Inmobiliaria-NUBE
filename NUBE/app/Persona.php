@@ -52,6 +52,7 @@ class Persona extends Model {
     }
 
     public function es_cliente(){
+        //$persona = \App\Persona::all();
         if($this->inquilino || $this->propietario)
             return true;
     }

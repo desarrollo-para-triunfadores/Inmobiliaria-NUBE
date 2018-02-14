@@ -48,6 +48,9 @@ class LiquidacionMensual extends Model
     public function getFechaCobroPropietarioVencimientoFormateadoAttribute(){
         return $this->fecha_cobro_propietario->format('d/m/Y');
     }
+    public function getComisionAPropietarioFormateadoAttribute(){
+        return number_format($this->comision_a_propietario,2);
+    }
      ########## --/ MUTADORES-- ##########    
 
     public function comprobar_vencimiento() {
@@ -65,6 +68,10 @@ class LiquidacionMensual extends Model
             $cantidad_dias = $fecha_hoy->diffInDays($this->vencimiento);
             return ($this->contrato->monto_basico * 2 /100) * $cantidad_dias;
         }
+    }
+
+    public function movimientos(){
+        return $this->hasMany('App\Movimiento');
     }
 
     public function contrato() {

@@ -10,6 +10,7 @@ use App\ServicioContrato;
 use App\Barrio;
 use App\Localidad;
 use App\Inmueble;
+use App\Notificacion;
 use App\LiquidacionMensual;
 use App\ConceptoLiquidacion;
 use App\Servicio;
@@ -182,6 +183,16 @@ class ConceptosLiquidacionesController extends Controller
                         $liquidacion->periodo = $periodo;
                         $liquidacion->contrato_id = $contrato->id;
                         $liquidacion->save();
+                        #Una vez creada la liquidacion, creamos la notificación de una nueva liquidacion imprimible
+                        $notificacion = new Notificacion();
+                        $nombre_inquilino = $liquidacion->contrato->inquilino->persona->nombre." ".$liquidacion->contrato->inquilino->persona->apellido;
+                        $notificacion->mensaje = "Se encuentra disponible la generación de boleta al inquilino ".$nombre_inquilino."por el periodo ".$liquidacion->periodo.".";
+                        $notificacion->ocultar = false;
+                        $notificacion->tipo = "pago";
+                        $notificacion->estado_leido = false;
+                        $notificacion->user_id = Auth::user()->id;
+                        $notificacion->save();
+                        #########-- Notificacion ##################
                         foreach ($conceptos_periodo as $concepto_liquidacion) { //por cada concepto que pertenece al periodo le asociamos el id de liquidacion que recién creamos
                             $concepto_liquidacion->liquidacionmensual_id = $liquidacion->id;
                             $concepto_liquidacion->save();
@@ -189,7 +200,7 @@ class ConceptosLiquidacionesController extends Controller
                     }
                 }
             }
-            return response()->json("OK");
+            return response()->json("OK, se preparo la liquidacion");
         }
         $edificios = Edificio::all();
         $localidades = Localidad::all();

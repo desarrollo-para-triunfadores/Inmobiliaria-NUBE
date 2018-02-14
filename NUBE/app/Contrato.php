@@ -68,15 +68,20 @@ class Contrato extends Model {
     public function liquidaciones() {
         return $this->hasMany('App\LiquidacionMensual');
     }
-
+/*
     public function ultima_liquidacion() {
+        $ultima = LiquidacionMensual::where('contrato')
         return $this->liquidaciones->last();
     }
-/*
-    public function ultima_liquidacion(){
-        return $this->liquidaciones()->get()->sortByDesc('id')->first(); 
+    */
+
+    public function ultima_liquidacion($id){
+        //$ultima_liquidacion =LiquidacionMensual::all();/*->sortByDesc('id')->first()*/;
+        $ultima_liquidacion =LiquidacionMensual::where('contrato_id', $this->id)->get()/*->sortByDesc('id')->first()*/;
+        return $ultima_liquidacion;
+        //return $this->liquidaciones()->get()->sortByDesc('id')->first(); 
     }
-*/
+
 
     public function periodos_contrato() {
         return $this->hasMany('App\PeriodoContrato');
@@ -102,10 +107,12 @@ class Contrato extends Model {
     {
         $this->attributes['monto_basico'] = ($value);
     }
+    /*  Comente esto porque produce una excepcion "A non well formed numeric value encountered"
     public function setIncrementoAttribute($value)
     {
         $this->attributes['incremento'] = number_format($value , 2);
     }
+    */
     
 
 }

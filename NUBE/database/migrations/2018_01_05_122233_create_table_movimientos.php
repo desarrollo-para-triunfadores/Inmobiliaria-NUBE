@@ -19,14 +19,14 @@ class CreateTableMovimientos extends Migration
             $table->enum('tipo_movimiento', ['entrada', 'salida']);
             $table->double('monto', 10, 2);
             $table->string('descripcion')->nullable();
-            $table->integer('usuario_id')->unsigned();
-            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade'); 
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             $table->integer('inquilino_id')->unsigned()->nullable();
             $table->foreign('inquilino_id')->references('id')->on('inquilinos')->onDelete('cascade'); 
             $table->integer('propietario_id')->unsigned()->nullable();
             $table->foreign('propietario_id')->references('id')->on('propietarios')->onDelete('cascade');     
             $table->integer('liquidacion_id')->unsigned()->nullable();
-            $table->foreign('liquidacion_id')->references('id')->on('movimientos')->onDelete('cascade');                     
+            $table->foreign('liquidacion_id')->references('id')->on('liquidaciones_mensuales')->onDelete('cascade');                     
             $table->timestamps();
         });
     }

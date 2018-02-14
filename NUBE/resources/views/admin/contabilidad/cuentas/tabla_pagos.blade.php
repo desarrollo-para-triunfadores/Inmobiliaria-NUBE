@@ -62,7 +62,6 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body ">
-
         <table id="example" class="display responsive" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -72,38 +71,77 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($liquidaciones as $liquidacion)
-                <tr>
-                    @if($liquidacion->abonado)
-                        <td class="text-center text-bold">Pagada ✔️</td>
-                    @elseif($liquidacion->comprobar_vencimiento)
-                        <td class="text-center text-bold">Vencida 🛑 </td>
-                    @else
-                        <td class="text-center text-bold">Por vencer</td>
-                    @endif
-                    <td class="text-center text-bold">{{$liquidacion->vencimiento->format('d/m/Y')}}</td>
-                    <td class="text-center" width="100">
-                        {{--
-                        <button onclick="mostrar_recibo($liquidacion)" title="Ver detalle de recibo" class="btn">
-                           Ver
-                        </button>
-                        <button class="btn-bitbucket" onclick="escargar_recibo({{$liquidacion}})">Descargar
-                        </button>
-                        --}}
-                        <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
-                            <i class="fa fa-list"></i>
-                        </a>
-                        <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
-                            <i class="fa fa-download"></i>
-                        </a>
-                        {{--
-                        <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
-                            <i class="fa fa-list"></i>
-                        </a>
-                        --}}
-                    </td>
-                </tr>
-            @endforeach
+            {{-- VISION DE PAGOS para PROPIETARIO --}}    
+            @if(Auth::user()->propietario)
+            {{dd($liquidaciones)}}
+                @foreach($liquidaciones as $liquidacion)
+                
+                    {{dd($liquidacion)}}
+                    <tr>
+                        @if($liquidacion->fecha_pago_propietario)
+                            <td class="text-center text-bold">Pagada ✔️</td>
+                        @else
+                            <td class="text-center text-bold">No pagada 🛑 </td>
+                        @endif
+                        <td class="text-center text-bold">{{$liquidacion->vencimiento->format('d/m/Y')}}</td>
+                        <td class="text-center" width="100">
+                            {{--
+                            <button onclick="mostrar_recibo($liquidacion)" title="Ver detalle de recibo" class="btn">
+                            Ver
+                            </button>
+                            <button class="btn-bitbucket" onclick="escargar_recibo({{$liquidacion}})">Descargar
+                            </button>
+                            --}}
+                            <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                                <i class="fa fa-list"></i>
+                            </a>
+                            <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            {{--
+                            <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                                <i class="fa fa-list"></i>
+                            </a>
+                            --}}
+                        </td>
+                    </tr>
+                @endforeach
+            {{-- VISION DE PAGOS para INQUILINO --}}    
+            @elseif(Auth::user()->inquilino)
+                @foreach($liquidaciones as $liquidacion)
+                {{--dd($liquidaciones)--}}
+                    <tr>
+                        @if($liquidacion->abonado)
+                            <td class="text-center text-bold">Pagada ✔️</td>
+                        @elseif($liquidacion->comprobar_vencimiento)
+                            <td class="text-center text-bold">Vencida 🛑 </td>
+                        @else
+                            <td class="text-center text-bold">Por vencer</td>
+                        @endif
+                        <td class="text-center text-bold">{{$liquidacion->vencimiento->format('d/m/Y')}}</td>
+                        <td class="text-center" width="100">
+                            {{--
+                            <button onclick="mostrar_recibo($liquidacion)" title="Ver detalle de recibo" class="btn">
+                            Ver
+                            </button>
+                            <button class="btn-bitbucket" onclick="escargar_recibo({{$liquidacion}})">Descargar
+                            </button>
+                            --}}
+                            <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                                <i class="fa fa-list"></i>
+                            </a>
+                            <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            {{--
+                            <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                                <i class="fa fa-list"></i>
+                            </a>
+                            --}}
+                        </td>
+                    </tr>
+                @endforeach
+            @endif    
             </tbody>
             {{--
             <tfoot>

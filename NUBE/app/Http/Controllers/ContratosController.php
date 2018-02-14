@@ -66,7 +66,7 @@ class ContratosController extends Controller
     {
         $contrato = new Contrato();
         /*** Datos del Inquilino ** */
-        if (!is_null($request->inquilino_id)) {     //*si no se recibe una persona asignada como propietario, crear una
+        if (is_null($request->inquilino_id)) {     //*si no se recibe un inquilino, crear uno
             $nombreImagen = 'sin imagen';
             if ($request->file('imagen')) {
                 $file = $request->file('imagen');
@@ -77,16 +77,19 @@ class ContratosController extends Controller
             $persona = new Persona($request->all());
             $persona->foto_perfil = $nombreImagen;
             $persona->save();
-            /* datos de propietario */
+            /* datos de inquilino */
             $inquilino = new Inquilino($request->all());
             $inquilino->persona_id = $persona->id;
             $inquilino->save();
+            $contrato->inquilino_id = $inquilino->id;
+        }else{
+            $contrato->inquilino_id = $request->inquilino_id;
         }
-        $contrato->inquilino_id = $inquilino->id;
+        
 
         
         /*         * * Datos del Garante ** */
-        if (!is_null($request->inquilino_nuevo)) {     //*si no se recibe una persona asignada como propietario, crear una
+        if (is_null($request->garante_id)) {     //*si no se recibe una persona asignada como garante, crear una
             $nombreImagen = 'sin imagen';
             if ($request->file('imagen2')) {
                 $file = $request->file('imagen2');
@@ -114,6 +117,8 @@ class ContratosController extends Controller
             $garante->persona_id = $persona->id;
             $garante->save();
             $contrato->garante_id = $garante->id;
+        }else{
+            $contrato->garante_id = $request->garante_id;
         }
 
         //si se cargó una fecha de vencimiento se formatea para guardar en la base

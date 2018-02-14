@@ -28,8 +28,8 @@ class NotificacionesComposer {
             if(Auth::user()->persona->inquilino){//Se comprueba que la persona es inquilino
                 $ultimo_contrato = Auth::user()->persona->inquilino->ultimo_contrato();//Obtenemos el último contrato 
                 if($ultimo_contrato && $ultimo_contrato->vigente()){//Si el contrato se encuentra en vigencia realizamos verificaciones para generar notificaciones
-                    $ultima_liquidacion = $ultimo_contrato->ultima_liquidacion();//obtenemos la última liquidación
-                   
+                    $ultima_liquidacion = $ultimo_contrato->ultima_liquidacion();//obtenemos la última liquidación               
+                    dd($ultimo_contrato->ultima_liquidacion());    
                     if($ultima_liquidacion->vencimiento && is_null($ultima_liquidacion->fecha_cobro_inquilino)){//si la liquidación tiene fecha de vencimiento y aún no fue cobrada se lanza el control. Que tenga fecha de vencimiento quiere decir que está lista para cobrarse.
                 
                         $fecha_hoy = Carbon::now();                             

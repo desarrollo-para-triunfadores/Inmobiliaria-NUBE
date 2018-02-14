@@ -11,12 +11,15 @@ use App\ServicioContrato;
 use App\Barrio;
 use App\Localidad;
 use App\Inmueble;
+use App\Inquilino;
+use App\Noificacion;
 use App\ConceptoLiquidacion;
 use App\LiquidacionMensual;
 use App\Servicio;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 use Session;
@@ -90,41 +93,35 @@ class LiquidacionMensualController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->ajax()) {           
-            foreach ($request->lista_conceptos as $liquidacion) {//$request->lista_conceptos llegan todas las liquidaciones que el usuario le haya colocado fecha de vencimiento
-                //Una por una las liquidaciones son actualizadas y guardadas
+        if ($request->ajax()) {
+            $conceptos = [];
+            $ids_servicios_contratos = [];
+            
+            foreach ($request->lista_conceptos as $liquidacion) {
                 $concepto_liquidacion = LiquidacionMensual::find($liquidacion["id_liquidacion"]);
                 $concepto_liquidacion->gastos_administrativos = $liquidacion["gastos_administrativos"];
                 $concepto_liquidacion->alquiler = $liquidacion["monto_alquiler"];
                 $concepto_liquidacion->total = $liquidacion["total"];
-                $concepto_liquidacion->subtotal = $liquidacion["subtotal"];       
+                $concepto_liquidacion->subtotal = $liquidacion["subtotal"];
+                $concepto_liquidacion->periodo = $liquidacion["periodo"];
                 if (!is_null($liquidacion["vencimiento"])){ //si se cargó una fecha de vencimiento se formatea para guardar en la base
                     $vencimiento = str_replace('/', '-', $liquidacion["vencimiento"]);
                     $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
                 $concepto_liquidacion->comision_a_propietario = ($liquidacion["monto_alquiler"] * $concepto_liquidacion->contrato->comision_propietario) / 100;
                 $concepto_liquidacion->save();
-
-                //Se crea la notificación para el inquilino
-                $notificacion = new Notificacion();
-                $notificacion->mensaje = "Estimado cliente le informamos que la boleta correspondiente al periodo ".$concepto_liquidacion->periodo." ya se encuentra lista. La misma vence el ".$concepto_liquidacion->vencimiento.".";
-                $notificacion->ocultar = false;
-                $notificacion->tipo = "pago";
-                $notificacion->estado_leido = false;
-                $notificacion->user_id = $concepto_liquidacion->contrato->inquilino->persona->user->id;
-                $notificacion->save();
-
                 ##########   Una vez liquidada boleta en el sistema, notificamos por email al cliente inquilino   #########
                 $conceptos = $liquidacion["conceptos"];
                 $inquilino = Inquilino::find($concepto_liquidacion->contrato->inquilino_id);
                 $cliente = $inquilino->persona->apellido.", ".$inquilino->persona->nombre;
                 $monto_alquiler = $liquidacion["monto_alquiler"];
-                $expensas = $liquidacion["expensas"];
-                $monto_expensas = $liquidacion["monto_expensas"];
+                $expensas = $liquidacion["conceptos"];
+                //$monto_expensas = $liquidacion["monto_expensas"];
                 $total = $liquidacion["total"];
+                $periodo = $liquidacion["periodo"];
                 $vencimiento = $liquidacion["vencimiento"];
                 try{
-                    Mail::send('emails.boleta.boleta', ['cliente'=>$cliente,'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'expensas'=>$expensas, 'monto_alquiler'=>$monto_alquiler, 'monto_expensas'=>$monto_expensas, 'total'=>$total], function($msj){
+                    Mail::send('emails.boleta.boleta', ['cliente'=>$cliente,'periodo'=>$periodo,'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'expensas'=>$expensas, 'monto_alquiler'=>$monto_alquiler, /*'monto_expensas'=>$monto_expensas,*/ 'total'=>$total], function($msj){
                         $msj->subject('Nube Propiedades | Boleta de Servicio');
                         $msj->to('jpcaceres.nea@gmail.com');
                     });
@@ -146,8 +143,6 @@ class LiquidacionMensualController extends Controller
             $cantidad_conceptos_cargados =  ConceptoLiquidacion::all()
                 ->where('liquidacionmensual_id', $liquidacion->id)
                 ->count();
-
-
             //Calculo valor de impuestos y servicios
 
             $servicios_contratos_claves = ServicioContrato::all()
@@ -172,13 +167,13 @@ class LiquidacionMensualController extends Controller
                 $valor_total_conceptos =  $valor_total_conceptos +  $valor->monto;               
             }
 
-
             //Calculo de valor del mes de alquiler
 
-            $fecha_periodo = Carbon::createFromFormat('d/m/Y',"1/".$liquidacion->periodo); //se setea al primero del mes del periodo de la liquidación así se puede determinar cuanto se debe pagar por el alquiler.  
+            $fecha_hoy = Carbon::now();
+            $periodo = $fecha_hoy->format('m/Y');
             $gastos_administrativos = $liquidacion->contrato->monto_basico * $liquidacion->contrato->comision_inquilino / 100;
 
-            $diferencia = $liquidacion->contrato->fecha_desde->diff($fecha_periodo);
+            $diferencia = $liquidacion->contrato->fecha_desde->diff($fecha_hoy);
             $mes_alquiler =  ( $diferencia->y * 12 ) + $diferencia->m + 1; //se suma 1 porque al momento de entrar (momento cero) ya está corriendo el monto para el mes 1
 
             $periodo_contrato = PeriodoContrato::all()
@@ -200,7 +195,7 @@ class LiquidacionMensualController extends Controller
                 "id_liquidacion" => $liquidacion->id,
                 "inquilino" => $liquidacion->contrato->inquilino->persona->apellido ." ".$liquidacion->contrato->inquilino->persona->nombre,
                 "monto_alquiler" => $monto_alquiler,
-                'periodo'=> $liquidacion->periodo,
+                'periodo'=> $periodo,
                 "gastos_administrativos" => $gastos_administrativos,
                 "valor_total_conceptos" => $valor_total_conceptos,
                 "total" =>  $total,
