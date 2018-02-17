@@ -48,9 +48,8 @@ class Propietario extends Model {
         }
         return $respuesta;
     }
-
     
-    public function contratos_vigentes(){   #Solo devuelve los contratos que involucran al Propietario en la actualidad
+    public function contratos_vigentes(){   #Devuelve los contratos que involucran al Propietario en la actualidad
         $respuesta = [];
         foreach($this->inmuebles as $inmueble){ #Obtener todos los inmuebles de este propietario
             if($inmueble->ultimo_contrato() /* && $inmueble->ultimo_contrato()->vigente()*/ ){
@@ -61,34 +60,33 @@ class Propietario extends Model {
     }
 
     public function total_comisiones_pendientes_pago(){      #Dinero que el propietario adeuda a la inmobiliaria en concepto de servicio por uso del sistema
-        $contratos_vigentes[] = $this->contratos_vigentes();          #Obtener todos los contratos vigentes que tienen relacion con este propietario
+        $contratos_vigentes = $this->contratos_vigentes();         
         $total_x_pagar = 0;
-        foreach($contratos_vigentes as $contrato_vigente){   
-            //$liquidaciones = $contrato_vigente->liquidaciones;
-            dd($contrato_vigente->liquidaciones);
-            //$liquidaciones= LiquidacionMensual::where('contrato_id',$contrato_vigente->id)/*->where('fecha_pago_propietario',null)*/->get();            
+        foreach($contratos_vigentes as $contrato_vigente){             
+            $liquidaciones= LiquidacionMensual::where('contrato_id',$contrato_vigente->id)->where('fecha_cobro_propietario',null)->get();            
             foreach($liquidaciones as $liquidacion){
-                $total_x_pagar = $total_x_pagar + $liquidacion->comision_propietario;
+                $total_x_pagar = $total_x_pagar + $liquidacion->comision_a_propietario;
             }            
         } 
-        return number_format($total_x_pagar , 2);
+        return $total_x_pagar;
     }
 
-    public function cobros_alquiler_pendientes(){      #Dinero que el propietario tiene disponible en concepto de recaudacion de sus alquileres que el sistema administra
-        $contratos_vigentes[] = $this->contratos_vigentes();          #Obtener todos los contratos vigentes que tienen relacion con este propietario
+    public function cobros_alquiler_pendientes(){      #Dinero que el propietario tiene disponible en concepto de 'recaudacion de sus alquileres' que el sistema administra
+        $contratos_vigentes= $this->contratos_vigentes();         
         $alquileres_x_cobrar = 0;    #alquileres
         foreach($contratos_vigentes as $contrato_vigente){        
-            $liquidaciones= \App\LiquidacionMensual::where('contrato_id',$contrato_vigente->id)->where('fecha_cobro_inquilino',!null)->where('fecha_pago_propietario',null)->get();            
+            $liquidaciones= LiquidacionMensual::where('contrato_id',$contrato_vigente->id)->whereNotNull('fecha_cobro_inquilino')->where('fecha_pago_propietario',null)->get();            
             foreach($liquidaciones as $liquidacion){
-                $alquileres_x_cobrar = $liquidacion->gastos_administrativos;
+                $alquileres_x_cobrar = $liquidacion->alquiler;
             }            
         } 
-        return number_format($alquileres_x_cobrar , 2);
+        return $alquileres_x_cobrar;
     }
 
 
     public function saldo(){
-        return number_format($this->total_comisiones_pendientes_pago() - $this->cobros_alquiler_pendientes() , 2);
+        $saldo =$this->total_comisiones_pendientes_pago() - $this->cobros_alquiler_pendientes();
+        return  $saldo;
     }
 
 

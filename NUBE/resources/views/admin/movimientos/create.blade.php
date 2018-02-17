@@ -21,21 +21,22 @@
                 @endif
 
                 <form id="form-create" action="/admin/movimientos" method="POST" enctype="multipart/form-data">
-                        <input id="token-create" type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input id="token-create" type="hidden" name="_token" value="{{ csrf_token() }}">
                     <br>
                     <div class="form-group"><label class="col-sm-3 control-label">Concepto</label>
                         <div class="col-sm-9 controls">
                             <div class="row">
                                 <div class="col-xs-10">
                                     <div class="input-icon right">
-                                        <select  style="width: 100%"  name="concepto" id="concepto_mov" placeholder="campo requerido"  class="select2 form-control">
+                                        <select  style="width: 100%"  name="concepto_mov" id="concepto_mov"  onchange="validarMovimiento_Otro(this)" placeholder="campo requerido"  class="select2 form-control">
                                             {{$conceptos = \App\Servicio::all()}}
                                             @foreach($conceptos as $concepto)
-                                                <option value="{{$concepto->nombre}}{{--$concepto->id--}}">{{$concepto->nombre}}</option>
+                                                <option value="{{$concepto->nombre}}">{{--$concepto->id--}}{{$concepto->nombre}}</option>
                                             @endforeach
                                             <option value="0">Otro</option>
-                                            <input id="descripcion" name="descripcion" class="form-control hide animated shake" placeholder="ingrese el motivo del movimiento" >
                                         </select>
+                                        <input id="descripcion" name="descripcion" class="form-control hide animated shake" placeholder="ingrese el motivo del movimiento" >
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -58,13 +59,14 @@
                             <div class="row">
                                 <div class="col-xs-10">
                                     <div class="input-icon right">
-
-                                        <input id="monto" name="monto" type="text" placeholder="campo requerido" class="form-control pull-right">
+                                        <input id="monto_mov" name="monto_mov" type="text" placeholder="campo requerido" class="form-control pull-right">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                   
                     <button id="boton_submit_crear" type="submit" class="btn btn-primary hide"></button>
                 </form>
                     <br>
@@ -77,3 +79,7 @@
         </div>
     </div>
 </div>
+
+@section('script')
+	<script src="{{ asset('js/contabilidad.js') }}"></script>
+@endsection

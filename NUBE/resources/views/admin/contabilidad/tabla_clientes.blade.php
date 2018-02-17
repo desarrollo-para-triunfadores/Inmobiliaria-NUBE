@@ -40,9 +40,9 @@
                     @if($cliente->propietario)   <!-- Si es Propietario-->                        
                         @if($cliente->propietario->contratos_vigentes() != null)              
                             <td class="text-center text-bold text-blue">{{$cliente->nombrecompleto}} [P]</td>                          
-                            <td class="text-center text-bold text-red">$ {{$cliente->propietario->total_comisiones_pendientes_pago()}}</td>
-                            <td class="text-center text-bold text-green">$ {{$cliente->propietario/*->cobros_alquiler_pendientes()*/}}</td>
-                            <td class="text-center text-bold text-blue">$ {{$cliente->propietario/*->saldo()*/}}</td>
+                            <td class="text-center text-bold text-red">$ {{ number_format($cliente->propietario->total_comisiones_pendientes_pago() , 2)}}</td>
+                            <td class="text-center text-bold text-green">$ {{ number_format($cliente->propietario->cobros_alquiler_pendientes() , 2)}}</td>
+                            <td class="text-center text-bold text-blue">$ {{ number_format($cliente->propietario->saldo() , 2)}}</td>
                             <td class="text-center">
                                 <a href="{{ route('contabilidad.show', $cliente->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
                                         <i class="fa fa-list"></i>

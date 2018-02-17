@@ -70,7 +70,6 @@ pieChart.Doughnut(PieData, pieOptions);
 /******************************************************************************************************************* */
 
 
-
 /** En seccion TABLA MOVIMIENTOS **/
 //Datatable - instaciación del plugin
 var table_mov = $('#tabla_movimientos').DataTable({
@@ -168,9 +167,10 @@ $('#tabla_clientes tbody').on('mouseenter', 'td', function () {
 
 
 /**** Oculta o Mustra el campo personalizado para "Concepto" ****/
+/*
 $("#concepto_mov").change(function () {
     alert('se selecciono');
-    /*
+    
     if ($('#concepto').val() == 0) {
         alert('se selecciono otro');
         $('#descripcion').removeClass('hide');
@@ -178,11 +178,25 @@ $("#concepto_mov").change(function () {
     if ($('#concepto').val() != 0) {
         $("#descripcion").hide();
     }
-    */
+    
 });
+*/
 /************************************************************** */
+function validarMovimiento_Otro(valor_select){
+    if($('#concepto_mov').val()==0){
+        console.log("Se entro en validarMovimiento_Otro = "+valor_select.value);
+        $('#descripcion').removeClass('hide');
+        $("#conv_mov").hide();
+        alert('sedeberia mostrar el campo para DESCRIPCION');
+    }
+    else /*($('#concepto').val() != 0)*/ {
+        $("#descripcion").hide();
+        alert('sedeberia OCULTAR campo Descripcion');
+    }
+}
 
 /*****  Mascaras para decimales  ******/
-$('#monto').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});
+$('#monto_mov').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});    //monto de alta de movimiento
+//$('#monto').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});
 /***************************************************************************************************************** */
 
