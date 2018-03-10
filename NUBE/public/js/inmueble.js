@@ -1,6 +1,67 @@
-$("#side-inmueble").addClass("active");
+$("#side-inmueble-li").addClass("active");
 $("#side-inmueble-ul").addClass("menu-open");
 $("#side-ele-lugares-propiedades").addClass("active");
+
+
+//Datatable - instaciación del plugin
+var table = $('#example').DataTable({
+    "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
+    "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.
+        null,                   //0--Condición
+        {"visible": false},     //1--Tipo
+        null,                   //2--Dirección
+        {"visible": false},     //3--Cant.Ambientes
+        {"visible": false},     //4--Precio venta
+        null,                   //5--Precio alquiler
+        {"visible": false},     //6--F.Habilitación
+        null,                   //7--Contrato de alquiler
+        null,                   //8--Fecha de Registro
+        null                    //11--Acciones
+    ]
+});
+
+
+instaciar_filtros();
+
+function instaciar_filtros() {
+    //Datatables | filtro individuales - instanciación de los filtros
+    $('#example tfoot th').each(function () {
+        var title = $(this).text();
+        if (title !== "") {
+            if (title !== 'Acciones') { //ignoramos la columna de los botones
+                $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />');
+            }
+        }
+    });
+
+//Datatables | filtro individuales - búsqueda 
+    table.columns().every(function () {
+        var that = this;
+        $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this.value) {
+                that.search(this.value).draw();
+            }
+        });
+    });
+}
+
+//Datatables | ocultar/visualizar columnas dinámicamente
+$('a.toggle-vis').on('click', function (e) {
+    e.preventDefault();
+    // Get the column API object
+    var column = table.column($(this).attr('data-column'));
+    // Toggle the visibility
+    column.visible(!column.visible()); 
+    instaciar_filtros();
+});
+
+//Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
+$('#example tbody').on('mouseenter', 'td', function () {
+    var colIdx = table.cell(this).index().column;
+    $(table.cells().nodes()).removeClass('highlight');
+    $(table.column(colIdx).nodes()).addClass('highlight');
+});
+
 
 var etapas_instanciadas = {
     propietario: false,
@@ -151,15 +212,17 @@ function toggleBounce() { //función para la animación del marcador
 
 
 //Date picker --instacniición y configuración
-$('.datepicker').datepicker({
-    autoclose: true,
-    startDate: "-80y",
-    endDate: "0y",
-    todayHighlight: true,
-    orientation: "bottom auto",
-    format: "dd/mm/yyyy",
-    language: "es"
+//Bootstrap Material Date picker
+$('.datepicker').bootstrapMaterialDatePicker ({
+    format: 'DD/MM/YYYY',
+    lang: 'es',
+    weekStart: 1, 			
+    switchOnClick : true,
+    cancelText: 'cerrar',
+    okText: 'ok',    
+    time: false 
 });
+
 
 
 //Sección - Caractísticas 

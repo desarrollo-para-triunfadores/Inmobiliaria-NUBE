@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Propietario;
+use App\LiquidacionMensual;
+use App\Contrato;
 use App\Localidad;
 use App\Inmueble;
 use App\Auditoria;
@@ -31,6 +33,7 @@ class PropietariosController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+
         $propietarios = Propietario::all();
         $paises = Pais::all();
         $localidades = Localidad::all();

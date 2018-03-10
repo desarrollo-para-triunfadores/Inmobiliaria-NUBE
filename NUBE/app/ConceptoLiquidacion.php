@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class ConceptoLiquidacion extends Model
 {
     protected $table = "conceptos_liquidaciones_mensuales";
@@ -27,4 +28,7 @@ class ConceptoLiquidacion extends Model
     {
         return $this->belongsTo('App\ServicioContrato');
     }
+
+
+
 }

@@ -10,11 +10,13 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Mensajes -->
-              @include('admin.partes.navtop.mensajes')
+            
               <!-- Notificationes -->
               @include('admin.partes.navtop.notificaciones')
               <!-- Otras notificationes-->
-              @include('admin.partes.navtop.notificaciones_oportunidades')
+              @can('acceso a oportunidades','acceso a agenda')               
+                @include('admin.partes.navtop.notificaciones_oportunidades')    
+              @endcan              
               <!-- Menu usuario -->
               @include('admin.partes.navtop.menu_usuario')
               <!-- Configuración interfaz -->
@@ -27,3 +29,5 @@
 </header>
 
 @include('admin.usuarios.formulario.act-pass')
+
+

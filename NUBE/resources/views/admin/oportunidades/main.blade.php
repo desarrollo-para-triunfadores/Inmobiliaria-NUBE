@@ -28,8 +28,8 @@ Oportunidades registrados
                         <h3 class="box-title"> Registros</h3>
                     </div>
                     <div class="box-body ">                            
-                        @include('admin.partes.msj_acciones')
-                        <table id="example" class="display table-bordered" cellspacing="0" width="100%">
+                        @include('admin.partes.msj_acciones')                        
+							<table id="example" class="display responsive" cellspacing="0" width="100%">
                             <thead>
                                 <tr>                                  
                                     <th class="text-center">Estado</th>

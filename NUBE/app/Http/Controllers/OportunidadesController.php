@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Estado_Oportunidad;
 use App\Historia_Oportunidad;
 use App\Oportunidad;
+use App\Notificacion;
 use App\Visita;
 use Illuminate\Http\Request;
 use Session;
@@ -103,7 +104,7 @@ class OportunidadesController extends Controller
         $oportunidad = Oportunidad::find($id);
         $oportunidad->fill($request->all());
         $oportunidad->save();
-        //añadir historia (si se actualizo)
+        //aï¿½adir historia (si se actualizo)
         if(($request->tipo_historia_oportunidad) && ($request->detalle_historia_oportunidad) /*&& ($request->fecha_historia_oportunidad)*/){
             $historia = new Historia_Oportunidad();
             $historia->oportunidad_id = $id;
@@ -114,7 +115,7 @@ class OportunidadesController extends Controller
             //$historia->fecha = $request->fecha_historia_oportunidad;
             $historia->save();
         }
-        Session::flash('message', '¡Se ha actualizado la información de la oportunidad');
+        Session::flash('message', 'ï¿½Se ha actualizado la informaciï¿½n de la oportunidad');
         return redirect()->route('oportunidades.index');
     }
 

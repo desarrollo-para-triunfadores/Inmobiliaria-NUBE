@@ -44,7 +44,7 @@ function abrir_modal_borrar(id) {
 //Croppie.js | create
 
 //se instancia el plugin
-var basic_nuevo = $('#main-cropper_nuevo').croppie({
+var basic_nuevo = $('#main-cropper-imagen-nuevo').croppie({
     enableExif: true,
     viewport: {
         width: 275,
@@ -62,7 +62,7 @@ function readFile(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#main-cropper_nuevo').croppie('bind', {
+            $('#main-cropper-imagen-nuevo').croppie('bind', {
                 url: e.target.result
             });
         };
@@ -72,7 +72,7 @@ function readFile(input) {
 
 //evento sobre el botón subir
 $('.actionUpload-nuevo input').on('change', function () {
-    $('#main-cropper_nuevo').removeClass('hide');
+    $('#main-cropper-imagen-nuevo').removeClass('hide');
     if (MediaStream_nuevo !== "") {
         MediaStream_nuevo.stop();
     }

@@ -9,9 +9,11 @@ use App\Edificio;
 use App\ServicioContrato;
 use App\Barrio;
 use App\Localidad;
+use App\Notificacion;
 use App\Inmueble;
 use App\LiquidacionMensual;
 use App\ConceptoLiquidacion;
+use App\PeriodoContrato;
 use App\Servicio;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -63,14 +65,11 @@ class ConceptosLiquidacionesController extends Controller
                 $inmuebles_claves = $inmuebles_claves->whereIn('id', $request->inmuebles);
             }
 
-            $inmuebles_claves = $inmuebles_claves->implode('id', ', ');   //obtenemos de la coleccion de objetos de inmuebles un string de todos los ids de inmuebles de la colección filtrada
-            $inmuebles_array = array_map('intval', explode(',', $inmuebles_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
-
-            $contratos_claves = $contratos_vigentes
-                ->whereIn('inmueble_id', $inmuebles_array) //filtramos los contratos que tengan de inmueble_id a cualquiera de los ids de la coleccion de ids de inmuebles que cumplen con los requisitos solicitados
-                ->implode('id', ', '); //obtenemos de la coleccion de objetos de contratos un string de todos los ids de contratos de la colección filtrada
-
-            $contratos_array = array_map('intval', explode(',', $contratos_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
+            $inmuebles_array = $inmuebles_claves->pluck('id')->toArray();
+        
+            $contratos_array = $contratos_vigentes
+                ->whereIn('inmueble_id', $inmuebles_array)
+                ->pluck('id')->toArray();
 
             $servicios_contratos = ServicioContrato::all()
                 ->whereIn('contrato_id', $contratos_array); //filtramos los servicios de contratos que tengan de contrato_id a cualquiera de los ids de la coleccion de contratos vigentes filtrados
@@ -82,8 +81,8 @@ class ConceptosLiquidacionesController extends Controller
 
 
             if ($request->accion === "visualizar") {
-                $servicios_contratos_claves = $servicios_contratos->implode('id', ', '); //obtenemos de la coleccion de objetos de contratos un string de todos los ids de contratos de la colección filtrada
-                $servicios_contratos_array = array_map('intval', explode(',', $servicios_contratos_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
+           
+                $servicios_contratos_array = $servicios_contratos->pluck('id')->toArray();
 
                 $conceptos_liquidaciones = ConceptoLiquidacion::all()->whereIn('serviciocontrato_id', $servicios_contratos_array);
 
@@ -106,14 +105,17 @@ class ConceptosLiquidacionesController extends Controller
         $edificios = Edificio::all();
         $localidades = Localidad::all();
         $barrios = Barrio::all();
-        $contratos = Contrato::all();
+
+        $fecha_hoy = Carbon::now();
+        $contratos_vigentes = Contrato::all()->where('fecha_hasta', '>', $fecha_hoy);
+
         $servicios = Servicio::all();
 
         return view('admin.conceptos_liquidaciones_mensuales.main')
             ->with('edificios', $edificios)
             ->with('barrios', $barrios)
             ->with('localidades', $localidades)
-            ->with('contratos', $contratos)
+            ->with('contratos', $contratos_vigentes)
             ->with('servicios', $servicios);
     }
 
@@ -149,21 +151,25 @@ class ConceptosLiquidacionesController extends Controller
                 array_push($ids_servicios_contratos, $concepto_liquidacion->serviciocontrato_id); //en este array todos los ids de los servicios asociados a contratos que cargó el usuario
             }
 
-            $contratos_claves = ServicioContrato::all()
+         /*   $contratos_array = ServicioContrato::all()
                 ->whereIn('id', $ids_servicios_contratos)
-                ->implode('contrato_id', ', '); //obtenemos de la coleccion de objetos de contratos un string de todos los ids de servicios_contratos de la colección filtrada
-
-            $contratos_array = array_map('intval', explode(',', $contratos_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
+                ->pluck('contrato_id')->toArray(); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
+            
             $ids_contratos = array_unique($contratos_array); //acá lo que se hace es eliminar los duplicados
+*/
+
+            $ids_contratos = ServicioContrato::all()
+            ->whereIn('id', $ids_servicios_contratos)->unique('contrato_id')
+            ->pluck('contrato_id')->toArray();
 
             $contratos= Contrato::all()->whereIn('id', $ids_contratos); //traemos todos los contratos que se ven involucrados en la carga
-
-            foreach ($contratos as $contrato) {
+           
+            foreach ($contratos as $contrato) { //Acá arranca el control para la realización automática de la liquidación
+               
                 $servicios_contratos = ServicioContrato::all()  //por cada contrato identificado se hace lo de abajo...
                 ->where('contrato_id', $contrato->id);
+                $servicios_contratos_array = $servicios_contratos->pluck('id')->toArray();
 
-                $servicios_contratos_claves = $servicios_contratos->implode('id', ', '); //obtenemos de la coleccion de objetos de contratos un string de todos los ids de servicios_contratos de la colección filtrada
-                $servicios_contratos_array = array_map('intval', explode(',', $servicios_contratos_claves)); //convertimos en collection para poder operar después
                 $cantidad_servicios = count($servicios_contratos_array); //obtenemos la cantidad de servicios que tiene asociado el contrato
 
                 $conceptos_liquidaciones = ConceptoLiquidacion::all()
@@ -173,14 +179,51 @@ class ConceptosLiquidacionesController extends Controller
                 $periodos_claves = trim($conceptos_liquidaciones->implode('periodo', ',')); //obtenemos los periodos de todos los conceptos que no esten asociados a una liquidación para la comprobación para saber si se puede generar ya liquidación
                 $periodos_array =  array_unique(explode(",", $periodos_claves)); //convertimos en array para operar y eliminamos los duplicados
 
+                
                 foreach ($periodos_array as $periodo) { //por cada periodo identificado hacemos la verificación...
 
-                    $conceptos_periodo = $conceptos_liquidaciones->where('periodo', $periodo); // obtenemos de la colleción que obtuvimos más arriba los conceptos que coicidan con el periodo
-
+                   $conceptos_periodo = $conceptos_liquidaciones->where('periodo', $periodo); // obtenemos de la colleción que obtuvimos más arriba los conceptos que coicidan con el periodo
+                   $valor= $conceptos_periodo->count() - $cantidad_servicios;
+                                      
                     if($conceptos_periodo->count() === $cantidad_servicios){ // si la cantidad de conceptos con ids de  servicioscontratos que están asociados al contrato que estamos refiriendonos en este momento es igual a la cantidad de servicios asociados al contrato quiere decir que el periodo tiene cargado todos los servicios correspondientes y está lista para liquidar.
+                                               
+                        $valor_total_conceptos = $conceptos_periodo->sum('monto');//esto sería la suma total de los montos de todas esos conceptos.
+                        $gastos_administrativos = $contrato->monto_basico * $contrato->comision_inquilino / 100; //comisión al inquilino
+                        
+                        $fecha_periodo = Carbon::createFromFormat('d/m/Y',"1/".$periodo); //se setea al primero del mes del periodo de la liquidación así se puede determinar cuanto se debe pagar por el alquiler.                         
+                        $diferencia = $contrato->fecha_desde->diff($fecha_periodo);
+                        $mes_alquiler =  ( $diferencia->y * 12 ) + $diferencia->m + 1; //se suma 1 porque al momento de entrar (momento cero) ya está corriendo el monto para el mes 1
+              
+                        /*
+                         Acá arriba lo que hicimos es determinar el número del mes
+                         de contrato que corresponde al periodo. El contrato se hace 
+                         por una x cantidad de meses y cada periodo liquidado corresponde 
+                         a un número de mes que cae en un rango de valor para para el alquiler.
+                        */
+
+                        $periodo_contrato = PeriodoContrato::all()
+                              ->where('contrato_id', $contrato->id)
+                              ->where('inicio_periodo', '<=', $mes_alquiler)
+                              ->where('fin_periodo', '>=', $mes_alquiler)
+                              ->first(); //obtenemos de la tabla de periodos los montos para el periodo que estamos liquidando
+              
+                        if ($contrato->tipo_renta === 'fija') {//determinamos el tipo de renta
+                            $monto_alquiler = $periodo_contrato->monto_fijo;
+                        } else {
+                            $monto_alquiler = $periodo_contrato->monto_incremental;
+                        }
+                        $total = $monto_alquiler + $valor_total_conceptos + $gastos_administrativos;
+
+                        $comision_a_propietario = ($monto_alquiler * $contrato->comision_propietario) / 100;//calculamos la comisión al propietario
+                       
                         $liquidacion = new LiquidacionMensual(); //creamos la liquidación
                         $liquidacion->periodo = $periodo;
+                        $liquidacion->total = $total;
+                        $liquidacion->alquiler = $monto_alquiler;
+                        $liquidacion->subtotal = $total;   
+                        $liquidacion->comision_a_propietario = $comision_a_propietario;
                         $liquidacion->contrato_id = $contrato->id;
+                        $liquidacion->gastos_administrativos = $gastos_administrativos;
                         $liquidacion->save();
                         foreach ($conceptos_periodo as $concepto_liquidacion) { //por cada concepto que pertenece al periodo le asociamos el id de liquidacion que recién creamos
                             $concepto_liquidacion->liquidacionmensual_id = $liquidacion->id;
@@ -191,6 +234,7 @@ class ConceptosLiquidacionesController extends Controller
             }
             return response()->json("OK");
         }
+
         $edificios = Edificio::all();
         $localidades = Localidad::all();
         $barrios = Barrio::all();

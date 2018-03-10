@@ -54,10 +54,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('cobros', 'CobrosController');
     Route::resource('pagos', 'PagosController');
     Route::resource('contabilidad', 'EstadisticasController');
+    Route::resource('notificaciones', 'NotificacionesController');
+    Route::get('/ocultar_notificaciones', 'NotificacionesController@ocultar_notificaciones')->name('ocultar_notificaciones');
 
     //Oportunidades
 
     Route::resource('oportunidades', 'OportunidadesController');
+
   //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
 
    //Route::resource('oportunidades', 'OportunidadesController');

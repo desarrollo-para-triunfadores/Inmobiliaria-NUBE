@@ -45,19 +45,19 @@
 									<tbody>
 									@foreach($liquidaciones as $liquidacion)
 										<tr>
-											<td class="text-center text-bold">{{$liquidacion["inquilino"]}}</td>
-											<td class="text-center text-bold">{{$liquidacion["periodo"]}}</td>
-											<td class="text-center">${{$liquidacion["valor_total_conceptos"]}}</td>
-											<td class="text-center">${{$liquidacion["monto_alquiler"]}}</td>
-											<td class="text-center">${{$liquidacion["gastos_administrativos"]}}</td>
-											<td class="text-center text-bold">${{$liquidacion["subtotal"]}}</td>
-											<td class="text-center text-bold">${{$liquidacion["total"]}}</td>
+											<td class="text-center text-bold">{{$liquidacion->contrato->inquilino->persona->nombrecompleto}}</td>
+											<td class="text-center text-bold">{{$liquidacion->periodo}}</td>
+											<td class="text-center">${{$liquidacion->calcular_total()}}</td>
+											<td class="text-center">${{$liquidacion->alquiler}}</td>
+											<td class="text-center">${{$liquidacion->gastos_administrativos}}</td>
+											<td class="text-center text-bold">${{$liquidacion->subtotal}}</td>
+											<td class="text-center text-bold">${{$liquidacion->total}}</td>
 											<td class="text-center">
 												<div class="input-group">
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input type="text" id='fecha_vencimiento' class="form-control mascara_vencimiento" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" onkeyup="carga_lineas({{json_encode($liquidacion)}}, this.value)">
+													<input type="text" class="form-control mascara_vencimiento" onchange="carga_lineas({{$liquidacion->id}}, this.value)">
 												</div>
 											</td>
 										</tr>

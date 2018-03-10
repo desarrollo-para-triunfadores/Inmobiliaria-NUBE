@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Oportunidad;
 use App\Visita;
 use App\Estado_Oportunidad;
+use App\Notificacion;
 use Carbon\Carbon;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\LocalidadRequestCreate;

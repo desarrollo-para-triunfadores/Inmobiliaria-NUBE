@@ -31,19 +31,38 @@
 			</tfoot>
 			<tbody>
 			@foreach($servicios_contratos as $servicio_contrato)
-				<tr>
+			
+			@if (count($servicio_contrato->periodos_validos() > 0))
+
+
+			
+			
+			<tr>
 					<td class="text-center text-bold">{{$servicio_contrato->contrato->inmueble->tipo->nombre}} en {{$servicio_contrato->contrato->inmueble->direccion}} ({{$servicio_contrato->contrato->inmueble->localidad->nombre}})</td>
 					<td class="text-center">{{$servicio_contrato->contrato->inquilino->persona->nombrecompleto}}</td>
 					<td>{{$servicio_contrato->servicio->nombre}}</td>
 					<td>
-						<select id="periodo{{$servicio_contrato->id}}" class="select_periodos" size="1" id="row-3-office" name="row-3-office" onchange="carga_lineas({{$servicio_contrato->id}})">
+
+
+						
+
+
+						<select id="periodo{{$servicio_contrato->id}}" onchange="carga_lineas({{$servicio_contrato->id}})">
+						
+						
+								@foreach($servicio_contrato->periodos_validos() as $periodo)
+								<option value="{{$periodo}}">{{$periodo}}</option>                                                    
+								@endforeach
+						
+						
+						
 						</select>
 					</td>
 					<td>
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
 							@if ($servicio_contrato->contrato->sujeto_a_gastos_compartidos && $servicio_contrato->servicio->servicio_compartido)
-								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="{{$servicio_contrato->determinar_valor()}}" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="" placeholder="{{$servicio_contrato->determinar_valor()}}" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
 							@else
 								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
 							@endif
@@ -54,7 +73,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input id="venc1{{$servicio_contrato->id}}" type="text" class="form-control mascara_vencimiento" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+							<input id="venc1{{$servicio_contrato->id}}" type="text" class="form-control mascara_vencimiento" onchange="carga_lineas({{$servicio_contrato->id}})">
 						</div>
 					</td>
 					<td>
@@ -62,7 +81,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input id="venc2{{$servicio_contrato->id}}" type="text" class="form-control mascara_vencimiento" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+							<input id="venc2{{$servicio_contrato->id}}" type="text" class="form-control mascara_vencimiento" onchange="carga_lineas({{$servicio_contrato->id}})">
 						</div>
 					</td>
 					<td>
@@ -72,6 +91,7 @@
 						</select>
 					</td>
 				</tr>
+				@endif
 			@endforeach
 			</tbody>
 		</table>
@@ -79,6 +99,7 @@
 	<div class="box-footer">
 		<div class="row">
 			<div class="col-md-12">
+					<p class="pull-left form-text text-muted"><strong>Información:</strong> el valor sugerido en algunas leyendas equivale al monto calculado automáticamente por sistema para gastos compartidos entre varios inquilinos de un edificio.</p>
 				<div class="pull-right">
 					<button onclick="enviar()" title="Registrar impuestos" class="btn btn-primary btn-sm">
 						<i class="fa fa-search" aria-hidden="true"></i> &nbsp;registrar cargos

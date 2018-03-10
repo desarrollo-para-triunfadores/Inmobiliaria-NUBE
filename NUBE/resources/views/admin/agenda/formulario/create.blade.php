@@ -30,7 +30,10 @@
                     <div class="form-group">
                         <label>Inicio:</label>
                         <div class='input-group date datetimepicker' >
-                            <input name="inicio" id="create-inicio" type='text' class="form-control" />
+                            
+                            <input name="inicio" id="create-inicio" type="text" placeholder="campo requerido" class="form-control datepicker">
+                           
+                   
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -39,7 +42,9 @@
                     <div class="form-group">
                         <label>Fin:</label>
                         <div class='input-group date datetimepicker' >
-                            <input name="fin" type='text' placeholder="campo opcional" class="form-control" />
+                                <input name="fin" id="create-inicio" type="text" placeholder="campo requerido" class="form-control datepicker">
+
+                            
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>

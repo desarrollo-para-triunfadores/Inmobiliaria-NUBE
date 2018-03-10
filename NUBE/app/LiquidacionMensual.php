@@ -80,4 +80,18 @@ class LiquidacionMensual extends Model
             ->sum('monto');
         return $total;
     }
+
+    public function detalle_conceptos(){//este método devuelve un detalle indicando concepto y monto de todos los conceptos de la liquidación. Se utiliza en la generación de la boleta   
+        $conceptos_liquidaciones= ConceptoLiquidacion::all()->where('liquidacionmensual_id', $this->id); 
+        $conceptos_para_factura = [];
+        foreach ($conceptos_liquidaciones as $valor) {
+            $dato =[
+                "concepto" => $valor->serviciocontrato->servicio->nombre,
+                "monto" => $valor->monto,
+                "concepto_compartido" => $valor->serviciocontrato->servicio->servicio_compartido,
+            ];
+            array_push($conceptos_para_factura, $dato);           
+        }
+        return $conceptos_para_factura;
+    } 
 }

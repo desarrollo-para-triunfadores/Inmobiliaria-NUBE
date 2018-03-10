@@ -153,73 +153,35 @@
             </td>
         </tr>
         {{-- Expensas compartidas por edificio --}}
-         @if($expensas["sueldo_personal"])
-            <tr class="item">
-                <td>
-                    Sueldos Personal
-                </td>
+        @foreach($conceptos as $concepto)
+        
+            @if ($concepto["concepto_compartido"])
+                <tr class="item">
+                    <td>
+                        {{ $concepto["concepto"] }}
+                    </td>
 
-                <td>
-                    $ {{$expensas["sueldo_personal"]}}
-                </td>
-            </tr>
-        @endif
-        @if($expensas["mant_ascensores"])
-            <tr class="item">
-                <td>
-                    Mto. Ascensor
-                </td>
-
-                <td>
-                    $ {{$expensas["mant_ascensores"]}}
-                </td>
-            </tr>
-        @endif
-        @if($expensas["ascensores"])
-            <tr class="item">
-                <td>
-                    Amortización Ascensores
-                </td>
-
-                <td>
-                    $ {{$expensas["ascensores"]}}
-                </td>
-            </tr>
-        @endif
-        @if($expensas["seguro"])
-            <tr class="item">
-                <td>
-                    Seguro Edificio
-                </td>
-
-                <td>
-                    $ {{$expensas["seguro"]}}
-                </td>
-            </tr>
-        @endif
-        @if($expensas["limpieza"])
-            <tr class="item">
-                <td>
-                    Limpieza espacios comunes
-                </td>
-
-                <td>
-                    $ {{$expensas["limpieza"]}}
-                </td>
-            </tr>
-        @endif
+                    <td>
+                        $ {{$concepto["monto"]}}
+                    </td>
+                </tr>
+            @endif
+       
+    @endforeach
         {{-- FIN -- Expensas compartidas por edificio --}}
 
         @foreach($conceptos as $concepto)
-            <tr class="item">
-                <td>
-                    {{ $concepto["concepto"] }}
-                </td>
+        @if (!$concepto["concepto_compartido"])
+        <tr class="item">
+            <td>
+                {{ $concepto["concepto"] }}
+            </td>
 
-                <td>
-                    $ {{$concepto["monto"]}}
-                </td>
-            </tr>
+            <td>
+                $ {{$concepto["monto"]}}
+            </td>
+        </tr>
+    @endif
         @endforeach
         <tr class="total">
             <td></td>

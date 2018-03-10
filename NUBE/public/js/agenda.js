@@ -313,9 +313,20 @@ $(document).ready(function () {
         $("#new-event").val("");
     });
 
-    $('.datetimepicker').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm'
-    });
+  
+
+//Bootstrap Material Date picker
+$('.datepicker').bootstrapMaterialDatePicker ({
+    format: 'DD/MM/YYYY HH:mm',
+    lang: 'es',
+    weekStart: 1, 			
+    switchOnClick : true,
+    cancelText: 'cerrar',
+    okText: 'ok',
+    minDate : moment().add(-100, 'year'),
+    maxDate : moment().add(100, 'year')
+});
+
 
     //Date range picker
     $('#reservation').daterangepicker();

@@ -51,23 +51,23 @@
 <!-- jquery-steps-master -->
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/AdminLTE/plugins/jquery-steps-master/css/jquery.steps.css') }}  ">
 
-  <!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href="{{ asset('plantillas/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css') }}">
-
+<!-- Bootstrap time Picker -->
+<link rel="stylesheet" href="{{ asset('plantillas/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plantillas/AdminLTE/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.css') }}">
 
-
-  <!-- wizard-bootstrap -->
+<!-- wizard-bootstrap -->
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/AdminLTE/plugins/twitter-bootstrap-wizard-master/prettify.css') }}">
 
-  
-  
+<!-- fullCalendar 3.1.0-->
+<link rel="stylesheet" href="{{asset('plantillas/AdminLTE/plugins/fullcalendar/fullcalendar.min.css')}}"/>
 
+<!-- bootstrap-material -->
+<link rel="stylesheet" href="{{asset('plantillas/AdminLTE/plugins/bootstrap-material/ripples.min.css')}}"/>
+<link rel="stylesheet" href="{{asset('plantillas/AdminLTE/plugins/bootstrap-material/icon.css')}}"/>
 
-<!-- fullCalendar 3.4.0-->
-{{--
-<link rel="stylesheet" href="{{asset('plantillas/AdminLTE/plugins/fullcalendar-3.4.0/fullcalendar.css')}}"/>
---}}
+<!-- bootstrap-material-datetimepicker -->
+<link rel="stylesheet" href="{{asset('plantillas/AdminLTE/plugins/bootstrap-material-datetimepicker/bootstrap-material-datetimepicker.css')}}"/>
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

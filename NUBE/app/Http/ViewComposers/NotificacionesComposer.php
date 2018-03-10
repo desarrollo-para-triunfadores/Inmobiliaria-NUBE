@@ -20,48 +20,52 @@ class NotificacionesComposer {
     public function compose(View $view)
     {        
         $fecha_hoy = Carbon::now(); 
-        $fecha_control = Carbon::now(); //esta fecha se utiliza como para determinar un límite de rangos con la fecha de hoy. La fecha sería la siguiente a la de hoy. Se hace así porque la variable create_at es timestamp y maneja hora y acá intereza todo lo que sea de la fecha de hoy
+        $fecha_control = Carbon::now(); //esta fecha se utiliza como para determinar un límite de rangos con la fecha de hoy. La fecha sería la siguiente a la de hoy. Se hace así porque la variable created_at es timestamp y maneja hora y acá intereza todo lo que sea de la fecha de hoy
         $fecha_control->addDay(); //sumamos un día 
-     
+      $diferencia = 0;
+        $notificacion_del_dia = Notificacion::all() //Se obtienen la notificaciones que se hayan creado el dia de la fecha. Esto se usa para controlar y no crear notificaciones repetidas
+        ->where('created_at', '>', $fecha_hoy->toDateString())
+        ->where('created_at', '<', $fecha_control->toDateString());
+
+
         //Notificaciones de vencimientos de Liquidaciones 
-        if(Auth::user()->persona){            
-            if(Auth::user()->persona->inquilino){//Se comprueba que la persona es inquilino
-                $ultimo_contrato = Auth::user()->persona->inquilino->ultimo_contrato();//Obtenemos el último contrato 
-                if($ultimo_contrato && $ultimo_contrato->vigente()){//Si el contrato se encuentra en vigencia realizamos verificaciones para generar notificaciones
-                    $ultima_liquidacion = $ultimo_contrato->ultima_liquidacion();//obtenemos la última liquidación
-                   
-                    if($ultima_liquidacion->vencimiento && is_null($ultima_liquidacion->fecha_cobro_inquilino)){//si la liquidación tiene fecha de vencimiento y aún no fue cobrada se lanza el control. Que tenga fecha de vencimiento quiere decir que está lista para cobrarse.
-                
-                        $fecha_hoy = Carbon::now();                             
-                        $diferencia = $fecha_hoy->diff($ultima_liquidacion->vencimiento);                        
-                        
-                        if($ultima_liquidacion->comprobar_vencimiento()){//Se verifica si la liquidación se encuentra vencida y generando mora
-                            $notificacion = new Notificacion();
-                            $notificacion->mensaje = "Estimado cliente le recordamos que adeuda el pago de la mensualidad correspondiente al periodo ".$ultima_liquidacion->periodo.". Le invitamos a contactarse con nosotros para regularizar su situación y así evitar más cargos por mora.";
-                            $notificacion->ocultar = false;
-                            $notificacion->tipo = "vencimiento";
-                            $notificacion->estado_leido = false;
-                            $notificacion->user_id = Auth::user()->id;
-                            $notificacion->save();
-                        }else if ($diferencia <= 5){ //Se verifica que falten 5 o menos días para informar mediante notificación el vencimiento
-                            $notificacion = new Notificacion();
-                            $notificacion->mensaje = "Estimado cliente le recordamos que su boleta correspondiente a la mensualidad del periodo ".$ultima_liquidacion->periodo.". A fin de evitar cargos por mora le invitamos a que abone el monto. El vencimiento es el ".$ultima_liquidacion->vencimiento;
-                            $notificacion->ocultar = false;
-                            $notificacion->tipo = "vencimiento";
-                            $notificacion->estado_leido = false;
-                            $notificacion->user_id = Auth::user()->id;
-                            $notificacion->save();
+        $notificacion_de_vencimiento_del_dia = $notificacion_del_dia->where('tipo', 'vencimiento')->last(); //Verificamos la existencia de notitificaciones de agenda para control
+
+        if(is_null($notificacion_de_vencimiento_del_dia)){//Si existe una notificación de este tipo no se crea ninguna notificación
+            if(Auth::user()->persona){            
+                if(Auth::user()->persona->inquilino){//Se comprueba que la persona es inquilino
+                    $ultimo_contrato = Auth::user()->persona->inquilino->ultimo_contrato();//Obtenemos el último contrato 
+                    if($ultimo_contrato && $ultimo_contrato->vigente()){//Si el contrato se encuentra en vigencia realizamos verificaciones para generar notificaciones
+                        $ultima_liquidacion = $ultimo_contrato->ultima_liquidacion();//obtenemos la última liquidación
+                    
+                        if($ultima_liquidacion->vencimiento && is_null($ultima_liquidacion->fecha_cobro_inquilino)){//si la liquidación tiene fecha de vencimiento y aún no fue cobrada se lanza el control. Que tenga fecha de vencimiento quiere decir que está lista para cobrarse.
+                    
+                            $fecha_hoy = Carbon::now();                             
+                            $diferencia = $fecha_hoy->diff($ultima_liquidacion->vencimiento);                                                  
+                           if($ultima_liquidacion->comprobar_vencimiento()){//Se verifica si la liquidación se encuentra vencida y generando mora
+                                $notificacion = new Notificacion();
+                                $notificacion->mensaje = "Estimado cliente le recordamos que adeuda el pago de la mensualidad correspondiente al periodo ".$ultima_liquidacion->periodo.". Le invitamos a contactarse con nosotros para regularizar su situación y así evitar más cargos por mora.";
+                                $notificacion->ocultar = false;
+                                $notificacion->tipo = "vencimiento";
+                                $notificacion->estado_leido = false;
+                                $notificacion->user_id = Auth::user()->id;
+                                $notificacion->save();
+                           }else if ($diferencia->d <= 5){ //Se verifica que falten 5 o menos días para informar mediante notificación el vencimiento
+                                $notificacion = new Notificacion();
+                                $notificacion->mensaje = "Estimado cliente le recordamos que su boleta correspondiente a la mensualidad del periodo ".$ultima_liquidacion->periodo.". A fin de evitar cargos por mora le invitamos a que abone el monto. El vencimiento es el ".$ultima_liquidacion->vencimiento;
+                                $notificacion->ocultar = false;
+                                $notificacion->tipo = "vencimiento";
+                                $notificacion->estado_leido = false;
+                                $notificacion->user_id = Auth::user()->id;
+                                $notificacion->save();
+                            }
                         }
-                    }
-                }                
+                    }                
+                }
             }
         }
-
-
-        $notificacion_del_dia = Notificacion::all() //Se obtienen la notificaciones que se hayan creado el dia de la fecha. Esto se usa para controlar y no crear notificaciones repetidas
-            ->where('created_at', '>', $fecha_hoy->toDateString())
-            ->where('created_at', '<', $fecha_control->toDateString());
-
+       
+        
         //Notificaciones de visitas del día
         if(Auth::user()->can('acceso a agenda')){
             
@@ -70,7 +74,7 @@ class NotificacionesComposer {
 
                 if(!is_null($notificacion_del_dia_de_agenda)){//Si existe una notificación de este tipo se controla que hayan nuevas visitas posteriores a la notificación
                     $cant_visitas = Visita::all() //Se obtiene la cantidad de visitas que tengan se hayan pactado para después de la hora del momento de creación de la última notificación
-                    ->where('created_at', '>', $notificacion_del_dia_de_agenda->create_at->toDateTimeString())                
+                    ->where('created_at', '>', $notificacion_del_dia_de_agenda->created_at->toDateTimeString())                
                     ->count();
                 }else{
                     $cant_visitas = Visita::all() //Se obtiene la cantidad de visitas que tengan la fecha de inicio el día de hoy
@@ -122,7 +126,11 @@ class NotificacionesComposer {
         }
 
         //Devolvemos las notificaciones del usuario
-        $notificaciones = Auth::user()->notificaciones;
-        $view->with('notificaciones', $notificaciones);
+        $notificaciones = Auth::user()->notificaciones->where('estado_leido','<>',true)->whereNotIn('tipo', ['oportunidad','agenda']);
+        $notificaciones_oportunidades = Auth::user()->notificaciones->where('estado_leido','<>',true)->whereIn('tipo', ['oportunidad','agenda']);
+        $view->with('notificaciones', $notificaciones)
+
+        ->with('notificaciones_oportunidades', $notificaciones_oportunidades);
+
     }
 }

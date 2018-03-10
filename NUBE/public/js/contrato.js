@@ -1,4 +1,4 @@
-$('#side-contratos').addClass('active')
+$('#side-contratos-li').addClass('active')
 $('#side-contratos-ul').addClass('menu-open')
 $('#side-ele-contratos').addClass('active')
 

@@ -89,15 +89,17 @@ $('#example tbody').on('mouseenter', 'td', function () {
 });
 
 
-//Date picker
-$('.datepicker').datepicker({
-    autoclose: true,
-    startDate: "-80y",
-    endDate: "0y",
-    todayHighlight: true,
-    orientation: "bottom auto",
-    format: "dd/mm/yyyy",
-    language: "es"
+//Bootstrap Material Date picker
+$('.datepicker').bootstrapMaterialDatePicker ({
+    format: 'DD/MM/YYYY',
+    lang: 'es',
+    weekStart: 1, 			
+    switchOnClick : true,
+    cancelText: 'cerrar',
+    okText: 'ok',
+    minDate : moment().add(-100, 'year'),
+    maxDate : moment(),
+    time: false 
 });
 
 

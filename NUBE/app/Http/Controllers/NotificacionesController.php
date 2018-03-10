@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Notificacion;
+Use Session;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class NotificacionesController extends Controller
 {
+    public function __construct() {
+        Carbon::setlocale('es');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,8 @@ class NotificacionesController extends Controller
      */
     public function index()
     {
-        //
+        $notificaciones = Notificacion::where('ocultar','<>',true)->latest()->paginate(5);
+        return view('/admin/notificaciones/main', compact('notificaciones'));
     }
 
     /**
@@ -21,9 +30,32 @@ class NotificacionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if($request->tipo === "notificaciones"){
+            $notificaciones = Notificacion::all()->where('estado_leido','<>',true)->whereNotIn('tipo', ['oportunidad','agenda']);            
+        }else{
+            $notificaciones = Notificacion::all()->where('estado_leido','<>',true)->whereIn('tipo', ['oportunidad','agenda']);
+        }
+        foreach ($notificaciones as $notificacion) {
+            $notificacion->estado_leido = true;
+            $notificacion->save();
+        }
+        return response()->json($notificaciones->count());
+    }
+
+    public function ocultar_notificaciones(Request $request)
+    {
+        if($request->tipo === "todo"){
+            $notificaciones = Notificacion::all()->where('ocultar','<>',true);            
+        }else{
+            $notificaciones = Notificacion::all()->whereIn('id', $request->lista);
+        }
+        foreach ($notificaciones as $notificacion) {
+            $notificacion->ocultar = true;
+            $notificacion->save();
+        }
+        return response()->json($notificaciones->count());
     }
 
     /**
@@ -68,7 +100,7 @@ class NotificacionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

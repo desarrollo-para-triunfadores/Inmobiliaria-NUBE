@@ -22,7 +22,7 @@ Agenda
                  @include('admin.partes.msj_acciones')
                 <div class="box box-primary">
                     <div class="box-body no-padding">
-                        <div id="calendar"></div>
+                        <div id='calendar'></div>
                     </div>
                 </div>
             </div>
