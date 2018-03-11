@@ -21,11 +21,14 @@ class User extends Authenticatable
     public function persona() {
         return $this->hasOne('App\Persona');
     }
-
     public function notificaciones() {
         return $this->hasMany('App\Notificacion');
     }
     
+    public function movimientos() {
+        return $this->hasMany('App\Movimiento');
+    }
+
     public function cantidad_notificaciones_nuevas() {
         return $this->notificaciones()->where("tipo", "<>", true)->where("estado_leido", "<>", true)->count();
     }

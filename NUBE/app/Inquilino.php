@@ -22,12 +22,14 @@ class Inquilino extends Model {
         return $this->contratos()->get()->sortByDesc('id')->first(); 
     }
 
+    public function ultimo_contrato_vigente(){
+        $this->contratos()->get()->sortByDesc('id')->first(); 
+    }
+
     public function movimientos(){
         return $this->hasMany('App\Movimientos');
     }
 
-   /* public function saldo(){    #metodo para detectar pagos pendientes por parte del inquilino
-        $liquidaciones_inquilino = \App\LiquidacionMensual::where('')
-    }*/
+    ######### Metodos #########
 
 }

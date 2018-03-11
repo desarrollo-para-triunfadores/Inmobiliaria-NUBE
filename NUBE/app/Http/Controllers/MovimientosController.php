@@ -20,26 +20,19 @@ class MovimientosController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     public function store(Request $request) //agregar movimiento a CC y/o a Caja
     {
         //dd($request);
         $movimiento = new Movimiento($request->all());
+        $movimiento = $request->monto_mov;
         $movimiento->fecha_hora = \Carbon\Carbon::now('America/Buenos_Aires');
-        $movimiento->usuario_id = Auth::user()->id;
-        if($request->concepto == 0){                # hardcodeado | 0="Otro"
-            $movimiento->descripcion = $request->descripcion;
+        $movimiento->user_id = Auth::user()->id;
+        //dd($request);
+        if($request->descripcion != ''){                # hardcodeado | 0="Otro"
+            $movimiento->descripcion = $request->descripcion;   #si tiene descripcion → no es un movimiento predefinido (tiene descripcion personalizada)
         }else{
-            $movimiento->descripcion = $request->concepto;
+            $movimiento->descripcion = $request->concepto_mov;  
         }
         $movimiento->save();
         Session::flash('message', 'Se ha registrado un movimiento exitosamente.');
@@ -47,25 +40,4 @@ class MovimientosController extends Controller
 
     }
 
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }

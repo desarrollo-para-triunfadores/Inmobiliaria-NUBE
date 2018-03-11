@@ -39,10 +39,8 @@ function calcular_cambio(){
 }
 
 function traer_resumen(){
-
     var cliente = $('#cliente_id').val();
     cliente = cliente.replace(/^\[\'|\'\]$/g,'').split("', '");
-
     $.ajax({
         url: '/admin/cobros',
         data: {

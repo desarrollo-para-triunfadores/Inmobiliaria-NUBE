@@ -102,7 +102,7 @@
                         </td>
 
                         <td>
-                            Resumen período xx/xxxx<br>
+                            Resumen período {{$periodo}}<br>
 
                             <br>
                             <br>
@@ -149,7 +149,7 @@
             </td>
 
             <td>
-                $ {{$monto_expensas}}
+                $ {{--$monto_expensas--}}
             </td>
         </tr>
         {{-- Expensas compartidas por edificio --}}

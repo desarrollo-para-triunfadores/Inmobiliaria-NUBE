@@ -13,6 +13,8 @@ use App\Localidad;
 use App\Notificacion;
 use App\Inquilino;
 use App\Inmueble;
+use App\Inquilino;
+use App\Noificacion;
 use App\ConceptoLiquidacion;
 use App\LiquidacionMensual;
 use App\Servicio;

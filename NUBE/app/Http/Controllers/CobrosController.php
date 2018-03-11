@@ -87,46 +87,7 @@ class CobrosController extends Controller
         ->with('propietarios', $propietarios);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         $liquidacion = LiquidacionMensual::find($id);
@@ -177,7 +138,7 @@ class CobrosController extends Controller
 
             //Se crea la notificación para el propietario
             $notificacion = new Notificacion();
-            $notificacion->mensaje = "Estimado cliente le informamos que se encuentra disponible el pago de la mensualidad correspondiente al periodo ".$ultima_liquidacion->periodo.". Le invitamos a acercarse a nuestras instalaciones para poder retirar el saldo correspondiente.";
+            $notificacion->mensaje = "Estimado cliente le informamos que se encuentra disponible el pago de la mensualidad correspondiente al periodo ".$liquidacion->periodo.". Le invitamos a acercarse a nuestras instalaciones para poder retirar el saldo correspondiente.";
             $notificacion->ocultar = false;
             $notificacion->tipo = "pago";
             $notificacion->estado_leido = false;

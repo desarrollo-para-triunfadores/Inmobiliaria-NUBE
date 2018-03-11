@@ -24,9 +24,15 @@
         </section>
 
         <section class="content animated fadeIn">
-            @include('admin.contabilidad.cuentas.boleta')   <!-- ULTIMA boleta hecha desde sistema (resumida) -->
+            @include('admin.contabilidad.cuentas.boleta')  
+            @if(Auth::user()->persona->propietario)
+                @include('admin.contabilidad.cuentas.tabla_propietario')   <!-- vista exclisuva para Propietarios -->
+            @else
+                @include('admin.contabilidad.cuentas.tabla_inquilino')     <!-- vista exclisuva para Inquilinos -->
+            @endif
+            {{--
             @include('admin.contabilidad.cuentas.tabla_pagos')
-
+            --}}            
         </section>
     </div>
 

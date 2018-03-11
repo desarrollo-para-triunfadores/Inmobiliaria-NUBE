@@ -31,6 +31,10 @@ class Persona extends Model {
         return $this->hasOne('App\Inquilino');
     }
 
+    public function propietario() {
+        return $this->hasOne('App\Propietario');
+    }
+
     public function garante() {
         return $this->hasOne('App\Garante');
     }
@@ -45,6 +49,12 @@ class Persona extends Model {
 
     public function user(){
         return $this->belongsTo('App\User');
+    }
+
+    public function es_cliente(){
+        //$persona = \App\Persona::all();
+        if($this->inquilino || $this->propietario)
+            return true;
     }
 
     public function getNombreCompletoAttribute(){
