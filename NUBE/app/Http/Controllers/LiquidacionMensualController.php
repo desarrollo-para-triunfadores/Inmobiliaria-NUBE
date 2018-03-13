@@ -13,7 +13,6 @@ use App\Localidad;
 use App\Notificacion;
 use App\Inquilino;
 use App\Inmueble;
-use App\Inquilino;
 use App\Noificacion;
 use App\ConceptoLiquidacion;
 use App\LiquidacionMensual;
@@ -116,14 +115,15 @@ class LiquidacionMensualController extends Controller
                 $notificacion->save();
 
                 ##########   Una vez liquidada boleta en el sistema, notificamos por email al cliente inquilino   #########
-                $conceptos = $liquidacion->detalle_conceptos();               
+              /*  $conceptos = $liquidacion->detalle_conceptos();               
                 $cliente = $liquidacion->contrato->inquilino->persona->nombrecompleto;
                 $monto_alquiler = $liquidacion->alquiler;
                 $monto_expensas = $liquidacion->calcular_total();
                 $total = $liquidacion->total;
+                $periodo = $liquidacion->periodo;
                 $vencimiento = $liquidacion->vencimiento;
                 try{
-                    Mail::send('emails.boleta.boleta', ['cliente'=>$cliente,'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'monto_alquiler'=>$monto_alquiler, 'monto_expensas'=>$monto_expensas, 'total'=>$total], function($msj){
+                    Mail::send('emails.boleta.boleta', ['cliente'=>$cliente, 'periodo'=>$periodo, 'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'monto_alquiler'=>$monto_alquiler, 'monto_expensas'=>$monto_expensas, 'total'=>$total], function($msj){
                         $msj->subject('Nube Propiedades | Boleta de Servicio');
                         $msj->to('jpcaceres.nea@gmail.com');
                     });
@@ -132,7 +132,7 @@ class LiquidacionMensualController extends Controller
                     $respuesta = array("excepcion"=>$e);
                     return response()->json(json_encode($respuesta, true));
                     $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
-                }
+                }*/
                 #################### --FIN Email de boletas -- ####################
            
             }

@@ -11,7 +11,6 @@ use App\Barrio;
 use App\Localidad;
 use App\Notificacion;
 use App\Inmueble;
-use App\Notificacion;
 use App\LiquidacionMensual;
 use App\ConceptoLiquidacion;
 use App\PeriodoContrato;
@@ -151,13 +150,6 @@ class ConceptosLiquidacionesController extends Controller
                 $concepto_liquidacion->save();
                 array_push($ids_servicios_contratos, $concepto_liquidacion->serviciocontrato_id); //en este array todos los ids de los servicios asociados a contratos que cargó el usuario
             }
-
-         /*   $contratos_array = ServicioContrato::all()
-                ->whereIn('id', $ids_servicios_contratos)
-                ->pluck('contrato_id')->toArray(); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
-            
-            $ids_contratos = array_unique($contratos_array); //acá lo que se hace es eliminar los duplicados
-*/
 
             $ids_contratos = ServicioContrato::all()
             ->whereIn('id', $ids_servicios_contratos)->unique('contrato_id')

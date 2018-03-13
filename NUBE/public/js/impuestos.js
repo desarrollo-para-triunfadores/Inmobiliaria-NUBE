@@ -53,7 +53,12 @@ function instanciar_elementos () {
     })
 }
 
-
+function cargar_monto_sugerido(id, monto){//este método se usa en los casos en que el concepto es un concepto compartido está sugerido a modo de placerholder entonces al dar un click en ese campor el mismo se complete con el monto sugerido
+    if(($('#monto' + id).val() === '')){
+        $('#monto' + id).val(monto);
+        carga_lineas(id);
+    }       
+}
 
 function carga_lineas (id) { // este proceso se encarga de registrar y actualizar cada vez que el usuario escribe un dato nuevo en la tabla de carga de impuestos
 
@@ -77,6 +82,7 @@ function carga_lineas (id) { // este proceso se encarga de registrar y actualiza
     }else{
         lineas.splice(id, 1);
     }
+    console.log(lineas);
 }
 
 function enviar () {
@@ -95,7 +101,7 @@ function enviar () {
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-            /*   bootbox.dialog({
+               bootbox.dialog({
                     title: 'Registración exitosa',
                     message: 'Se ha registrado con éxito los impuestos y servicios ingresados.',
                     className: 'modal-success',
@@ -108,7 +114,7 @@ function enviar () {
                             }
                         }
                     }
-                })*/
+                })
             }
         })
     }else{

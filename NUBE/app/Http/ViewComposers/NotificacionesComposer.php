@@ -38,28 +38,32 @@ class NotificacionesComposer {
                     if($ultimo_contrato && $ultimo_contrato->vigente()){//Si el contrato se encuentra en vigencia realizamos verificaciones para generar notificaciones
                         $ultima_liquidacion = $ultimo_contrato->ultima_liquidacion();//obtenemos la última liquidación
                     
-                        if($ultima_liquidacion->vencimiento && is_null($ultima_liquidacion->fecha_cobro_inquilino)){//si la liquidación tiene fecha de vencimiento y aún no fue cobrada se lanza el control. Que tenga fecha de vencimiento quiere decir que está lista para cobrarse.
-                    
-                            $fecha_hoy = Carbon::now();                             
-                            $diferencia = $fecha_hoy->diff($ultima_liquidacion->vencimiento);                                                  
-                           if($ultima_liquidacion->comprobar_vencimiento()){//Se verifica si la liquidación se encuentra vencida y generando mora
-                                $notificacion = new Notificacion();
-                                $notificacion->mensaje = "Estimado cliente le recordamos que adeuda el pago de la mensualidad correspondiente al periodo ".$ultima_liquidacion->periodo.". Le invitamos a contactarse con nosotros para regularizar su situación y así evitar más cargos por mora.";
-                                $notificacion->ocultar = false;
-                                $notificacion->tipo = "vencimiento";
-                                $notificacion->estado_leido = false;
-                                $notificacion->user_id = Auth::user()->id;
-                                $notificacion->save();
-                           }else if ($diferencia->d <= 5){ //Se verifica que falten 5 o menos días para informar mediante notificación el vencimiento
-                                $notificacion = new Notificacion();
-                                $notificacion->mensaje = "Estimado cliente le recordamos que su boleta correspondiente a la mensualidad del periodo ".$ultima_liquidacion->periodo.". A fin de evitar cargos por mora le invitamos a que abone el monto. El vencimiento es el ".$ultima_liquidacion->vencimiento;
-                                $notificacion->ocultar = false;
-                                $notificacion->tipo = "vencimiento";
-                                $notificacion->estado_leido = false;
-                                $notificacion->user_id = Auth::user()->id;
-                                $notificacion->save();
+                        if(!is_null($ultima_liquidacion)){
+
+                            if($ultima_liquidacion->vencimiento && is_null($ultima_liquidacion->fecha_cobro_inquilino)){//si la liquidación tiene fecha de vencimiento y aún no fue cobrada se lanza el control. Que tenga fecha de vencimiento quiere decir que está lista para cobrarse.                        
+                                $fecha_hoy = Carbon::now();                             
+                                $diferencia = $fecha_hoy->diff($ultima_liquidacion->vencimiento);                                                  
+                            if($ultima_liquidacion->comprobar_vencimiento()){//Se verifica si la liquidación se encuentra vencida y generando mora
+                                    $notificacion = new Notificacion();
+                                    $notificacion->mensaje = "Estimado cliente le recordamos que adeuda el pago de la mensualidad correspondiente al periodo ".$ultima_liquidacion->periodo.". Le invitamos a contactarse con nosotros para regularizar su situación y así evitar más cargos por mora.";
+                                    $notificacion->ocultar = false;
+                                    $notificacion->tipo = "vencimiento";
+                                    $notificacion->estado_leido = false;
+                                    $notificacion->user_id = Auth::user()->id;
+                                    $notificacion->save();
+                            }else if ($diferencia->d <= 5){ //Se verifica que falten 5 o menos días para informar mediante notificación el vencimiento
+                                    $notificacion = new Notificacion();
+                                    $notificacion->mensaje = "Estimado cliente le recordamos que su boleta correspondiente a la mensualidad del periodo ".$ultima_liquidacion->periodo.". A fin de evitar cargos por mora le invitamos a que abone el monto. El vencimiento es el ".$ultima_liquidacion->vencimiento;
+                                    $notificacion->ocultar = false;
+                                    $notificacion->tipo = "vencimiento";
+                                    $notificacion->estado_leido = false;
+                                    $notificacion->user_id = Auth::user()->id;
+                                    $notificacion->save();
+                                }
                             }
+
                         }
+
                     }                
                 }
             }
@@ -110,9 +114,7 @@ class NotificacionesComposer {
                     ->count();
             }else{
                 $cant_oportunidades_nuevas = $oportunidades_no_atendidas->count(); //Se obtiene la cantidad de oportunidades que no posean visita programada aún     
-            }  
-           
-           
+            }                        
             if($cant_oportunidades_nuevas > 0){             
                 //Se crea la notificación para indicar la cantidad de oportunidades sin atender
                 $notificacion = new Notificacion();

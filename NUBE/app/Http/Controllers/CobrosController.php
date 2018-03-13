@@ -35,8 +35,7 @@ class CobrosController extends Controller
             $contrato_id = $inquilino->ultimo_contrato()->id;
             $saldo_cuenta = 0;
 
-            $liquidaciones = LiquidacionMensual::all()->where("fecha_pago", null)->where("abonado", null)->where("alquiler", "<>", null)->where("contrato_id", $contrato_id);
-
+            $liquidaciones = LiquidacionMensual::all()->where("fecha_pago", null)->where("abonado", null)->where("vencimiento", "<>", null)->where("contrato_id", $contrato_id);
             $liquidacion_posterior = LiquidacionMensual::all() //este se utiliza para comprobar que el saldo diponible no hay asido utilizado.
             ->where("contrato_id",$contrato_id)
                 ->where("abonado",'<>', null)
