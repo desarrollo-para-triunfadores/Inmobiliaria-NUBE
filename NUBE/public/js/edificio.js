@@ -277,7 +277,7 @@ function instanciar_cropie () {
               label: 'cerrar',
               className: 'btn btn-outline pull-right',
               callback: function () {
-                window.location.href = '/admin/edificio/'
+                window.location.href = '/admin/edificios'
               }
             }
           }

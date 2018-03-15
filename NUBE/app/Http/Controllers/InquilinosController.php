@@ -67,7 +67,7 @@ class InquilinosController extends Controller {
         $nombreImagen = 'sin imagen';
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() . '.' . $file->getClientOriginalExtension();
+            $nombreImagen = 'persona_' . time() .'.png';
             Storage::disk('personas')->put($nombreImagen, \File::get($file));
         }
         /* datos de persona */
@@ -122,7 +122,7 @@ class InquilinosController extends Controller {
         $persona = Persona::find($inquilino->persona_id);
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() . '.' . $file->getClientOriginalExtension();
+            $nombreImagen = 'persona_' . time() .'.png';
             if (Storage::disk('personas')->exists($persona->foto_perfil)) {
                 Storage::disk('personas')->delete($persona->foto_perfil);   // Borramos la imagen anterior.      
             }

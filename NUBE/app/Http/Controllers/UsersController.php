@@ -52,7 +52,7 @@ class UsersController extends Controller {
         $nombreImagen = 'sin imagen';
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'usuario_' . time() . '.' . $file->getClientOriginalExtension();
+            $nombreImagen = 'usuario_' . time() .'.png';
             Storage::disk('usuarios')->put($nombreImagen, \File::get($file));
         }
 
@@ -115,7 +115,7 @@ class UsersController extends Controller {
         $usuario->fill($request->all());
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'usuario_' . time() . '.' . $file->getClientOriginalExtension();
+            $nombreImagen = 'usuario_' . time() .'.png';
             if (Storage::disk('usuarios')->exists($usuario->imagen)) {
                 Storage::disk('usuarios')->delete($usuario->imagen);   // Borramos la imagen anterior.      
             }            

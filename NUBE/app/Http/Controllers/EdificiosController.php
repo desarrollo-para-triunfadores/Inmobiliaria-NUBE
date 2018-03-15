@@ -68,7 +68,7 @@ class EdificiosController extends Controller
         $nombreImagen = 'sin imagen';
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'edificio_' . time() . $file->getClientOriginalExtension();
+            $nombreImagen = 'edificio_' . time() .'.png';
             Storage::disk('edificios')->put($nombreImagen, \File::get($file));
         }
 
