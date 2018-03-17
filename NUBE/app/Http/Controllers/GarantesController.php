@@ -152,6 +152,6 @@ class GarantesController extends Controller {
         $garante->delete();
         $persona->delete();
         Session::flash('message', 'La información asociada al garante ha sido eliminada del sistema');
-        return redirect()->route('pacientes.index');
+        return redirect()->route('garantes.index');
     }
 }

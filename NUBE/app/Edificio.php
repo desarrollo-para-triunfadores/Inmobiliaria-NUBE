@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Edificio extends Model
@@ -31,6 +32,10 @@ class Edificio extends Model
 
     protected $dates = ['fecha_habilitacion'];
 
+    public function getFechaHabilitacionFormateadoAttribute(){
+        return $this->fecha_habilitacion->format('d/m/Y');
+    }
+
     public function inmuebles()
     {
         return $this->hasMany('App\Inmueble');
@@ -49,6 +54,13 @@ class Edificio extends Model
     {
         return $this->hasMany('App\Servicio');
     }
+
+    public function setFechaHabilitacionAttribute($value)
+    {
+        $fecha= str_replace('/', '-', $value);
+        $this->attributes['fecha_habilitacion'] = date('Y-m-d', strtotime($fecha));
+    }
+
 
     public function obtener_cantidad_departamentos_alquilados($cant_alquileres)
     {

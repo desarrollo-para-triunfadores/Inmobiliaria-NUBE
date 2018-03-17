@@ -7,16 +7,21 @@ var etapas_instanciadas = {
   ubicacion: false
 }, foto_edificio = "";
 
-//function desabilitar_input(estado, clase): esta función habilita o deshabilita los imputs de acuerdo al valor de los check tildados
-function desabilitar_input(check, clase){
-  if(clase==="ascensor"){
+function abrir_modal_borrar(id) {
+  $('#form-borrar').attr('action', '/admin/edificios/' + id);
+  $('#boton-modal-borrar').click();
+}
+
+//function desabilitar_input(clase): esta función habilita o deshabilita los imputs de acuerdo al valor de los check tildados
+function desabilitar_input(clase){
+  if(clase==="posee_ascensores"){
     $('.'+clase).addClass("hide"); 
-    if($('#'+check).prop('checked')) {
+    if($('#'+clase).prop('checked')) {
       $('.'+clase).removeClass("hide");
     }
   }else{
     $('.'+clase).attr("disabled", true);
-    if($('#'+check).prop('checked')) {
+    if($('#'+clase).prop('checked')) {
       $('.'+clase).removeAttr("disabled");      
     }
   }
@@ -45,7 +50,7 @@ var table = $('#example').DataTable({
   "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.
       null, //Nombre
       {"visible": false},//Localidad
-      null,//Barrio
+      {"visible": false},//Barrio
       {"visible": false},//Dirección
       null,//Administrado por sistema
       null,//Cant.Departamentos
@@ -105,27 +110,9 @@ $(document).ready(function () {
 
   instanciar_cropie()
 
-  jQuery.extend(jQuery.validator.messages, {
-    required: 'Este campo es obligatorio.',
-    remote: 'Por favor, rellena este campo.',
-    email: 'Por favor, escribe una dirección de correo válida',
-    url: 'Por favor, escribe una URL válida.',
-    date: 'Por favor, escribe una fecha válida.',
-    dateISO: 'Por favor, escribe una fecha (ISO) válida.',
-    number: 'Por favor, escribe un número entero válido.',
-    digits: 'Por favor, escribe sólo dígitos.',
-    creditcard: 'Por favor, escribe un número de tarjeta válido.',
-    equalTo: 'Por favor, escribe el mismo valor de nuevo.',
-    accept: 'Por favor, escribe un valor con una extensión aceptada.',
-    maxlength: jQuery.validator.format('Por favor, no escribas más de {0} caracteres.'),
-    minlength: jQuery.validator.format('Por favor, no escribas menos de {0} caracteres.'),
-    rangelength: jQuery.validator.format('Por favor, escribe un valor entre {0} y {1} caracteres.'),
-    range: jQuery.validator.format('Por favor, escribe un valor entre {0} y {1}.'),
-    max: jQuery.validator.format('Por favor, escribe un valor menor o igual a {0}.'),
-    min: jQuery.validator.format('Por favor, escribe un valor mayor o igual a {0}.')
-  })
+  jQuery.extend(jQuery.validator.messages, msj_validacion_jquery)
   
-  var $validator = $('#form-create').validate({
+  var $validator = $('#form').validate({
     highlight: function (element) {
       $(element).closest('.form-group').addClass('has-error')
     },
@@ -147,7 +134,7 @@ $(document).ready(function () {
   $('#rootwizard').bootstrapWizard({
     tabClass: 'nav nav-pills',
     onNext: function (tab, navigation, index) {
-      var $valid = $('#form-create').valid()
+      var $valid = $('#form').valid()
       if (!$valid) {
         $validator.focusInvalid()
         return false
@@ -177,9 +164,10 @@ $(document).ready(function () {
 })
 
 function instanciar_mapa() {
- var marcador = {lat: -27.451082, lng: -58.986562};
- $("#latitud").val("-27.451082");
- $("#longitud").val("-58.986562");
+
+ $("#latitud").val(marcador.lat);
+ $("#longitud").val(marcador.lng);
+
     var map = new google.maps.Map(document.getElementById('map'), {//instancio mapa
         zoom: 12,
         center: marcador,
@@ -206,6 +194,18 @@ function toggleBounce() { //función para la animación del marcador
       marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
+
+
+function cargar_barrios(){
+  var combo = document.getElementById("localidad_id");
+  barrios = JSON.parse(combo.options[combo.selectedIndex].getAttribute("barrios"));
+  var options_select_barrios = [];
+  barrios.forEach(function(element) {
+    options_select_barrios.push('<option value="'+element.id+'">'+element.nombre+'</option>');    
+  });
+  $("#barrio_id").html(options_select_barrios);
+}
+
 
 
 function instanciar_cropie () {
@@ -248,14 +248,14 @@ function instanciar_cropie () {
   
   // Enviar datos.
   function mandar () {
-    var form = $('#form-create')
+    var form = $('#form')
     var url = form.attr('action')
-    var token = $('#token-create').val()
-    var formData = new FormData(document.getElementById('form-create'))
+    var token = $('#token').val()
+    var formData = new FormData(document.getElementById('form'))
     if (foto_edificio !== '') {
       formData.append('imagen', foto_edificio)
     }  
-    // // Este método sirve para ver el contenido del formdata
+    // // Este buvle sirve para ver el contenido del formdata
   /* for (var pair of formData.entries())
      {
      console.log(pair[0]+ ', '+ pair[1]); 

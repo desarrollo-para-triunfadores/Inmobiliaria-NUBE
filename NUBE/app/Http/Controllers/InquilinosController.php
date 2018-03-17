@@ -158,7 +158,7 @@ class InquilinosController extends Controller {
         $inquilino->delete();
         $persona->delete();
         Session::flash('message', 'La información asociada al inquilino ha sido eliminada del sistema');
-        return redirect()->route('pacientes.index');
+        return redirect()->route('inquilinos.index');
     }
 
 }

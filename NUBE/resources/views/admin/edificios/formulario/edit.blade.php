@@ -1,7 +1,7 @@
 @extends('admin.partes.index')
 
 @section('title')
-    Edificios Registrados
+    Actualizar Edificio
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <section class="content-header">
         <h1>
             Edificio
-            <small>registrar un nuevo complejo</small>
+            <small>actualizar un registro</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-suitcase"></i> Inmuebles</a></li>
@@ -25,8 +25,9 @@
         <br>
         <div class="row">
             <div class="col-md-12">         
-                <form id="form-create"  action="/admin/edificios" method="POST"  class="form-horizontal" enctype="multipart/form-data">
-                    <input id="token-create" type="hidden" name="_token" value="{{ csrf_token() }}">    
+                <form id="form" action="/admin/edificios/{{$edificio->id}}"  method="POST"  class="form-horizontal" enctype="multipart/form-data">
+                    <input name="_method" type="hidden" value="PUT">
+                    <input id="token" type="hidden" name="_token" value="{{csrf_token()}}">                                                                                                      
                     <div id="rootwizard">
                         <div class="box box-primary">
                             <div class="box-body">
@@ -51,19 +52,17 @@
                             <div class="box-body ">                            
                                 <div class="tab-content">
                                     <div class="tab-pane" id="tab1">
-                                        @include('admin.edificios2.partes_create.datos_basicos')                                        
+                                        @include('admin.edificios.partes_create.datos_basicos')                                        
                                     </div>
                                     <div class="tab-pane" id="tab2">
-                                        @include('admin.edificios2.partes_create.ubicacion')
+                                        @include('admin.edificios.partes_create.ubicacion')
                                     </div> 
                                     <div class="tab-pane" id="tab3">
-                                        @include('admin.edificios2.partes_create.otros_datos')
-                                    </div> 
-                                
+                                        @include('admin.edificios.partes_create.otros_datos')
+                                    </div>                                 
                                     <div class="tab-pane" id="tab4">
-                                        @include('admin.edificios2.partes_create.confirmacion')
+                                        @include('admin.edificios.partes_create.confirmacion')
                                     </div> 
-
                                     <ul class="pager wizard">
                                         <li class="previous">
                                             <a href="#">
@@ -98,4 +97,39 @@
 @endsection
 @section('script') 
 <script src="{{ asset('js/edificio.js') }}"></script>
+<script>
+
+    /*Campos de la sección Ubicación*/
+        
+        var marcador = {lat: parseFloat('{{$edificio->latitud}}'), lng: parseFloat('{{$edificio->longitud}}')};    
+        $('#localidad_id').val('{{$edificio->barrio->localidad_id}}').trigger("change");
+        $('#barrio_id').val('{{$edificio->barrio_id}}').trigger("change");
+
+    /*Campos de la sección Otros Datos*/
+
+        if('{{$edificio->cochera}}'==='1'){
+            $('#cochera').prop('checked', true);
+        }
+        if('{{$edificio->administrado_por_sistema}}'==='1'){
+            $('#administrado_por_sistema').prop('checked', true);
+        }
+        if('{{!is_null($edificio->cant_ascensores)}}'){
+            $('#posee_ascensores').prop('checked', true);
+            desabilitar_input('posee_ascensores');
+        }
+        if('{{!is_null($edificio->costo_sueldos_personal)}}'){
+            $('#costo_sueldos_personal').prop('checked', true);
+            desabilitar_input('costo_sueldos_personal');
+        }
+        if('{{!is_null($edificio->costo_limpieza)}}'){
+            $('#costo_limpieza').prop('checked', true);
+            desabilitar_input('costo_limpieza');
+        }
+        if('{{!is_null($edificio->costo_seguro)}}'){
+            $('#costo_seguro').prop('checked', true);
+            desabilitar_input('costo_seguro');
+        }
+
+
+</script>
 @endsection

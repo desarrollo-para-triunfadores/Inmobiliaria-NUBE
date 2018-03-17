@@ -62,72 +62,75 @@ Edificios registrados
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Ascensores | Cochera</label>
+                                    <label>Ascensores</label>
                                 @if($edificio->cant_ascensores < 1)
-                                    <span class="form-control">Sin ascensores</span>
+                                    <span class="form-control">No posee</span>
                                 @else
-                                    <span class="form-control">Si ({{$edificio->cant_ascensores}})</span>
+                                    <span class="form-control">Sí posee (Cantidad: {{$edificio->cant_ascensores}}. Valor: ${{$edificio->valor_ascensores}})</span>
                                 @endif
                                 </div>
-                            </div>                                                                             
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Valor en ascensores:</label>
-                                    <span class="form-control">$ {{$edificio->valor_ascensores}}</span>
-                                </div>
-                            </div>
+                            </div>                                                                                                   
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Costos Personal</label>
-                                    <span data-toggle="tooltip" title="costos fijos en conjunto de personal del edificio" class="form-control">$ {{$edificio->costo_sueldos_personal}}</span>
+                                    @if($edificio->costo_sueldos_personal)
+                                        <span data-toggle="tooltip" title="costos fijos en conjunto de personal del edificio" class="form-control">${{$edificio->costo_sueldos_personal}}</span>
+                                    @else
+                                        <span class="form-control">No se espicificó</span>
+                                    @endif  
+                                    
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Costos Limpieza:</label>
-                                    <span class="form-control">$ {{$edificio->costo_limpieza}}</span>
+                                    @if($edificio->costo_limpieza)
+                                        <span class="form-control">${{$edificio->costo_limpieza}}</span>
+                                    @else
+                                        <span class="form-control">No se espicificó</span>
+                                    @endif                                    
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Costos Seguro:</label>
-                                    <span class="form-control">$ {{$edificio->costo_seguro}}</span>
+                                    @if($edificio->costo_seguro)
+                                     <span class="form-control">${{$edificio->costo_seguro}}</span>
+                                    @else
+                                        <span class="form-control">No se espicificó</span>
+                                    @endif                                    
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Fecha Habilitación</label>
-                                    <span class="form-control">{{$edificio->fecha_habilitacion}}</span>
+                                    @if($edificio->fecha_habilitacion)
+                                        <span class="form-control">{{$edificio->FechaHabilitacionFormateado}}</span>
+                                    @else
+                                        <span class="form-control">No se espicificó</span>
+                                    @endif                                    
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Teléfono:</label>
-                                    <span class="form-control">(3624)-99999</span>
+                                    <label>Cochera</label>
+                                @if($edificio->cochera)
+                                    <span class="form-control">No posee</span>
+                                @else
+                                    <span class="form-control">Sí posee</span>
+                                @endif
                                 </div>
-                            </div>  
-
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <span class="form-control">info@edificio.com</span>
-                                </div>
-                            </div> 
-
-
+                            </div>   
                         </div>  
                     </div> 
                     <div class="box-footer">
                         <div class="row">
                             <div class="col-md-12">
                                 <a href="{{ route('edificios.index') }}" title="volver a la pantalla anterior" class="btn btn-default btn-sm"><i class="fa fa-arrow-left"></i> volver</a>
-                                <button title="Registrar un edificio" type="button" id="boton-modal-crear" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-crear">
-                                    <i class="fa fa-plus-circle"></i> &nbsp;registrar edificio
-                                </button>
-                                <div class="pull-right">                                    
-                                    <a onclick="completar_campos({{$edificio}})" title="Editar este registro" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> actualizar registro</a>
-                                    <a onclick="abrir_modal_borrar({{$edificio->id}})" title="Eliminar este registro" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> eliminar registro</a>
+                                <a href="/admin/edificios/create" data-toggle="tooltip" title="Registrar un nuevo edificio" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> &nbsp;registrar un edificio</a>
+                                <div class="pull-right">                                          
+                                    <a href="{{ route('edificios.edit', $edificio->id) }}" data-toggle="tooltip" title="Editar este registro" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> actualizar registro</a>
+                                    <a onclick="abrir_modal_borrar({{$edificio->id}})" data-toggle="tooltip" title="Eliminar este registro" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> eliminar registro</a>
                                 </div>
                             </div>    
                         </div>
@@ -137,13 +140,10 @@ Edificios registrados
         </div>
     </section>
 </div>
-{{--
-@include('admin.Edificios.formulario.create')
-@include('admin.Edificios.formulario.editar')
-@include('admin.Edificios.formulario.confirmar')
---}}
+
+@include('admin.edificios.formulario.confirmar')
+
 @endsection
 @section('script') 
-<script src="{{ asset('js/edificio.js') }}"></script>
-<script src="{{ asset('js/camara.js') }}"></script>
+    <script src="{{ asset('js/edificio.js') }}"></script>
 @endsection
