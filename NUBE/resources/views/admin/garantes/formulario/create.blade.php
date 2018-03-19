@@ -10,7 +10,37 @@
                 @include('admin.partes.msj_lista_errores')
                 <form id="form-create" action="/admin/garantes" method="POST" enctype="multipart/form-data">
                     <input id="token-create" type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="row">
+                   
+                   
+                    <div class="row">                                           
+                            <div class="col-md-8">
+                                <div class="control-group">
+                                    <label>Persona:</label>
+                                    <div class="controls">
+                                        <select style="width: 100%"  name="persona_id" id="persona_id" class="select2 form-control" required>
+                                            <option value="">-</option>
+                                            @foreach($personas as $persona)
+                                            <option value="{{$persona->id}}">{{$persona->NombreCompleto}}. DNI: {{$persona->dni}}</option>
+                                            @endforeach
+                                        </select>
+                                        <small class="form-text text-muted"><strong>Información:</strong> si la persona aún no fue registrada puede hacerlo tildando la casilla: <b>Dar de alta a una persona</b> para habilitar el ingreso de datos para un nuevo registro.</small>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <br>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="persona_nueva" onchange="mostrar_panel_persona()" id="garante_nuevo" class="form-check-input">
+                                        Dar de alta a una persona
+                                    </label>
+                                </div>
+                            </div>  
+                        </div>
+                        <br>
+                        
+                        
+                        <div id="panel_persona_nueva" style="display: none;" class="row animated fadeIn">
                         <div class="col-md-7">
                             <h3>Información general</h3>
                             <br>

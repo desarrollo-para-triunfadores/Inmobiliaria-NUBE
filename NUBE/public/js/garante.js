@@ -1,4 +1,4 @@
-$("#side-inmueble").addClass("active");
+$("#side-inmueble-li").addClass("active");
 $("#side-inmueble-ul").addClass("menu-open");
 $("#side-ele-garantes").addClass("active");
 
@@ -189,6 +189,18 @@ $('.actionUpload-update input').on('change', function () {
     readFile2(this);
 });
 
+
+function mostrar_panel_persona () {
+    if ($('#panel_persona_nueva').is(':hidden')) {
+        $('#panel_persona_nueva').show()
+        $('#persona_id').removeAttr('required')
+        $('#persona_id').attr('disabled', true)
+    } else {
+        $('#panel_persona_nueva').hide()
+        $('#persona_id').attr('required', true)
+        $('#persona_id').removeAttr('disabled')
+    }
+  }
 
 
 // Enviar datos.

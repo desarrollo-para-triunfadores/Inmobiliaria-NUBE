@@ -38,13 +38,23 @@ Edificios registrados
 
                             </div>    
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nombre:</label>
                                     <span class="form-control"><strong>{{$edificio->nombre}}</strong></span>
                                 </div>
-                            </div>                                                                     
-                            <div class="col-md-4">
+                            </div>      
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Fecha Habilitación</label>
+                                    @if($edificio->fecha_habilitacion)
+                                        <span class="form-control">{{$edificio->FechaHabilitacionFormateado}}</span>
+                                    @else
+                                        <span class="form-control">No se espicificó</span>
+                                    @endif                                    
+                                </div>
+                            </div>                                                                  
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Dirección:</label>
                                     @if($edificio->barrio)
@@ -54,9 +64,9 @@ Edificios registrados
                                     @endif
                                 </div>
                             </div> 
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <label>Cantidad de Departamentos:</label>
+                                    <label>Cant. Departamentos:</label>
                                     <span class="form-control">{{$edificio->cant_deptos}}</span>
                                 </div>
                             </div>
@@ -70,7 +80,7 @@ Edificios registrados
                                 @endif
                                 </div>
                             </div>                                                                                                   
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Costos Personal</label>
                                     @if($edificio->costo_sueldos_personal)
@@ -81,7 +91,7 @@ Edificios registrados
                                     
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Costos Limpieza:</label>
                                     @if($edificio->costo_limpieza)
@@ -91,7 +101,7 @@ Edificios registrados
                                     @endif                                    
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Costos Seguro:</label>
                                     @if($edificio->costo_seguro)
@@ -100,18 +110,8 @@ Edificios registrados
                                         <span class="form-control">No se espicificó</span>
                                     @endif                                    
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Fecha Habilitación</label>
-                                    @if($edificio->fecha_habilitacion)
-                                        <span class="form-control">{{$edificio->FechaHabilitacionFormateado}}</span>
-                                    @else
-                                        <span class="form-control">No se espicificó</span>
-                                    @endif                                    
-                                </div>
-                            </div>                            
-                            <div class="col-md-4">
+                            </div>                                                     
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Cochera</label>
                                 @if($edificio->cochera)

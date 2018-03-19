@@ -9,7 +9,7 @@ Inmuebles Registrados
     <section class="content-header">
         <h1>
             Contratos
-            <small>registrar un nuevo contrato</small>
+            <small>editar un contrato</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-suitcase"></i> Contratos</a></li>          
@@ -25,8 +25,9 @@ Inmuebles Registrados
         <br>
         <div class="row">
             <div class="col-md-12">         
-                <form id="form"  action="/admin/contratos" method="POST"  class="form-horizontal" enctype="multipart/form-data">
-                    <input id="token" type="hidden" name="_token" value="{{ csrf_token() }}">    
+                <form id="form-create"  action="/admin/contratos" method="POST"  class="form-horizontal" enctype="multipart/form-data">
+                    <input name="_method" type="hidden" value="PUT">
+                    <input id="token" type="hidden" name="_token" value="{{csrf_token()}}">
                     <div id="rootwizard">
                         <div class="box box-primary">
                             <div class="box-body">
@@ -52,7 +53,7 @@ Inmuebles Registrados
                             <div class="box-body ">                            
                                 <div class="tab-content">
                                     <div class="tab-pane" id="tab1">
-                                        @include('admin.contratos.partes_form.datos_basicos')
+                                        @include('admin.contratos.partes_form.datos_basicos')       
                                     </div>
 
                                     <div class="tab-pane" id="tab2">
@@ -109,4 +110,25 @@ Inmuebles Registrados
 <script src="http://momentjs.com/downloads/moment.min.js"></script>
 <script src="{{ asset('js/camara.js') }}"></script>
 <script src="{{ asset('js/contrato.js') }}"></script>
+
+<script>
+
+
+    $('#inmueble_id').val('{{$contrato->inmueble_id}}').trigger("change");
+    $('#tipo_renta').val('{{$contrato->tipo_renta}}').trigger("change");      
+    $('#inquilino_id').val('{{$contrato->inquilino_id}}').trigger("change");
+    $('#garante_id').val('{{$contrato->garante_id}}').trigger("change");
+   
+    datos_calculo_renta.fecha_desde = '{{$contrato->fecha_desde}}';
+    datos_calculo_renta.fecha_hasta = '{{$contrato->fecha_hasta}}';
+    datos_calculo_renta.valor_alquiler = parseFloat('{{$contrato->monto_basico}}');            
+    datos_calculo_renta.periodo_incremento = parseInt('{{$contrato->periodos}}');
+    datos_calculo_renta.tasa = parseFloat('{{$contrato->incremento}}');
+    
+    calcular_meses_renta();
+    calcular_renta();
+
+
+
+</script>
 @endsection

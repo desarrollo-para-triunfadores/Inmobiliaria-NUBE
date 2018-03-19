@@ -1,4 +1,7 @@
-@extends('admin.partes.index') @section('title') Inmuebles Registrados @endsection @section('content')
+@extends('admin.partes.index')
+ @section('title') Editar rol de usuario 
+ @endsection 
+ @section('content')
 <div class="content-wrapper" style="min-height: 916px;">
 	<section class="content-header">
 		<h1>
@@ -42,14 +45,24 @@
 									</div>
 								</div>
                                 <br><br>
-                                <legend>Permisos</legend>
+								<div class="row">
+										<div class="col-md-8">
+											<legend>Permisos</legend>
+										</div>
+										<div class="col-md-4">
+											<div class="control-group">
+												<div class="controls">
+													<input id="input_busqueda" type="text" class="form-control" placeholder="filtre aquí permisos...">
+												</div>
+											</div>									
+										</div>
+									</div>
 								<div class="row">
 									@foreach($permisos as $permiso)																	
-									<div class="col-md-3">
+									<div class="col-md-3 li_item animated fadeIn" id="{{str_replace(' ', '', $permiso->name)}}">
 										<div class="form-check">
 											<br>
-											<label class="form-check-label">
-												
+											<label class="form-check-label">												
 												@if(is_null(DB::table('role_has_permissions')->where('role_id', $rol->id)->where('permission_id', $permiso->id)->first()))
                                                     <input type="checkbox" name="check_{{$permiso->name}}" value="{{$permiso->name}}" class="form-check-input"> {{$permiso->name}}
                                                 @else
@@ -73,3 +86,6 @@
 </div>
 
 @endsection 
+@section('script')
+<script src="{{ asset('js/rol.js') }}"></script>
+@endsection

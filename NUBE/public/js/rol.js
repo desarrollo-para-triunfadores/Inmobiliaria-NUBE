@@ -2,6 +2,22 @@ $("#side-usuarios-li").addClass("active");
 $("#side-usuarios-ul").addClass("menu-open");
 $("#side-ele-roles").addClass("active");
 
+
+$('#input_busqueda').on('keyup', function (evt) { // este evento controla y aplica el filtra todos los permisos de acuerdo a lo que se está escribiendo en el campo
+    $(".li_item").addClass("hide"); //escondemos todos los items 
+    var valor_a_filtrar = $(this).val(); //valor del campo
+    if ($(this).val() !== "") {     // vemos si el campo de búsqueda está vacio o no.   
+        $('.li_item').each(function(key, element){  // por cada elemento que está para filtrar vemos que existan coincidencias entre el id de ese elemento y el valor escrito     
+            nombre_permiso = element.getAttribute("id"); 
+            if (nombre_permiso.indexOf(valor_a_filtrar)  > -1){           
+                $("#" + nombre_permiso).removeClass("hide");
+            }
+        });
+    } else {
+        $(".li_item").removeClass("hide");
+    }
+});
+
 function abrir_modal_borrar(id) {
     $('#form-borrar').attr('action', 'roles/' + id);
     $('#boton-modal-borrar').click();

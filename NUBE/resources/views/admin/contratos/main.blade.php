@@ -27,7 +27,19 @@
                         </div>
                         <div class="box-body ">
                             @include('admin.partes.msj_acciones')
-
+                            <div>
+                                Columnas:
+                                <a class="toggle-vis" href="" data-column="0">Inmueble</a> -
+                                <a class="toggle-vis" href="" data-column="1">Edificio</a> -
+                                <a class="toggle-vis" href="" data-column="2">Vigente</a> -
+                                <a class="toggle-vis" href="" data-column="3">Desde</a> -
+                                <a class="toggle-vis" href="" data-column="4">Hasta</a> -
+                                <a class="toggle-vis" href="" data-column="5">Inquilino</a> -
+                                <a class="toggle-vis" href="" data-column="6">Garante</a> -
+                                <a class="toggle-vis" href="" data-column="7">Fecha alta</a> -
+                                <a class="toggle-vis" href="" data-column="8">Acciones</a>
+                            </div>
+                            <br>
                             <table id="example" class="display responsive" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
@@ -46,13 +58,13 @@
                                 @foreach($contratos as $contrato)
                                     <tr>
                                         @if($contrato->inmueble->piso || $contrato->inmueble->numDepto)
-                                            <td class="text-center text-bold"><a href="{{route('inmuebles.edit', $contrato->inmueble->id)}}">{{$contrato->inmueble->tipo->nombre}} en {{$contrato->inmueble->direccion }}  (Piso {{$contrato->inmueble->piso}} Depto {{$contrato->inmueble->numDepto}})
-                                                    @if($contrato->inmueble->edificio)
-                                                </a>️</td>
-                                        @else
-                                            - {{$contrato->inmueble->localidad->nombre}}</a></td>
-                                        @endif
-
+                                            <td class="text-center text-bold">
+                                                    <a href="{{route('inmuebles.edit', $contrato->inmueble->id)}}">{{$contrato->inmueble->tipo->nombre}} en {{$contrato->inmueble->direccion }}  (Piso {{$contrato->inmueble->piso}} Depto {{$contrato->inmueble->numDepto}})
+                                                    @if(!$contrato->inmueble->edificio)
+                                                         {{$contrato->inmueble->localidad->nombre}}
+                                                    @endif
+                                                </a>️
+                                            </td>
                                         @else
                                             <td class="text-center text-bold">{{$contrato->inmueble->tipo->nombre}} en {{$contrato->inmueble->direccion}} ({{$contrato->inmueble->localidad->nombre}})</td>
                                         @endif
@@ -74,9 +86,10 @@
 
                                         <td class="text-center" width="100">
                                             {{--
-                                         <a onclick="completar_campos({{$contrato}})" title="Editar este registro" class="btn btn-social-icon btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                         <a onclick="abrir_modal_borrar({{$contrato->id}})" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                         --}}
+                                         <a onclick="completar_campos({{$contrato}})" title="Editar este registro" class="btn btn-social-icon btn-warning btn-sm"><i class="fa fa-pencil"></i></a>--}}
+                                            
+                                         <a href="{{ route('contratos.edit', $contrato->id) }}" title="Editar este registro" class="btn btn-social-icon btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                                         <a onclick="abrir_modal_borrar({{$contrato->id}})" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger"><i class="fa fa-trash"></i></a>                                         
                                             <a href="{{ route('contratos.show', $contrato->id) }}" data-toggle="tooltip" title="Visualizar el detalle de este contrato" class="btn btn-social-icon btn-sm btn-info"><i class="fa fa-list"></i></a>
                                         </td>
                                     </tr>
@@ -101,19 +114,18 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right">
-                                        <a href="/admin/contratos/create" title="Registrar un garante" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> &nbsp;registrar un contrato</a>
+                                        <a href="/admin/contratos/create" title="Registrar un contrato" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp;registrar un contrato</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-
+@include('admin.contratos.formulario.confirmar')
 
 @endsection
 @section('script')

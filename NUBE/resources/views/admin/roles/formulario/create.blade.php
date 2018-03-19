@@ -1,4 +1,7 @@
-@extends('admin.partes.index') @section('title') Inmuebles Registrados @endsection @section('content')
+@extends('admin.partes.index') 
+@section('title') Crear rol de usuario
+@endsection
+@section('content')
 <div class="content-wrapper" style="min-height: 916px;">
 	<section class="content-header">
 		<h1>
@@ -40,11 +43,23 @@
 										</div>
 									</div>
 								</div>
-                                <br><br>
-                                <legend>Permisos</legend>
+								<br><br>
+								
+								<div class="row">
+									<div class="col-md-8">
+										<legend>Permisos</legend>
+									</div>
+									<div class="col-md-4">
+										<div class="control-group">
+											<div class="controls">
+												<input id="input_busqueda" type="text" class="form-control" placeholder="filtre aquí permisos...">
+											</div>
+										</div>									
+									</div>
+								</div>								
 								<div class="row">
 									@foreach($permisos as $permiso)																	
-									<div class="col-md-3">
+									<div class="col-md-3 li_item animated fadeIn" id="{{str_replace(' ', '', $permiso->name)}}">
 										<div class="form-check">
 											<br>
 											<label class="form-check-label">                                            
@@ -54,6 +69,7 @@
                                     </div>                                    
                                     @endforeach
 								</div>
+								<br>
                             </div>
                             <div class="box-footer">
                                 <p class="pull-left form-text text-muted"><strong>Información:</strong> los roles proporcionan permisos para las acciones disponibles en el <b>sistema</b>.</p>
@@ -67,4 +83,7 @@
 	</section>
 </div>
 
-@endsection @section('script') @endsection
+@endsection 
+@section('script')
+<script src="{{ asset('js/rol.js') }}"></script>
+@endsection

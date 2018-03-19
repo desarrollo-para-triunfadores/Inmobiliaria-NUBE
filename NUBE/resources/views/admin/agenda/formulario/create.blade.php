@@ -59,11 +59,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <br>
                     <button id="boton_submit_crear" type="submit" class="btn btn-primary hide"></button>
-                </form>
-                <br>      
+                </form>    
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">volver</button>

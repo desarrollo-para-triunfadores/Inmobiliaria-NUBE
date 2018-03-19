@@ -94,6 +94,27 @@ class Contrato extends Model {
     ### --/- METODOS 
 
     #### MUTADORES ####
+
+    public function setFechaHastaAttribute($value)
+    {
+        $fecha= str_replace('/', '-', $value);
+        $this->attributes['fecha_hasta'] = date('Y-m-d', strtotime($fecha));
+    }
+
+    public function setFechaDesdeAttribute($value)
+    {
+        $fecha= str_replace('/', '-', $value);
+        $this->attributes['fecha_desde'] = date('Y-m-d', strtotime($fecha));
+    }
+
+    public function setFechaHabilitacionAttribute($value)
+    {
+        $fecha= str_replace('/', '-', $value);
+        $this->attributes['fecha_habilitacion'] = date('Y-m-d', strtotime($fecha));
+    }
+
+
+
     public function setMontoBasicoAttribute($value)
     {
         $this->attributes['monto_basico'] = ($value);

@@ -34,11 +34,15 @@ class GarantesController extends Controller {
         $paises = Pais::all();
         $inmuebles = Inmueble::all();
         $localidades = Localidad::all();
+        $personas = Persona::all()->whereNotIn('id', $garantes->pluck('id')->toArray());
+
+
 //        if ($garantes->count() == 0) { // la funcion count te devuelve la cantidad de registros contenidos en la cadena
 //            return view('admin.garantes.sinRegistros')->with('localidades', $localidades); //se devuelve la vista para crear un registro
 //        } else {
         return view('admin.garantes.main')
                         ->with('garantes', $garantes)
+                        ->with('personas', $personas)
                         ->with('paises', $paises)
                         ->with('localidades', $localidades); // se devuelven los registros
 //        }
@@ -60,19 +64,24 @@ class GarantesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $nombreImagen = 'sin imagen';
-        if ($request->file('imagen')) {
-            $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() .'.png';
-            Storage::disk('personas')->put($nombreImagen, \File::get($file));
+    
+        if (is_null($request->persona_id)) {//*si no se recibe una persona asignada como garante, crear una
+            $nombreImagen = 'sin imagen';
+            if ($request->file('imagen')) {
+                $file = $request->file('imagen');
+                $nombreImagen = 'persona_' . time() .'.png';
+                Storage::disk('personas')->put($nombreImagen, \File::get($file));
+            }
+            $persona = new Persona($request->all());
+            $persona->foto_perfil = $nombreImagen;            
+            $persona->save();
+            $garante = new Garante($request->all());
+            $garante->persona_id = $persona->id;           
+        }else{
+            $garante = new Garante();
+            $garante->persona_id = $request->persona_id;
         }
-        /* datos de persona */
-        $persona = new Persona($request->all());
-        $persona->foto_perfil = $nombreImagen;
-        $persona->save();
-        /* datos de garante */
-        $garante = new Garante($request->all());
-        $garante->persona_id = $persona->id;
+
         $garante->save();
         Session::flash('message', 'Se ha registrado un nuevo garante.');
         return redirect()->route('garantes.index');
@@ -85,11 +94,14 @@ class GarantesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        $garantes = Garante::all();
         $garante = Garante::find($id);
         $paises = Pais::all();
         $localidades = Localidad::all();
+        $personas = Persona::all()->whereNotIn('id', $garantes->pluck('id')->toArray());
         return view('admin.garantes.show')
                         ->with('garante', $garante)
+                        ->with('personas', $personas)
                         ->with('paises', $paises)
                         ->with('localidades', $localidades);
     }
@@ -144,13 +156,13 @@ class GarantesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $garante = Inquilino::find($id);
-        $persona = Persona::find($garante->persona_id);
+        $garante = Garante::find($id);
+      /*  $persona = Persona::find($garante->persona_id);
         if ($persona->foto_perfil != 'sin imagen') {
             Storage::disk('personas')->delete($persona->foto_perfil); // Borramos la imagen asociada.
-        }
+        }*/
         $garante->delete();
-        $persona->delete();
+        //$persona->delete();
         Session::flash('message', 'La información asociada al garante ha sido eliminada del sistema');
         return redirect()->route('garantes.index');
     }

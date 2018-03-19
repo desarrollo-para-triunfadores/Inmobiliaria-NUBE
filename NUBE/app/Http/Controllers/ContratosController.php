@@ -46,58 +46,67 @@ class ContratosController extends Controller
     public function create()
     {
         $garantes = Garante::all();
-        $inquilinos = Inquilino::all();
-        $inmuebles = Inmueble::where('disponible', '1')->get();
+
+        /*Obtenemos los contratos vigentes para obtener el listado de inquilinos activos y excluirlos de la lista de candidatos a inquilino*/
+        $fecha_hoy = Carbon::now();
+        $contratos_vigentes = Contrato::all()->where('fecha_hasta', '>', $fecha_hoy);
+        $inquilinos_activos = $contratos_vigentes->pluck('inquilino_id')->toArray();
+        $inquilinos_potenciales = Persona::all()->whereNotIn('id', $inquilinos_activos);
+
+        $departamentos = Inmueble::all()->where('condicion', '<>','venta')->where('tipo_id','1')->where('disponible', '1');
+        $casas = Inmueble::all()->where('condicion', '<>','venta')->where('tipo_id','2')->where('disponible', '1');                
         $paises = Pais::all();
         $localidades = Localidad::all();
         $servicios = Servicio::all();
+
+
 
         return view('admin.contratos.formulario.create')
             ->with('paises', $paises)
             ->with('localidades', $localidades)
             ->with('garantes', $garantes)
-            ->with('inquilinos', $inquilinos)
+            ->with('personas', $inquilinos_potenciales)
             ->with('servicios', $servicios)
-            ->with('inmuebles', $inmuebles);
+            ->with('departamentos', $departamentos)
+            ->with('casas', $casas);
     }
 
 
     public function store(Request $request)
     {
-        $contrato = new Contrato();
-        /*** Datos del Inquilino ** */
+
+        $contrato = new Contrato($request->all());
+      
+        /*---------------------INICIO DATOS INQUILINO-------------------*/
         if (is_null($request->inquilino_id)) {     //*si no se recibe un inquilino, crear uno
+            
             $nombreImagen = 'sin imagen';
             if ($request->file('imagen')) {
                 $file = $request->file('imagen');
-                $nombreImagen = 'persona_' . time() . '.' . $file->getClientOriginalExtension();
+                $nombreImagen = 'persona_' . time() .'.png';
                 Storage::disk('personas')->put($nombreImagen, \File::get($file));
             }
-            /* datos de persona */
+            
             $persona = new Persona($request->all());
             $persona->foto_perfil = $nombreImagen;
             $persona->save();
-            /* datos de inquilino */
-            $inquilino = new Inquilino($request->all());
+            $inquilino = new Inquilino();
             $inquilino->persona_id = $persona->id;
             $inquilino->save();
             $contrato->inquilino_id = $inquilino->id;
-        }else{
-            $contrato->inquilino_id = $request->inquilino_id;
         }
-        
-
-        
-        /*         * * Datos del Garante ** */
+        /*---------------------FIN DATOS INQUILINO-------------------*/    
+        /*---------------------INICIO DATOS GARANTE-------------------*/
         if (is_null($request->garante_id)) {     //*si no se recibe una persona asignada como garante, crear una
+            
             $nombreImagen = 'sin imagen';
             if ($request->file('imagen2')) {
                 $file = $request->file('imagen2');
-                $nombreImagen = 'persona_' . time() . '.' . $file->getClientOriginalExtension();
+                $nombreImagen = 'persona_' . time() .'.png';
                 Storage::disk('personas')->put($nombreImagen, \File::get($file));
             }
-            /* datos de persona */
-            $persona = new Persona($request->all());
+
+            $persona = new Persona();
             $persona->nombre = $request->garante_nombre;
             $persona->apellido = $request->garante_apellido;
             $persona->dni = $request->garante_dni;
@@ -112,34 +121,18 @@ class ContratosController extends Controller
             $persona->pais_id = $request->garante_pais_id;
             $persona->foto_perfil = $nombreImagen;
             $persona->save();
-            /* datos de garante */
+            
             $garante = new Garante($request->all());
             $garante->persona_id = $persona->id;
             $garante->save();
             $contrato->garante_id = $garante->id;
-        }else{
-            $contrato->garante_id = $request->garante_id;
-        }
-
-        //si se cargó una fecha de vencimiento se formatea para guardar en la base
-        $fecha_desde = str_replace('/', '-', $request->fecha_desde);
-        $contrato->fecha_desde = date('Y-m-d', strtotime($fecha_desde));
-        $fecha_hasta = str_replace('/', '-', $request->fecha_hasta);
-        $contrato->fecha_hasta = date('Y-m-d', strtotime($fecha_hasta));
-        $contrato->inmueble_id = $request->inmueble_id;
-        //$contrato->comision_garante = $request->comision_garante;
-        $contrato->comision_propietario = $request->comision_propietario;
-        $contrato->comision_inquilino = $request->comision_inquilino;
-        //$contrato->gastos_administrativos = $request->gastos_administrativos;
-       // $contrato->tasa_gastos_admin = $request->tasa_gastos_admin;
-        $contrato->tipo_renta = $request->tipo_renta;
-        $contrato->monto_basico = $request->monto_basico;
-        $contrato->periodos = $request->periodos;
-        $contrato->incremento = $request->incremento;
-        $contrato->sujeto_a_gastos_compartidos = $request->sujeto_a_gastos_compartidos;
+        }                
+        /*---------------------FIN DATOS GARANTE-------------------*/
+        
         $contrato->save();
-        /*** Periodos pagos contrato ** */
-
+        
+        /*---------------------INICIO DATOS PERIODOS-------------------*/
+        
         $periodos = json_decode($request->periodos_pagos, true);
 
         foreach ($periodos as $dato) {
@@ -151,24 +144,26 @@ class ContratosController extends Controller
             $periodo->monto_incremental = $dato["monto_incremental"];
             $periodo->save();
         }
-
-        /*** Servicios del Inmueble ** */
-        //dd($request->servicios);
+        /*---------------------FIN DATOS PERIODOS-------------------*/
+        /*---------------------INICIO DATOS SERVICIOS-------------------*/
+        
         if($request->servicios){
             foreach($request->servicios as $servicio){
                 $servicio_contrato = new ServicioContrato();
-                $servicio_contrato->servicio_id = Servicio::where('nombre', $servicio)->first()->id;        //$servicio->id;
+                $servicio_contrato->servicio_id = $servicio;
                 $servicio_contrato->contrato_id = $contrato->id;
                 $servicio_contrato->save();
             }
             
         }
-    
+        /*---------------------FIN DATOS SERVICIOS-------------------*/
+        /*---------------------INICIO DATOS INMUEBLE-------------------*/
+            
+            $inmueble = Inmueble::find($request->inmueble_id);
+            $inmueble->disponible = 0;
+            $inmueble->save();
 
-
-        $inmueble = Inmueble::find($request->inmueble_id);
-        $inmueble->disponible = 0;
-        $inmueble->save();
+        /*---------------------INICIO ENVIO EMAIL-------------------*/
 
         /*** Envio de EMAIL a interesados en el inmueble, notificacion de que inmueble se alquilo (capturados desde la Oportunidad) **/
         /*  $oportunidades = Oportunidad::where('inmueble_id', $contrato->inmueble_id)->get();
@@ -187,46 +182,62 @@ class ContratosController extends Controller
               }
           }*/
 
-        /* *********************************** -Email************************************ */
-
+        /*---------------------FIN ENVIO EMAIL-------------------*/
+        /*---------------------INICIO OPORTUNIDADES------------------*/
         /*    $oportunidades = Oportunidad::where('inmueble_id', $request->inmueble_id)->orderBy('id', 'desc')->get();
 
             foreach ($oportunidades as $oportunidad) {
                 $oportunidad->estado_id = null; //este valor hay que cambiarlo por otro después. Según la lógica debería existir en la base de datos un valor que simbolice a las oportunidades que fueron desafectadas.
                 $oportunidad->save();
             }*/
-
+        /*---------------------FIN OPORTUNIDADES------------------*/
         return response()->json('ok');
     }
 
     public function show($id)
     {
         $contrato= Contrato::find($id);
-        $garante = $contrato->garante;
-        $inquilino = $contrato->inquilino;
-        $inmuebles = $contrato->inmueble;
-
-        return view('admin.contratos.formulario.show')
-            ->with('inquilinos', $inquilino)
-            ->with('inmuebles', $inmuebles)
-            ->with('garantes', $garante)
-            ->with('contrato', $contrato);
+        return view('admin.contratos.show')->with('contrato', $contrato);
     }
 
     public function edit($id)
     {
-        //
+        $contrato= Contrato::find($id);
+        $garantes = Garante::all();
+
+        /*Obtenemos los contratos vigentes para obtener el listado de inquilinos activos y excluirlos de la lista de candidatos a inquilino*/
+        $fecha_hoy = Carbon::now();
+        $contratos_vigentes = Contrato::all()->where('fecha_hasta', '>', $fecha_hoy);
+        $inquilinos_activos = $contratos_vigentes->pluck('inquilino_id')->toArray();
+        $inquilinos_potenciales = Persona::all()->whereNotIn('id', $inquilinos_activos);
+
+        $departamentos = Inmueble::all()->where('condicion', '<>','venta')->where('tipo_id','1')->where('disponible', '1');
+        $casas = Inmueble::all()->where('condicion', '<>','venta')->where('tipo_id','2')->where('disponible', '1');                
+        $paises = Pais::all();
+        $localidades = Localidad::all();
+        $servicios = Servicio::all();
+
+        return view('admin.contratos.formulario.edit')
+            ->with('contrato', $contrato)
+            ->with('paises', $paises)
+            ->with('localidades', $localidades)
+            ->with('garantes', $garantes)
+            ->with('personas', $inquilinos_potenciales)
+            ->with('servicios', $servicios)
+            ->with('departamentos', $departamentos)
+            ->with('casas', $casas);
     }
 
     public function update(Request $request)
     {
     }
 
+
     public function destroy($id)
     {
-        $inmueble = Inmueble::find($id);
-        $inmueble->delete();
-        Session::flash('message $persona->El inmueble ha sido eliminado del sistema');
-        return redirect()->route('inmueble.index');
+        $contrato = Contrato::find($id);
+        $contrato->delete();
+        Session::flash('message', 'El contrato ha sido eliminado del sistema');
+        return redirect()->route('contratos.index');
     }
 }

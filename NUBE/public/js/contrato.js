@@ -2,24 +2,15 @@ $('#side-contratos-li').addClass('active')
 $('#side-contratos-ul').addClass('menu-open')
 $('#side-ele-contratos').addClass('active')
 
-/***************** Edit Contrato *************/
-function completar_campos(contrato) {
-    $('#nombre').val(contrato.nombre);
-    $('#direccion').val(contrato.direccion);
-
-
-    $('#form-update').attr('action', '/admin/contratos/' + contrato.id);
-    $('#boton-modal-update').click();
+function abrir_modal_borrar(id) {
+  $('#form-borrar').attr('action', '/admin/edificios/' + id);
+  $('#boton-modal-borrar').click();
 }
-/************** Fin Edit Contrato ***********/
-
-
 
 var datos_calculo_renta = {
   fecha_desde: '',
   fecha_hasta: '',
   valor_alquiler: '',
-  valor_inmuelble: '',
   meses_de_alquiler: '',
   periodo_incremento: '',
   tasa: '',
@@ -38,11 +29,23 @@ var fotos = {
   inquilino_nuevo: ''
 }
 
-// Datatable - instaciación del plugin
-var table = $('#example').DataTable({
-  'language': tabla_traducida // esta variable esta instanciada donde están declarados todos los js.
+var monto_basico_sugerido = 0;
 
-})
+//Datatable - instaciación del plugin
+var table = $('#example').DataTable({
+  "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
+  "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.      
+    null,//Inmueble      
+    {"visible": false}, //Edificio      
+    null,//Vigente
+    null,//Desde    
+    null,//Hasta
+    null,//Inquilino    
+    {"visible": false},//Garante
+    {"visible": false},//Fecha alta
+    null//Acciones
+  ]
+});
 
 instaciar_filtros()
 function instaciar_filtros () {
@@ -67,28 +70,30 @@ function instaciar_filtros () {
   })
 }
 
-$(document).ready(function () {
-  jQuery.extend(jQuery.validator.messages, {
-    required: 'Este campo es obligatorio.',
-    remote: 'Por favor, rellena este campo.',
-    email: 'Por favor, escribe una dirección de correo válida',
-    url: 'Por favor, escribe una URL válida.',
-    date: 'Por favor, escribe una fecha válida.',
-    dateISO: 'Por favor, escribe una fecha (ISO) válida.',
-    number: 'Por favor, escribe un número entero válido.',
-    digits: 'Por favor, escribe sólo dígitos.',
-    creditcard: 'Por favor, escribe un número de tarjeta válido.',
-    equalTo: 'Por favor, escribe el mismo valor de nuevo.',
-    accept: 'Por favor, escribe un valor con una extensión aceptada.',
-    maxlength: jQuery.validator.format('Por favor, no escribas más de {0} caracteres.'),
-    minlength: jQuery.validator.format('Por favor, no escribas menos de {0} caracteres.'),
-    rangelength: jQuery.validator.format('Por favor, escribe un valor entre {0} y {1} caracteres.'),
-    range: jQuery.validator.format('Por favor, escribe un valor entre {0} y {1}.'),
-    max: jQuery.validator.format('Por favor, escribe un valor menor o igual a {0}.'),
-    min: jQuery.validator.format('Por favor, escribe un valor mayor o igual a {0}.')
-  })
+//Datatables | ocultar/visualizar columnas dinámicamente
+$('a.toggle-vis').on('click', function (e) {
+  e.preventDefault();
+  // Get the column API object
+  var column = table.column($(this).attr('data-column'));
+  // Toggle the visibility
+  column.visible(!column.visible());
+  instaciar_filtros();
+});
 
-  var $validator = $('#form-create').validate({
+//Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
+$('#example tbody').on('mouseenter', 'td', function () {
+  var colIdx = table.cell(this).index().column;
+  $(table.cells().nodes()).removeClass('highlight');
+  $(table.column(colIdx).nodes()).addClass('highlight');
+});
+
+
+
+
+$(document).ready(function () {
+  jQuery.extend(jQuery.validator.messages, msj_validacion_jquery)
+
+  var $validator = $('#form').validate({
     highlight: function (element) {
       $(element).closest('.form-group').addClass('has-error')
     },
@@ -110,7 +115,7 @@ $(document).ready(function () {
   $('#rootwizard').bootstrapWizard({
     tabClass: 'nav nav-pills',
     onNext: function (tab, navigation, index) {
-      var $valid = $('#form-create').valid()
+      var $valid = $('#form').valid()
       if (!$valid) {
         $validator.focusInvalid()
         return false
@@ -173,36 +178,42 @@ function mostrar_panel_garante () {
 // Date picker --instaciación y configuración
 
 // Date picker para la fecha de inicio de contrato
-$('.datepicker_desde').datepicker({
-  autoclose: true,
-  startView: 1,
-  /*startDate: '-1d',*/
-  todayHighlight: true,
-  orientation: 'bottom auto',
-  format: 'dd/mm/yyyy',
-  language: 'es'
-})
+//Bootstrap Material Date picker
+$('.datepicker_desde').bootstrapMaterialDatePicker ({
+  format: 'DD/MM/YYYY',
+  lang: 'es',
+  weekStart: 1, 			
+  switchOnClick : true,
+  cancelText: 'cerrar',
+  okText: 'ok',
+  minDate : moment().add(-100, 'year'),
+  time: false 
+});
+
 // Date picker para la fecha de finalización
-$('.datepicker_hasta').datepicker({
-  autoclose: true,
-  startView: 2,
-  startDate: '0d',
-  todayHighlight: true,
-  orientation: 'bottom auto',
-  format: 'dd/mm/yyyy',
-  language: 'es'
-})
+$('.datepicker_hasta').bootstrapMaterialDatePicker ({
+  format: 'DD/MM/YYYY',
+  lang: 'es',
+  weekStart: 1, 			
+  switchOnClick : true,
+  cancelText: 'cerrar',
+  okText: 'ok',
+  minDate : moment().add(-100, 'year'),
+  time: false 
+});
 
 // Date picker con configuración para las fechas de nacimiento
-$('.datepicker').datepicker({
-  autoclose: true,
-  startDate: '-80y',
-  endDate: '0y',
-  todayHighlight: true,
-  orientation: 'bottom auto',
-  format: 'dd/mm/yyyy',
-  language: 'es'
-})
+$('.datepicker').bootstrapMaterialDatePicker ({
+  format: 'DD/MM/YYYY',
+  lang: 'es',
+  weekStart: 1, 			
+  switchOnClick : true,
+  cancelText: 'cerrar',
+  okText: 'ok',
+  minDate : moment().add(-100, 'year'),
+  maxDate : moment(),
+  time: false 
+});
 
 function instanciar_cropie (index) {
   switch (index) {
@@ -234,10 +245,10 @@ function instanciar_cropie (index) {
 
 // Enviar datos.
 function mandar () {
-  var form = $('#form-create')
+  var form = $('#form')
   var url = form.attr('action')
-  var token = $('#token-create').val()
-  var formData = new FormData(document.getElementById('form-create'))
+  var token = $('#token').val()
+  var formData = new FormData(document.getElementById('form'))
   if (fotos.inquilino_nuevo !== '') {
     formData.append('imagen', fotos.inquilino_nuevo)
   }
@@ -280,12 +291,38 @@ function mandar () {
 
 $('#inmueble_id').change(function () {
   var elemento = JSON.parse($('option:selected', this).attr('objeto'))
-  $('#valor_alquiler').val(elemento.valorAlquiler)
+  if(elemento.edificio_id !== ""){
+    var administrado_por_sistema = JSON.parse($('option:selected', this).attr('edificio-sistema'))
+    if(administrado_por_sistema === 1){
+      $(".sujeto_a_gastos_compartidos").removeClass("hide") 
+      $("#sujeto_a_gastos_compartidos").prop("checked", true);
+    }else{
+      $(".sujeto_a_gastos_compartidos").addClass("hide")
+      $("#sujeto_a_gastos_compartidos").prop("checked", false);
+    }
+    tildar_gastos_compartidos();
+  }
+
+  monto_basico_sugerido = elemento.valorAlquiler;
+  $('#monto_basico').attr( "placeholder", monto_basico_sugerido);
   datos_calculo_renta.valor_alquiler = elemento.valorAlquiler
-  datos_calculo_renta.valor_inmuelble = elemento.valorReal
-  calcular_tasa_gastos_admin()
   calcular_renta()
 })
+
+function cargar_monto_sugerido(){//este método se usa en los casos en que el concepto es un concepto compartido está sugerido a modo de placerholder entonces al dar un click en ese campor el mismo se complete con el monto sugerido
+  if(($('#monto_basico').val() === '')){
+      $('#monto_basico').val(monto_basico_sugerido);
+  }       
+}
+
+function tildar_gastos_compartidos() {
+  if( $('#sujeto_a_gastos_compartidos').prop('checked') ) {
+    $(".gasto_compartido").prop("checked", true);  
+  }else{
+    $(".gasto_compartido").prop("checked", false);  
+  }
+}
+
 
 $('#fecha_desde').change(function () {
   var fecha_formateada = new Date($('#fecha_desde').val().split('/').reverse().join('-'))
@@ -327,9 +364,6 @@ $('#periodos').change(function () {
   calcular_renta()
 })
 
-$('#tasa_gastos_admin').change(function () {
-  calcular_tasa_gastos_admin()
-})
 
 function msg_informar_fechas () {
   bootbox.dialog({
@@ -362,11 +396,90 @@ function calcular_meses_renta () {
   }
 }
 
-function calcular_tasa_gastos_admin () {
-  var valor = (datos_calculo_renta.valor_inmuelble * $('#tasa_gastos_admin').val()) / 100
-  $('#gastos_administrativos').val(valor)
+
+
+function calcular_renta () {
+  console.log("entre");
+  datos_calculo_renta.meses = []
+  if (datos_calculo_renta.fecha_hasta !== '' &&
+    datos_calculo_renta.fecha_desde !== '' &&
+    datos_calculo_renta.periodo_incremento !== '' &&
+    datos_calculo_renta.tasa !== '' &&
+    datos_calculo_renta.monto_basico !== ''
+  ) {
+    var cantidad_incrementos = parseInt(datos_calculo_renta.meses_de_alquiler / datos_calculo_renta.periodo_incremento),
+      resto = datos_calculo_renta.meses_de_alquiler % datos_calculo_renta.periodo_incremento,
+      valor_tasa = 0,
+      valor_actualizado = parseFloat($('#monto_basico').val()),
+      num_mes = 1,
+      sumatoria = 0
+
+    for (var n = 1; n <= cantidad_incrementos; n++) {
+      datos_calculo_renta.valor_alquiler = valor_actualizado
+      if (n > 1) {
+        valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
+      }
+
+      for (var i = 0; i < datos_calculo_renta.periodo_incremento; i++) {
+        var mes = {
+          numero: num_mes++,
+          tasa_fija: 0,
+          tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa
+        }
+        valor_actualizado = mes.tasa_creciente
+        datos_calculo_renta.meses.push(mes)
+        sumatoria = sumatoria + valor_actualizado
+      }
+    }
+
+    if (resto > 0) {
+      nuevo_indice = datos_calculo_renta.meses_de_alquiler - (datos_calculo_renta.periodo_incremento * cantidad_incrementos)
+
+      datos_calculo_renta.valor_alquiler = valor_actualizado
+      valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
+
+      for (var i = 0; i < nuevo_indice; i++) {
+        var mes = {
+          numero: num_mes++,
+          tasa_fija: 0,
+          tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa
+        }
+        valor_actualizado = mes.tasa_creciente
+        datos_calculo_renta.meses.push(mes)
+        sumatoria = sumatoria + valor_actualizado
+      }
+    }
+    var tasa_fija = parseFloat(sumatoria) / datos_calculo_renta.meses_de_alquiler
+    $('.fila').remove()
+
+    var valor_creciente = 0
+
+    datos_calculo_renta.meses.forEach(function (item) {
+      item.tasa_fija = tasa_fija.toFixed(2)
+      item.tasa_creciente = parseFloat(item.tasa_creciente).toFixed(2)
+
+      if (valor_creciente !== item.tasa_creciente) {
+        valor_creciente = item.tasa_creciente
+        periodos_pagos.push({
+          inicio_periodo: item.numero,
+          fin_periodo: item.numero + datos_calculo_renta.periodo_incremento - 1,
+          monto_fijo: item.tasa_fija,
+          monto_incremental: item.tasa_creciente
+        })
+      }
+      console.log(periodos_pagos)
+      $('#tabla-meses > tbody').append('<tr class="fila"><td>' + item.numero + '</td><td>$' + item.tasa_fija + '</td><td>$' + item.tasa_creciente + '</td></tr>')
+    })
+
+    $('#info_valor_total').html('El valor total del alquiler asciende a <b>$' + parseFloat(sumatoria).toFixed(2) + '</b>')
+  }
 }
 
+
+
+
+
+/*
 function calcular_renta () {
   datos_calculo_renta.meses = []
   if (datos_calculo_renta.fecha_hasta !== '' &&
@@ -378,7 +491,7 @@ function calcular_renta () {
     var cantidad_incrementos = parseInt(datos_calculo_renta.meses_de_alquiler / datos_calculo_renta.periodo_incremento),
       resto = datos_calculo_renta.meses_de_alquiler % datos_calculo_renta.periodo_incremento,
       valor_tasa = 0,
-      valor_actualizado = $('#monto_basico').maskMoney('unmasked')[0],
+      valor_actualizado = $('#monto_basico').val(),
       num_mes = 1,
       sumatoria = 0
 
@@ -441,7 +554,7 @@ function calcular_renta () {
 
     $('#info_valor_total').html('El valor total del alquiler asciende a <b>$' + parseFloat(sumatoria).toFixed(2) + '</b>')
   }
-}
+}*/
 
 // Sección - Caractísticas 
 
