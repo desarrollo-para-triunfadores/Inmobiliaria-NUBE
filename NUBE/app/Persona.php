@@ -35,6 +35,10 @@ class Persona extends Model {
         return $this->hasOne('App\Propietario');
     }
 
+    public function tecnico() {
+        return $this->hasOne('App\Tecnico');
+    }
+
     public function garante() {
         return $this->hasOne('App\Garante');
     }

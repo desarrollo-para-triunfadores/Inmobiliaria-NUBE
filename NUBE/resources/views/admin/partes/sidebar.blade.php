@@ -32,7 +32,7 @@
             @else
                 <li  id="side-general-li"  class="treeview">
                     <a href="#">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
                         <span>Parámetros generales</span>
                         <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -239,9 +239,28 @@
                 </a>
             </li>
 
+        <!-- TECNICOS -->
+            <li id="li15">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/contabilidad/">
+                    <i class="fa fa-wrench">
+                        <div class="icon-bg bg-orange"></div>
+                    </i>
+                    <span class="menu-title">Personal Técnico</span>
+                </a>
+            </li>
+
+        <!--Peticiones de Servicio Técnico -->
+            <li id="li16">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/solicitudes_servicio/">
+                    <i class="fa fa-id-badge ">
+                        <div class="icon-bg bg-orange"></div>
+                    </i>
+                    <span class="menu-title">Solicitudes de Servicio</span>
+                </a>
+            </li>    
 
         <!--Backup de Datos -->
-            <li id="li14">
+            <li id="li17">
                 <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Backup de la información almacenada" onclick="backup()"  href="{{--  route('admin.backup.index') --}}">
                     <i class="fa fa-database">
                         <div class="icon-bg bg-orange"></div>

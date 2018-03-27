@@ -28,7 +28,7 @@ class CreateTablePersonas extends Migration
             $table->string('descripcion', 500)->nullable();
             $table->integer('localidad_id')->unsigned();
             $table->foreign('localidad_id')->references('id')->on('localidades')->onDelete('cascade');
-            $table->integer('pais_id')->unsigned();
+            $table->integer('pais_id')->unsigned()->nullable();
             $table->foreign('pais_id')->references('id')->on('paises')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

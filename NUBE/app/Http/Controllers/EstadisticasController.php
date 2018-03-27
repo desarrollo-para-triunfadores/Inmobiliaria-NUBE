@@ -89,7 +89,7 @@ class EstadisticasController extends Controller
                 }
                 */
                 $contrato = $inquilino->ultimo_contrato()/*contratos()->id()->last()*/;
-                dd($contrato);
+               // dd($contrato);
                 if($contrato->vigente()){
                     $liquidaciones= $contrato->liquidaciones;
                     //dd($contrato->id/*ultima_liquidacion()*/);

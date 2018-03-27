@@ -21,9 +21,8 @@
             </thead>
             <tbody>
             @foreach($liquidaciones as $liquidacion)
-                <tr>
-                        
-                            @if(is_null($liquidacion[0]->fecha_pago_propietario))
+                <tr>                        
+                    @if(is_null($liquidacion[0]->fecha_pago_propietario))
                         <td class="text-center text-bold">Pagada ✔️</td>
                     @else
                                 <td class="text-center text-bold">No pagada 🛑 </td>

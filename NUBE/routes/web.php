@@ -58,8 +58,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/ocultar_notificaciones', 'NotificacionesController@ocultar_notificaciones')->name('ocultar_notificaciones');
 
     //Oportunidades
-
     Route::resource('oportunidades', 'OportunidadesController');
+
+    #Tecnicos
+    Route::resource('tecnicos', 'TecnicosController');
+    #Solicitudes Servicio Técnico
+    Route::resource('solicitudes_servicio', 'SolicitudesServicioController');
 
   //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
 
