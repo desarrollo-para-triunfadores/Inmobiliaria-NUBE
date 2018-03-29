@@ -95,9 +95,9 @@ class LiquidacionMensual extends Model
         $conceptos_para_factura = [];
         foreach ($conceptos_liquidaciones as $valor) {
             $dato =[
-                "concepto" => $valor->serviciocontrato->servicio->nombre,
+                "concepto" => $valor->servicio->nombre,
                 "monto" => $valor->monto,
-                "concepto_compartido" => $valor->serviciocontrato->servicio->servicio_compartido,
+                "concepto_compartido" => $valor->servicio->servicio_compartido,
             ];
             array_push($conceptos_para_factura, $dato);           
         }

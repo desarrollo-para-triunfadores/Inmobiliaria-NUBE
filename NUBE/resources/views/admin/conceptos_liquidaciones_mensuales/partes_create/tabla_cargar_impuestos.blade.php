@@ -32,7 +32,7 @@
 			<tbody>
 			@foreach($servicios_contratos as $servicio_contrato)
 			
-			@if (count($servicio_contrato->periodos_validos() > 0))					
+			@if (count($servicio_contrato->periodos_validos()) > 0)					
 				<tr>
 					<td class="text-center text-bold">{{$servicio_contrato->contrato->inmueble->tipo->nombre}} en {{$servicio_contrato->contrato->inmueble->direccion}} ({{$servicio_contrato->contrato->inmueble->localidad->nombre}})</td>
 					<td class="text-center">{{$servicio_contrato->contrato->inquilino->persona->nombrecompleto}}</td>
@@ -48,9 +48,9 @@
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
 							@if ($servicio_contrato->contrato->sujeto_a_gastos_compartidos && $servicio_contrato->servicio->servicio_compartido)
-								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" onclick="cargar_monto_sugerido({{$servicio_contrato->id}}, {{$servicio_contrato->determinar_valor()}})" value="" placeholder="{{$servicio_contrato->determinar_valor()}}" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="0" class="form-control" onclick="cargar_monto_sugerido({{$servicio_contrato->id}}, {{$servicio_contrato->determinar_valor()}})" value="" placeholder="{{$servicio_contrato->determinar_valor()}}" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
 							@else
-								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="" class="form-control" value="" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
+								<input id="monto{{$servicio_contrato->id}}" type="number" steap="any" min="0" class="form-control" value="" onchange="carga_lineas({{$servicio_contrato->id}})" onkeyup="carga_lineas({{$servicio_contrato->id}})">
 							@endif
 						</div>
 					</td>

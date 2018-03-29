@@ -61,9 +61,9 @@ Contrato Detalle
                                 <div class="form-group">
                                     <label>Sujeto a gastos compartidos:</label>  
                                     @if ($contrato->sujeto_a_gastos_compartidos === 1)
-                                        <span class="form-control"><strong>No está sujeto</strong></span>
+                                        <span class="form-control"><strong>Sí está sujeto</strong></span>                                    
                                     @else
-                                        <span class="form-control"><strong>Sí está sujeto</strong></span>
+                                        <span class="form-control"><strong>No está sujeto</strong></span>
                                     @endif                      
                                 </div>
                             </div>                               

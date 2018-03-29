@@ -50,7 +50,7 @@
                             @if (isset($contrato))
                                 <input name="fecha_hasta" id="fecha_hasta" value="{{$contrato->fechahastaformateado}}" type="text" placeholder="campo requerido" class="form-control datepicker_hasta" required>
                             @else
-                            <input name="fecha_hasta" id="fecha_hasta"type="text" placeholder="campo requerido" class="form-contro datepicker_hasta" required>
+                                <input name="fecha_hasta" id="fecha_hasta" type="text" placeholder="campo requerido" class="form-control datepicker_hasta" required>  
                             @endif
                         </div>
                     </div>

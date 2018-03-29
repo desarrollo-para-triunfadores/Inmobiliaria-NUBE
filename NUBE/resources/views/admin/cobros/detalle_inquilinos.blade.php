@@ -29,7 +29,7 @@
                                         <li class="item">
                                                     <div class="product-img">
                                                         <span class="info-box-icon-modificado">                                                                    
-                                                            @if ($concepto->serviciocontrato->servicio->servicio_compartido)
+                                                            @if ($concepto->servicio->servicio_compartido)
                                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                                             @else
                                                                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -37,10 +37,10 @@
                                                         </span>
                                                     </div>
                                                     <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">{{$concepto->serviciocontrato->servicio->nombre}}
+                                                        <a href="javascript:void(0)" class="product-title">{{$concepto->servicio->nombre}}
                                                             <span class="label label-warning pull-right">$ {{number_format($concepto->monto, 2) }} </span>
                                                         </a>
-                                                        <span class="product-description">{{$concepto->serviciocontrato->servicio->descripcion}}</span>
+                                                        <span class="product-description">{{$concepto->servicio->descripcion}}</span>
                                                     </div>
                                                 </li>
                                     @endforeach                                                            
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-md-6">                                                               
                         <div class="info-box">
-                            <span class="info-box-icon bg-green"><i class="fa fa-building-o" aria-hidden="true"></i></span>            
+                            <span class="info-box-icon bg-purple"><i class="fa fa-building-o" aria-hidden="true"></i></span>            
                             <div class="info-box-content">
                                 <span class="info-box-text">Alquiler</span>
                                 <span class="info-box-number">Monto: ${{ number_format($liquidacion->alquiler , 2)}}</span>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="info-box">
-                            <span class="info-box-icon" style="background-color:#605ca8;"><i class="fa fa-money" style="color:#FFFFFF"></i></span>                                                                        
+                            <span class="info-box-icon bg-green" style="background-color:#605ca8;"><i class="fa fa-money" style="color:#FFFFFF"></i></span>                                                                        
                             <div class="info-box-content">
                                 <span class="info-box-text">Saldo a favor</span>
                                 <span class="info-box-number">Monto: ${{$saldo_cuenta}}</span>

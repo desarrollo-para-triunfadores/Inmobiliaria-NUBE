@@ -37,14 +37,10 @@ class PropietariosController extends Controller {
         $propietarios = Propietario::all();
         $paises = Pais::all();
         $localidades = Localidad::all();
-//        if ($propietarios->count() == 0) { // la funcion count te devuelve la cantidad de registros contenidos en la cadena
-//            return view('admin.propietarios.sinRegistros'); //se devuelve la vista para crear un registro
-//        } else {
-//            return view('admin.propietarios.main')->with('propietarios', $propietarios)
-//                                                ->with('inmuebles', $inmuebles); // se devuelven los registros
-//        }
+        $personas = Persona::all()->whereNotIn('id', $propietarios->pluck('id')->toArray());
         return view('admin.propietarios.main')
                         ->with('propietarios', $propietarios)
+                        ->with('personas', $personas)
                         ->with('paises', $paises)
                         ->with('localidades', $localidades); // se devuelven los registros
     }

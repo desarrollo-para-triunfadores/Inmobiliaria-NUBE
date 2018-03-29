@@ -267,7 +267,6 @@ function instanciar_cropie () {
       processData: false,
       contentType: false,
       success: function (data) {
-        console.log(data);
         bootbox.dialog({
           title: 'Registración exitosa',
           message: 'El edificio se ha registrado de manera exitosa.',

@@ -35,14 +35,10 @@ class InquilinosController extends Controller {
         $inmuebles = Inmueble::all();
         $paises = Pais::all();
         $localidades = Localidad::all();
-//        if ($inquilinos->count() == 0) { // la funcion count te devuelve la cantidad de registros contenidos en la cadena
-//            return view('admin.inquilinos.sinRegistros'); //se devuelve la vista para crear un registro
-//        } else {
-//            return view('admin.inquilinos.main')->with('inquilinos', $inquilinos)
-//                                                ->with('inmuebles', $inmuebles); // se devuelven los registros
-//        }
+        $personas = Persona::all()->whereNotIn('id', $inquilinos->pluck('id')->toArray());
         return view('admin.inquilinos.main')
                         ->with('inquilinos', $inquilinos)
+                        ->with('personas', $personas)
                         ->with('paises', $paises)
                         ->with('inmuebles', $inmuebles)
                         ->with('localidades', $localidades); // se devuelven los registros
