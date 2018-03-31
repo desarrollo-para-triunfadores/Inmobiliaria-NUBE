@@ -24,10 +24,6 @@ var etapas_instanciadas = {
   garante: false
 }
 
-var fotos = {
-  garante_nuevo: '',
-  inquilino_nuevo: ''
-}
 
 var monto_basico_sugerido = 0;
 
@@ -215,6 +211,13 @@ $('.datepicker').bootstrapMaterialDatePicker ({
   time: false 
 });
 
+
+
+var fotos = {
+  garante_nuevo: '',
+  inquilino_nuevo: ''
+}
+
 function instanciar_cropie (index) {
   switch (index) {
     case 1:
@@ -381,6 +384,7 @@ function msg_informar_fechas () {
 
 function calcular_meses_renta () {
   if (datos_calculo_renta.fecha_hasta !== '' && datos_calculo_renta.fecha_desde !== '') {
+    
     datos_calculo_renta.meses_de_alquiler = datos_calculo_renta.fecha_hasta.diff(datos_calculo_renta.fecha_desde, 'month')
 
     if (datos_calculo_renta.meses_de_alquiler < 1) {
@@ -399,41 +403,50 @@ function calcular_meses_renta () {
 
 
 function calcular_renta () {
-  console.log("entre");
-  datos_calculo_renta.meses = []
+  datos_calculo_renta.meses = [] //en esta variable quedará almacenada la información de montos para cada mes de alquiler del contrato
+  periodos_pagos = [] //en esta variable quedará almacenada la información de los periodos de incremento que compongan al contrato 
+  /**   
+   * Primero verificamos que todos los datos necesarios estén disponibles.
+   */
   if (datos_calculo_renta.fecha_hasta !== '' &&
     datos_calculo_renta.fecha_desde !== '' &&
     datos_calculo_renta.periodo_incremento !== '' &&
     datos_calculo_renta.tasa !== '' &&
     datos_calculo_renta.monto_basico !== ''
   ) {
-    var cantidad_incrementos = parseInt(datos_calculo_renta.meses_de_alquiler / datos_calculo_renta.periodo_incremento),
-      resto = datos_calculo_renta.meses_de_alquiler % datos_calculo_renta.periodo_incremento,
-      valor_tasa = 0,
-      valor_actualizado = parseFloat($('#monto_basico').val()),
-      num_mes = 1,
-      sumatoria = 0
 
-    for (var n = 1; n <= cantidad_incrementos; n++) {
-      datos_calculo_renta.valor_alquiler = valor_actualizado
-      if (n > 1) {
+    var cantidad_incrementos = parseInt(datos_calculo_renta.meses_de_alquiler / datos_calculo_renta.periodo_incremento), //indica la cantidad de veces que el valor del alquiler zufrirá de un incremento en su monto
+      resto = datos_calculo_renta.meses_de_alquiler % datos_calculo_renta.periodo_incremento, //indica la cantidad de meses que quedan por fuera los intervalos completos de incremento. Ejemplo: 27 meses de duración de contrato / 12 meses (periodo incremento)  = 2 periodos completos (cantidad de incrementos) + 3 meses (contenido de seta variable).
+      valor_tasa = 0, // en ella se guarda constantemente el incremento que debe sumarse al monto básico en cada periodo nuevo
+      valor_actualizado = parseFloat($('#monto_basico').val()), //variable que se usa para guardar temporalmente el valor del alquiler
+      num_mes = 1, //contador para los meses del alquiler
+      sumatoria = 0 //esta variable guarda el valor total del monto de alquiler para todo el tiempo que dure el contrato, se utiliza pra determinar el valor del monto fijo del alquiler
+
+    for (var n = 1; n <= cantidad_incrementos; n++) { // este bucle itera sobre la cantidad de incrementos que haya    
+      datos_calculo_renta.valor_alquiler = valor_actualizado 
+     
+      if (n > 1) {//después de que se crean los montos para el primer periodo (para el primer periodo la tasa debe ser 0) se calcula cuanto es el aumento que debe incorporarse
         valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
       }
 
-      for (var i = 0; i < datos_calculo_renta.periodo_incremento; i++) {
+      for (var i = 0; i < datos_calculo_renta.periodo_incremento; i++) { //este bucle itera sobre la cantidad de meses que componen a un periodo de incremento completo
         var mes = {
           numero: num_mes++,
-          tasa_fija: 0,
+          tasa_fija: 0,//la tasa fija se calcula y se setea al final del método porque en esta instancia aún no conocemos el monto total por alquiler para toda la vigencia del contrato
           tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa
         }
-        valor_actualizado = mes.tasa_creciente
+        valor_actualizado = mes.tasa_creciente //guardamos temporalmente el valor actual del alquiler a medida que se calculan los valores para cada mes
         datos_calculo_renta.meses.push(mes)
         sumatoria = sumatoria + valor_actualizado
       }
+
     }
 
-    if (resto > 0) {
-      nuevo_indice = datos_calculo_renta.meses_de_alquiler - (datos_calculo_renta.periodo_incremento * cantidad_incrementos)
+    /**
+     * Ahora incorporamos al arreglo de meses calculados los meses que no integran periodos completos 
+     */
+    if (resto > 0) { 
+      nuevo_indice = datos_calculo_renta.meses_de_alquiler - (datos_calculo_renta.periodo_incremento * cantidad_incrementos) //determinamos en que mes debemos arrancar nuevamente el cálculo
 
       datos_calculo_renta.valor_alquiler = valor_actualizado
       valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
@@ -441,120 +454,46 @@ function calcular_renta () {
       for (var i = 0; i < nuevo_indice; i++) {
         var mes = {
           numero: num_mes++,
-          tasa_fija: 0,
+          tasa_fija: 0, //la tasa fija se calcula y se setea al final del método porque en esta instancia aún no conocemos el monto total por alquiler para toda la vigencia del contrato
           tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa
         }
-        valor_actualizado = mes.tasa_creciente
+        valor_actualizado = mes.tasa_creciente //seteamos el valor actual del alquiler a medida que se calculan los valores para cada mes
         datos_calculo_renta.meses.push(mes)
         sumatoria = sumatoria + valor_actualizado
       }
     }
-    var tasa_fija = parseFloat(sumatoria) / datos_calculo_renta.meses_de_alquiler
-    $('.fila').remove()
+
+    var tasa_fija = parseFloat(sumatoria) / datos_calculo_renta.meses_de_alquiler //este es el monto que debe pagar cada mes si el alquiler 
+    $('.fila').remove()//limpiamos la tabla de la vista
 
     var valor_creciente = 0
 
-    datos_calculo_renta.meses.forEach(function (item) {
-      item.tasa_fija = tasa_fija.toFixed(2)
-      item.tasa_creciente = parseFloat(item.tasa_creciente).toFixed(2)
+    /**
+     * En esta instancia ya determinamos los montos para todos 
+     * los meses de alquiler. Solo nos resta setear el monto fijo para 
+     * todos los meses y determinar los montos, mes de inicio y finalización 
+     * de los periodos de incrementos. Esta es la información que se guarda en la BD
+     */   
+   
+     datos_calculo_renta.meses.forEach(function (item) { //por cada mes que disponemos en el arreglo vamos operando
+    
+      item.tasa_fija = tasa_fija.toFixed(2)//seteamos el valor a dos decimales
+      item.tasa_creciente = parseFloat(item.tasa_creciente).toFixed(2) //convertimos a decimal y seteamos a dos decimales para poder operar
 
-      if (valor_creciente !== item.tasa_creciente) {
-        valor_creciente = item.tasa_creciente
+      if (valor_creciente !== item.tasa_creciente) {//Cada vez que el valor creciente no coicida con el valor para la tasa creciente del mes quiere decir que entramos a un periodo nuevo y aca que registramos 
+        valor_creciente = item.tasa_creciente //actualizamos el valor creciente
         periodos_pagos.push({
           inicio_periodo: item.numero,
           fin_periodo: item.numero + datos_calculo_renta.periodo_incremento - 1,
           monto_fijo: item.tasa_fija,
           monto_incremental: item.tasa_creciente
-        })
+        })        
       }
-      console.log(periodos_pagos)
       $('#tabla-meses > tbody').append('<tr class="fila"><td>' + item.numero + '</td><td>$' + item.tasa_fija + '</td><td>$' + item.tasa_creciente + '</td></tr>')
     })
-
     $('#info_valor_total').html('El valor total del alquiler asciende a <b>$' + parseFloat(sumatoria).toFixed(2) + '</b>')
   }
 }
-
-
-
-
-
-/*
-function calcular_renta () {
-  datos_calculo_renta.meses = []
-  if (datos_calculo_renta.fecha_hasta !== '' &&
-    datos_calculo_renta.fecha_desde !== '' &&
-    datos_calculo_renta.periodo_incremento !== '' &&
-    datos_calculo_renta.tasa !== '' &&
-    datos_calculo_renta.monto_basico !== ''
-  ) {
-    var cantidad_incrementos = parseInt(datos_calculo_renta.meses_de_alquiler / datos_calculo_renta.periodo_incremento),
-      resto = datos_calculo_renta.meses_de_alquiler % datos_calculo_renta.periodo_incremento,
-      valor_tasa = 0,
-      valor_actualizado = $('#monto_basico').val(),
-      num_mes = 1,
-      sumatoria = 0
-
-    for (var n = 1; n <= cantidad_incrementos; n++) {
-      datos_calculo_renta.valor_alquiler = valor_actualizado;
-      if (n > 1) {
-        valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
-      }
-
-      for (var i = 0; i < datos_calculo_renta.periodo_incremento; i++) {
-        var mes = {
-          numero: num_mes++,
-          tasa_fija: 0,
-          tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa,
-        }
-        valor_actualizado = mes.tasa_creciente
-        datos_calculo_renta.meses.push(mes)
-        sumatoria = parseFloat(sumatoria) + valor_actualizado
-      }
-    }
-
-    if (resto > 0) {
-      nuevo_indice = datos_calculo_renta.meses_de_alquiler - (datos_calculo_renta.periodo_incremento * cantidad_incrementos)
-
-      datos_calculo_renta.valor_alquiler = valor_actualizado
-      valor_tasa = (datos_calculo_renta.valor_alquiler * datos_calculo_renta.tasa) / 100
-
-      for (var i = 0; i < nuevo_indice; i++) {
-        var mes = {
-          numero: num_mes++,
-          tasa_fija: 0,
-          tasa_creciente: datos_calculo_renta.valor_alquiler + valor_tasa
-        }
-        valor_actualizado = mes.tasa_creciente
-        datos_calculo_renta.meses.push(mes)
-        sumatoria = sumatoria + valor_actualizado
-      }
-    }
-    var tasa_fija = parseFloat(sumatoria) / datos_calculo_renta.meses_de_alquiler
-    $('.fila').remove()
-
-    var valor_creciente = 0
-
-    datos_calculo_renta.meses.forEach(function (item) {
-      item.tasa_fija = tasa_fija.toFixed(2)
-      item.tasa_creciente = parseFloat(item.tasa_creciente).toFixed(2)
-
-      if (valor_creciente !== item.tasa_creciente) {
-        valor_creciente = item.tasa_creciente
-        periodos_pagos.push({
-          inicio_periodo: item.numero,
-          fin_periodo: item.numero + datos_calculo_renta.periodo_incremento - 1,
-          monto_fijo: item.tasa_fija,
-          monto_incremental: item.tasa_creciente
-        })
-      }
-      console.log(periodos_pagos)
-      $('#tabla-meses > tbody').append('<tr class="fila"><td>' + item.numero + '</td><td>$' + item.tasa_fija + '</td><td>$' + item.tasa_creciente + '</td></tr>')
-    })
-
-    $('#info_valor_total').html('El valor total del alquiler asciende a <b>$' + parseFloat(sumatoria).toFixed(2) + '</b>')
-  }
-}*/
 
 // Sección - Caractísticas 
 

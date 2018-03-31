@@ -25,9 +25,9 @@ Inmuebles Registrados
         <br>
         <div class="row">
             <div class="col-md-12">         
-                <form id="form-create"  action="/admin/contratos" method="POST"  class="form-horizontal" enctype="multipart/form-data">
+                <form id="form"  action="/admin/contratos/{{$contrato->id}}" method="POST"  class="form-horizontal" enctype="multipart/form-data">
                     <input name="_method" type="hidden" value="PUT">
-                    <input id="token" type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input id="token" type="hidden" name="_token" value="{{csrf_token()}}">            
                     <div id="rootwizard">
                         <div class="box box-primary">
                             <div class="box-body">
@@ -116,19 +116,22 @@ Inmuebles Registrados
 
     $('#inmueble_id').val('{{$contrato->inmueble_id}}').trigger("change");
     $('#tipo_renta').val('{{$contrato->tipo_renta}}').trigger("change");      
-    $('#inquilino_id').val('{{$contrato->inquilino_id}}').trigger("change");
-    $('#garante_id').val('{{$contrato->garante_id}}').trigger("change");
+    $('#inquilino_id').val('{{$contrato->inquilino->persona->id}}').trigger("change");
+    $('#garante_id').val('{{$contrato->garante->persona->id}}').trigger("change");
    
-    datos_calculo_renta.fecha_desde = '{{$contrato->fecha_desde}}';
-    datos_calculo_renta.fecha_hasta = '{{$contrato->fecha_hasta}}';
+    datos_calculo_renta.fecha_desde = moment('{{$contrato->fecha_desde}}');
+    datos_calculo_renta.fecha_hasta = moment('{{$contrato->fecha_hasta}}');
     datos_calculo_renta.valor_alquiler = parseFloat('{{$contrato->monto_basico}}');            
     datos_calculo_renta.periodo_incremento = parseInt('{{$contrato->periodos}}');
     datos_calculo_renta.tasa = parseFloat('{{$contrato->incremento}}');
     
     calcular_meses_renta();
-    calcular_renta();
 
-
+    if('{{$contrato->sujeto_a_gastos_compartidos}}'==='1'){
+        $('#sujeto_a_gastos_compartidos').prop('checked', true);
+    }else{
+        $('#sujeto_a_gastos_compartidos').prop('checked', false);
+    }
 
 </script>
 @endsection

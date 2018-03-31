@@ -2,9 +2,12 @@ $("#side-inmueble-li").addClass("active");
 $("#side-inmueble-ul").addClass("menu-open");
 $("#side-ele-garantes").addClass("active");
 
+var imagen_cropie = { //Esta variable es necesaria porque en ella se guardan las imégenes resultantes de la interacción con cropie.js
+    create : "",
+    edit : ""
+};
 
 function completar_campos(garante) {
-    console.log(garante);
     $('#apellido').val(garante.persona.apellido);
     $('#dni').val(garante.persona.dni);
     $('#sexo').val(garante.persona.sexo);
@@ -60,6 +63,7 @@ function instaciar_filtros() {
         }
     });
 
+
 //Datatables | filtro individuales - búsqueda 
     table.columns().every(function () {
         var that = this;
@@ -108,16 +112,14 @@ $('.datepicker').bootstrapMaterialDatePicker ({
 //se instancia el plugin
 var basic_nuevo = $('#main-cropper_nuevo').croppie({
     enableExif: true,
-    viewport: {
-        width: 275,
-        height: 275,
-        type: 'circle'
-    },
-    boundary: {
-        width: 275,
-        height: 275
+    viewport: {width: 275, height: 275, type: 'circle'},
+    boundary: {width: 275, height: 275},
+    update: function (data) {
+      basic_nuevo.croppie('result', 'blob').then(function (html) {
+        imagen_cropie.create = html
+      })
     }
-});
+})
 
 //carga imagen al plugin
 function readFile(input) {
@@ -152,14 +154,12 @@ $('.actionUpload-nuevo input').on('change', function () {
 //se instancia el plugin
 var basic_update = $('#main-cropper_update').croppie({
     enableExif: true,
-    viewport: {
-        width: 275,
-        height: 275,
-        type: 'circle'
-    },
-    boundary: {
-        width: 275,
-        height: 275
+    viewport: {width: 275, height: 275, type: 'circle'},
+    boundary: {width: 275, height: 275},
+    update: function (data) {
+      basic_update.croppie('result', 'blob').then(function (html) {
+        imagen_cropie.edit = html
+      })
     }
 });
 
@@ -220,111 +220,25 @@ function mandar(tipo_form) { //tipo_form puede ser create o update
     var url = form.attr("action");
     var token = $("#token-" + tipo_form).val();
     var formData = new FormData(document.getElementById("form-" + tipo_form));
+    
+    if ((tipo_form === 'create')&&(imagen_cropie.create !== '')) {
+        formData.append('imagen', imagen_cropie.create)
+    } else if (imagen_cropie.edit !== ''){
+        formData.append('imagen', imagen_cropie.edit)
+    } 
 
+    $.ajax(url, {
+        headers: {"X-CSRF-TOKEN": token},
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            window.location.href = redireccion;
+        },
+        error: function () {
+            console.log('Upload error');
+        }
+    });
 
-    if (tipo_form === 'create') {
-        if (basic_nuevo_cam === "") {
-            if ($('#imagen-nuevo').val() === '') {
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            } else {
-                basic_nuevo.croppie('result', 'blob').then(function (html) {
-                    formData.append('imagen', html);
-                    $.ajax(url, {
-                        headers: {"X-CSRF-TOKEN": token},
-                        method: "POST",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
-                            window.location.href = redireccion;
-                        },
-                        error: function () {
-                            console.log('Upload error');
-                        }
-                    });
-                });
-            }
-        } else {
-            basic_nuevo_cam.croppie('result', 'blob').then(function (html) {
-                formData.append('imagen', html);
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            });
-        }
-    } else {
-        if (basic_update_cam === "") {
-            if ($('#imagen-update').val() === '') {
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            } else {
-                basic_update.croppie('result', 'blob').then(function (html) {
-                    formData.append('imagen', html);
-                    $.ajax(url, {
-                        headers: {"X-CSRF-TOKEN": token},
-                        method: "POST",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
-                            window.location.href = redireccion;
-                        },
-                        error: function () {
-                            console.log('Upload error');
-                        }
-                    });
-                });
-            }
-        } else {
-            basic_update_cam.croppie('result', 'blob').then(function (html) {
-                formData.append('imagen', html);
-                $.ajax(url, {
-                    headers: {"X-CSRF-TOKEN": token},
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        window.location.href = redireccion;
-                    },
-                    error: function () {
-                        console.log('Upload error');
-                    }
-                });
-            });
-        }
-    }
 }

@@ -7,7 +7,7 @@
                 <select style="width: 100%"  name="garante_id" id="garante_id" class="select2 form-control" required>
                     <option></option>
                     @foreach($garantes as $garante)
-                        <option value="{{$garante->id}}">{{$garante->persona->NombreCompleto}} | DNI: {{$garante->persona->dni}}</option>
+                        <option value="{{$garante->id}}">{{$garante->NombreCompleto}} | DNI: {{$garante->dni}}</option>
                     @endforeach
                 </select>
                 <small class="form-text text-muted"><strong>Información:</strong> si el garante aún no fue registrado puede hacerlo tildando la casilla: <b>Dar de alta a un garante</b> para habilitar el ingreso de datos para el nuevo garante.</small>
@@ -25,7 +25,7 @@
     </div>  
 </div>
 <br>
-<div id="panel_garante_nuevo" style="display: none;" class="row animated fadeIn">
+<div id="panel_persona_nueva" style="display: none;" class="row animated fadeIn">
     <div class="col-md-7">
         <hr/>  
         <h3>Información general</h3>

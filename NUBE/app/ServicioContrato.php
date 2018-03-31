@@ -77,7 +77,8 @@ class ServicioContrato extends Model
         }
 
         $periodos_liquidaciones_claves = DB::table('conceptos_liquidaciones_mensuales')
-        ->where('serviciocontrato_id', $this['attributes']['id'])
+        ->where('contrato_id', $this['attributes']['contrato_id'])
+        ->where('servicio_id', $this['attributes']['servicio_id'])
         ->pluck('periodo')
         ->toArray(); //obtenemos un array con todos los periodos para el servicio
         
