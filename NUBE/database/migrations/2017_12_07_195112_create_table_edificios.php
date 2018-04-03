@@ -20,7 +20,7 @@ class CreateTableEdificios extends Migration
             $table->string('longitud')->nullable();
             $table->string('latitud')->nullable();
             $table->boolean('administrado_por_sistema')->nullable();
-            $table->string('foto_perfil')->nullable();
+            $table->string('imagen')->nullable();
             $table->boolean('cochera')->nullable();
             $table->integer('cant_ascensores')->nullable();
             $table->integer('cant_deptos')->nullable();

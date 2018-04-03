@@ -204,8 +204,15 @@ $(".my-colorpicker2").colorpicker({
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-<!-- Mascara para manejo de dinero (MaskMoney) -->
+<!-- Máscara para manejo de dinero (MaskMoney) -->
 <script src="{{ asset('plantillas/ADMINLTE/maskmoney/src/jquery.maskMoney.js') }}" type="text/javascript"></script>
 
-
+<!-- Directorios imágenes-->
+<script>
+    var url_imagenes_usuarios = "{{ asset('imagenes/usuarios/') }}/",
+        url_imagenes_personas = "{{ asset('imagenes/personas/') }}/", 
+        url_imagenes_inmuebles = "{{ asset('imagenes/inmuebles/') }}/",
+        url_imagenes_proyectos = "{{ asset('imagenes/proyectos/') }}/",
+        url_imagenes_edificios = "{{ asset('imagenes/edificios/') }}/";
+</script>
 

@@ -28,12 +28,8 @@ Propietarios registrados
                     <div class="box-body ">                            
                         @include('admin.partes.msj_acciones')
                         <div class="row">
-                            <div class="col-lg-4">
-                                @if ($propietario->persona->foto_perfil === "sin imagen")                                                                                                                                    
-                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/sin-logo.png') }}" alt="User profile picture">                                                               
-                                @else
-                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/' . $propietario->persona->foto_perfil) }} " alt="User profile picture">                                
-                                @endif
+                            <div class="col-lg-4">                             
+                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/' . $propietario->persona->foto_perfil) }} " alt="User profile picture">                                                              
                             </div>    
 
                             <div class="col-md-4">
@@ -45,7 +41,7 @@ Propietarios registrados
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Fecha de nacimiento:</label>
-                                    <span class="form-control">{{$propietario->persona->fecha_nac}}</span>                           
+                                    <span class="form-control">{{$propietario->persona->fechanacformateado}}</span>                           
                                 </div>
                             </div> 
                             <div class="col-md-4">
@@ -127,11 +123,11 @@ Propietarios registrados
     </section>
 </div>
 @include('admin.propietarios.formulario.create')
-@include('admin.propietarios.formulario.editar')
+@include('admin.propietarios.formulario.update')
 @include('admin.propietarios.formulario.confirmar')
 
 @endsection
 @section('script') 
-<script src="{{ asset('js/propietario.js') }}"></script>
-<script src="{{ asset('js/camara.js') }}"></script>
+    <script src="{{ asset('js/propietario.js') }}"></script>
+    <script src="{{ asset('js/imagen_croppie.js') }}"></script>
 @endsection

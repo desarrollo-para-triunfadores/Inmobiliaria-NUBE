@@ -6,6 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -32,6 +35,13 @@ class User extends Authenticatable
     public function cantidad_notificaciones_nuevas() {
         return $this->notificaciones()->where("tipo", "<>", true)->where("estado_leido", "<>", true)->count();
     }
+
+    public function obtener_rol(){
+        $id_rol = DB::table('model_has_roles')->where('model_id', $this->id)->pluck('role_id')->first();
+        $nombre_rol = DB::table('roles')->where('id', $id_rol)->pluck('name')->first();
+        return $nombre_rol;
+    }
+
 
 
     /**

@@ -23,6 +23,3 @@
         </div>
     </div>
 </div>
-
-
-<button type="button" id="boton-modal-borrar" class="btn btn-primary btn-lg hide" data-toggle="modal" data-target="#modal-borrar"></button>

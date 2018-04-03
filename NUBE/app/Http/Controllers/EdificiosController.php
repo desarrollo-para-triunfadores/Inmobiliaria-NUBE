@@ -63,17 +63,17 @@ class EdificiosController extends Controller
     }
 
     public function store(Request $request)
-    {
-        
-        $edificio = new edificio($request->all());
-        $nombreImagen = 'sin imagen';
+    {                
+        $nombreImagen = "sin_imagen.png";
+
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
             $nombreImagen = 'edificio_' . time() .'.png';
             Storage::disk('edificios')->put($nombreImagen, \File::get($file));
         }
 
-        $edificio->foto_perfil = $nombreImagen;
+        $edificio = new edificio($request->all());
+        $edificio->imagen = $nombreImagen;
         $edificio->costo_sueldos_personal = 0;
         $edificio->cant_ascensores = 0;
         $edificio->valor_ascensores = 0;
@@ -101,6 +101,7 @@ class EdificiosController extends Controller
         }
 
         $edificio->save();
+        Session::flash('message', '¡Se ha registrado a un nuevo edificio con éxito!');
         return response()->json('ok');
     }
 
@@ -120,7 +121,7 @@ class EdificiosController extends Controller
         $edificio = Edificio::find($id);
         $localidades = Localidad::all();
         $barrios = Barrio::all();
-        return view('admin.edificios.formulario.edit')
+        return view('admin.edificios.formulario.update')
             ->with('edificio', $edificio)
             ->with('barrios', $barrios)
             ->with('localidades', $localidades);
@@ -131,16 +132,19 @@ class EdificiosController extends Controller
     public function update(Request $request, $id)
     {
         $edificio = edificio::find($id);
-        $edificio->fill($request->all());
+        $nombreImagen = "sin_imagen.png";
+
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
             $nombreImagen = 'edificio_' . time() .'.png';
-            if (Storage::disk('edificios')->exists($edificio->foto_perfil)) {
-                Storage::disk('edificios')->delete($edificio->foto_perfil);   // Borramos la imagen anterior.      
+            if ((Storage::disk('edificios')->exists($edificio->imagen)) && ($edificio->imagen !== "sin_imagen.png")) {
+                Storage::disk('edificios')->delete($edificio->imagen);   // Borramos la imagen anterior.      
             } 
             Storage::disk('edificios')->put($nombreImagen, \File::get($file));
         }
-        $edificio->foto_perfil = $nombreImagen;
+
+        $edificio->fill($request->all());
+        $edificio->imagen = $nombreImagen;
         $edificio->costo_sueldos_personal = 0;
         $edificio->cant_ascensores = 0;
         $edificio->valor_ascensores = 0;
@@ -175,8 +179,8 @@ class EdificiosController extends Controller
     public function destroy($id)
     {
         $edificio = edificio::find($id);
-        if (Storage::disk('edificios')->exists($edificio->foto_perfil)) {
-            Storage::disk('edificios')->delete($edificio->foto_perfil);   // Borramos la imagen anterior.      
+        if (Storage::disk('edificios')->exists($edificio->imagen)) {
+            Storage::disk('edificios')->delete($edificio->imagen);   // Borramos la imagen anterior.      
         } 
         $edificio->delete();
         Session::flash('message', 'El edificio ha sido eliminado del sistema');

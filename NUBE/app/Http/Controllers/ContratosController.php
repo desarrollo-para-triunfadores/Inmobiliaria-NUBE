@@ -99,7 +99,6 @@ class ContratosController extends Controller
         } else {
             $persona = Persona::find($request->inquilino_id);
 
-
             if (isset($persona->inquilino->id)) {
                 $contrato->inquilino_id = $persona->inquilino->id;
             } else {
@@ -217,6 +216,7 @@ class ContratosController extends Controller
                 $oportunidad->save();
             }*/
         /*---------------------FIN OPORTUNIDADES------------------*/
+        Session::flash('message', '¡Se ha registrado a un nuevo contrato con éxito!');
         return response()->json('ok');
     }
 
@@ -247,7 +247,7 @@ class ContratosController extends Controller
         $localidades = Localidad::all();
         $servicios = Servicio::all();
 
-        return view('admin.contratos.formulario.edit')
+        return view('admin.contratos.formulario.update')
             ->with('contrato', $contrato)
             ->with('paises', $paises)
             ->with('localidades', $localidades)
@@ -261,43 +261,37 @@ class ContratosController extends Controller
     public function update(Request $request, $id)
     {
 
-
-
-
         $contrato = Contrato::find($id);
         $contrato->fill($request->all());
 
+        /*---------------------INICIO DATOS INQUILINO-------------------*/
+        if (is_null($request->inquilino_id)) {     //*si no se recibe un inquilino, crear uno
 
+            $nombreImagen = 'sin imagen';
+            if ($request->file('imagen')) {
+                $file = $request->file('imagen');
+                $nombreImagen = 'persona_' . time() . '.png';
+                Storage::disk('personas')->put($nombreImagen, \File::get($file));
+            }
 
-        
-          /*---------------------INICIO DATOS INQUILINO-------------------*/
-          if (is_null($request->inquilino_id)) {     //*si no se recibe un inquilino, crear uno
-  
-              $nombreImagen = 'sin imagen';
-              if ($request->file('imagen')) {
-                  $file = $request->file('imagen');
-                  $nombreImagen = 'persona_' . time() . '.png';
-                  Storage::disk('personas')->put($nombreImagen, \File::get($file));
-              }
-  
-              $persona = new Persona($request->all());
-              $persona->foto_perfil = $nombreImagen;
-              $persona->save();
-              $inquilino = new Inquilino();
-              $inquilino->persona_id = $persona->id;
-              $inquilino->save();
-              $contrato->inquilino_id = $inquilino->id;
-          } else {
-              $persona = Persona::find($request->inquilino_id);
-              if (is_null($persona->inquilino())) {
-                  $inquilino = new Inquilino();
-                  $inquilino->persona_id = $persona->id;
-                  $inquilino->save();
-                  $contrato->inquilino_id = $inquilino->id;
-              } else {
-                  $contrato->inquilino_id = $persona->inquilino->id;
-              }
-          }  
+            $persona = new Persona($request->all());
+            $persona->foto_perfil = $nombreImagen;
+            $persona->save();
+            $inquilino = new Inquilino();
+            $inquilino->persona_id = $persona->id;
+            $inquilino->save();
+            $contrato->inquilino_id = $inquilino->id;
+        } else {
+            $persona = Persona::find($request->inquilino_id);
+            if (is_null($persona->inquilino())) {
+                $inquilino = new Inquilino();
+                $inquilino->persona_id = $persona->id;
+                $inquilino->save();
+                $contrato->inquilino_id = $inquilino->id;
+            } else {
+                $contrato->inquilino_id = $persona->inquilino->id;
+            }
+        }  
           /*---------------------FIN DATOS INQUILINO-------------------*/    
           /*---------------------INICIO DATOS GARANTE-------------------*/
           if (is_null($request->garante_id)) {     //*si no se recibe una persona asignada como garante, crear una
@@ -383,7 +377,8 @@ class ContratosController extends Controller
           $inmueble->save();
 
           /*---------------------FIN DATOS INMUEBLE-------------------*/
-
+          
+          Session::flash('message', 'Se ha actualizado la información del contrato.');
           return response()->json('ok');
     }
 

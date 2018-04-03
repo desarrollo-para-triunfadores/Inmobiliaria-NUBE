@@ -15,7 +15,7 @@ class EdificiosTableSeeder extends Seeder
             'nombre' => 'Modena',
             'direccion'=> 'Entre Ríos 142',
             'cochera'=> true,
-            'foto_perfil'=> 'sin imagen',
+            'imagen'=> 'sin_imagen.png',
             'longitud' => '-27.4605598',
             'latitud' => '-58.9838905',
             'cant_ascensores'=> '2',
@@ -37,7 +37,7 @@ class EdificiosTableSeeder extends Seeder
         DB::table('edificios')->insert([
             'nombre' => 'Condominio del Este',
             'direccion'=> 'Monteagudo 695',
-            'foto_perfil'=> 'sin imagen',
+            'imagen'=> 'sin_imagen.png',
             'longitud' => '-27.4605598',
             'latitud' => '-58.9838905',
             'cochera'=> true,
@@ -61,7 +61,7 @@ class EdificiosTableSeeder extends Seeder
         DB::table('edificios')->insert([
             'nombre' => 'Los Robles',
             'direccion'=> 'Av. Ávalos y Entre Rios',
-            'foto_perfil'=> 'sin imagen',
+            'imagen'=> 'sin_imagen.png',
             'longitud' => '-27.4605598',
             'latitud' => '-58.9838905',
             'cochera'=> true,
@@ -85,7 +85,7 @@ class EdificiosTableSeeder extends Seeder
         DB::table('edificios')->insert([
             'nombre' => 'Torres Sarmiento',
             'direccion'=> 'Juan D. Perón al 1400',
-            'foto_perfil'=> 'sin imagen',
+            'imagen'=> 'sin_imagen.png',
             'longitud' => '-27.4605598',
             'latitud' => '-58.9838905',
             'cochera'=> true,
@@ -107,7 +107,7 @@ class EdificiosTableSeeder extends Seeder
         DB::table('edificios')->insert([
             'nombre' => 'Torre Vista',
             'direccion'=> 'Salta 289',
-            'foto_perfil'=> 'sin imagen',
+            'imagen'=> 'sin_imagen.png',
             'longitud' => '-27.4605598',
             'latitud' => '-58.9838905',
             'cochera'=> true,
@@ -130,7 +130,7 @@ class EdificiosTableSeeder extends Seeder
         DB::table('edificios')->insert([
             'nombre' => 'Torre Kuszniruk',
             'direccion'=> 'Corrientes 2247',
-            'foto_perfil'=> 'sin imagen',
+            'imagen'=> 'sin_imagen.png',
             'longitud' => '-27.4605598',
             'latitud' => '-58.9838905',
             'cochera'=> false,

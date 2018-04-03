@@ -41,23 +41,10 @@
                     <div class="form-group">
                         <label for="formGroupExampleInput">Nombre completo:</label>
                         <input  name="name" type="text" maxlength="50" class="form-control" placeholder="campo requerido" required>
-                    </div>                        
-                    <div class="form-group">
-                        <label>Subir imagen de perfil:</label>
-                        <div id="main-cropper-imagen-nuevo" class="hide"></div>
-                        <a class="button actionUpload-nuevo">                   
-                            <input type="file" id="imagen-nuevo" value="Escoja una imagen" accept="image/*">
-                        </a>                       
-                        <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
-                    </div> 
-                    <div class="form-group">
-                        <label for="exampleInputFile">Tomar imagen de perfil desde la cámara:</label><br>
-                        <div id="contenido_foto_nuevo"></div>       
-                        <button id="start_nuevo"><i class="fa fa-camera" aria-hidden="true"></i>&nbsp; Iniciar cámara</button>   
-                        <video id="video_nuevo" width="565" height="360" autoplay="true" class="hide"></video>
-                        <canvas id="canvas_nuevo" name="imagen2" type="file" width="1280" height="720" class="hide"></canvas>  
-                        <button id="capture_nuevo" class="hide"> <i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;Capturar imágen</button>
-                    </div>
+                    </div>                                            
+                    
+                    @include('admin.usuarios.formulario.imagen_create')
+                    
                     <button id="boton_submit_crear" type="submit" class="btn btn-primary hide"></button>
                 </form>
                 <br>      

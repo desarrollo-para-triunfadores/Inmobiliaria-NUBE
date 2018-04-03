@@ -25,7 +25,7 @@ class Edificio extends Model
         'longitud',
         'latitud',
         'administrado_por_sistema', //esta variable puede indica si el edificio es administrado en su totalidad por el sistema
-        'foto_perfil',
+        'imagen',
         'fecha_habilitacion',
         'descripcion'
     ];

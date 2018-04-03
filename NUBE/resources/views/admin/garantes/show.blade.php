@@ -29,11 +29,7 @@ Garantes registrados
                         @include('admin.partes.msj_acciones')
                         <div class="row">
                             <div class="col-lg-4">
-                                @if ($garante->persona->foto_perfil === "sin imagen")                                                                                                                                    
-                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/sin-logo.png') }}" alt="User profile picture">                                                               
-                                @else
-                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/' . $garante->persona->foto_perfil) }} " alt="User profile picture">                                
-                                @endif
+                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/' . $garante->persona->foto_perfil) }} " alt="User profile picture">                                                           
                             </div>    
 
                             <div class="col-md-4">
@@ -45,7 +41,7 @@ Garantes registrados
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Fecha de nacimiento:</label>
-                                    <span class="form-control">{{$garante->persona->fecha_nac}}</span>                           
+                                    <span class="form-control">{{$garante->persona->fechanacformateado}}</span>                           
                                 </div>
                             </div> 
                             <div class="col-md-4">
@@ -127,11 +123,11 @@ Garantes registrados
     </section>
 </div>
 @include('admin.garantes.formulario.create')
-@include('admin.garantes.formulario.editar')
+@include('admin.garantes.formulario.update')
 @include('admin.garantes.formulario.confirmar')
 
 @endsection
 @section('script') 
-<script src="{{ asset('js/garante.js') }}"></script>
-<script src="{{ asset('js/camara.js') }}"></script>
+    <script src="{{ asset('js/garante.js') }}"></script>
+    <script src="{{ asset('js/imagen_croppie.js') }}"></script>
 @endsection

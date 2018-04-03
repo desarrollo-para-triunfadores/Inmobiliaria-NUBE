@@ -52,23 +52,23 @@ Inmuebles Registrados
                             <div class="box-body ">                            
                                 <div class="tab-content">
                                     <div class="tab-pane" id="tab1">
-                                        @include('admin.contratos.partes_form.datos_basicos')
+                                        @include('admin.contratos.formulario.secciones_wizard.datos_basicos')
                                     </div>
 
                                     <div class="tab-pane" id="tab2">
-                                        @include('admin.contratos.partes_form.inquilino')
+                                        @include('admin.contratos.formulario.secciones_wizard.inquilino')
                                     </div>
 
                                     <div class="tab-pane" id="tab3">
-                                        @include('admin.contratos.partes_form.garante')
+                                        @include('admin.contratos.formulario.secciones_wizard.garante')
                                     </div> 
 
                                     <div class="tab-pane" id="tab4">
-                                        @include('admin.contratos.partes_form.servicios')
+                                        @include('admin.contratos.formulario.secciones_wizard.servicios')
                                     </div>      
 
                                     <div class="tab-pane" id="tab5">
-                                        @include('admin.contratos.partes_form.confirmacion')
+                                        @include('admin.contratos.formulario.secciones_wizard.confirmacion')
                                     </div>                                    
                                     <ul class="pager wizard">
                                         <li class="previous">
@@ -105,8 +105,6 @@ Inmuebles Registrados
 @section('script') 
 <!-- Mascara para manejo de dinero (MaskMoney) -->
 <script src="{{ asset('plantillas/ADMINLTE/maskmoney/src/jquery.maskMoney.js') }}" type="text/javascript"></script>
-
-<script src="http://momentjs.com/downloads/moment.min.js"></script>
-<script src="{{ asset('js/camara.js') }}"></script>
+<script src="{{ asset('js/contrato_croppie.js') }}"></script>
 <script src="{{ asset('js/contrato.js') }}"></script>
 @endsection

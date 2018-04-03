@@ -79,7 +79,7 @@ Usuarios registrados
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="description-block text-center">                                       
-                                        <a onclick="completar_campos({{$usuario}})" title="Editar este registro" class="btn btn-social-icon btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                                        <a onclick="completar_campos({{$usuario}}, '{{$usuario->obtener_rol()}}')" title="Editar este registro" class="btn btn-social-icon btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
                                         <a onclick="abrir_modal_borrar({{$usuario->id}})" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger"><i class="fa fa-trash"></i></a>                                  
                                     </div>
                                 </div>
@@ -91,24 +91,14 @@ Usuarios registrados
             </div>
         </div>                             
     </section>
-
-
-
-
 </div>
 
 @include('admin.usuarios.formulario.create')
-@include('admin.usuarios.formulario.editar')
+@include('admin.usuarios.formulario.update')
 @include('admin.usuarios.formulario.confirmar')
-
-
 @endsection
+
 @section('script') 
-
-<script>
-    var imagen_user = 'imagenes/usuarios/{{ Auth::user()->imagen}}';
-</script>
-
-<script src="{{ asset('js/usuarios.js') }}"></script>
-<script src="{{ asset('js/camara.js') }}"></script>
+    <script src="{{ asset('js/usuarios.js') }}"></script>
+    <script src="{{ asset('js/imagen_croppie.js') }}"></script>
 @endsection

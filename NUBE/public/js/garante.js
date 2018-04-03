@@ -2,16 +2,13 @@ $("#side-inmueble-li").addClass("active");
 $("#side-inmueble-ul").addClass("menu-open");
 $("#side-ele-garantes").addClass("active");
 
-var imagen_cropie = { //Esta variable es necesaria porque en ella se guardan las imégenes resultantes de la interacción con cropie.js
-    create : "",
-    edit : ""
-};
 
-function completar_campos(garante) {
+function completar_campos(garante) { // este método carga los datos de un registro en el formulario de actualización
     $('#apellido').val(garante.persona.apellido);
     $('#dni').val(garante.persona.dni);
     $('#sexo').val(garante.persona.sexo);
-    $('#fecha_nac').val(garante.persona.fecha_nac);
+    $('#fecha_nac').val("");
+    $('.datepicker').bootstrapMaterialDatePicker ('setDate', moment(garante.persona.fecha_nac));
     $('#telefono').val(garante.persona.telefono);
     $('#telefono_contacto').val(garante.persona.telefono_contacto);
     $('#email').val(garante.persona.email);
@@ -20,14 +17,23 @@ function completar_campos(garante) {
     $('#nombre').val(garante.persona.nombre);
     $('#pais_id').val(garante.persona.pais_id).trigger("change");
     $('#form-update').attr('action', '/admin/garantes/' + garante.id);
-    $('#boton-modal-update').click();
+    $('#modal-update').modal();
+    $("#modal-update").on('shown.bs.modal', function () {
+       
+        /**
+         * El método "instanciar_croppie_update" se encuentra en el archivo de 
+         * javascript: imagen_croppie.js de la carpeta public/js/.
+         * La variable url_imagenes_personas se encuentra definida en partes/scripts/
+         */
+        
+        instanciar_croppie_update(url_imagenes_personas + garante.persona.foto_perfil);
+    });  
 }
 
-function abrir_modal_borrar(id) {
+function abrir_modal_borrar(id) {  // este método carga los datos de un registro en el formulario de confirmación de eliminación
     $('#form-borrar').attr('action', '/admin/garantes/' + id);
     $('#boton-modal-borrar').click();
 }
-
 
 
 //Datatable - instaciación del plugin
@@ -50,30 +56,26 @@ var table = $('#example').DataTable({
 });
 
 
-instaciar_filtros();
 
-function instaciar_filtros() {
-    //Datatables | filtro individuales - instanciación de los filtros
-    $('#example tfoot th').each(function () {
-        var title = $(this).text();
-        if (title !== "") {
-            if (title !== 'Acciones') { //ignoramos la columna de los botones
-                $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />');
-            }
+//Datatables | filtro individuales - instanciación de los filtros
+$('#example tfoot th').each(function () {
+    var title = $(this).text();
+    if (title !== "") {
+        if (title !== 'Acciones') { //ignoramos la columna de los botones
+            $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />');
         }
-    });
-
+    }
+});
 
 //Datatables | filtro individuales - búsqueda 
-    table.columns().every(function () {
-        var that = this;
-        $('input', this.footer()).on('keyup change', function () {
-            if (that.search() !== this.value) {
-                that.search(this.value).draw();
-            }
-        });
+table.columns().every(function () {
+    var that = this;
+    $('input', this.footer()).on('keyup change', function () {
+        if (that.search() !== this.value) {
+            that.search(this.value).draw();
+        }
     });
-}
+});
 
 //Datatables | ocultar/visualizar columnas dinámicamente
 $('a.toggle-vis').on('click', function (e) {
@@ -107,89 +109,6 @@ $('.datepicker').bootstrapMaterialDatePicker ({
 });
 
 
-//Croppie.js | create
-
-//se instancia el plugin
-var basic_nuevo = $('#main-cropper_nuevo').croppie({
-    enableExif: true,
-    viewport: {width: 275, height: 275, type: 'circle'},
-    boundary: {width: 275, height: 275},
-    update: function (data) {
-      basic_nuevo.croppie('result', 'blob').then(function (html) {
-        imagen_cropie.create = html
-      })
-    }
-})
-
-//carga imagen al plugin
-function readFile(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#main-cropper_nuevo').croppie('bind', {
-                url: e.target.result
-            });
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-//evento sobre el botón subir
-$('.actionUpload-nuevo input').on('change', function () {
-    $('#main-cropper_nuevo').removeClass('hide');
-    if (MediaStream_nuevo !== "") {
-        MediaStream_nuevo.stop();
-    }
-    $("#video_nuevo").addClass("hide");
-    $("#capture_nuevo").addClass("hide");
-    $("#start_nuevo").removeClass("hide");
-    $("#contenido_foto_nuevo").addClass("hide");
-    readFile(this);
-});
-
-
-
-//Croppie.js | update
-
-//se instancia el plugin
-var basic_update = $('#main-cropper_update').croppie({
-    enableExif: true,
-    viewport: {width: 275, height: 275, type: 'circle'},
-    boundary: {width: 275, height: 275},
-    update: function (data) {
-      basic_update.croppie('result', 'blob').then(function (html) {
-        imagen_cropie.edit = html
-      })
-    }
-});
-
-//carga imagen al plugin
-function readFile2(input) {
-    if (input.files && input.files[0]) {
-        var reader2 = new FileReader();
-        reader2.onload = function (e) {
-            $('#main-cropper_update').croppie('bind', {
-                url: e.target.result
-            });
-        };
-        reader2.readAsDataURL(input.files[0]);
-    }
-}
-
-//evento sobre el botón subir
-$('.actionUpload-update input').on('change', function () {
-    $('#main-cropper_update').removeClass('hide');
-    if (MediaStream_update !== "") {
-        MediaStream_update.stop();
-    }
-    $("#video_update").addClass("hide");
-    $("#capture_update").addClass("hide");
-    $("#start_update").removeClass("hide");
-    $("#contenido_foto_update").addClass("hide");
-    readFile2(this);
-});
-
-
 function mostrar_panel_persona () {
     if ($('#panel_persona_nueva').is(':hidden')) {
         $('#panel_persona_nueva').show()
@@ -204,7 +123,6 @@ function mostrar_panel_persona () {
 
 
 // Enviar datos.
-
 function mandar(tipo_form) { //tipo_form puede ser create o update
 
     var redireccion = "/admin/garantes/";
@@ -223,8 +141,8 @@ function mandar(tipo_form) { //tipo_form puede ser create o update
     
     if ((tipo_form === 'create')&&(imagen_cropie.create !== '')) {
         formData.append('imagen', imagen_cropie.create)
-    } else if (imagen_cropie.edit !== ''){
-        formData.append('imagen', imagen_cropie.edit)
+    } else if (imagen_cropie.update !== ''){
+        formData.append('imagen', imagen_cropie.update)
     } 
 
     $.ajax(url, {

@@ -129,10 +129,10 @@
 	</div>
 
 	@include('admin.inquilinos.formulario.create') 
-	@include('admin.inquilinos.formulario.editar')
-	 @include('admin.inquilinos.formulario.confirmar')
+	@include('admin.inquilinos.formulario.update')
+	@include('admin.inquilinos.formulario.confirmar')
 	 
 @endsection @section('script')
 	<script src="{{ asset('js/inquilino.js') }}"></script>
-	<script src="{{ asset('js/camara.js') }}"></script>
+	<script src="{{ asset('js/imagen_croppie.js') }}"></script>
 @endsection
