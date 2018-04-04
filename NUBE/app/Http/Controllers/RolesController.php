@@ -24,14 +24,6 @@ class RolesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-
-
-        //si la peticion se realiza por ajax, es para solicitar el rol de usuario para un determinado usuario.
-        if($request->ajax()){            
-            $id_rol = DB::table('model_has_roles')->where('model_id', $request->id)->pluck('role_id')->first();
-            $nombre_rol = DB::table('roles')->where('id', $id_rol)->pluck('name')->first();
-            return response()->json($nombre_rol);
-        }
         $roles = DB::table('roles')->get();      
         return view('admin/roles/main')->with('roles', $roles); // se devuelven los registros
     }

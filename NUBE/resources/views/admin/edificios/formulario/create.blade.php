@@ -51,17 +51,17 @@
                             <div class="box-body ">                            
                                 <div class="tab-content">
                                     <div class="tab-pane" id="tab1">
-                                        @include('admin.edificios.partes_create.datos_basicos')                                        
+                                        @include('admin.edificios.formulario.secciones_wizard.datos_basicos')                                        
                                     </div>
                                     <div class="tab-pane" id="tab2">
-                                        @include('admin.edificios.partes_create.ubicacion')
+                                        @include('admin.edificios.formulario.secciones_wizard.ubicacion')
                                     </div> 
                                     <div class="tab-pane" id="tab3">
-                                        @include('admin.edificios.partes_create.otros_datos')
+                                        @include('admin.edificios.formulario.secciones_wizard.otros_datos')
                                     </div> 
                                 
                                     <div class="tab-pane" id="tab4">
-                                        @include('admin.edificios.partes_create.confirmacion')
+                                        @include('admin.edificios.formulario.secciones_wizard.confirmacion')
                                     </div> 
 
                                     <ul class="pager wizard">
@@ -97,7 +97,9 @@
 
 @endsection
 @section('script') 
-<script src="{{ asset('js/edificio.js') }}"></script>
+    <script src="{{ asset('js/configuracion_google_maps.js') }}"></script>
+    <script src="{{ asset('js/imagen_croppie.js') }}"></script>
+    <script src="{{ asset('js/edificio.js') }}"></script>
 <script>
     var marcador = {lat: -27.451082, lng: -58.986562};
 </script>

@@ -125,11 +125,11 @@ Propietarios registrados
 </div>
 
 @include('admin.propietarios.formulario.create')
-@include('admin.propietarios.formulario.editar')
+@include('admin.propietarios.formulario.update')
 @include('admin.propietarios.formulario.confirmar')
 
 @endsection
 @section('script') 
-<script src="{{ asset('js/propietario.js') }}"></script>
-<script src="{{ asset('js/camara.js') }}"></script>
+    <script src="{{ asset('js/propietario.js') }}"></script>
+    <script src="{{ asset('js/imagen_croppie.js') }}"></script>
 @endsection

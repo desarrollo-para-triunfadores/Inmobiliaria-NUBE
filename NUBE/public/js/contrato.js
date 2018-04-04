@@ -1,7 +1,7 @@
 $('#side-contratos-li').addClass('active')
 $('#side-contratos-ul').addClass('menu-open')
 $('#side-ele-contratos').addClass('active')
-
+ 
 function abrir_modal_borrar(id) {
   $('#form-borrar').attr('action', '/admin/edificios/' + id);
   $('#boton-modal-borrar').click();
@@ -24,7 +24,6 @@ var etapas_instanciadas = {
   garante: false
 }
 
-
 var monto_basico_sugerido = 0;
 
 //Datatable - instaciación del plugin
@@ -43,28 +42,25 @@ var table = $('#example').DataTable({
   ]
 });
 
-instaciar_filtros()
-function instaciar_filtros () {
-  // Datatables | filtro individuales - instanciación de los filtros
-  $('#example tfoot th').each(function () {
-    var title = $(this).text()
-    if (title !== '') {
-      if (title !== 'Acciones') { // ignoramos la columna de los botones
-        $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
-      }
+// Datatables | filtro individuales - instanciación de los filtros
+$('#example tfoot th').each(function () {
+  var title = $(this).text()
+  if (title !== '') {
+    if (title !== 'Acciones') { // ignoramos la columna de los botones
+      $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
+    }
+  }
+})
+
+// Datatables | filtro individuales - búsqueda
+table.columns().every(function () {
+  var that = this
+  $('input', this.footer()).on('keyup change', function () {
+    if (that.search() !== this.value) {
+      that.search(this.value).draw()
     }
   })
-
-  // Datatables | filtro individuales - búsqueda
-  table.columns().every(function () {
-    var that = this
-    $('input', this.footer()).on('keyup change', function () {
-      if (that.search() !== this.value) {
-        that.search(this.value).draw()
-      }
-    })
-  })
-}
+})
 
 //Datatables | ocultar/visualizar columnas dinámicamente
 $('a.toggle-vis').on('click', function (e) {
@@ -82,8 +78,6 @@ $('#example tbody').on('mouseenter', 'td', function () {
   $(table.cells().nodes()).removeClass('highlight');
   $(table.column(colIdx).nodes()).addClass('highlight');
 });
-
-
 
 
 $(document).ready(function () {
@@ -120,14 +114,14 @@ $(document).ready(function () {
       switch (index) {
         case 1:
           if (!etapas_instanciadas.inquilino) {
-            etapas_instanciadas.inquilino = true
-            instanciar_cropie(index)
+            etapas_instanciadas.inquilino = true;
+            instanciar_croppie_inquilino();
           }
           break
         case 2:
           if (!etapas_instanciadas.garante) {
-            etapas_instanciadas.garante = true
-            instanciar_cropie(index)
+            etapas_instanciadas.garante = true;
+            instanciar_croppie_garante();
           }
           break
       }
@@ -147,7 +141,7 @@ $(document).ready(function () {
   })
 })
 
-function mostrar_panel_inquilino () {
+function mostrar_panel_inquilino () { //Esconde o muestra el formulario para poder ingresar los datos para el alta de un inquilino
   if ($('#panel_inquilino_nuevo').is(':hidden')) {
     $('#panel_inquilino_nuevo').show()
     $('#inquilino_id').removeAttr('required')
@@ -159,7 +153,8 @@ function mostrar_panel_inquilino () {
   }
 }
 
-function mostrar_panel_garante () {
+function mostrar_panel_garante () { //Esconde o muestra el formulario para poder ingresar los datos para el alta de un garante
+  console.log("dede");
   if ($('#panel_garante_nuevo').is(':hidden')) {
     $('#panel_garante_nuevo').show()
     $('#garante_id').removeAttr('required')
@@ -212,51 +207,17 @@ $('.datepicker').bootstrapMaterialDatePicker ({
 });
 
 
-
-var fotos = {
-  garante_nuevo: '',
-  inquilino_nuevo: ''
-}
-
-function instanciar_cropie (index) {
-  switch (index) {
-    case 1:
-      var basic_nuevo = $('#main-cropper-imagen-nuevo').croppie({
-        enableExif: true,
-        viewport: {width: 275, height: 275, type: 'circle'},
-        boundary: {width: 275, height: 275},
-        update: function (data) {
-          basic_nuevo.croppie('result', 'blob').then(function (html) {
-            fotos.inquilino_nuevo = html
-          })
-        }
-      })
-      break
-    case 2:
-      var garante_basic_nuevo = $('#main-cropper-imagen-nuevo-garante').croppie({
-        enableExif: true,
-        viewport: {width: 275, height: 275, type: 'circle'},
-        boundary: {width: 275, height: 275},
-        update: function (data) {
-          garante_basic_nuevo.croppie('result', 'blob').then(function (html) {
-            fotos.garante_nuevo = html
-          })
-        }
-      })
-  }
-}
-
 // Enviar datos.
 function mandar () {
   var form = $('#form')
   var url = form.attr('action')
   var token = $('#token').val()
   var formData = new FormData(document.getElementById('form'))
-  if (fotos.inquilino_nuevo !== '') {
-    formData.append('imagen', fotos.inquilino_nuevo)
+  if (imagen_cropie.inquilino !== '') {
+    formData.append('imagen', imagen_cropie.inquilino)
   }
-  if (fotos.garante_nuevo !== '') {
-    formData.append('imagen2', fotos.garante_nuevo)
+  if (imagen_cropie.garante !== '') {
+    formData.append('imagen2', imagen_cropie.garante)
   }
   formData.append('periodos_pagos', JSON.stringify(periodos_pagos))
   // // Este método sirve para ver el contenido del formdata
@@ -271,20 +232,7 @@ function mandar () {
     processData: false,
     contentType: false,
     success: function (data) {
-      bootbox.dialog({
-        title: 'Registración exitosa',
-        message: 'El contrato se ha registrado de manera exitosa.',
-        className: 'modal-success',
-        buttons: {
-          cancel: {
-            label: 'cerrar',
-            className: 'btn btn-outline pull-right',
-            callback: function () {
-              window.location.href = '/admin/contratos/'
-            }
-          }
-        }
-      })
+      window.location.href = '/admin/contratos/'
     },
     error: function () {
       console.log('Upload error')
@@ -318,7 +266,7 @@ function cargar_monto_sugerido(){//este método se usa en los casos en que el co
   }       
 }
 
-function tildar_gastos_compartidos() {
+function tildar_gastos_compartidos() {//este método se encarga de tildar o destildar todos los servicios que estén marcados con la clase "gastos compartidos"
   if( $('#sujeto_a_gastos_compartidos').prop('checked') ) {
     $(".gasto_compartido").prop("checked", true);  
   }else{

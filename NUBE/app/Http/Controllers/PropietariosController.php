@@ -61,7 +61,7 @@ class PropietariosController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $nombreImagen = 'sin imagen';
+        $nombreImagen = 'sin_imagen.png';
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
             $nombreImagen = 'persona_' . time() .'.png';
@@ -86,12 +86,15 @@ class PropietariosController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        $propietarios = Propietario::all();
         $propietario = Propietario::find($id);
         $paises = Pais::all();
         $localidades = Localidad::all();
+        $personas = Persona::all()->whereNotIn('id', $propietarios->pluck('id')->toArray());
         return view('admin.propietarios.show')
                         ->with('propietario', $propietario)
                         ->with('paises', $paises)
+                        ->with('personas', $personas)
                         ->with('localidades', $localidades);
     }
 
@@ -115,10 +118,12 @@ class PropietariosController extends Controller {
     public function update(Request $request, $id) {
         $propietario = Propietario::find($id);
         $persona = Persona::find($propietario->persona_id);
+        $nombreImagen = "sin_imagen.png";
+        
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
             $nombreImagen = 'persona_' . time() .'.png';
-            if (Storage::disk('personas')->exists($persona->foto_perfil)) {
+            if ((Storage::disk('personas')->exists($persona->foto_perfil)) && ($persona->foto_perfil !== "sin_imagen.png")) {
                 Storage::disk('personas')->delete($persona->foto_perfil);   // Borramos la imagen anterior.      
             }
             $persona->fill($request->all());
@@ -147,7 +152,7 @@ class PropietariosController extends Controller {
     public function destroy($id) {
         $propietario = Propietario::find($id);
         $persona = Persona::find($propietario->persona_id);
-        if ($persona->foto_perfil != 'sin imagen') {
+        if ($persona->foto_perfil != 'sin_imagen.png') {
             Storage::disk('personas')->delete($persona->foto_perfil); // Borramos la imagen asociada.
         }
         $propietario->delete();

@@ -88,3 +88,8 @@
 <!--Estilos propios-->
 <link type="text/css" rel="stylesheet" href="{{ asset('css/estilos_propios.css') }}">
 
+<style>
+    #miCameraOnline video{width:320px;height:240px;margin:15px;float:left;}
+    #miCameraOnline canvas{width:320px;height:240px;margin:15px;float:left;}
+    #miCameraOnline button{clear:both;margin:30px;}
+    </style>

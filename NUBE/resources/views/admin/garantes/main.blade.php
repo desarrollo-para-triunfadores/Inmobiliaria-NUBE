@@ -125,13 +125,13 @@
     </div>
 
     @include('admin.garantes.formulario.create')
-    @include('admin.garantes.formulario.editar')
+    @include('admin.garantes.formulario.update')
     @include('admin.garantes.formulario.confirmar')
 
 @endsection
 @section('script')
     <script src="{{ asset('js/garante.js') }}"></script>
-    <script src="{{ asset('js/camara.js') }}"></script>
+	<script src="{{ asset('js/imagen_croppie.js') }}"></script>
 @endsection
 
 

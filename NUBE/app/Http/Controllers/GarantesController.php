@@ -66,7 +66,7 @@ class GarantesController extends Controller {
     public function store(Request $request) {
     
         if (is_null($request->persona_id)) {//*si no se recibe una persona asignada como garante, crear una
-            $nombreImagen = 'sin imagen';
+            $nombreImagen = 'sin_imagen.png';
             if ($request->file('imagen')) {
                 $file = $request->file('imagen');
                 $nombreImagen = 'persona_' . time() .'.png';
@@ -126,10 +126,12 @@ class GarantesController extends Controller {
     public function update(Request $request, $id) {
         $garante = Garante::find($id);
         $persona = Persona::find($garante->persona_id);
+        $nombreImagen = "sin_imagen.png";
+       
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
             $nombreImagen = 'persona_' . time() .'.png';
-            if (Storage::disk('personas')->exists($persona->foto_perfil)) {
+            if ((Storage::disk('personas')->exists($persona->foto_perfil)) && ($persona->foto_perfil !== "sin_imagen.png")) {
                 Storage::disk('personas')->delete($persona->foto_perfil);   // Borramos la imagen anterior.      
             }
             $persona->fill($request->all());
@@ -157,12 +159,12 @@ class GarantesController extends Controller {
      */
     public function destroy($id) {
         $garante = Garante::find($id);
-      /*  $persona = Persona::find($garante->persona_id);
-        if ($persona->foto_perfil != 'sin imagen') {
+        $persona = Persona::find($garante->persona_id);
+        if ($persona->foto_perfil != 'sin_imagen.png') {
             Storage::disk('personas')->delete($persona->foto_perfil); // Borramos la imagen asociada.
-        }*/
+        }
         $garante->delete();
-        //$persona->delete();
+        $persona->delete();
         Session::flash('message', 'La información asociada al garante ha sido eliminada del sistema');
         return redirect()->route('garantes.index');
     }

@@ -23,7 +23,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 443 - 8084',
             'telefono_contacto' => '(362) 443 - 0300',
             'email'   => 'juribe@idiomas.udea.edu.co',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'user_id' => '1',
             'pais_id' => '1',
@@ -39,7 +39,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 442 - 6145',
             'telefono_contacto' => '(362) 442 - 6005',
             'email'   => 'hersy@epm.net.co',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'user_id'=>'4',
@@ -55,7 +55,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 447 - 6394',
             'telefono_contacto' => '(362) 443 - 2168',
             'email'   => 'urestrepo @idiomas.udea.edu.co',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -70,7 +70,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 445 - 1406',
             'telefono_contacto' => '(362) 447 - 4779',
             'email'   => ' vivian_981@yahoo.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -85,7 +85,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 446 - 0306',
             'telefono_contacto' => '(362) 442 - 8475',
             'email'   => 'julianaparis@hotmail.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -100,7 +100,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 443 - 2363',
             'telefono_contacto' => '(362) 444 - 6512',
             'email'   => 'domini26@latinmail.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -115,7 +115,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 446 - 2756',
             'telefono_contacto' => '(362) 443 - 8482',
             'email'   => ' julianaparis@hotmail.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -130,7 +130,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 443 - 5921',
             'telefono_contacto' => '(362) 443 - 8482',
             'email'   => ' yessy_39@hotmail.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -145,7 +145,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 444 - 9305',
             'telefono_contacto' => '(362) 442 - 8797',
             'email'   => 'ashida_barak@yahoo.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -160,7 +160,7 @@ class PersonasTableSeeder extends Seeder
             'telefono' => '(362) 446 - 1367',
             'telefono_contacto' => '(362) 442 - 4022',
             'email'   => 'menadel@hotmail.com',                      
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -180,7 +180,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 443 - 8325',
             'email'   => 'm.fdez_87@hotmail.com',    
             'direccion' => 'Juan Domingo Perón 396',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -196,7 +196,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 443 - 8325',
             'email'   => 'reinald_34@hotmail.com',       
             'direccion' => 'Donovan 174',               
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -212,7 +212,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 446 - 1311',
             'email'   => 'ibrahin@cied.rimed.cu',    
             'direccion' => 'Juan Domingo Perón 455',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -228,7 +228,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 443 - 5004',
             'email'   => 'acampadaalcoy@gmail.com',    
             'direccion' => 'Salta 446',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -244,7 +244,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 444 - 7177',
             'email'   => 'acampada.algeciras@gmail.com',   
             'direccion' => 'Av. Belgrano 410',                   
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -260,7 +260,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 446 - 7445',
             'email'   => 'difusio.acampadabdn@gmail.com',    
             'direccion' => 'Av. Manuel Belgrano 511',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -276,7 +276,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 442 - 3393',
             'email'   => 'dryburgos@gmail.com',        
             'direccion' => 'Jujuy 715',              
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -292,7 +292,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 442 - 4040',
             'email'   => 'castello15m@gmail.com',      
             'direccion' => 'Moreno 940',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -308,7 +308,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 443 - 2640',
             'email'   => 'iabarcae@yahoo.es',      
             'direccion' => 'Santiago del Estero, 3500',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -324,7 +324,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 446 - 7319',
             'email'   => 'alexus3@hotmail.com',      
             'direccion' => 'Av. 25 de Mayo 980',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -344,7 +344,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 448 - 8882',
             'email'   => 'luuuuuuci@hotmail.com', 
             'direccion' => 'S B D Mte Alto 55',                     
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -360,7 +360,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 448 - 8882',
             'email'   => 'kristian_siempre_azul@hotmail.com',   
             'direccion' => 'Calle Corrientes 905',                   
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'user_id' => '3',
@@ -377,7 +377,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 447 - 3172',
             'email'   => 'mapuchin@hotmail.com',      
             'direccion' => 'Marcelo T. de Alvear 1097',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -393,7 +393,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 447 - 3172',
             'email'   => 'arahuetes@manquehue.net',          
             'direccion' => 'Marcelo T. de Alvear 1301',            
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -409,7 +409,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 443 - 5252',
             'email'   => 'eduardo.arancibia@grange.cl',     
             'direccion' => 'San Fernando 335',                 
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -425,7 +425,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 446 - 6439',
             'email'   => 'leonor.araya@gmail.com',      
             'direccion' => 'Av. Rivadavia 1130',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -441,7 +441,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 441 - 7610',
             'email'   => 'paulifran@hotmail.com',  
             'direccion' => 'La Rioja 1199',                    
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -457,7 +457,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 444 - 0105',
             'email'   => 'bad.girl.-@hotmail.es',      
             'direccion' => 'Fotheringam 45',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -473,7 +473,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 476 - 4523',
             'email'   => 'aargomedo@hecsa.cl',      
             'direccion' => 'Jujuy 1870',                
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -489,7 +489,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 476 - 4523',
             'email'   => 'joy_pao_@hotmail.com',  
             'direccion' => 'Mendoza 2662',                    
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -505,7 +505,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '(362) 497 - 2426',
             'email'   => 'Sergio.Aspe@adretail.cl',    
             'direccion' => 'García Merou 2901',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -521,7 +521,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3743499820',
             'email'   => 'jpaulnava@gmail.com',    
             'direccion' => 'Monteagudo 695',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '1',
             'pais_id' => '1',
             'user_id' =>'2',
@@ -537,7 +537,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752499820',
             'email'   => 'hacho.kuszniruk@gmail.com',    
             'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'user_id' =>'1',
@@ -553,7 +553,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752499740',
             'email'   => 'marcemarin@gmail.com',    
             'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -568,7 +568,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752887411',
             'email'   => 'ale.rodriguez@gmail.com',    
             'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -583,7 +583,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752112233',
             'email'   => 'damian.freidenberger@gmail.com',    
             'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -598,7 +598,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752895623',
             'email'   => 'ale.alba@gmail.com',    
             'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -613,7 +613,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752748596',
             'email'   => 'sergio.sanab@gmail.com',    
             'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
@@ -630,7 +630,7 @@ class PersonasTableSeeder extends Seeder
             'telefono_contacto' => '3752002233',
             'email'   => 'm.larsson@gmail.com',    
             'direccion' => 'Remedios de Escalada 555',                  
-            'foto_perfil' => 'sin imagen',
+            'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
             'user_id' => '5',
@@ -649,7 +649,7 @@ class PersonasTableSeeder extends Seeder
         'telefono_contacto' => '3743002233',
         'email'   => 'claudiana@gmail.com',    
         'direccion' => 'San Luis 387',                  
-        'foto_perfil' => 'sin imagen',
+        'foto_perfil' => 'sin_imagen.png',
         'localidad_id' => '1',
         'pais_id' => '1',
         'created_at' => date('Y-m-d H:m:s')

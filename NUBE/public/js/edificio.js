@@ -5,12 +5,13 @@ $("#side-ele-edificios").addClass("active");
 var etapas_instanciadas = {
   datos_basicos: false,
   ubicacion: false
-}, foto_edificio = "";
+};
 
 function abrir_modal_borrar(id) {
   $('#form-borrar').attr('action', '/admin/edificios/' + id);
   $('#boton-modal-borrar').click();
 }
+
 
 //function desabilitar_input(clase): esta función habilita o deshabilita los imputs de acuerdo al valor de los check tildados
 function desabilitar_input(clase){
@@ -27,7 +28,6 @@ function desabilitar_input(clase){
   }
 }
 
-
 //Bootstrap Material Date picker
 $('.datepicker').bootstrapMaterialDatePicker ({
     format: 'DD/MM/YYYY',
@@ -37,12 +37,8 @@ $('.datepicker').bootstrapMaterialDatePicker ({
     cancelText: 'cerrar',
     okText: 'ok',
     minDate : moment().add(-100, 'year'),
-    maxDate : moment(),
     time: false 
 });
-
-
-// Enviar datos.
 
 //Datatable - instaciación del plugin
 var table = $('#example').DataTable({
@@ -62,30 +58,25 @@ var table = $('#example').DataTable({
   ]
 });
 
-
-instaciar_filtros();
-
-function instaciar_filtros() {
-    //Datatables | filtro individuales - instanciación de los filtros
-    $('#example tfoot th').each(function () {
-        var title = $(this).text();
-        if (title !== "") {
-            if (title !== 'Acciones') { //ignoramos la columna de los botones
-                $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />');
-            }
+//Datatables | filtro individuales - instanciación de los filtros
+$('#example tfoot th').each(function () {
+    var title = $(this).text();
+    if (title !== "") {
+        if (title !== 'Acciones') { //ignoramos la columna de los botones
+            $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />');
         }
-    });
+    }
+});
 
 //Datatables | filtro individuales - búsqueda 
-    table.columns().every(function () {
-        var that = this;
-        $('input', this.footer()).on('keyup change', function () {
-            if (that.search() !== this.value) {
-                that.search(this.value).draw();
-            }
-        });
+table.columns().every(function () {
+    var that = this;
+    $('input', this.footer()).on('keyup change', function () {
+        if (that.search() !== this.value) {
+            that.search(this.value).draw();
+        }
     });
-}
+});
 
 //Datatables | ocultar/visualizar columnas dinámicamente
 $('a.toggle-vis').on('click', function (e) {
@@ -108,11 +99,9 @@ $('#example tbody').on('mouseenter', 'td', function () {
 
 $(document).ready(function () {
 
-  instanciar_cropie()
-
   jQuery.extend(jQuery.validator.messages, msj_validacion_jquery)
   
-  var $validator = $('#form').validate({
+  var $validator = $('#form').validate({ //Validador de jquery
     highlight: function (element) {
       $(element).closest('.form-group').addClass('has-error')
     },
@@ -163,40 +152,8 @@ $(document).ready(function () {
   })
 })
 
-function instanciar_mapa() {
 
- $("#latitud").val(marcador.lat);
- $("#longitud").val(marcador.lng);
-
-    var map = new google.maps.Map(document.getElementById('map'), {//instancio mapa
-        zoom: 12,
-        center: marcador,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-    });
-    var marker = new google.maps.Marker({//instancio marcador
-        map: map,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        position: marcador
-    });
-    marker.addListener('dragend', function () { //este es el evento que detecta las coordenadas al mover el marcador y setea los inputs ocultos en en el form.
-        $("#latitud").val(marker.getPosition().lat());
-        $("#longitud").val(marker.getPosition().lng());
-    });
-    marker.addListener('click', toggleBounce);
-}
-
-
-function toggleBounce() { //función para la animación del marcador
-  if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-  } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
-
-
-function cargar_barrios(){
+function cargar_barrios(){ //este método carga el select de barrios con los barrios de la localidad seleccionada
   var combo = document.getElementById("localidad_id");
   barrios = JSON.parse(combo.options[combo.selectedIndex].getAttribute("barrios"));
   var options_select_barrios = [];
@@ -207,83 +164,36 @@ function cargar_barrios(){
 }
 
 
+// Enviar datos.
+function mandar () {
+  var form = $('#form')
+  var url = form.attr('action')
+  var token = $('#token').val()
+  var formData = new FormData(document.getElementById('form'))
 
-function instanciar_cropie () {
-    
-//Croppie.js | create
+  if (imagen_cropie.create !== '') {
+    formData.append('imagen', imagen_cropie.create)
+  } else if (imagen_cropie.update !== ''){
+      formData.append('imagen', imagen_cropie.update)
+  } 
 
+  // // Este buvle sirve para ver el contenido del formdata
+/* for (var pair of formData.entries())
+    {
+    console.log(pair[0]+ ', '+ pair[1]); 
+    }*/
 
-  //se instancia el plugin
-  var basic_nuevo = $('#main-cropper_nuevo').croppie({
-    enableExif: true,
-    viewport: {width: 275, height: 275, type: 'circle'},
-    boundary: {width: 275, height: 275},
-    update: function (data) {
-      basic_nuevo.croppie('result', 'blob').then(function (html) {
-        foto_edificio = html
-      })
+  $.ajax(url, {
+    headers: {'X-CSRF-TOKEN': token},
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      window.location.href = '/admin/edificios'
+    },
+    error: function () {
+      console.log('Upload error')
     }
   })
-
-  //carga imagen al plugin
-  function readFile(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#main-cropper_nuevo').croppie('bind', {
-                url: e.target.result
-            });
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  //evento sobre el botón subir
-  $('.actionUpload-nuevo input').on('change', function () {
-    $('#main-cropper_nuevo').removeClass('hide');
-    readFile(this);
-  });
-
 }
-  
-  // Enviar datos.
-  function mandar () {
-    var form = $('#form')
-    var url = form.attr('action')
-    var token = $('#token').val()
-    var formData = new FormData(document.getElementById('form'))
-    if (foto_edificio !== '') {
-      formData.append('imagen', foto_edificio)
-    }  
-    // // Este buvle sirve para ver el contenido del formdata
-  /* for (var pair of formData.entries())
-     {
-     console.log(pair[0]+ ', '+ pair[1]); 
-     }*/
-    $.ajax(url, {
-      headers: {'X-CSRF-TOKEN': token},
-      method: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (data) {
-        bootbox.dialog({
-          title: 'Registración exitosa',
-          message: 'El edificio se ha registrado de manera exitosa.',
-          className: 'modal-success',
-          buttons: {
-            cancel: {
-              label: 'cerrar',
-              className: 'btn btn-outline pull-right',
-              callback: function () {
-                window.location.href = '/admin/edificios'
-              }
-            }
-          }
-        })
-      },
-      error: function () {
-        console.log('Upload error')
-      }
-    })
-  }

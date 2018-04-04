@@ -28,32 +28,22 @@ Edificios registrados
                     <div class="box-body ">                            
                         @include('admin.partes.msj_acciones')
                         <div class="row">
-                            <div class="col-lg-4">
-
-                                @if ($edificio->foto_perfil === "sin imagen")
-                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/personas/sin-logo.png') }}" alt="User profile picture">                                                               
-                                @else
-                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/edificios/' . $edificio->foto_perfil) }} " alt="User profile picture">
-                                @endif
-
+                            <div class="col-lg-4">                        
+                                <img style="width:200px;height:200px"  alt="User Image" class="profile-user-img img-responsive img-circle" src="{{ asset('imagenes/edificios/' . $edificio->imagen) }} " alt="User profile picture">                      
                             </div>    
-
+                            <div class="col-md-8">
+                                <div id="map" style="width:auto;height:200px;"></div>                                        
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nombre:</label>
                                     <span class="form-control"><strong>{{$edificio->nombre}}</strong></span>
                                 </div>
                             </div>      
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Fecha Habilitación</label>
-                                    @if($edificio->fecha_habilitacion)
-                                        <span class="form-control">{{$edificio->FechaHabilitacionFormateado}}</span>
-                                    @else
-                                        <span class="form-control">No se espicificó</span>
-                                    @endif                                    
-                                </div>
-                            </div>                                                                  
+                                                                                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Dirección:</label>
@@ -64,12 +54,7 @@ Edificios registrados
                                     @endif
                                 </div>
                             </div> 
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Cant. Departamentos:</label>
-                                    <span class="form-control">{{$edificio->cant_deptos}}</span>
-                                </div>
-                            </div>
+                            
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Ascensores</label>
@@ -79,7 +64,23 @@ Edificios registrados
                                     <span class="form-control">Sí posee (Cantidad: {{$edificio->cant_ascensores}}. Valor: ${{$edificio->valor_ascensores}})</span>
                                 @endif
                                 </div>
-                            </div>                                                                                                   
+                            </div> 
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Fecha Habilitación</label>
+                                    @if($edificio->fecha_habilitacion)
+                                        <span class="form-control">{{$edificio->FechaHabilitacionFormateado}}</span>
+                                    @else
+                                        <span class="form-control">No se espicificó</span>
+                                    @endif                                    
+                                </div>
+                            </div>  
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Cant. Departamentos:</label>
+                                    <span class="form-control">{{$edificio->cant_deptos}}</span>
+                                </div>
+                            </div>                                                                                                  
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Costos Personal</label>
@@ -121,7 +122,7 @@ Edificios registrados
                                 @endif
                                 </div>
                             </div>   
-                        </div>  
+                        </div>                                                
                     </div> 
                     <div class="box-footer">
                         <div class="row">
@@ -145,5 +146,10 @@ Edificios registrados
 
 @endsection
 @section('script') 
+    <script src="{{ asset('js/configuracion_google_maps.js') }}"></script>
     <script src="{{ asset('js/edificio.js') }}"></script>
+    <script>
+        var marcador = {lat: parseFloat('{{$edificio->latitud}}'), lng: parseFloat('{{$edificio->longitud}}')};    
+        instanciar_mapa();
+    </script>
 @endsection

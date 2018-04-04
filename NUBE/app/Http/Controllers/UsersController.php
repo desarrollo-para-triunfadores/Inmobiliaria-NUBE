@@ -49,7 +49,7 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $nombreImagen = 'sin imagen';
+        $nombreImagen = 'sin_imagen.png';
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
             $nombreImagen = 'usuario_' . time() .'.png';
@@ -65,7 +65,7 @@ class UsersController extends Controller {
         $user->assignRole($request->rol_usuario);
 
         Session::flash('message', '¡Se ha registrado a un nuevo usuario con éxito!');
-        return redirect()->route('usuarios.index');
+        return response()->json('ok');
     }
 
     /**
@@ -112,24 +112,28 @@ class UsersController extends Controller {
      */
     public function update(Request $request, $id) {
         $usuario = User::find($id);
-        $usuario->fill($request->all());
+        $nombreImagen = "sin_imagen.png";
+
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'usuario_' . time() .'.png';
-            if (Storage::disk('usuarios')->exists($usuario->imagen)) {
+            $nombreImagen = 'usuario_' . time() .'.png';                        
+            if ((Storage::disk('usuarios')->exists($usuario->imagen)) && ($usuario->imagen !== "sin_imagen.png")) {
                 Storage::disk('usuarios')->delete($usuario->imagen);   // Borramos la imagen anterior.      
-            }            
-            $usuario->imagen = $nombreImagen;  // Actualizamos el nombre de la nueva imagen.
-            Storage::disk('usuarios')->put($nombreImagen, \File::get($file));  // Movemos la imagen nueva al directorio /imagenes/usuarios   
-           
-        }          
+            }                      
+            Storage::disk('usuarios')->put($nombreImagen, \File::get($file));  // Movemos la imagen nueva al directorio /imagenes/usuarios              
+        }
+            
+        $usuario->fill($request->all());    
+        if($nombreImagen !== ""){
+            $usuario->imagen = $nombreImagen;  // Actualizamos el nombre de la nueva imagen.       
+        }       
         $usuario->save();
 
         DB::table('model_has_roles')->where('model_id', $usuario->id)->delete(); //eliminamos el rol que posea el usuario y le volvemos a asignar
         $usuario->assignRole($request->rol_usuario);
 
         Session::flash('message', '¡Se ha actualizado la información del usuario con éxito!');
-        return redirect()->route('usuarios.index');
+        return response()->json('ok');
     }
 
     /**
@@ -140,7 +144,7 @@ class UsersController extends Controller {
      */
     public function destroy($id) {
         $usuario = User::find($id);
-        if ($usuario->imagen != 'sin imagen') {
+        if ($usuario->imagen != 'sin_imagen.png') {
             Storage::disk('usuarios')->delete($usuario->imagen); // Borramos la imagen asociada.
         }
         DB::table('model_has_roles')->where('model_id', $usuario->id)->delete();
