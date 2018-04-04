@@ -14,7 +14,7 @@ class PersonasTableSeeder extends Seeder
 
         //Inicio Personas que sirven para inquilinos (1-10)
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #1
             'nombre' => 'Norma G',
             'apellido' => 'Alvarez Rodriguez',
             'sexo' => 'Femenino',
@@ -30,7 +30,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #2
             'nombre' => 'Andrea',
             'apellido' => 'Ríos López',
             'sexo' => 'Femenino',
@@ -46,7 +46,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #3
             'nombre' => 'Analia L',
             'apellido' => 'Eginini Rodriguez',
             'sexo' => 'Femenino',
@@ -61,7 +61,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #4
             'nombre' => 'Isaac E',
             'apellido' => 'Martinez Rodriguez',
             'sexo' => 'Masculino',
@@ -76,7 +76,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #5
             'nombre' => 'Carmen E',
             'apellido' => 'Gonzales',
             'sexo' => 'Femenino',
@@ -91,7 +91,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #6
             'nombre' => 'Roque G',
             'apellido' => 'Gonzales',
             'sexo' => 'Masculino',
@@ -106,7 +106,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
         
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #7
             'nombre' => 'Alberto A',
             'apellido' => 'Espinoza',
             'sexo' => 'Masculino',
@@ -121,7 +121,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #8
             'nombre' => 'Carlos R',
             'apellido' => 'Espinoza',
             'sexo' => 'Masculino',
@@ -136,7 +136,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #9
             'nombre' => 'Graciela L',
             'apellido' => 'Espinoza',
             'sexo' => 'Femenino',
@@ -151,7 +151,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #10
             'nombre' => 'Jose',
             'apellido' => 'Espinoza',
             'sexo' => 'Masculino',
@@ -170,7 +170,7 @@ class PersonasTableSeeder extends Seeder
 
 //Inicio Personas que sirven para garantes (11-20)
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #11
             'nombre' => 'Hector Ruben',
             'apellido' => 'Espinoza',
             'sexo' => 'Masculino',
@@ -186,7 +186,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #12
             'nombre' => 'Martha',
             'apellido' => 'Werle',
             'sexo' => 'Femenino',
@@ -202,7 +202,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #13
             'nombre' => 'Albertina G De',
             'apellido' => 'Galarza',
             'sexo' => 'Femenino',
@@ -218,7 +218,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #14
             'nombre' => 'Carlos',
             'apellido' => 'Gonzalez',
             'sexo' => 'Masculino',
@@ -234,7 +234,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #15
             'nombre' => 'Carolina E',
             'apellido' => 'Galarza',
             'sexo' => 'Femenino',
@@ -250,7 +250,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #16
             'nombre' => 'Julio N',
             'apellido' => 'Fernandez Nuñez',
             'sexo' => 'Masculino',
@@ -266,7 +266,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #17
             'nombre' => 'Magdalena N De',
             'apellido' => 'Gomez Nuñez',
             'sexo' => 'Femenino',
@@ -282,7 +282,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #18
             'nombre' => 'Narvajas',
             'apellido' => 'Gomez Nunez',
             'sexo' => 'Masculino',
@@ -298,7 +298,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #19
             'nombre' => 'Emilio Alberto',
             'apellido' => 'Rached',
             'sexo' => 'Masculino',
@@ -314,7 +314,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #20
             'nombre' => 'Natalia Gabriela ',
             'apellido' => 'Neme',
             'sexo' => 'Femenino',
@@ -334,7 +334,7 @@ class PersonasTableSeeder extends Seeder
 
 //Inicio Personas que sirven para propietarios únicamente (21-30)
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #21
             'nombre' => ' Marcelo Ramon de la Santisima Trinidad',
             'apellido' => 'Lugones',
             'sexo' => 'Masculino',
@@ -350,7 +350,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #22
             'nombre' => 'Juan',
             'apellido' => 'Rubio',
             'sexo' => 'Masculino',
@@ -367,7 +367,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #23
             'nombre' => 'Paola Anabel',
             'apellido' => 'Griggio',
             'sexo' => 'Femenino',
@@ -383,7 +383,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #24
             'nombre' => 'Guillermo Antonio',
             'apellido' => 'Novara',
             'sexo' => 'Masculino',
@@ -399,7 +399,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #25
             'nombre' => 'Ricardo Luis',
             'apellido' => 'Corbalan',
             'sexo' => 'Masculino',
@@ -415,7 +415,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #26
             'nombre' => 'Elba Cristina',
             'apellido' => 'Alvarez',
             'sexo' => 'Femenino',
@@ -431,7 +431,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #27
             'nombre' => 'Ramón',
             'apellido' => 'Goitea',
             'sexo' => 'Masculino',
@@ -447,7 +447,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #28
             'nombre' => 'Guillermo Elias Ruben',
             'apellido' => 'Ganón',
             'sexo' => 'Masculino',
@@ -463,7 +463,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #29
             'nombre' => 'Omar D',
             'apellido' => 'Avalos Fernandez',
             'sexo' => 'Masculino',
@@ -479,7 +479,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #30
             'nombre' => 'Rodrigo',
             'apellido' => 'Alvarez Fernandez',
             'sexo' => 'Masculino',
@@ -495,7 +495,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
         
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #31
             'nombre' => 'Gabriel N',
             'apellido' => 'Banquero Fernandez',
             'sexo' => 'Masculino',
@@ -511,7 +511,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #32
             'nombre' => 'Juan Pablo',
             'apellido' => 'Cáceres',
             'sexo' => 'Masculino',
@@ -527,7 +527,7 @@ class PersonasTableSeeder extends Seeder
             'user_id' =>'2',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([ #33
             'nombre' => 'Horacio Alejandro',
             'apellido' => 'Kuszniruk',
             'sexo' => 'Masculino',
@@ -543,7 +543,7 @@ class PersonasTableSeeder extends Seeder
             'user_id' =>'1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #34
             'nombre' => 'Marcelo',
             'apellido' => 'Marin',
             'sexo' => 'Masculino',
@@ -558,7 +558,7 @@ class PersonasTableSeeder extends Seeder
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #35
             'nombre' => 'Alejandro',
             'apellido' => 'Rodriguez',
             'sexo' => 'Masculino',
@@ -573,7 +573,7 @@ class PersonasTableSeeder extends Seeder
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #36
             'nombre' => 'Damian',
             'apellido' => 'Freidenberger',
             'sexo' => 'Masculino',
@@ -588,7 +588,7 @@ class PersonasTableSeeder extends Seeder
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #37
             'nombre' => 'Alejandro',
             'apellido' => 'Alba Posse',
             'sexo' => 'Masculino',
@@ -603,7 +603,7 @@ class PersonasTableSeeder extends Seeder
             'pais_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('personas')->insert([
+        DB::table('personas')->insert([     #38
             'nombre' => 'Sergio',
             'apellido' => 'Sanabria',
             'sexo' => 'Masculino',
@@ -619,7 +619,8 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([ #PROPIETARIA DEPTOS DE EDIFICIO --HORACIO
+        #PROPIETARIA DEPTOS DE EDIFICIO --HORACIO
+        DB::table('personas')->insert([     #39
             'nombre' => 'Mirta',
             'apellido' => 'Larsson',
             'sexo' => 'Femenino',
@@ -636,7 +637,9 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([ #PROPIETARIA DEPTO JUAMPY
+
+         #PROPIETARIA DEPTO JUAMPY
+        DB::table('personas')->insert([ #40
         'nombre' => 'Claudia',
         'apellido' => 'Menéndez',
         'sexo' => 'Femenino',
@@ -651,6 +654,42 @@ class PersonasTableSeeder extends Seeder
         'pais_id' => '1',
         'created_at' => date('Y-m-d H:m:s')
         ]);
+
+        #PERSONAS para ser TECNICOS
+        DB::table('personas')->insert([ #Tecnico 1  | #Persona 41
+        'nombre' => 'Rodolfo',
+        'apellido' => 'Pedernera',
+        'sexo' => 'Masculino',
+        'dni' => '29874198',
+        'fecha_nac' => '1977-11-15',
+        'telefono' => '3762002233',
+        'telefono_contacto' => '3743002233',
+        'email'   => 'dudolf@gmail.com',    
+        'direccion' => 'McLean 1844',                  
+        'foto_perfil' => 'rodolfo.png',
+        'localidad_id' => '1',
+        'pais_id' => '1',
+        'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        #PERSONAS para ser TECNICOS
+        DB::table('personas')->insert([ #Tecnico 2  | #Persona 42
+        'nombre' => 'Raúl',
+        'apellido' => 'Plomber',
+        'sexo' => 'Masculino',
+        'dni' => '29585233',
+        'fecha_nac' => '1980-01-05',
+        'telefono' => '3624788791',
+        'telefono_contacto' => '3624788791',
+        'email'   => 'plomeria.integral@gmail.com',    
+        'direccion' => 'Güemes 1214',                  
+        'foto_perfil' => 'plomero.png',
+        'localidad_id' => '1',
+        'pais_id' => '1',
+        'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        
 
     }
 }
