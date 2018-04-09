@@ -30,97 +30,100 @@ Garantes registrados
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-3">             
-                                        <div class="control-group">
-                                            <label>Localidad:</label>
-                                            <div class="controls">
-                                                <select style="width: 100%"  name="localidades_ids" id="localidades_ids"  placeholder="campo requerido" class="select2 form-control" multiple>
-                                                    <option></option>
-                                                    @foreach($localidades as $localidad)
-                                                        <option value="{{$localidad->id}}">{{$localidad->nombre}}</b></option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">             
-                                        <div class="control-group">
-                                            <label>Barrios:</label>
-                                            <div class="controls">
-                                                <select style="width: 100%"  name="barrios_ids" id="barrios_ids"  placeholder="campo requerido" class="select2 form-control" multiple>
-                                                    <option></option>
-                                                    @foreach($barrios as $barrio)
-                                                        <option value="{{$barrio->id}}">{{$barrio->nombre}}</b></option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">             
-                                        <div class="control-group">
-                                            <label>Edificios:</label>
-                                            <div class="controls">
-                                                <select style="width: 100%"  name="edificios_ids" id="edificios_ids"  placeholder="campo requerido" class="select2 form-control" multiple>
-                                                    <option></option>
-                                                    @foreach($edificios as $edificio)
-                                                        <option value="{{$edificio->id}}">{{$edificio->nombre}}</b></option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">             
-                                        <div class="control-group">
-                                            <label>Inmueble:</label>
-                                            <div class="controls">
-                                                <select style="width: 100%"  name="inmueble_id" id="inmueble_id"  placeholder="campo requerido" class="select2 form-control" multiple>
-                                                    <option></option>
-                                                    @foreach($contratos as $contrato)
-                                                        <option value="{{$contrato->inmueble->id}}">{{$contrato->inmueble->direccion}} ({{$contrato->inmueble->localidad->nombre}}). Piso: {{$contrato->inmueble->piso}}. Departamento: ({{$contrato->inmueble->numDepto}}) </b></option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">                                
                                     <div class="col-md-3">
-                                        <div class="control-group">
-                                            <label>Impuestos/Servicios:</label>
-                                            <div class="controls">
-                                                <select style="width: 100%"  name="servicios_ids" id="servicios_ids"  placeholder="campo requerido"  class="select2 form-control" multiple>
-                                                    <option value=""></option>
-                                                    @foreach($servicios as $servicio)
-                                                    <option value="{{$servicio->id}}">{{$servicio->nombre}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>   
-                                        </div>
-                                    </div>                                   
-                                    <div class="col-md-3">
-                                        <div class="control-group">
-                                            <label>Desde:</label>
-                                            <div class="controls">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>                                                    
-                                                    <input name="fecha_desde" id="fecha_desde"type="text" placeholder="campo requerido"  class="form-control pull-right datepicker_desde" required>                                                
+                                        <div class="row">                                           
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <label>Desde:</label>
+                                                    <div class="controls">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>                                                    
+                                                            <input name="fecha_desde" id="fecha_desde"type="text" class="form-control pull-right datepicker" required>                                                
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="control-group">
-                                            <label>Hasta:</label>
-                                            <div class="controls">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>                                                   
-                                                    <input name="fecha_hasta" id="fecha_hasta"type="text" placeholder="campo requerido" class="form-control pull-right datepicker_hasta" required>                                                  
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <label>Hasta:</label>
+                                                    <div class="controls">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>                                                   
+                                                            <input name="fecha_hasta" id="fecha_hasta"type="text" class="form-control pull-right datepicker" required>                                                  
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            </div>		
+                                        </div>		
+                                    </div>					
+									<div class="col-md-3">
+										<div class="control-group">
+											<label>Localidad:</label>
+											<div class="controls">
+												<select style="width: 100%" id="localidad_id" onchange="filtrar_select('localidad_id')" placeholder="campo requerido" class="select2 form-control" multiple>																								
+													@foreach($localidades as $localidad)
+														<option listado="{{$localidad->barrios}}" inmuebles="{{$localidad->inmuebles}}" value="{{$localidad->id}}">{{$localidad->nombre}}</b></option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="control-group">
+											<label>Barrios:</label>
+											<div class="controls">
+												<select style="width: 100%" id="barrio_id" onchange="filtrar_select('barrio_id')" placeholder="campo requerido" class="select2 form-control" multiple>
+													@foreach($barrios as $barrio)
+														<option value="{{$barrio->id}}">{{$barrio->nombre}}</b></option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="control-group">
+											<label>Edificios:</label>
+											<div class="controls">
+												<select style="width: 100%" id="edificio_id" onchange="filtrar_select('edificio_id')" placeholder="campo requerido" class="select2 form-control" multiple>
+													@foreach($edificios as $edificio)
+														<option value="{{$edificio->id}}">{{$edificio->nombre}}</b></option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-md-6">									
+										<div class="control-group">
+											<label>Inmueble:</label>
+											<div class="controls">
+												<select style="width: 100%" id="inmueble_id" placeholder="campo requerido" class="select2 form-control" multiple>													
+													@foreach($inmuebles as $inmueble)
+													<option value="{{$inmueble->id}}">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}}). Piso: {{$inmueble->piso}}.
+														Departamento: ({{$inmueble->numDepto}}) </b>
+													</option>
+													@endforeach
+												</select>
+											</div>										
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="control-group">
+											<label>Impuestos/Servicios:</label>
+											<div class="controls">
+												<select style="width: 100%" id="servicio_id" placeholder="campo requerido" class="select2 form-control" multiple>
+													<option></option>
+													@foreach($servicios as $servicio)
+														<option value="{{$servicio->id}}">{{$servicio->nombre}}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+									</div>								
+								</div>
+								<br>                             
                             </div>
                         </div>                      
                     </div> 
@@ -149,9 +152,9 @@ Garantes registrados
 @endsection
 @section('script') 
 <script>
-    $("#side-impuestos").addClass("active");
+    $("#side-impuestos-li").addClass("active");
     $("#side-impuestos-ul").addClass("menu-open");
-    $("#side-ele-visualizar-impuestos").addClass("active");
+    $("#side-ele-visualizar-impuestos").addClass("active");	
     var pantalla = "visualizar";
 </script>
 <script src="{{ asset('js/impuestos.js') }}"></script>

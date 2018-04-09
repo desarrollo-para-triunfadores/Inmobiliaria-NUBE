@@ -192,13 +192,13 @@
                     </span>
                     </a>
                     <ul id="side-impuestos-ul" class="treeview-menu">
-                        @can('acceso a impuestos')
-                            <li id="side-ele-visualizar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista filtrada de todos los impuestos y servicios cargados" href="/admin/conceptosliquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros de impuestos</a></li>
-                        @endcan
+                       
                         @can('alta de impuestos')
-                            <li id="side-ele-cargar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="cargar los montos para los impuestos asociados a los contratos" href="/admin/conceptosliquidaciones/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carga de impuestos</a></li>
+                            <li id="side-ele-cargar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="cargar los montos para los impuestos asociados a los contratos" href="/admin/conceptosliquidaciones/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Cargar impuestos</a></li>
                         @endcan
-
+                        @can('acceso a impuestos')
+                            <li id="side-ele-visualizar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista filtrada de todos los impuestos y servicios cargados" href="/admin/conceptosliquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Ver historial</a></li>
+                        @endcan
                     </ul>
                 </li>
             @endcan

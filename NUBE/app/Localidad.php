@@ -29,7 +29,7 @@ class Localidad extends Model
 
     public function inmuebles()
     {
-        return $this->hasMany('App\Inmuebles');
+        return $this->hasMany('App\Inmueble');
     }
 
     public function barrios()

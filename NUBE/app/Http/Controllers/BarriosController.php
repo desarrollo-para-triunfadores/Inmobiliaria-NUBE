@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Barrio;
+use App\Edificio;
+use App\Inmueble;
+use App\Contrato;
 use App\Localidad;
 use Carbon\Carbon;
 use Laracasts\Flash\Flash;
@@ -37,7 +40,7 @@ class BarriosController extends Controller
         }
     }
 
-
+    
     public function create()
     {
         return view('admin.barrios.create');
@@ -77,6 +80,7 @@ class BarriosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         $barrio = Barrio::find($id);
@@ -84,4 +88,51 @@ class BarriosController extends Controller
         Session::flash('message', 'El barrio ha sido eliminado del sistema');
         return redirect()->route('barrios.index');
     }
+
+
+    public function obtener_inmuebles(Request $request) 
+    {        
+        /**
+         * Este método recibe un array de ids de localidades y devuelve un array
+         * con todos los inmuebles que pertenescan a esas localidades.   
+         */
+        
+        $listado = [];
+        if(count($request->lista_ids)>0){
+            foreach ($request->lista_ids as $id_localidad) {            
+                $barrio = Barrio::find($id_barrio);                        
+                $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes
+                $inmuebles = $barrio->inmuebles->whereIn('id', $inmuebles_ocupados);                
+                foreach ($inmuebles as $inmueble) {
+                    array_push($listado, $inmueble);
+                }                                        
+            }
+        }else{
+            $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes
+            $listado = Inmueble::all()->whereIn('id', $inmuebles_ocupados);
+        }
+        return response()->json($listado);
+    }
+
+    public function obtener_edificios(Request $request) 
+    {        
+        /**
+         * Este método recibe un array de ids de localidades y devuelve un array
+         * con todos los edificios que pertenescan a esas localidades.   
+         */
+        
+        $listado = [];
+        if(count($request->lista_ids)>0){
+            foreach ($request->lista_ids as $id_barrio) {            
+                $barrio = Barrio::find($id_barrio);                   
+                foreach ($barrio->edificios as $edificio) {
+                    array_push($listado, $edificio);
+                }                                 
+            }
+        }else{
+            $listado = Edificio::all();
+        }
+        return response()->json($listado);
+    }
+
 }

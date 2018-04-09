@@ -59,7 +59,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input id="venc1{{$servicio_contrato->id}}" type="text" class="form-control mascara_vencimiento" onchange="carga_lineas({{$servicio_contrato->id}})">
+							<input id="venc1{{$servicio_contrato->id}}" type="text" class="form-control datepicker" onchange="carga_lineas({{$servicio_contrato->id}})">
 						</div>
 					</td>
 					<td>
@@ -67,7 +67,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input id="venc2{{$servicio_contrato->id}}" type="text" class="form-control mascara_vencimiento" onchange="carga_lineas({{$servicio_contrato->id}})">
+							<input id="venc2{{$servicio_contrato->id}}" type="text" class="form-control datepicker" onchange="carga_lineas({{$servicio_contrato->id}})">
 						</div>
 					</td>
 					<td>

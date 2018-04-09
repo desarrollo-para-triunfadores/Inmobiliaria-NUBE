@@ -61,23 +61,36 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('oportunidades', 'OportunidadesController');
 
-  //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
-
+   //Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
    //Route::resource('oportunidades', 'OportunidadesController');
    //Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
-  //Route::post('cargar_archivo_correo', 'Mail_contacto_OportunidadesController@store'); //se llama por ajax (post)
-  //Route::post('enviar_correo', 'Mail_contacto_OportunidadesController@enviar');
-    //Route::get('form_enviar_correo', 'Mail_contacto_OportunidadesController@crear');
+   //Route::post('cargar_archivo_correo', 'Mail_contacto_OportunidadesController@store'); //se llama por ajax (post)
+   //Route::post('enviar_correo', 'Mail_contacto_OportunidadesController@enviar');
+   //Route::get('form_enviar_correo', 'Mail_contacto_OportunidadesController@crear');
 
     Route::resource('agenda', 'VisitasController');
+
+
+  /**
+   * Rutas de métodos específicos 
+   */
+
+    Route::get('/obtener_inmuebles_edificio', 'EdificiosController@obtener_inmuebles')->name('obtener_inmuebles_edificio');
+
+    Route::get('/obtener_inmuebles_barrios', 'BarriosController@obtener_inmuebles')->name('obtener_inmuebles_barrios');
+    Route::get('/obtener_edificios_barrios', 'BarriosController@obtener_edificios')->name('obtener_edificios_barrios');
+
+    Route::get('/obtener_inmuebles_localidad', 'LocalidadesController@obtener_inmuebles')->name('obtener_inmuebles_localidad');
+    Route::get('/obtener_edificios_localidad', 'LocalidadesController@obtener_edificios')->name('obtener_edificios_localidad');
+    Route::get('/obtener_barrios_localidad', 'LocalidadesController@obtener_barrios')->name('obtener_barrios_localidad');
+    
+
+    Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('cargaEventos{id?}', 'CalendarController@index');
-
-
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
-    Route::get('/configuracion', function () {
-  // esta ruta es solo para zafar, pero hay que hacer un controller con la info de la empresa
+    Route::get('/configuracion', function () {// esta ruta es solo para zafar, pero hay que hacer un controller con la info de la empresa
         return view('admin.configuracion.main');
     });
 });

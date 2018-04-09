@@ -20,11 +20,9 @@ class Barrio extends Model
         return $this->hasMany('App\Inmueble');
     }
 
-
-
-    /******** devuelve todos los barrios ingresandole el id de localidad ******/
-    public static function barrios($id){
-        return Barrio::where('localidad_id','=',$id)
-            ->get();
+    public function edificios()
+    {
+        return $this->hasMany('App\Edificio');
     }
+
 }
