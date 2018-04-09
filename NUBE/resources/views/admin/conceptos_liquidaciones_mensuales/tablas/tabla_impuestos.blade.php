@@ -4,7 +4,7 @@
         <h3 class="box-title"> Impuestos y servicios</h3>
     </div>
     <div class="box-body ">
-        <table id="example"  class="display" cellspacing="0" width="100%">
+        <table id="example"  class="display responsive" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th>Inmueble</th>
@@ -12,9 +12,11 @@
                 <th>Servicio</th>
                 <th>Periodo</th>
                 <th>Monto</th>
-                <th>1º vencimiento</th>
-                <th>2º vencimiento</th>
+                <th>1º venc.</th>
+                <th>2º venc.</th>
                 <th>Estado de liquidación</th>
+                <th>Abonado</th>
+                <th>Fecha carga</th>
             </tr>
             </thead>
             <tfoot>
@@ -24,9 +26,11 @@
                 <th>Servicio</th>
                 <th>Periodo</th>
                 <th>Monto</th>
-                <th>1º vencimiento</th>
-                <th>2º vencimiento</th>
+                <th>1º venc.</th>
+                <th>2º venc.</th>
                 <th>Estado de liquidación</th>
+                <th>Abonado</th>
+                <th>Fecha carga</th>
             </tr>
             </tfoot>
             <tbody>
@@ -44,6 +48,12 @@
                     @else
                         <td class="text-center text-red"><b>Sin liquidar</b></td>
                     @endif
+                    @if($concepto_liquidacion->servicio_abonado)
+                        <td class="text-center text-green"><b>Abonado</b></td>
+                    @else
+                        <td class="text-center text-red"><b>No abonado</b></td>
+                    @endif
+                    <td class="text-center">{{$concepto_liquidacion->created_at->format('d/m/Y')}}</td>
                 </tr>
             @endforeach
             </tbody>
