@@ -198,7 +198,7 @@ class EdificiosController extends Controller
          */
         
         $listado = [];
-        if(count($request->lista_ids)>0){
+        if(!is_null($request->lista_ids)){
             foreach ($request->lista_ids as $id_edficio) {            
                 $edificio = Edificio::find($id_edficio);                 
                 $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes

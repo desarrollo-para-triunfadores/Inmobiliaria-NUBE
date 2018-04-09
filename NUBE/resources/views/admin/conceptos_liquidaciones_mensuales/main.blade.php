@@ -1,19 +1,18 @@
 @extends('admin.partes.index')
 
 @section('title')
-Garantes registrados
+Historial de impuestos y servicios cargados
 @endsection
 
 @section('content')
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content-header">
         <h1>
-            Impuestos y servicios cargados
-            <small></small>
+            Historial de impuestos y servicios cargados
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-suitcase"></i> Impuestos</a></li>          
-            <li class="active">Impuestos y servicios cargados</li>
+            <li class="active">Historial</li>
         </ol>
     </section>
     <section class="content animated fadeIn">

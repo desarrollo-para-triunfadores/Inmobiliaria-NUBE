@@ -64,20 +64,15 @@ class ConceptosLiquidacionesController extends Controller
                 ->whereIn('inmueble_id', $inmuebles_array)
                 ->pluck('id')->toArray();
 
-            $servicios_contratos = ServicioContrato::all()
-                ->whereIn('contrato_id', $contratos_array); //filtramos los servicios de contratos que tengan de contrato_id a cualquiera de los ids de la coleccion de contratos vigentes filtrados
-
-            if ($request->servicios !== null) {
-                $servicios_contratos = $servicios_contratos
-                    ->whereIn('servicio_id', $request->servicios); //filtramos los inmuebles que tengan de servicio_id a cualquiera de los ids recibidos
-            }
-
             if ($request->accion === "visualizar") {
 
-                $servicios_contratos_array = $servicios_contratos->pluck('id')->toArray();
+                $conceptos_liquidaciones = ConceptoLiquidacion::all()->whereIn('contrato_id', $contratos_array);
 
-                $conceptos_liquidaciones = ConceptoLiquidacion::all()->whereIn('serviciocontrato_id', $servicios_contratos_array);
-
+                if ($request->servicios !== null) {
+                    $conceptos_liquidaciones = $conceptos_liquidaciones
+                        ->whereIn('servicio_id', $request->servicios); //filtramos los inmuebles que tengan de servicio_id a cualquiera de los ids recibidos
+                }               
+                
                 if ($request->desde !== null) {
                     $fecha = str_replace('/', '-', $request->desde);
                     $fecha_desde = date('Y-m-d', strtotime($fecha));
@@ -88,9 +83,20 @@ class ConceptosLiquidacionesController extends Controller
                     $fecha_hasta = date('Y-m-d', strtotime($fecha));
                     $conceptos_liquidaciones = $conceptos_liquidaciones->where('created_at', '<', $fecha_hasta);
                 }
-                return response()->json(view('admin.conceptos_liquidaciones_mensuales.partes_create.tabla_impuestos', compact('conceptos_liquidaciones'))->render()); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
+
+                return response()->json(view('admin.conceptos_liquidaciones_mensuales.tablas.tabla_impuestos', compact('conceptos_liquidaciones'))->render()); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
+            
             } else {
-                return response()->json(view('admin.conceptos_liquidaciones_mensuales.partes_create.tabla_cargar_impuestos', compact('servicios_contratos'))->render()); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
+
+                $servicios_contratos = ServicioContrato::all()
+                ->whereIn('contrato_id', $contratos_array); //filtramos los servicios de contratos que tengan de contrato_id a cualquiera de los ids de la coleccion de contratos vigentes filtrados
+
+                if ($request->servicios !== null) {
+                    $servicios_contratos = $servicios_contratos
+                        ->whereIn('servicio_id', $request->servicios); //filtramos los inmuebles que tengan de servicio_id a cualquiera de los ids recibidos
+                }
+
+                return response()->json(view('admin.conceptos_liquidaciones_mensuales.tablas.tabla_cargar_impuestos', compact('servicios_contratos'))->render()); //devolvemos la vista de la tabla con la coleccion de objetos filtrados.
             }
         }
 
@@ -234,7 +240,7 @@ class ConceptosLiquidacionesController extends Controller
 
         $servicios = Servicio::all();
 
-        return view('admin.conceptos_liquidaciones_mensuales.formulario.create')
+        return view('admin.conceptos_liquidaciones_mensuales.create')
             ->with('edificios', $edificios)
             ->with('barrios', $barrios)
             ->with('localidades', $localidades)

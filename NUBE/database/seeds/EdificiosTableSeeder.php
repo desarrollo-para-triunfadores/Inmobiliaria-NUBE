@@ -144,7 +144,7 @@ class EdificiosTableSeeder extends Seeder
             'fecha_habilitacion'=> '2005-10-01',
             'administrado_por_sistema'=> true,
             'descripcion'=> 'Edificio autoadministrado',
-            'barrio_id' => '1',
+            'barrio_id' => '138',
             'localidad_id'=> '5',
             'created_at' => date('Y-m-d H:m:s')
         ]);

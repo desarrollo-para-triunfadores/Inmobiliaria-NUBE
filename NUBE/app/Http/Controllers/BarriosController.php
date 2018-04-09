@@ -98,8 +98,8 @@ class BarriosController extends Controller
          */
         
         $listado = [];
-        if(count($request->lista_ids)>0){
-            foreach ($request->lista_ids as $id_localidad) {            
+        if(!is_null($request->lista_ids)){
+            foreach ($request->lista_ids as $id_barrio) {            
                 $barrio = Barrio::find($id_barrio);                        
                 $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes
                 $inmuebles = $barrio->inmuebles->whereIn('id', $inmuebles_ocupados);                
@@ -122,7 +122,7 @@ class BarriosController extends Controller
          */
         
         $listado = [];
-        if(count($request->lista_ids)>0){
+        if(!is_null($request->lista_ids)){
             foreach ($request->lista_ids as $id_barrio) {            
                 $barrio = Barrio::find($id_barrio);                   
                 foreach ($barrio->edificios as $edificio) {

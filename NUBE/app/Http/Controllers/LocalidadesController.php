@@ -101,7 +101,7 @@ class LocalidadesController extends Controller
          */
         
         $listado = [];
-        if(count($request->lista_ids)>0){
+        if(!is_null($request->lista_ids)){
             foreach ($request->lista_ids as $id_localidad) {            
                 $localidad = Localidad::find($id_localidad);                    
                 $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes
@@ -125,7 +125,7 @@ class LocalidadesController extends Controller
          */
         
         $listado = [];
-        if(count($request->lista_ids)>0){
+        if(!is_null($request->lista_ids)){
             foreach ($request->lista_ids as $id_localidad) {            
                 $localidad = Localidad::find($id_localidad);                   
                 foreach ($localidad->edificios as $edificio) {
@@ -147,7 +147,7 @@ class LocalidadesController extends Controller
          */
         
         $listado = [];
-        if(count($request->lista_ids)>0){
+        if(!is_null($request->lista_ids)){
             foreach ($request->lista_ids as $id_localidad) {            
                 $localidad = Localidad::find($id_localidad);                   
                 foreach ($localidad->barrios as $barrio) {

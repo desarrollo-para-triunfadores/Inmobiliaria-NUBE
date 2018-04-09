@@ -1,16 +1,20 @@
-@extends('admin.partes.index') @section('title') Registrar impuestos nuevos @endsection @section('content')
+@extends('admin.partes.index') 
+
+@section('title') 
+Carga de impuestos
+@endsection 
+
+@section('content')
 <div class="content-wrapper" style="min-height: 916px;">
 	<section class="content-header">
 		<h1>
-			Carga de impuestos
-			<small></small>
+			Carga de impuestos			
 		</h1>
 		<ol class="breadcrumb">
 			<li>
 				<a href="#">
 					<i class="fa fa-suitcase"></i> Impuestos</a>
 			</li>
-			<li>Registros de impuestos</li>
 			<li class="active">Carga de Impuestos</li>
 		</ol>
 	</section>
