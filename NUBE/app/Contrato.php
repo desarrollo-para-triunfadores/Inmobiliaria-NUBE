@@ -57,6 +57,12 @@ class Contrato extends Model
         return $this->belongsTo('App\Inquilino');
     }
 
+    /*
+    public function propietario()
+    {
+        return $this->belongsTo('App\Inmueble');
+    }    
+*/
     public function inmueble()
     {
         return $this->belongsTo('App\Inmueble');
@@ -121,7 +127,7 @@ class Contrato extends Model
 
     public function total_boletas_impagas()
     {
-        $liquidaciones = $this->hasMany('App\LiquidacionMensual')->where('abonado', null)->get();
+        $liquidaciones = $this->hasMany('App\LiquidacionMensual')->where('abonado', null)->whereNotNull('vencimiento')->get();  #cuando vencimiento no es nulo, quiere decir que la liquidacion es abonable (se emitio boleta)
         $deuda = 0;
         foreach ($liquidaciones as $liquidacion) {
             $deuda = $deuda + $liquidacion->total;

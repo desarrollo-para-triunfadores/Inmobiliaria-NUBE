@@ -13,6 +13,7 @@ class Visita extends Model {
         'fin',
         'allDay',
         'color',
+        'confirmada','realizada', 'solicitudservicio_id',
         'oportunidad_id'
     ];
 

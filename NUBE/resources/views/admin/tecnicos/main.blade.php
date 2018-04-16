@@ -69,10 +69,10 @@
 											@else
 												<td class="text-center">Sin especialidad</td>
 											@endif
-											<td class="text-center">{{$tecnico->persona->telefono}}</td>
+											<td class="text-center">-</td>
 											
-											<td class="text-center">{{$tecnico->persona->email}}</td>
-											<td class="text-center">{{$tecnico->ocupado}}</td>
+											<td class="text-center">-{{--$tecnico->persona->email--}}</td>
+											<td class="text-center">{{$tecnico->estado}}</td>
 											<td class="text-center">{{$tecnico->persona->localidad->nombre}}</td>
 											<td class="text-center">{{$tecnico->persona->direccion}}</td>
 											@if($tecnico->persona->fecha_nac)

@@ -10,15 +10,15 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body ">
-        <table id="tabla_clientes" class="display responsive dataTable table-bordered" cellspacing="0" width="100%">
+        <table id="tbl_clientes" class="display responsive dataTable" cellspacing="0" width="100%">
             <thead>
-            <tr>
-                <th class="text-center">Apellido y nombre</th>
-                <th class="text-center">A pagar</th>
-                <th class="text-center">A cobrar</th>
-                <th class="text-center">Saldo</th>
-                <th class="text-center">Acciones</th>      
-            </tr>
+                <tr>
+                    <th class="text-center">Apellido y nombre</th>
+                    <th class="text-center" data-toogle="tooltip" title="Dinero que el cliente debe por servicios">A pagar</th>
+                    <th class="text-center" data-toogle="tooltip" title="Dinero que pertenece al cliente y está en condiciones de serle entregado">A cobrar</th>
+                    <th class="text-center">Saldo</th>
+                    <th class="text-center">Acciones</th>      
+                </tr>
             </thead>
             <tbody>
             @foreach($clientes as $cliente)
@@ -55,13 +55,13 @@
             @endforeach
             </tbody>
             <tfoot>
-            <tr>
-                <th class="text-center">Apellido y nombre</th>
-                <th class="text-center">A pagar</th>
-                <th class="text-center">A cobrar</th>
-                <th class="text-center">Saldo</th>
-                <th class="text-center">Acciones</th>              
-            </tr>
+                <tr>
+                    <th class="text-center">Apellido y nombre</th>
+                    <th class="text-center">A pagar</th>
+                    <th class="text-center">A cobrar</th>
+                    <th class="text-center">Saldo</th>
+                    <th class="text-center">Acciones</th>              
+                </tr>
             </tfoot>
         </table>
     </div>

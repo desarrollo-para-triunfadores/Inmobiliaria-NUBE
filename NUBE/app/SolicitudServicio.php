@@ -7,19 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class SolicitudServicio extends Model
 {
     protected $table = "solicitudesServicio";
-    protected $fillable =  ['inmueble_id','tecnico_id', 'inquilino_id', 'propietario_id', 
-                            'estado', 'fecha_inicio', 'fecha_fin', 'cobrado']; 
+    protected $fillable =  ['tecnico_id', 'contrato_id', 'responsable', 
+                            'rubrotecnico_id', 'motivo', 'estado', 'monto_final', 'fecha_cierre']; 
 
     public function tecnico(){
         return $this->belongsTo('App\Tecnico');
     }  
-    public function inmueble(){
-        return $this->belongsTo('App\Inmueble');
+    public function contrato(){
+        return $this->belongsTo('App\Contrato');
     }  
-    public function inquilino(){
-        return $this->belongsTo('App\Inquilino');
+    public function rubro(){
+        return $this->belongsTo('App\RubroTecnico');
     }  
-    public function propietario(){
-        return $this->belongsTo('App\Propietario');
-    }                        
+    
+    #########################################
+    public function solicitante(){              #devuelve el el obj propietario o inquilino segun la marca de quien solicito el servicio tecnico (responsable)
+        if($this->responsable == 'propietario'){
+            return $this->contrato->inmueble->propietario;
+        }else{
+            return $this->contrato->inquilino;
+        }
+
+    }
 }

@@ -33,17 +33,12 @@ class LiquidacionMensualController extends Controller
         Carbon::setlocale('es'); // Instancio en Español el manejador de fechas de Laravel
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
         if ($request->ajax()) {
             $fecha_hoy = \Carbon\Carbon::now('America/Buenos_Aires');
             $contratos_vigentes = Contrato::all()->where('fecha_hasta', '<', $fecha_hoy);
-
             $inmuebles_claves = Inmueble::all()->where("tipo_id", 1); //obtenemos todos los objeto inmuebles disponebles para alquiler
 
             if ($request->lodalidades !== null) { //filtramos los inmuebles que tengan de id_localidades a cualquiera de los ids recibidos
@@ -87,15 +82,10 @@ class LiquidacionMensualController extends Controller
             ->with('servicios', $servicios);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create(Request $request)
     {
-        if ($request->ajax()) {
-            
+        if ($request->ajax()) {            
             foreach ($request->lista_conceptos as $item) {//$request->lista_conceptos llegan todas las liquidaciones que el usuario le haya colocado fecha de vencimiento
                 //Una por una las liquidaciones son actualizadas y guardadas
                 $liquidacion = LiquidacionMensual::find($item["id_liquidacion"]);               
@@ -103,8 +93,8 @@ class LiquidacionMensualController extends Controller
                     $vencimiento = str_replace('/', '-', $item["vencimiento"]);
                     $liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
                 }
+                //dd($liquidacion);
                 $liquidacion->save();
-
                 //Se crea la notificación para el inquilino
                 $notificacion = new Notificacion();
                 $notificacion->mensaje = "Estimado cliente le informamos que la boleta correspondiente al periodo ".$liquidacion->periodo." ya se encuentra lista. La misma vence el ".$liquidacion->vencimiento.".";
@@ -115,7 +105,7 @@ class LiquidacionMensualController extends Controller
                 $notificacion->save();
 
                 ##########   Una vez liquidada boleta en el sistema, notificamos por email al cliente inquilino   #########
-              /*  $conceptos = $liquidacion->detalle_conceptos();               
+                $conceptos = $liquidacion->detalle_conceptos();               
                 $cliente = $liquidacion->contrato->inquilino->persona->nombrecompleto;
                 $monto_alquiler = $liquidacion->alquiler;
                 $monto_expensas = $liquidacion->calcular_total();
@@ -123,16 +113,15 @@ class LiquidacionMensualController extends Controller
                 $periodo = $liquidacion->periodo;
                 $vencimiento = $liquidacion->vencimiento;
                 try{
-                    Mail::send('emails.boleta.boleta', ['cliente'=>$cliente, 'periodo'=>$periodo, 'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'monto_alquiler'=>$monto_alquiler, 'monto_expensas'=>$monto_expensas, 'total'=>$total], function($msj){
-                        $msj->subject('Nube Propiedades | Boleta de Servicio');
+                    Mail::send('emails.boleta.boleta', ['liquidacion'=>$liquidacion, 'cliente'=>$cliente, 'periodo'=>$periodo, 'vencimiento'=>$vencimiento, 'conceptos'=>$conceptos, 'monto_alquiler'=>$monto_alquiler, 'monto_expensas'=>$monto_expensas, 'total'=>$total], function($msj){
+                        $msj->subject('Cloudprop | Boleta de Servicio');
                         $msj->to('jpcaceres.nea@gmail.com');
                     });
                     return response()->json(json_encode("Se envio el email", true));
                 }catch (Exception $e){
                     $respuesta = array("excepcion"=>$e);
-                    return response()->json(json_encode($respuesta, true));
-                    $concepto_liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
-                }*/
+                    return response()->json(json_encode($respuesta, true));                    
+                }
                 #################### --FIN Email de boletas -- ####################
            
             }

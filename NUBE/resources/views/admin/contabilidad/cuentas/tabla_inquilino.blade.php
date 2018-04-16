@@ -20,13 +20,17 @@
             </thead>
             <tbody>
             @foreach($liquidaciones as $liquidacion)
-                <tr>           
-                    <td class="text-center text-bold">{{$liquidacion->periodo}}</td>             
-                    @if(is_null($liquidacion->fecha_pago_propietario))
-                        <td class="text-center text-bold">Pagada ✔️</td>
+                <tr>             
+                    <td class="text-center text-bold">{{$liquidacion->periodo}}</td> 
+                    @if($liquidacion->abonado)     
+                        <td class="text-center text-bold">Pagada ✔️</td>                 
                     @else
-                        <td class="text-center text-bold">No pagada 🛑 </td>
-                    @endif
+                        @if($liquidacion->vencimiento > \Carbon\Carbon::now())         
+                            <td class="text-center text-bold">No pagada ❌</td>     
+                        @else
+                            <td class="text-center text-bold text-red">VENCIDA ❌</td>  
+                        @endif     
+                    @endif                    
                             
                     <td class="text-center" width="100">
                         {{--
@@ -35,9 +39,10 @@
                         </button>
                         <button class="btn-bitbucket" onclick="escargar_recibo({{$liquidacion}})">Descargar
                         </button>
-                                --}}
-                        <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                        --}}
+                        <a href="{{ route('contabilidad.verBoleta', $liquidacion->id)}}" target="_blank" title="Ver el detalle de esta boleta / Imprimir" class="btn btn-social-icon btn-sm btn-info">
                             <i class="fa fa-list"></i>
+                          
                         </a>
                                 <a href="{{ route('contabilidad.show', $inquilino->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
                             <i class="fa fa-download"></i>

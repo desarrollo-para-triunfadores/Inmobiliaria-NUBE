@@ -53,10 +53,17 @@ class SolicitudesServicioController extends Controller
 
     public function store(Request $request)
     {
+        $solicitud = new SolicitudServicio();
+        $solicitud->tecnico_id = $request->tecnico_id;
+        $solicitud->rubrotecnico_id = $request->rubrotecnico_id;
+        $solicitud->contrato_id = $request->contrato_id;         #resta mandarlo en la vista
+        $solicitud->motivo = $request->titulo;
+        $solicitud->estado = "inicial";
+
+        $solicitud->save();
+        return json("Se proceso su solicitud correctamente.");
+
         
-    
-        $edificio->save();
-        return response()->json('ok');
     }
 
 

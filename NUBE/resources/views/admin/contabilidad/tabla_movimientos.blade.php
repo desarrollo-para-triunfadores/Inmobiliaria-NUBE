@@ -10,7 +10,6 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body ">
-
         <table id="tabla_movimientos" class="display responsive dataTable" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -68,9 +67,7 @@
             },
             success: function (data) {
                 var recibido = JSON.parse(data);
-
                 console.log(recibido);
-
             }
         });
     }

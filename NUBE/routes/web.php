@@ -61,7 +61,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('oportunidades', 'OportunidadesController');
 
     #Tecnicos
+    Route::name('tecnicos.tecnicosxrubro')->get('tecnicos/tecnicosxrubro/', 'TecnicosController@tecnicosxrubro');
     Route::resource('tecnicos', 'TecnicosController');
+
+    //Route::get('/verBoleta', 'EstadisticasController@verBoleta')->name('verBoleta');
+    Route::name('contabilidad.verBoleta')->get('contabilidad/verBoleta/{id}', 'EstadisticasController@verBoleta');
+    /*
+    Route::get('contabilidad/verBoleta', function()
+    {       
+        return View::make('contabilidad.verBoleta'); 
+    });
+    */
     #Solicitudes Servicio Técnico
     Route::resource('solicitudes_servicio', 'SolicitudesServicioController');
 
@@ -75,13 +85,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('agenda', 'VisitasController');
     Route::get('cargaEventos{id?}', 'CalendarController@index');
-
+    
 
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
     Route::get('/configuracion', function () {
-  // esta ruta es solo para zafar, pero hay que hacer un controller con la info de la empresa
+    // esta ruta es solo para zafar, pero hay que hacer un controller con la info de la empresa
         return view('admin.configuracion.main');
     });
 });

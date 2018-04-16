@@ -13,13 +13,13 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','imagen'];
+    protected $fillable = ['name', 'email', 'rol_id', 'password','imagen'];
 
     public function persona() {
         return $this->hasOne('App\Persona');

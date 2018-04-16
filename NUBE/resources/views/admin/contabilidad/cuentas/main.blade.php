@@ -21,10 +21,7 @@
                 --}}   
                      <button type="button" class="btn btn-bitbucket" onclick="" data-toggle="modal" data-placement="bottom" data-target="#modal-nueva-peticion-servicio" title="Llamar a personal de servicio técnico"  >Solicitar Servicio Técnico</button>
                 </li>
-            </ol>
-            
-           
-            
+            </ol>            
         </section>
 
         <section class="content animated fadeIn">
@@ -41,7 +38,29 @@
     </div>
 
 
-@endsection @section('script')
-    <script src="{{ asset('js/camara.js') }}"></script>
+@endsection 
+@section('script')
     <script src="{{ asset('js/contabilidad.js') }}"></script>
+    <script>
+            /**** Cuando se selecciona un rubro de tecnico, desplegar los tecnicos que corresponden al rubro ****/
+          $('select#rubrotecnico_id').on('change',function () {
+              $('select#tecnico_id').empty();   
+              $.ajax({
+                  dataType: 'JSON',
+                  url: "/admin/tecnicos/tecnicosxrubro",      
+                  data: {
+                      id: $('#rubrotecnico_id').val()
+                  },
+                  success: function (data) {
+                      console.log(data);
+                      data = JSON.parse(data);
+                      //factura.tipo_cbre = data.tipo_cbre;
+                      for(i=0; i<data.length; i++){
+                          $('select#tecnico_id').append("<option value='"+data[i].tecnico.id+"'> "+data[i].persona.nombre+" "+data[i].persona.apellido+"</option>");
+                      }
+                  }
+              });
+             
+          });
+    </script>
 @endsection

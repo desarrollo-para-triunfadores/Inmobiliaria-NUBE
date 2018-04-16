@@ -89,7 +89,7 @@
 							@if (count($liquidaciones) > 0)
 								<button title="Registrar las liquidaciones" type="button" onclick="enviar()" id="boton-modal-crear" class="btn btn-primary pull-right" data-toggle="modal"
 										data-target="#modal-crear">
-									<i class="fa fa-plus-circle"></i> &nbsp;registrar liquidaciones
+									<i class="fa fa-plus-circle"></i> &nbsp;Registrar Liquidaciones
 								</button>
 							@endif
 						</div>

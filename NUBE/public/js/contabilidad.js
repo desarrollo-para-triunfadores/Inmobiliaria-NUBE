@@ -71,11 +71,11 @@ pieChart.Doughnut(PieData, pieOptions);
 
 
 /** En seccion TABLA MOVIMIENTOS **/
-//Datatable - instaciación del plugin
+//Datatable | instaciación del plugin
 var table_mov = $('#tabla_movimientos').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
 });
-//Datatable - instaciación del plugin
+
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
     var colIdx = table_mov.cell(this).index().column;
@@ -105,14 +105,14 @@ function instaciar_filtros_movimientos() {
     });
 }
 //Datatables | ocultar/visualizar columnas dinámicamente
+/*
 $('a.toggle-vis').on('click', function (e) {
     e.preventDefault();
-    // Get the column API object
     var column = table_mov.column($(this).attr('data-column'));
-    // Toggle the visibility
     column.visible(!column.visible());
     instaciar_filtros_movimientos();
 });
+*/
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
     var colIdx = table_mov.cell(this).index().column;
@@ -122,13 +122,12 @@ $('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
 /******************************************************************************************************************* */
 
 
-/** TABLA CLIENTES **/
-/** En seccion TABLA CLIENTES **/
 //Datatable - instaciación del plugin
+/** TABLA CLIENTES **** En seccion TABLA CLIENTES **/
+//Datatable | instaciación del plugin
 var table_c = $('#tabla_clientes').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
 });
-//Datatable - instaciación del plugin
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_clientes tbody').on('mouseenter', 'td', function () {
     var colIdx = table_c.cell(this).index().column;
@@ -158,29 +157,6 @@ function instaciar_filtros_clientes() {
     });
 }
 
-//Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
-$('#tabla_clientes tbody').on('mouseenter', 'td', function () {
-    var colIdx = table_c.cell(this).index().column;
-    $(table_c.cells().nodes()).removeClass('highlight');
-    $(table_c.column(colIdx).nodes()).addClass('highlight');
-});
-
-
-/**** Oculta o Mustra el campo personalizado para "Concepto" ****/
-/*
-$("#concepto_mov").change(function () {
-    alert('se selecciono');
-    
-    if ($('#concepto').val() == 0) {
-        alert('se selecciono otro');
-        $('#descripcion').removeClass('hide');
-    }
-    if ($('#concepto').val() != 0) {
-        $("#descripcion").hide();
-    }
-    
-});
-*/
 /************************************************************** */
 function validarMovimiento_Otro(valor_select){
     if($('#concepto_mov').val()==0){
@@ -188,15 +164,23 @@ function validarMovimiento_Otro(valor_select){
         $('#descripcion').removeClass('hide');
         $("#conv_mov").hide();
         alert('sedeberia mostrar el campo para DESCRIPCION');
-    }
-    else /*($('#concepto').val() != 0)*/ {
+    }else{
         $("#descripcion").hide();
         alert('sedeberia OCULTAR campo Descripcion');
     }
 }
-
 /*****  Mascaras para decimales  ******/
 $('#monto_mov').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});    //monto de alta de movimiento
 //$('#monto').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:'.', affixesStay: false});
 /***************************************************************************************************************** */
 
+function ver_boleta(liquidacion_id){    //Abre boletas anteriores en pestaña nueva    
+   $.ajax({
+        dataType: 'JSON',
+        url: "/admin/contabilidad/verBoleta",
+        data: {
+            liquidacion_id: liquidacion_id,            
+        },       
+    });
+      
+}

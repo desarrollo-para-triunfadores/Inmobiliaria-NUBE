@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">                                           
-                                <label>Tipo:</label>
+                                <label>Rubro:</label>
                                 <select style="width: 100%"  name="rubrotecnico_id" id="rubrotecnico_id" placeholder="campo obligatorio"  class="select2 form-control">
                                     <option value=""></option>
                                     @foreach($rubrosTecnicos as $rubro)
@@ -30,19 +30,33 @@
                                 </select>
                             </div>
                          </div>
-                         <div class="col-md-4">
+                         <div class="col-md-8">
                             <div class="form-group">                                           
-                                <label>Tipo:</label>
-                                <select style="width: 100%"  name="rubrotecnico_id" id="rubrotecnico_id" placeholder="campo obligatorio"  class="select2 form-control">
+                                <label>¿Tiene preferencia por algun técnico?:</label>
+                                <select style="width: 90%"  name="tecnico_id" id="tecnico_id" placeholder="campo obligatorio"  class="select2 form-control">
                                     <option value=""></option>
                                     @foreach($tecnicos as $tecnico)
-                                        <option value="{{$tecnico->id}}">{{$tecnico->persona->nombreCompleto}}</option>
+                                        <option value="{{$tecnico->id}}"><b>{{$tecnico->persona->nombreCompleto}}</b>  |  {{$tecnico->persona->email}}</option>
                                     @endforeach
                                 </select>
                             </div>
                          </div>
                     </div>
-                                           
+                    
+                    <!--Acerca del inmueble (contrato) de solicitud -->
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Inmueble:</label>
+                                <select style="width: 100%"  name="contrato_id" id="contrato_id" placeholder="campo obligatorio"  class="select2 form-control">
+                                    <option value=""></option>
+                                    @foreach($contratos as $contrato)
+                                        <option value="{{$contrato->id}}">{{$contrato->inmueble->direccion}} (Depto: {{$contrato->inmueble->piso}}-{{$contrato->inmueble->numDepto}})  ||   inquilino actual: {{ $contrato->inquilino->persona->nombreCompleto }}  </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>                       
+                    </div>
                     <!--Datos de Evento (Visita en agenda)-->                     
                          
                     <div class="row">
@@ -83,3 +97,5 @@
  </div>          
     </div>
 </div>
+
+

@@ -68,7 +68,7 @@ class Propietario extends Model {
                 $total_x_pagar = $total_x_pagar + $liquidacion->comision_a_propietario;
             }            
         } 
-        return $total_x_pagar;
+        return $total_x_pagar;//number_format($total_x_pagar , 2);
     }
 
     public function cobros_alquiler_pendientes(){      #Dinero que el propietario tiene disponible en concepto de 'recaudacion de sus alquileres' que el sistema administra

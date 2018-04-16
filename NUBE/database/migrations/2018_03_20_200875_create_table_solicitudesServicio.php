@@ -13,10 +13,18 @@ class CreateTableSolicitudesServicio extends Migration
             $table->integer('tecnico_id')->unsigned()->nullable();
             $table->foreign('tecnico_id')->references('id')->on('tecnicos')->onDelete('cascade'); 
 
-            $table->integer('inquilino_id')->unsigned();
-            $table->foreign('inquilino_id')->references('id')->on('inquilinos')->onDelete('cascade');   
-            $table->integer('propietario_id')->unsigned();
-            $table->foreign('propietario_id')->references('id')->on('propietarios')->onDelete('cascade');                     
+            $table->integer('contrato_id')->unsigned();
+            $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');  
+
+            $table->integer('rubrotecnico_id')->unsigned();
+            $table->foreign('rubrotecnico_id')->references('id')->on('rubrostecnicos')->onDelete('cascade');
+            
+            $table->enum('responsable', ['propietario', 'inquilino']);
+
+            $table->string('motivo')->nullable(); 
+            $table->enum('estado', ['inicial', 'tomada', 'concluida', 'finalizada']); //Estado Solicitud
+            $table->double('monto_final', 10, 2)->nullable();
+            $table->date('fecha_cierre')->nullable();
             $table->timestamps();
         });
     }

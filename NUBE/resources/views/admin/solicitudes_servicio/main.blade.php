@@ -49,33 +49,21 @@
                         <td class="text-center">{{$ss->fecha_inicio}}</td>
                     @else
                         <td class="text-center">No establecido</td>
-                    @endif
-                                        @if($ss->fecha_fin != null)
-                                            <td class="text-center">{{$ss->fecha_fin}}</td>
-                                        @else
-                                            <td class="text-center">No establecido</td>
-                                        @endif
-                                        @if($ss->moivo != null)
+                    @endif               
+                    @if($ss->moivo != null)
                                             <td class="text-center">{{$ss->motivo}}</td>
                                         @else
                                             <td class="text-center">-</td>
-                                        @endif                                      
-                                        @if($ss->solicitante_i != null)
-                                            <td class="text-center  "></td>
-                                        @else
-                                            <td class="text-center">-</td>
-                                        @endif
-                                        @if($ss->estado)
-                                            <td class="text-center">Si ✔️</td>
-                                        @else
-                                            <td class="text-center">No ❌️</td>
-                                        @endif
+                                        @endif                                   
+                                        <td class="text-center">{{$ss->solicitante()->persona->nombreCompleto}}</td>                                        
+                                        <td class="text-center">{{ $ss->estado }}</td>                                     
                                         <td class="text-center">{{$ss->created_at->format('d/m/Y')}}</td>
                                         <td class="text-center">
                                             {{--
                                             <a href="{{ route('solicitudes_servicio.show', $ss->id) }}" data-toggle="tooltip" title="Visualizar el detalle de este edificio" class="btn btn-social-icon btn-sm btn-info"><i class="fa fa-list"></i></a>
                                             <a href="{{ route('solicitudes_servicio.edit', $ss->id) }}" data-toggle="tooltip" title="Editar los datos de este edificio" class="btn btn-social-icon btn-sm btn-warning"><i class="fa fa-pencil"></i></a>                                            
                                             --}}
+                                            <a href="{{ route('solicitudes_servicio.show', $ss->id) }}" data-toggle="tooltip" title="Visualizar el detalle de este edificio" class="btn btn-social-icon btn-sm btn-info"><i class="fa fa-list"></i></a>
                                             <a onclick="abrir_modal_borrar({{$ss->id}})" data-toggle="tooltip" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
