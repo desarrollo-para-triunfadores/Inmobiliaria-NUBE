@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Barrio;
 use App\Edificio;
+use App\Inmueble;
+use App\Contrato;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Localidad;
@@ -185,5 +187,30 @@ class EdificiosController extends Controller
         $edificio->delete();
         Session::flash('message', 'El edificio ha sido eliminado del sistema');
         return redirect()->route('edificios.index');
+    }
+
+
+    public function obtener_inmuebles(Request $request) 
+    {        
+        /**
+         * Este método recibe un array de ids de edificios y devuelve un array
+         * con todos los inmuebles que pertenescan a esos edificios.   
+         */
+        
+        $listado = [];
+        if(!is_null($request->lista_ids)){
+            foreach ($request->lista_ids as $id_edficio) {            
+                $edificio = Edificio::find($id_edficio);                 
+                $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes
+                $inmuebles = $edificio->inmuebles->whereIn('id', $inmuebles_ocupados);                
+                foreach ($inmuebles as $inmueble) {
+                    array_push($listado, $inmueble);
+                }                                  
+            }
+        }else{
+            $inmuebles_ocupados = Contrato::all()->where('fecha_hasta', '>', Carbon::now())->pluck('inmueble_id')->toArray(); //listado de ids de inmuebles sacados de los contratos que están vigentes
+            $listado = Inmueble::all()->whereIn('id', $inmuebles_ocupados);
+        }    
+        return response()->json($listado);
     }
 }

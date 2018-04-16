@@ -23,11 +23,19 @@ class ConceptoLiquidacion extends Model
     protected $dates = ['primer_vencimiento', 'segundo_vencimiento'];
     
     public function getPrimerVencimientoFormateadoAttribute(){
-        return $this->primer_vencimiento->format('d/m/Y');
+        $fecha = "-";
+        if(!is_null($this->segundo_vencimiento)){           
+            $fecha = $this->segundo_vencimiento->format('d/m/Y');
+        }  
+        return $fecha;       
     }
 
     public function getSegundoVencimientoFormateadoAttribute(){
-        return $this->segundo_vencimiento->format('d/m/Y');
+        $fecha = "-";
+        if(!is_null($this->segundo_vencimiento)){           
+            $fecha = $this->segundo_vencimiento->format('d/m/Y');
+        }  
+        return $fecha;
     }
 
     public function setPrimerVencimientoAttribute($value){
