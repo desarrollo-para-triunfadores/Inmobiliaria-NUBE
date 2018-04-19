@@ -18,7 +18,6 @@ class UsersRolesPermisosTableSeeder extends Seeder
         $user_1 = User::create([
             'name' => 'Hacho Kuszniruk',
             'email' => 'hacho_k@outlook.com',
-            'rol_id' => 1,
             'password' => bcrypt('123123'),
             'imagen' => 'usuario_1499775381.jpg'
         ]);
@@ -26,7 +25,6 @@ class UsersRolesPermisosTableSeeder extends Seeder
         $user_2 = User::create([
             'name' => 'Juan Pablo Cáceres',
             'email' => 'jpcaceres.nea@gmail.com',
-            'rol_id' => 1,
             'password' => bcrypt('123123'),
             'imagen' => 'usuario_1499215225.jpg'
         ]);
@@ -34,7 +32,6 @@ class UsersRolesPermisosTableSeeder extends Seeder
         $user_3 = User::create([
             'name' => 'Juan Rubio',
             'email' => 'juanrubio_96@hotmail.com',
-            'rol_id' => 1,
             'password' => bcrypt('123123'),
             'imagen' => 'usuario_1499775474.jpg'
         ]);

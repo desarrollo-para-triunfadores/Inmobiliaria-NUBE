@@ -17,7 +17,7 @@ class CreateTableSolicitudesServicio extends Migration
             $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');  
 
             $table->integer('rubrotecnico_id')->unsigned();
-            $table->foreign('rubrotecnico_id')->references('id')->on('rubrostecnicos')->onDelete('cascade');
+            $table->foreign('rubrotecnico_id')->references('id')->on('rubrosTecnicos')->onDelete('cascade');
             
             $table->enum('responsable', ['propietario', 'inquilino']);
 
