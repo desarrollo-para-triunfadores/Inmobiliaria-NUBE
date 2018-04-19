@@ -16,7 +16,8 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composers
         ([
-            'App\Http\ViewComposers\NotificacionesComposer' => 'admin.partes.navtop.main',                
+            'App\Http\ViewComposers\NotificacionesComposer' => 'admin.partes.navtop.main',
+            'App\Http\ViewComposers\MensajesComposer' => 'admin.partes.navtop.mensajes',                
         ]);
     }
 

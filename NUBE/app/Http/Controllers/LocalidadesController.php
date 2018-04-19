@@ -17,6 +17,7 @@ use App\Http\Requests\LocalidadRequestCreate;
 use App\Http\Requests\LocalidadRequestEdit;
 use Illuminate\Support\Facades\Auth;
 use Session;
+
 class LocalidadesController extends Controller
 {
     public function __construct()

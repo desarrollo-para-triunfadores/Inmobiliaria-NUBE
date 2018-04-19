@@ -10,7 +10,7 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Mensajes -->
-            
+              @include('admin.partes.navtop.mensajes')
               <!-- Notificationes -->
               @include('admin.partes.navtop.notificaciones')
               <!-- Otras notificationes-->

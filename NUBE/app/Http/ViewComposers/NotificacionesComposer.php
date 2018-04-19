@@ -22,7 +22,7 @@ class NotificacionesComposer {
         $fecha_hoy = Carbon::now(); 
         $fecha_control = Carbon::now(); //esta fecha se utiliza como para determinar un límite de rangos con la fecha de hoy. La fecha sería la siguiente a la de hoy. Se hace así porque la variable created_at es timestamp y maneja hora y acá intereza todo lo que sea de la fecha de hoy
         $fecha_control->addDay(); //sumamos un día 
-      $diferencia = 0;
+        $diferencia = 0;
         $notificacion_del_dia = Notificacion::all() //Se obtienen la notificaciones que se hayan creado el dia de la fecha. Esto se usa para controlar y no crear notificaciones repetidas
         ->where('created_at', '>', $fecha_hoy->toDateString())
         ->where('created_at', '<', $fecha_control->toDateString());

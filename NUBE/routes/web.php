@@ -57,6 +57,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('notificaciones', 'NotificacionesController');
     Route::get('/ocultar_notificaciones', 'NotificacionesController@ocultar_notificaciones')->name('ocultar_notificaciones');
 
+    Route::resource('mensajes', 'MensajesController');
+
     //Oportunidades
 
     Route::resource('oportunidades', 'OportunidadesController');
@@ -75,23 +77,37 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    * Rutas de métodos específicos 
    */
 
+    //Edificios
     Route::get('/obtener_inmuebles_edificio', 'EdificiosController@obtener_inmuebles')->name('obtener_inmuebles_edificio');
 
+    //Barrios
     Route::get('/obtener_inmuebles_barrios', 'BarriosController@obtener_inmuebles')->name('obtener_inmuebles_barrios');
     Route::get('/obtener_edificios_barrios', 'BarriosController@obtener_edificios')->name('obtener_edificios_barrios');
 
+    //Localidades
     Route::get('/obtener_inmuebles_localidad', 'LocalidadesController@obtener_inmuebles')->name('obtener_inmuebles_localidad');
     Route::get('/obtener_edificios_localidad', 'LocalidadesController@obtener_edificios')->name('obtener_edificios_localidad');
     Route::get('/obtener_barrios_localidad', 'LocalidadesController@obtener_barrios')->name('obtener_barrios_localidad');
     
-
+    //Mensajes   
+    Route::get('/obtener_mensajes_conversacion', 'MensajesController@obtener_mensajes_conversacion')->name('obtener_mensajes_conversacion');
+    Route::get('/enviar_mensaje', 'MensajesController@enviar_mensaje')->name('enviar_mensaje');
+    Route::get('/borrar_conversacion', 'MensajesController@borrar_conversacion')->name('borrar_conversacion');
+    Route::get('/cambiar_bandera_escritura', 'MensajesController@cambiar_bandera_escritura')->name('cambiar_bandera_escritura');
+    Route::get('/obtener_cabecera', 'MensajesController@obtener_cabecera')->name('obtener_cabecera');
+    Route::get('/obtener_listado_conversaciones', 'MensajesController@obtener_listado_conversaciones')->name('obtener_listado_conversaciones');
+    
+    //Visitas
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('cargaEventos{id?}', 'CalendarController@index');
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
+    
+    //Panel de configuración
     Route::get('/configuracion', function () {// esta ruta es solo para zafar, pero hay que hacer un controller con la info de la empresa
         return view('admin.configuracion.main');
     });
+
 });
 Auth::routes();
