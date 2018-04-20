@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
 
     $this->call(LiquidacionesMensualesTableSeeder::class);
     $this->call(ConceptosLiquidacionesMensualesTableSeeder::class);
-    $this->call(RubrosTecnicosTableSeeder::class);
     $this->call(ConversacionesTableSeeder::class);
 
 
