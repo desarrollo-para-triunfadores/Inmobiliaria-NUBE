@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RubrosTecnicosTableSeeder extends Seeder
+class rubrosTecnicosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,31 +11,31 @@ class RubrosTecnicosTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Plomero',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Electricista',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Albañil',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Carpintero',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Decorador de interiores',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Jardinero',
             'created_at' => date('Y-m-d H:m:s')
         ]);
-        DB::table('rubrostecnicos')->insert([
+        DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Refrigeraciones',
             'created_at' => date('Y-m-d H:m:s')
         ]);
