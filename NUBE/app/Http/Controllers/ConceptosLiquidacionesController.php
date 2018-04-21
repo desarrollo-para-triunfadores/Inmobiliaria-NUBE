@@ -223,8 +223,8 @@ class ConceptosLiquidacionesController extends Controller
 
                     $liquidacion = new LiquidacionMensual(); 
                     $liquidacion->periodo = $periodo;
-                    $liquidacion->total = $total;
                     $liquidacion->alquiler = $monto_alquiler;
+                    $liquidacion->total = $total;
                     $liquidacion->subtotal = $total;
                     $liquidacion->comision_a_propietario = $comision_a_propietario;
                     $liquidacion->contrato_id = $contrato->id;
@@ -260,21 +260,40 @@ class ConceptosLiquidacionesController extends Controller
                      * técnico para el inmueble del contrato y que coincida con el periodo de la liquidación 
                      * recién generada. De ser así asociamos esos trabajos a la liquidación
                      */
-
+                    
+                    $monto_total_por_solicitudes_servicio = 0;
+                    
                     $solicitudes_servicio = SolicitudServicio::all()
                     ->where('contrato_id', $contrato->id)
                     ->where('liquidacionmensual_id', null)
-                    ->where('estado', 'concluida');
+                    ->where('estado', 'concluida')
+                    ->where('responsable', 'inquilino');
 
                     foreach ($solicitudes_servicio as $solicitud) {
 
                         $periodo_solicitud = $solicitud->created_at->format('m/Y');
                                                 
                         if($periodo === $periodo_solicitud){// si los periodos son coicidentes se asocian
-                            $concepto_liquidacion->liquidacionmensual_id = $liquidacion->id;
-                            $concepto_liquidacion->save();
+                            $solicitud->liquidacionmensual_id = $liquidacion->id;
+                            $solicitud->save();
+
+                            $monto_total_por_solicitudes_servicio += $solicitud->monto_final;
                         }                      
                     }
+
+                    if($monto_total_por_solicitudes_servicio > 0){
+
+                        /**
+                         * Si el monto total por solicitudes de servicio es mayor a cero 
+                         * se corrige el total y se actualiza en los montos de la liquidación.
+                         */
+
+                        $total += $monto_total_por_solicitudes_servicio;
+                        $liquidacion->total = $total;
+                        $liquidacion->subtotal = $total;
+                        $liquidacion->save();
+                    }
+                    
                 }
             }
         }
@@ -293,7 +312,7 @@ class ConceptosLiquidacionesController extends Controller
     public function create(Request $request)
     {
         /**
-         * Esta vista se complementa con el composer: ConceptosLiquidacionesComposer
+        * Esta vista se complementa con el composer: ConceptosLiquidacionesComposer
         */
         return view('admin.conceptos_liquidaciones_mensuales.create');
     }

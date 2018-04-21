@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Inquilino;
-use App\Propietario;
-use App\Inmueble;
-use App\Contrato;
-use App\Movimiento;
-use App\Notificacion;
-use App\LiquidacionMensual;
 use App\ConceptoLiquidacion;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use App\Contrato;
+use App\Http\Controllers\Controller;
+use App\Http\Requests;
 use App\Http\Requests\InquilinoRequestCreate;
 use App\Http\Requests\InquilinoRequestEdit;
+use App\Inmueble;
+use App\Inquilino;
+use App\LiquidacionMensual;
+use App\Movimiento;
+use App\Notificacion;
+use App\Propietario;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 use Session;
 
 
@@ -95,7 +96,7 @@ class CobrosController extends Controller
             $liquidacion->fecha_cobro_propietario = Carbon::now();     
             $liquidacion->save();
            
-            //Movimiento para el propietario
+            //Movimiento para el propietario por comision empresa
             $movimiento = new Movimiento();
             $movimiento->user_id = Auth::user()->id;  
             $movimiento->fecha_hora = Carbon::now();          
@@ -112,13 +113,28 @@ class CobrosController extends Controller
             $movimiento->user_id = Auth::user()->id;  
             $movimiento->fecha_hora = Carbon::now();          
             $movimiento->user_id = Auth::user()->id;     
-            $movimiento->monto = $liquidacion->abonado;       
+            $movimiento->monto = $liquidacion->obtener_monto_por_repararaciones("propietario");       
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->comision_a_propietario;
             $movimiento->descripcion = "Se recibe un pago por $".$liquidacion->comision_a_propietario.". Correspondiente a la comisión al propietario por la liquidación del periodo ".$liquidacion->periodo.".";
             $movimiento->liquidacion_id = $liquidacion->id;
             $movimiento->save();
+
+            if($liquidacion->obtener_monto_por_repararaciones("propietario") > 0){                                        
+                foreach ($liquidacion->solicitudes_servicios as $solicitud) {
+                    //Se crea la notificación para el técnico
+                    $notificacion = new Notificacion();
+                    $notificacion->mensaje = "Estimado: le informamos que se encuentra disponible el pago por los trabajos realizados en el inmueble de  ".$liquidacion->inmueble->direccion." por el monto de $: ".$solicitud->monto_final.". Le invitamos a acercarse a nuestras instalaciones para poder retirar el saldo correspondiente.";
+                    $notificacion->ocultar = false;
+                    $notificacion->tipo = "pago";
+                    $notificacion->estado_leido = false;
+                    $notificacion->user_id = $solicitud->tecnico->persona->user->id;
+                    $notificacion->save();
+                }
+            }
+      
         }else{
+
             $liquidacion->fill($request->all()); 
             $liquidacion->fecha_cobro_inquilino = Carbon::now();     
             $liquidacion->save();
@@ -143,6 +159,19 @@ class CobrosController extends Controller
             $notificacion->estado_leido = false;
             $notificacion->user_id = $liquidacion->contrato->inmueble->propietario->persona->user->id;
             $notificacion->save();
+
+            if($liquidacion->obtener_monto_por_repararaciones("inquilino") > 0){                                          
+                foreach ($liquidacion->solicitudes_servicios as $solicitud) {
+                    //Se crea la notificación para el técnico
+                    $notificacion = new Notificacion();
+                    $notificacion->mensaje = "Estimado: le informamos que se encuentra disponible el pago por los trabajos realizados en el inmueble de  ".$liquidacion->inmueble->direccion." por el monto de $: ".$solicitud->monto_final.". Le invitamos a acercarse a nuestras instalaciones para poder retirar el saldo correspondiente.";
+                    $notificacion->ocultar = false;
+                    $notificacion->tipo = "pago";
+                    $notificacion->estado_leido = false;
+                    $notificacion->user_id = $solicitud->tecnico->persona->user->id;
+                    $notificacion->save();
+                }
+            }            
         }
 
         Session::flash('message', 'Se ha actualizado la información');
