@@ -60,45 +60,59 @@ class InquilinosController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $nombreImagen = 'sin_imagen.png';
-        if ($request->file('imagen')) {
-            $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() .'.png';
-            Storage::disk('personas')->put($nombreImagen, \File::get($file));
-        }
         
-             /**
-         * datos del usuario
-         */
-        $user_nuevo = new User();
-        $user_nuevo->name = $request->nombre . " " . $request->apellido;
-        $user_nuevo->email = $request->email;
-        $user_nuevo->password = rand();
-        $user_nuevo->imagen = $nombreImagen;
-        $user_nuevo->save();
-        $user_nuevo->assignRole('Cliente');
+        $persona_id = $request->persona_id;
+        
+        if (is_null($request->persona_id)) {    
+            
+            /**
+             * Si no llega un id de persona se crea un usuario, un persona y se notifica
+             */
+           
+            $nombreImagen = 'sin_imagen.png';        
+            
+            if ($request->file('imagen')) {
+                $file = $request->file('imagen');
+                $nombreImagen = 'persona_' . time() .'.png';
+                Storage::disk('personas')->put($nombreImagen, \File::get($file));
+            }
+            
+            /**
+             * datos del usuario
+             */
 
-        //Envío de correo para notificar la creación del nuevo usuario
-      
-        Mail::send('emails.confirmacion_inscripcion', ['user_nuevo' => $user_nuevo], function ($m) use ($user_nuevo) {
-            $m->from('sistemanube@gmail.com', 'Nube Propiedades | Notificación de creación de usuario');
-            $m->to($user_nuevo->email, $user_nuevo->name)->subject('No conteste este correo.');
-        });
+            $user_nuevo = new User();
+            $user_nuevo->name = $request->nombre . " " . $request->apellido;
+            $user_nuevo->email = $request->email;
+            $user_nuevo->password = bcrypt(rand());
+            $user_nuevo->imagen = $nombreImagen;
+            $user_nuevo->save();
+            $user_nuevo->assignRole('Cliente');
 
-        /**
-         * datos de persona
-         */
-        $persona = new Persona($request->all());
-        $persona->foto_perfil = $nombreImagen;
-        $persona->user_id = $user_nuevo->id;
-        $persona->save();
+            //Envío de correo para notificar la creación del nuevo usuario
+        
+            Mail::send('emails.confirmacion_inscripcion', ['user_nuevo' => $user_nuevo], function ($m) use ($user_nuevo) {
+                $m->from('sistemanube@gmail.com', 'Nube Propiedades | Notificación de creación de usuario');
+                $m->to($user_nuevo->email, $user_nuevo->name)->subject('No conteste este correo.');
+            });
 
+            /**
+             * datos de persona
+             */
+            $persona = new Persona($request->all());
+            $persona->foto_perfil = $nombreImagen;
+            $persona->user_id = $user_nuevo->id;
+            $persona->save();
+            $persona_id = $persona->id;
+         
+        } 
+        
         /**
          * datos del inquilino
          */
 
         $inquilino = new Inquilino($request->all());
-        $inquilino->persona_id = $persona->id;
+        $inquilino->persona_id = $persona_id;
         $inquilino->save();
         Session::flash('message', 'Se ha registrado un nuevo inquilino.');
         return redirect()->route('inquilinos.index');
