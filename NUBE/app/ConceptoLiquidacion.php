@@ -22,6 +22,10 @@ class ConceptoLiquidacion extends Model
     
     protected $dates = ['primer_vencimiento', 'segundo_vencimiento'];
     
+    /**
+     * Mutadores
+     */
+
     public function getPrimerVencimientoFormateadoAttribute(){
         $fecha = "-";
         if(!is_null($this->segundo_vencimiento)){           
@@ -52,21 +56,24 @@ class ConceptoLiquidacion extends Model
         }        
     }
 
+    /**
+     * Relaciones
+     */  
 
-    public function liquidacionmensual()
-    {
+    public function liquidacionmensual(){
         return $this->belongsTo('App\LiquidacionMensual');
     }
 
-    public function contrato()
-    {
+    public function contrato(){
         return $this->belongsTo('App\Contrato');
     }
 
-    public function servicio()
-    {
+    public function servicio(){
         return $this->belongsTo('App\Servicio');
     }
 
+    /**
+     * Métodos diversos
+     */
 
 }

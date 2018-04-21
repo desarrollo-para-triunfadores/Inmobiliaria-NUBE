@@ -89,12 +89,9 @@ class LiquidacionMensualController extends Controller
             foreach ($request->lista_conceptos as $item) {//$request->lista_conceptos llegan todas las liquidaciones que el usuario le haya colocado fecha de vencimiento
                 //Una por una las liquidaciones son actualizadas y guardadas
                 $liquidacion = LiquidacionMensual::find($item["id_liquidacion"]);               
-                if (!is_null($item["vencimiento"])){ //si se cargó una fecha de vencimiento se formatea para guardar en la base
-                    $vencimiento = str_replace('/', '-', $item["vencimiento"]);
-                    $liquidacion->vencimiento = date('Y-m-d', strtotime($vencimiento));
-                }
-                //dd($liquidacion);
+                $liquidacion->vencimiento = $item["vencimiento"];
                 $liquidacion->save();
+                
                 //Se crea la notificación para el inquilino
                 $notificacion = new Notificacion();
                 $notificacion->mensaje = "Estimado cliente le informamos que la boleta correspondiente al periodo ".$liquidacion->periodo." ya se encuentra lista. La misma vence el ".$liquidacion->vencimiento.".";
