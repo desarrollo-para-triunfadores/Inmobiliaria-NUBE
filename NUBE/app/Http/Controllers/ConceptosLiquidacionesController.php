@@ -263,7 +263,8 @@ class ConceptosLiquidacionesController extends Controller
 
                     $solicitudes_servicio = SolicitudServicio::all()
                     ->where('contrato_id', $contrato->id)
-                    ->where('liquidacionmensual_id', null);
+                    ->where('liquidacionmensual_id', null)
+                    ->where('estado', 'concluida');
 
                     foreach ($solicitudes_servicio as $solicitud) {
 
