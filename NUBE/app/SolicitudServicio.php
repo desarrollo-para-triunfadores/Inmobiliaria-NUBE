@@ -71,7 +71,7 @@ class SolicitudServicio extends Model
          * solicitó el servicio tecnico (responsable)
          */
                       
-        if($this->responsable == 'propietario'){
+        if($this->responsable === 'propietario'){
             return $this->contrato->inmueble->propietario;
         }else{
             return $this->contrato->inquilino;

@@ -19,59 +19,40 @@ Pagos pendientes
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <br>
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <i class="fa fa-mobile" aria-hidden="true"></i>
-                        <h3 class="box-title"> Registros</h3>
+                <br>                                   
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_1" data-toggle="tab">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Clientes
+                                @if(count($liquidaciones)>0)
+                                <span class="label label-danger">{{count($liquidaciones)}}</span>
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_2" data-toggle="tab">
+                                <i class="fa fa-wrench" aria-hidden="true"></i> Personal Técnico
+                                @if(count($solicitudes)>0)
+                                <span class="label label-danger">{{count($solicitudes)}}</span>
+                                @endif
+                            </a>
+                        </li>                            
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                        @include('admin.pagos.tabla_clientes')
+                        </div>                             
+                        <div class="tab-pane" id="tab_2">
+                        @include('admin.pagos.tabla_personal')
+                        </div>                              
                     </div>
-                    <div class="box-body ">                            
-                        @include('admin.partes.msj_acciones')
-                        @if (count($liquidaciones) > 0)
-                        <table id="example" class="display" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>                                  
-                                    <th class="text-center">Cliente</th>
-                                    <th class="text-center">Periodo a pagar</th>
-                                    <th class="text-center">Monto</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($liquidaciones as $liquidacion)
-                                <tr>                                    
-                                    <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->propietario->persona->nombrecompleto}}</td>
-                                    <td class="text-center">{{$liquidacion->periodo}}</td>
-                                    <td class="text-center">${{$liquidacion->total}}</td>
-                                    <td class="text-center">                                        
-                                        <a onclick="abrir_modal_confirmar({{$liquidacion->id}})" title="marcar como pagado" class="btn btn-social-icon btn-sm btn-success"><i class="fa fa-check"></i></a>
-                                    </td>
-                                </tr> 
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>                                  
-                                    <th class="text-center">Cliente</th>
-                                    <th class="text-center">Periodo a pagar</th>
-                                    <th class="text-center">Monto</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        @else
-                        <div class="callout callout-info animated fadeIn">
-                            <h4><i class="icon fa fa-exclamation-circle"></i><strong> No hay pagos pendientes</strong></h4>            
-                            <p>Actualmente el no existen pagos pendientes a clientes de la empresa.</p>
-                          </div>                       
-                        @endif                                                                                  
-                    </div>                   
-                </div>
+                </div>                
             </div>                                               
         </div>
     </section>
 </div>
 
-@include('admin.pagos.confirmar')
 
 @endsection
 @section('script') 

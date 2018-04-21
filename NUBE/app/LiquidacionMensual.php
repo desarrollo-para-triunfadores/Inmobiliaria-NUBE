@@ -104,12 +104,11 @@ class LiquidacionMensual extends Model
     public function calcular_total_a_propietario(){ 
 
         /**
-         * Este método calcula el monto a pagar por el propietario por los servicios 
-         * prestados.
+         * Este método calcula el monto a pagar por el propietario por los servicios prestados.
          */
 
-        $monto = number_format($this->comision_a_propietario + obtener_monto_por_repararaciones("propietario"));
-        return $monto;
+        $total = $this->comision_a_propietario + $this->obtener_monto_por_repararaciones("propietario");
+        return $total;
     }
 
     public function detalle_conceptos(){ 
@@ -139,8 +138,9 @@ class LiquidacionMensual extends Model
          * en el periodo de acuerdo a lo solicitado (inquilino o propietario).
          */
 
-        $monto_total = $this->solicitudes_servicios->where('responsable', $responsable)->sum('monto_final');
-        return $monto_total;
+
+        $total = DB::table('solicitudesServicio')->where('liquidacionmensual_id', $this->id)->where('responsable', $responsable)->sum('monto_final');
+        return $total;
     }
 
     public function comprobar_vencimiento() {

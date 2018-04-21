@@ -32,6 +32,11 @@ class CobrosController extends Controller
     public function index(Request $request)
     {
         if($request->tipo_cliente==="I"){
+            
+            /**
+             * Enviamos el detalle para el cobro a un inquilino 
+             */
+            
             $inquilino = Inquilino::find($request->id_cliente);
             $contrato_id = $inquilino->ultimo_contrato()->id;
             $saldo_cuenta = 0;
@@ -46,28 +51,29 @@ class CobrosController extends Controller
                 $saldo_cuenta = $liquidacion_posterior->saldo_periodo;
             }
             return response()->json(view('admin.cobros.detalle_inquilinos', compact('liquidaciones', 'saldo_cuenta'))->render());
+        
         }else{
 
-            //Esto de abajo es para obtener los conceptos para las diferentes pantallas
+            /**
+             * Enviamos el detalle para el cobro a un propietario 
+             */
+
             $fecha_hoy = Carbon::now();
-            
-            $inmuebles_claves = Inmueble::all()->where("propietario_id", $request->id_cliente); //obtenemos todos los objeto inmuebles marcados para alquiler
-            $inmuebles_claves = $inmuebles_claves->implode('id', ', ');   //obtenemos de la coleccion de objetos de inmuebles un string de todos los ids de inmuebles de la colección filtrada
-            $inmuebles_array = array_map('intval', explode(',', $inmuebles_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
-
+    
+            $inmuebles_array = Inmueble::all()
+                ->where("propietario_id", $request->id_cliente)
+                ->pluck('id')->toArray();
            
-            $contratos_claves = Contrato::all()
+            $contratos_array = Contrato::all()
                 ->where('fecha_hasta', '>', $fecha_hoy)
-                ->whereIn('inmueble_id', $inmuebles_array) //filtramos los contratos que tengan de inmueble_id a cualquiera de los ids de la coleccion de ids de inmuebles que cumplen con los requisitos solicitados
-                ->implode('id', ', '); //obtenemos de la coleccion de objetos de contratos un string de todos los ids de contratos de la colección filtrada
+                ->whereIn('inmueble_id', $inmuebles_array)
+                ->pluck('id')->toArray();
 
-            $contratos_array = array_map('intval', explode(',', $contratos_claves)); //convertimos el string de claves a una coleccion que es compatible para hacer concultas.
-                        
             $liquidaciones = LiquidacionMensual::all()
-            ->where("abonado", "<>",null)
-            ->where("fecha_pago_propietario", "<>", null)
-            ->where("fecha_cobro_propietario", null)
-            ->whereIn('contrato_id', $contratos_array);
+                ->where("abonado", "<>",null)
+                ->where("fecha_pago_propietario", "<>", null)
+                ->where("fecha_cobro_propietario", null)
+                ->whereIn('contrato_id', $contratos_array);
 
             return response()->json(view('admin.cobros.detalle_propietario', compact('liquidaciones'))->render());
         }       

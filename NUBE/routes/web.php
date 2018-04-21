@@ -118,6 +118,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //Notificaciones
     Route::get('/ocultar_notificaciones', 'NotificacionesController@ocultar_notificaciones')->name('ocultar_notificaciones');
    
+    //Pagos
+    Route::get('/registrar_pago', 'PagosController@registrar_pago')->name('registrar_pago');
+
     //Panel de configuración
     Route::get('/configuracion', function () {// esta ruta es solo para zafar, pero hay que hacer un controller con la info de la empresa
         return view('admin.configuracion.main');

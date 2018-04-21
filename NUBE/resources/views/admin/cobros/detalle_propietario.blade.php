@@ -42,7 +42,7 @@
                             <span class="info-box-icon bg-green" style="background-color:#605ca8;"><i class="fa fa-wrench" style="color:#FFFFFF"></i></span>                                                                        
                             <div class="info-box-content">
                                 <span class="info-box-text">Servicio técnico</span>
-                                <span class="info-box-number">Monto: ${{$liquidacion->obtener_monto_por_repararaciones("inquilino"}}</span>
+                                <span class="info-box-number">Monto: ${{$liquidacion->obtener_monto_por_repararaciones("propietario")}}</span>
                                 <span class="product-description"> 
                                     Este monto es por trabajos que se realizaron en el inmueble durante el periodo.
                                 </span>
