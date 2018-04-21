@@ -61,11 +61,21 @@ class Persona extends Model {
             return true;
     }
 
+    /**
+     * Mutadores
+     */
+
     public function getNombreCompletoAttribute(){
         return $this->apellido ." ". $this->nombre;
     }
 
     public function getFechaNacFormateadoAttribute(){
         return $this->fecha_nac->format('d/m/Y');
+    }
+
+    public function setFechaNacAttribute($value)
+    {
+        $fecha = str_replace('/', '-', $value);
+        $this->attributes['fecha_nac'] = date('Y-m-d', strtotime($fecha));     
     }
 }

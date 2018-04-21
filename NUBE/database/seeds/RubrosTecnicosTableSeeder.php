@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class rubrosTecnicosTableSeeder extends Seeder
+class RubrosTecnicosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

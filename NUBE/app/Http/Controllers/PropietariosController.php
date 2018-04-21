@@ -12,6 +12,7 @@ use App\Inmueble;
 use App\Auditoria;
 use App\Persona;
 use App\Pais;
+use App\User;
 use Carbon\Carbon;
 use Storage;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +20,14 @@ use Laracasts\Flash\Flash;
 use App\Http\Requests\PropietarioRequestCreate;
 use App\Http\Requests\PropietarioRequestEdit;
 use Illuminate\Http\Request;
+use Mail;
 use Session;
 
-class PropietariosController extends Controller {
+class PropietariosController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         Carbon::setlocale('es'); // Instancio en Español el manejador de fechas de Laravel
     }
 
@@ -32,17 +36,18 @@ class PropietariosController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
 
         $propietarios = Propietario::all();
         $paises = Pais::all();
         $localidades = Localidad::all();
         $personas = Persona::all()->whereNotIn('id', $propietarios->pluck('id')->toArray());
         return view('admin.propietarios.main')
-                        ->with('propietarios', $propietarios)
-                        ->with('personas', $personas)
-                        ->with('paises', $paises)
-                        ->with('localidades', $localidades); // se devuelven los registros
+            ->with('propietarios', $propietarios)
+            ->with('personas', $personas)
+            ->with('paises', $paises)
+            ->with('localidades', $localidades); // se devuelven los registros
     }
 
     /**
@@ -50,7 +55,8 @@ class PropietariosController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
@@ -60,18 +66,44 @@ class PropietariosController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $nombreImagen = 'sin_imagen.png';
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() .'.png';
+            $nombreImagen = 'persona_' . time() . '.png';
             Storage::disk('personas')->put($nombreImagen, \File::get($file));
         }
-        /* datos de persona */
+
+        /**
+         * datos del usuario
+         */
+        $user_nuevo = new User();
+        $user_nuevo->name = $request->nombre . " " . $request->apellido;
+        $user_nuevo->email = $request->email;
+        $user_nuevo->password = rand();
+        $user_nuevo->imagen = $nombreImagen;
+        $user_nuevo->save();
+        $user_nuevo->assignRole('Cliente');
+
+        //Envío de correo para notificar la creación del nuevo usuario
+      
+        Mail::send('emails.confirmacion_inscripcion', ['user_nuevo' => $user_nuevo], function ($m) use ($user_nuevo) {
+            $m->from('sistemanube@gmail.com', 'Nube Propiedades | Notificación de creación de usuario');
+            $m->to($user_nuevo->email, $user_nuevo->name)->subject('No conteste este correo.');
+        });
+
+        /**
+         * datos de persona
+         */
         $persona = new Persona($request->all());
         $persona->foto_perfil = $nombreImagen;
+        $persona->user_id = $user_nuevo->id;
         $persona->save();
-        /* datos de propietario */
+
+        /**
+         * datos del propietario
+         */
         $propietario = new Propietario($request->all());
         $propietario->persona_id = $persona->id;
         $propietario->save();
@@ -85,17 +117,18 @@ class PropietariosController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $propietarios = Propietario::all();
         $propietario = Propietario::find($id);
         $paises = Pais::all();
         $localidades = Localidad::all();
         $personas = Persona::all()->whereNotIn('id', $propietarios->pluck('id')->toArray());
         return view('admin.propietarios.show')
-                        ->with('propietario', $propietario)
-                        ->with('paises', $paises)
-                        ->with('personas', $personas)
-                        ->with('localidades', $localidades);
+            ->with('propietario', $propietario)
+            ->with('paises', $paises)
+            ->with('personas', $personas)
+            ->with('localidades', $localidades);
     }
 
     /**
@@ -104,7 +137,8 @@ class PropietariosController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -115,14 +149,15 @@ class PropietariosController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $propietario = Propietario::find($id);
         $persona = Persona::find($propietario->persona_id);
         $nombreImagen = "sin_imagen.png";
-        
+
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() .'.png';
+            $nombreImagen = 'persona_' . time() . '.png';
             if ((Storage::disk('personas')->exists($persona->foto_perfil)) && ($persona->foto_perfil !== "sin_imagen.png")) {
                 Storage::disk('personas')->delete($persona->foto_perfil);   // Borramos la imagen anterior.      
             }
@@ -149,7 +184,8 @@ class PropietariosController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $propietario = Propietario::find($id);
         $persona = Persona::find($propietario->persona_id);
         if ($persona->foto_perfil != 'sin_imagen.png') {

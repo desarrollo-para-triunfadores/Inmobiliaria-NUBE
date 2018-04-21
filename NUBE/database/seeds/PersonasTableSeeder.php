@@ -14,520 +14,7 @@ class PersonasTableSeeder extends Seeder
 
         //Inicio Personas que sirven para inquilinos (1-10)
 
-        DB::table('personas')->insert([ #1
-            'nombre' => 'Norma G',
-            'apellido' => 'Alvarez Rodriguez',
-            'sexo' => 'Femenino',
-            'dni' => '42146964',
-            'fecha_nac' => '1957-10-15',
-            'telefono' => '(362) 443 - 8084',
-            'telefono_contacto' => '(362) 443 - 0300',
-            'email'   => 'juribe@idiomas.udea.edu.co',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'user_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #2
-            'nombre' => 'Andrea',
-            'apellido' => 'Ríos López',
-            'sexo' => 'Femenino',
-            'dni' => '40673760',
-            'fecha_nac' => '1967-02-22',
-            'telefono' => '(362) 442 - 6145',
-            'telefono_contacto' => '(362) 442 - 6005',
-            'email'   => 'hersy@epm.net.co',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'user_id'=>'4',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #3
-            'nombre' => 'Analia L',
-            'apellido' => 'Eginini Rodriguez',
-            'sexo' => 'Femenino',
-            'dni' => '42532753',
-            'fecha_nac' => '1988-11-22',
-            'telefono' => '(362) 447 - 6394',
-            'telefono_contacto' => '(362) 443 - 2168',
-            'email'   => 'urestrepo @idiomas.udea.edu.co',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #4
-            'nombre' => 'Isaac E',
-            'apellido' => 'Martinez Rodriguez',
-            'sexo' => 'Masculino',
-            'dni' => '43278119',
-            'fecha_nac' => '1968-05-12',
-            'telefono' => '(362) 445 - 1406',
-            'telefono_contacto' => '(362) 447 - 4779',
-            'email'   => ' vivian_981@yahoo.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #5
-            'nombre' => 'Carmen E',
-            'apellido' => 'Gonzales',
-            'sexo' => 'Femenino',
-            'dni' => '71241786',
-            'fecha_nac' => '1978-12-11',
-            'telefono' => '(362) 446 - 0306',
-            'telefono_contacto' => '(362) 442 - 8475',
-            'email'   => 'julianaparis@hotmail.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #6
-            'nombre' => 'Roque G',
-            'apellido' => 'Gonzales',
-            'sexo' => 'Masculino',
-            'dni' => '45743257',
-            'fecha_nac' => '1990-12-31',
-            'telefono' => '(362) 443 - 2363',
-            'telefono_contacto' => '(362) 444 - 6512',
-            'email'   => 'domini26@latinmail.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        
-        DB::table('personas')->insert([ #7
-            'nombre' => 'Alberto A',
-            'apellido' => 'Espinoza',
-            'sexo' => 'Masculino',
-            'dni' => '46202533',
-            'fecha_nac' => '1987-11-13',
-            'telefono' => '(362) 446 - 2756',
-            'telefono_contacto' => '(362) 443 - 8482',
-            'email'   => ' julianaparis@hotmail.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #8
-            'nombre' => 'Carlos R',
-            'apellido' => 'Espinoza',
-            'sexo' => 'Masculino',
-            'dni' => '42264899',
-            'fecha_nac' => '1955-09-10',
-            'telefono' => '(362) 443 - 5921',
-            'telefono_contacto' => '(362) 443 - 8482',
-            'email'   => ' yessy_39@hotmail.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #9
-            'nombre' => 'Graciela L',
-            'apellido' => 'Espinoza',
-            'sexo' => 'Femenino',
-            'dni' => '32476447',
-            'fecha_nac' => '1971-01-02',
-            'telefono' => '(362) 444 - 9305',
-            'telefono_contacto' => '(362) 442 - 8797',
-            'email'   => 'ashida_barak@yahoo.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #10
-            'nombre' => 'Jose',
-            'apellido' => 'Espinoza',
-            'sexo' => 'Masculino',
-            'dni' => '23230565',
-            'fecha_nac' => '1956-03-13',
-            'telefono' => '(362) 446 - 1367',
-            'telefono_contacto' => '(362) 442 - 4022',
-            'email'   => 'menadel@hotmail.com',                      
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-//Fin Personas que sirven para inquilinos (1-10)
-
-//Inicio Personas que sirven para garantes (11-20)
-
-        DB::table('personas')->insert([ #11
-            'nombre' => 'Hector Ruben',
-            'apellido' => 'Espinoza',
-            'sexo' => 'Masculino',
-            'dni' => '78682726',
-            'fecha_nac' => '1989-10-10',
-            'telefono' => '(362) 446 - 3838',
-            'telefono_contacto' => '(362) 443 - 8325',
-            'email'   => 'm.fdez_87@hotmail.com',    
-            'direccion' => 'Juan Domingo Perón 396',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #12
-            'nombre' => 'Martha',
-            'apellido' => 'Werle',
-            'sexo' => 'Femenino',
-            'dni' => '12270734',
-            'fecha_nac' => '1981-04-05',
-            'telefono' => '(362) 446 - 1311',
-            'telefono_contacto' => '(362) 443 - 8325',
-            'email'   => 'reinald_34@hotmail.com',       
-            'direccion' => 'Donovan 174',               
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #13
-            'nombre' => 'Albertina G De',
-            'apellido' => 'Galarza',
-            'sexo' => 'Femenino',
-            'dni' => '12682277',
-            'fecha_nac' => '1963-04-10',
-            'telefono' => '(362) 443 - 5004',
-            'telefono_contacto' => '(362) 446 - 1311',
-            'email'   => 'ibrahin@cied.rimed.cu',    
-            'direccion' => 'Juan Domingo Perón 455',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #14
-            'nombre' => 'Carlos',
-            'apellido' => 'Gonzalez',
-            'sexo' => 'Masculino',
-            'dni' => '16351202',
-            'fecha_nac' => '1989-08-08',
-            'telefono' => '(362) 444 - 7177',
-            'telefono_contacto' => '(362) 443 - 5004',
-            'email'   => 'acampadaalcoy@gmail.com',    
-            'direccion' => 'Salta 446',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #15
-            'nombre' => 'Carolina E',
-            'apellido' => 'Galarza',
-            'sexo' => 'Femenino',
-            'dni' => '13115783',
-            'fecha_nac' => '1981-09-02',
-            'telefono' => '(362) 446 - 3069',
-            'telefono_contacto' => '(362) 444 - 7177',
-            'email'   => 'acampada.algeciras@gmail.com',   
-            'direccion' => 'Av. Belgrano 410',                   
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #16
-            'nombre' => 'Julio N',
-            'apellido' => 'Fernandez Nuñez',
-            'sexo' => 'Masculino',
-            'dni' => '27390202',
-            'fecha_nac' => '1955-07-16',
-            'telefono' => '(362) 446 - 3069',
-            'telefono_contacto' => '(362) 446 - 7445',
-            'email'   => 'difusio.acampadabdn@gmail.com',    
-            'direccion' => 'Av. Manuel Belgrano 511',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #17
-            'nombre' => 'Magdalena N De',
-            'apellido' => 'Gomez Nuñez',
-            'sexo' => 'Femenino',
-            'dni' => '12075202',
-            'fecha_nac' => '1965-07-09',
-            'telefono' => '(362) 447 - 9854',
-            'telefono_contacto' => '(362) 442 - 3393',
-            'email'   => 'dryburgos@gmail.com',        
-            'direccion' => 'Jujuy 715',              
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #18
-            'nombre' => 'Narvajas',
-            'apellido' => 'Gomez Nunez',
-            'sexo' => 'Masculino',
-            'dni' => '59427123',
-            'fecha_nac' => '1971-02-06',
-            'telefono' => '(362) 442 - 3177',
-            'telefono_contacto' => '(362) 442 - 4040',
-            'email'   => 'castello15m@gmail.com',      
-            'direccion' => 'Moreno 940',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #19
-            'nombre' => 'Emilio Alberto',
-            'apellido' => 'Rached',
-            'sexo' => 'Masculino',
-            'dni' => '27789946',
-            'fecha_nac' => '1925-06-23',
-            'telefono' => '(362) 443 - 8052',
-            'telefono_contacto' => '(362) 443 - 2640',
-            'email'   => 'iabarcae@yahoo.es',      
-            'direccion' => 'Santiago del Estero, 3500',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #20
-            'nombre' => 'Natalia Gabriela ',
-            'apellido' => 'Neme',
-            'sexo' => 'Femenino',
-            'dni' => '30231555',
-            'fecha_nac' => '1956-12-03',
-            'telefono' => '(362) 443 - 2640',
-            'telefono_contacto' => '(362) 446 - 7319',
-            'email'   => 'alexus3@hotmail.com',      
-            'direccion' => 'Av. 25 de Mayo 980',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-//Fin Personas que sirven para garantes (11-20)
-
-//Inicio Personas que sirven para propietarios únicamente (21-30)
-
-        DB::table('personas')->insert([ #21
-            'nombre' => ' Marcelo Ramon de la Santisima Trinidad',
-            'apellido' => 'Lugones',
-            'sexo' => 'Masculino',
-            'dni' => '18758730',
-            'fecha_nac' => '1991-11-22',
-            'telefono' => '(362) 446 - 7319',
-            'telefono_contacto' => '(362) 448 - 8882',
-            'email'   => 'luuuuuuci@hotmail.com', 
-            'direccion' => 'S B D Mte Alto 55',                     
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([ #22
-            'nombre' => 'Juan',
-            'apellido' => 'Rubio',
-            'sexo' => 'Masculino',
-            'dni' => '17333490',
-            'fecha_nac' => '1994-06-13',
-            'telefono' => '(362) 444 - 6866',
-            'telefono_contacto' => '(362) 448 - 8882',
-            'email'   => 'kristian_siempre_azul@hotmail.com',   
-            'direccion' => 'Calle Corrientes 905',                   
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'user_id' => '3',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #23
-            'nombre' => 'Paola Anabel',
-            'apellido' => 'Griggio',
-            'sexo' => 'Femenino',
-            'dni' => '34662263',
-            'fecha_nac' => '1989-11-11',
-            'telefono' => '(362) 442 - 7958',
-            'telefono_contacto' => '(362) 447 - 3172',
-            'email'   => 'mapuchin@hotmail.com',      
-            'direccion' => 'Marcelo T. de Alvear 1097',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #24
-            'nombre' => 'Guillermo Antonio',
-            'apellido' => 'Novara',
-            'sexo' => 'Masculino',
-            'dni' => '38082134',
-            'fecha_nac' => '1992-01-02',
-            'telefono' => '(362) 446 - 6439',
-            'telefono_contacto' => '(362) 447 - 3172',
-            'email'   => 'arahuetes@manquehue.net',          
-            'direccion' => 'Marcelo T. de Alvear 1301',            
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #25
-            'nombre' => 'Ricardo Luis',
-            'apellido' => 'Corbalan',
-            'sexo' => 'Masculino',
-            'dni' => '30226561',
-            'fecha_nac' => '1985-12-16',
-            'telefono' => '(362) 476 - 4523',
-            'telefono_contacto' => '(362) 443 - 5252',
-            'email'   => 'eduardo.arancibia@grange.cl',     
-            'direccion' => 'San Fernando 335',                 
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #26
-            'nombre' => 'Elba Cristina',
-            'apellido' => 'Alvarez',
-            'sexo' => 'Femenino',
-            'dni' => '13934021',
-            'fecha_nac' => '1987-05-06',
-            'telefono' => '(362) 441 - 7610',
-            'telefono_contacto' => '(362) 446 - 6439',
-            'email'   => 'leonor.araya@gmail.com',      
-            'direccion' => 'Av. Rivadavia 1130',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #27
-            'nombre' => 'Ramón',
-            'apellido' => 'Goitea',
-            'sexo' => 'Masculino',
-            'dni' => '23423358',
-            'fecha_nac' => '1976-09-11',
-            'telefono' => '(362) 444 - 0105',
-            'telefono_contacto' => '(362) 441 - 7610',
-            'email'   => 'paulifran@hotmail.com',  
-            'direccion' => 'La Rioja 1199',                    
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #28
-            'nombre' => 'Guillermo Elias Ruben',
-            'apellido' => 'Ganón',
-            'sexo' => 'Masculino',
-            'dni' => '20596506',
-            'fecha_nac' => '1980-02-06',
-            'telefono' => '(362) 443 - 4581',
-            'telefono_contacto' => '(362) 444 - 0105',
-            'email'   => 'bad.girl.-@hotmail.es',      
-            'direccion' => 'Fotheringam 45',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #29
-            'nombre' => 'Omar D',
-            'apellido' => 'Avalos Fernandez',
-            'sexo' => 'Masculino',
-            'dni' => '26387675',
-            'fecha_nac' => '1956-02-03',
-            'telefono' => '(362) 441 - 7610',
-            'telefono_contacto' => '(362) 476 - 4523',
-            'email'   => 'aargomedo@hecsa.cl',      
-            'direccion' => 'Jujuy 1870',                
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #30
-            'nombre' => 'Rodrigo',
-            'apellido' => 'Alvarez Fernandez',
-            'sexo' => 'Masculino',
-            'dni' => '24771656',
-            'fecha_nac' => '1985-01-14',
-            'telefono' => '(362) 445 - 1462',
-            'telefono_contacto' => '(362) 476 - 4523',
-            'email'   => 'joy_pao_@hotmail.com',  
-            'direccion' => 'Mendoza 2662',                    
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        
-        DB::table('personas')->insert([     #31
-            'nombre' => 'Gabriel N',
-            'apellido' => 'Banquero Fernandez',
-            'sexo' => 'Masculino',
-            'dni' => '27872450',
-            'fecha_nac' => '1975-08-10',
-            'telefono' => '(362) 442 - 1576',
-            'telefono_contacto' => '(362) 497 - 2426',
-            'email'   => 'Sergio.Aspe@adretail.cl',    
-            'direccion' => 'García Merou 2901',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-
-        DB::table('personas')->insert([     #32
-            'nombre' => 'Juan Pablo',
-            'apellido' => 'Cáceres',
-            'sexo' => 'Masculino',
-            'dni' => '34478385',
-            'fecha_nac' => '1989-05-10',
-            'telefono' => '3743499820',
-            'telefono_contacto' => '3743499820',
-            'email'   => 'jpaulnava@gmail.com',    
-            'direccion' => 'Monteagudo 695',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '1',
-            'pais_id' => '1',
-            'user_id' =>'2',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        DB::table('personas')->insert([ #33
+        DB::table('personas')->insert([
             'nombre' => 'Horacio Alejandro',
             'apellido' => 'Kuszniruk',
             'sexo' => 'Masculino',
@@ -535,92 +22,70 @@ class PersonasTableSeeder extends Seeder
             'fecha_nac' => '1991-12-16',
             'telefono' => '3752499820',
             'telefono_contacto' => '3752499820',
-            'email'   => 'hacho.kuszniruk@gmail.com',    
-            'direccion' => 'Corientes 2247',                  
+            'email' => 'hacho.kuszniruk@gmail.com',
+            'direccion' => 'Corientes 2247',
             'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
-            'user_id' =>'1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        DB::table('personas')->insert([     #34
-            'nombre' => 'Marcelo',
-            'apellido' => 'Marin',
-            'sexo' => 'Masculino',
-            'dni' => '32444888',
-            'fecha_nac' => '1987-12-16',
-            'telefono' => '3752499740',
-            'telefono_contacto' => '3752499740',
-            'email'   => 'marcemarin@gmail.com',    
-            'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '5',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        DB::table('personas')->insert([     #35
-            'nombre' => 'Alejandro',
-            'apellido' => 'Rodriguez',
-            'sexo' => 'Masculino',
-            'dni' => '36777888',
-            'fecha_nac' => '1991-10-21',
-            'telefono' => '3752887411',
-            'telefono_contacto' => '3752887411',
-            'email'   => 'ale.rodriguez@gmail.com',    
-            'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '5',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        DB::table('personas')->insert([     #36
-            'nombre' => 'Damian',
-            'apellido' => 'Freidenberger',
-            'sexo' => 'Masculino',
-            'dni' => '33223882',
-            'fecha_nac' => '1987-03-06',
-            'telefono' => '3752112233',
-            'telefono_contacto' => '3752112233',
-            'email'   => 'damian.freidenberger@gmail.com',    
-            'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '5',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        DB::table('personas')->insert([     #37
-            'nombre' => 'Alejandro',
-            'apellido' => 'Alba Posse',
-            'sexo' => 'Masculino',
-            'dni' => '36005888',
-            'fecha_nac' => '1991-04-16',
-            'telefono' => '3752895623',
-            'telefono_contacto' => '3752895623',
-            'email'   => 'ale.alba@gmail.com',    
-            'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '5',
-            'pais_id' => '1',
-            'created_at' => date('Y-m-d H:m:s')
-        ]);
-        DB::table('personas')->insert([     #38
-            'nombre' => 'Sergio',
-            'apellido' => 'Sanabria',
-            'sexo' => 'Masculino',
-            'dni' => '36021954',
-            'fecha_nac' => '1991-08-20',
-            'telefono' => '3752748596',
-            'telefono_contacto' => '3752748596',
-            'email'   => 'sergio.sanab@gmail.com',    
-            'direccion' => 'Corientes 2247',                  
-            'foto_perfil' => 'sin_imagen.png',
-            'localidad_id' => '5',
-            'pais_id' => '1',
+            'user_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        #PROPIETARIA DEPTOS DE EDIFICIO --HORACIO
-        DB::table('personas')->insert([     #39
+        DB::table('personas')->insert([
+            'nombre' => 'Juan Pablo',
+            'apellido' => 'Cáceres',
+            'sexo' => 'Masculino',
+            'dni' => '34478385',
+            'fecha_nac' => '1989-05-10',
+            'telefono' => '3743499820',
+            'telefono_contacto' => '3743499820',
+            'email' => 'jpaulnava@gmail.com',
+            'direccion' => 'Monteagudo 695',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '2',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+
+        DB::table('personas')->insert([ #PROPIETARIA DEPTO JUAMPY
+            'nombre' => 'Juán',
+            'apellido' => 'Rubio',
+            'sexo' => 'masculino',
+            'dni' => '27555634',
+            'fecha_nac' => '1967-11-15',
+            'telefono' => '3743002233',
+            'telefono_contacto' => '3743002233',
+            'email' => 'juanrubio@gmail.com',
+            'direccion' => 'San Luis 387',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '3',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+
+        DB::table('personas')->insert([
+            'nombre' => 'Andrea Ríos López',
+            'apellido' => 'Menéndez',
+            'sexo' => 'Femenino',
+            'dni' => '27535614',
+            'fecha_nac' => '1967-11-15',
+            'telefono' => '3743002233',
+            'telefono_contacto' => '3743002233',
+            'email' => 'rioslopezandrea@gmail.com',
+            'direccion' => 'San Luis 387',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '4',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+
+        DB::table('personas')->insert([ #PROPIETARIA DEPTOS DE EDIFICIO --HORACIO
             'nombre' => 'Mirta',
             'apellido' => 'Larsson',
             'sexo' => 'Femenino',
@@ -628,8 +93,8 @@ class PersonasTableSeeder extends Seeder
             'fecha_nac' => '1979-08-03',
             'telefono' => '3752002233',
             'telefono_contacto' => '3752002233',
-            'email'   => 'm.larsson@gmail.com',    
-            'direccion' => 'Remedios de Escalada 555',                  
+            'email' => 'm.larsson@gmail.com',
+            'direccion' => 'Remedios de Escalada 555',
             'foto_perfil' => 'sin_imagen.png',
             'localidad_id' => '5',
             'pais_id' => '1',
@@ -638,58 +103,633 @@ class PersonasTableSeeder extends Seeder
         ]);
 
 
-         #PROPIETARIA DEPTO JUAMPY
-        DB::table('personas')->insert([ #40
-        'nombre' => 'Claudia',
-        'apellido' => 'Menéndez',
-        'sexo' => 'Femenino',
-        'dni' => '27555614',
-        'fecha_nac' => '1967-11-15',
-        'telefono' => '3743002233',
-        'telefono_contacto' => '3743002233',
-        'email'   => 'claudiana@gmail.com',    
-        'direccion' => 'San Luis 387',                  
-        'foto_perfil' => 'sin_imagen.png',
-        'localidad_id' => '1',
-        'pais_id' => '1',
-        'created_at' => date('Y-m-d H:m:s')
+        DB::table('personas')->insert([
+            'nombre' => 'Norma G',
+            'apellido' => 'Alvarez Rodriguez',
+            'sexo' => 'Femenino',
+            'dni' => '42146964',
+            'fecha_nac' => '1957-10-15',
+            'telefono' => '(362) 443 - 8084',
+            'telefono_contacto' => '(362) 443 - 0300',
+            'email' => 'juribe@idiomas.udea.edu.co',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '6',
+            'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        #PERSONAS para ser TECNICOS
-        DB::table('personas')->insert([ #Tecnico 1  | #Persona 41
-        'nombre' => 'Rodolfo',
-        'apellido' => 'Pedernera',
-        'sexo' => 'Masculino',
-        'dni' => '29874198',
-        'fecha_nac' => '1977-11-15',
-        'telefono' => '3762002233',
-        'telefono_contacto' => '3743002233',
-        'email'   => 'dudolf@gmail.com',    
-        'direccion' => 'McLean 1844',                  
-        'foto_perfil' => 'rodolfo.png',
-        'localidad_id' => '1',
-        'pais_id' => '1',
-        'created_at' => date('Y-m-d H:m:s')
+        DB::table('personas')->insert([
+            'nombre' => 'Andrea',
+            'apellido' => 'Ríos López',
+            'sexo' => 'Femenino',
+            'dni' => '40673760',
+            'fecha_nac' => '1967-02-22',
+            'telefono' => '(362) 442 - 6145',
+            'telefono_contacto' => '(362) 442 - 6005',
+            'email' => 'hersy@epm.net.co',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '7',
+            'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        #PERSONAS para ser TECNICOS
-        DB::table('personas')->insert([ #Tecnico 2  | #Persona 42
-        'nombre' => 'Raúl',
-        'apellido' => 'Plomber',
-        'sexo' => 'Masculino',
-        'dni' => '29585233',
-        'fecha_nac' => '1980-01-05',
-        'telefono' => '3624788791',
-        'telefono_contacto' => '3624788791',
-        'email'   => 'plomeria.integral@gmail.com',    
-        'direccion' => 'Güemes 1214',                  
-        'foto_perfil' => 'plomero.png',
-        'localidad_id' => '1',
-        'pais_id' => '1',
-        'created_at' => date('Y-m-d H:m:s')
+        DB::table('personas')->insert([
+            'nombre' => 'Analia L',
+            'apellido' => 'Eginini Rodriguez',
+            'sexo' => 'Femenino',
+            'dni' => '42532753',
+            'fecha_nac' => '1988-11-22',
+            'telefono' => '(362) 447 - 6394',
+            'telefono_contacto' => '(362) 443 - 2168',
+            'email' => 'urestrepo@idiomas.udea.edu.co',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '8',
+            'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        
+        DB::table('personas')->insert([
+            'nombre' => 'Isaac E',
+            'apellido' => 'Martinez Rodriguez',
+            'sexo' => 'Masculino',
+            'dni' => '43278119',
+            'fecha_nac' => '1968-05-12',
+            'telefono' => '(362) 445 - 1406',
+            'telefono_contacto' => '(362) 447 - 4779',
+            'email' => 'vivian_981@yahoo.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '9',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Carmen E',
+            'apellido' => 'Gonzales',
+            'sexo' => 'Femenino',
+            'dni' => '71241786',
+            'fecha_nac' => '1978-12-11',
+            'telefono' => '(362) 446 - 0306',
+            'telefono_contacto' => '(362) 442 - 8475',
+            'email' => 'julianaparis@hotmail.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '10',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Roque G',
+            'apellido' => 'Gonzales',
+            'sexo' => 'Masculino',
+            'dni' => '45743257',
+            'fecha_nac' => '1990-12-31',
+            'telefono' => '(362) 443 - 2363',
+            'telefono_contacto' => '(362) 444 - 6512',
+            'email' => 'domini26@latinmail.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '11',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Alberto A',
+            'apellido' => 'Espinoza',
+            'sexo' => 'Masculino',
+            'dni' => '46202533',
+            'fecha_nac' => '1987-11-13',
+            'telefono' => '(362) 446 - 2756',
+            'telefono_contacto' => '(362) 443 - 8482',
+            'email' => 'julianaparis@hotmail.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '12',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Carlos R',
+            'apellido' => 'Espinoza',
+            'sexo' => 'Masculino',
+            'dni' => '42264899',
+            'fecha_nac' => '1955-09-10',
+            'telefono' => '(362) 443 - 5921',
+            'telefono_contacto' => '(362) 443 - 8482',
+            'email' => 'yessy_39@hotmail.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '13',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Graciela L',
+            'apellido' => 'Espinoza',
+            'sexo' => 'Femenino',
+            'dni' => '32476447',
+            'fecha_nac' => '1971-01-02',
+            'telefono' => '(362) 444 - 9305',
+            'telefono_contacto' => '(362) 442 - 8797',
+            'email' => 'ashida_barak@yahoo.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '14',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Jose',
+            'apellido' => 'Espinoza',
+            'sexo' => 'Masculino',
+            'dni' => '23230565',
+            'fecha_nac' => '1956-03-13',
+            'telefono' => '(362) 446 - 1367',
+            'telefono_contacto' => '(362) 442 - 4022',
+            'email' => 'menadel@hotmail.com',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '15',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+//Fin Personas que sirven para inquilinos (1-10)
+
+//Inicio Personas que sirven para garantes (11-20)
+
+        DB::table('personas')->insert([
+            'nombre' => 'Hector Ruben',
+            'apellido' => 'Espinoza',
+            'sexo' => 'Masculino',
+            'dni' => '78682726',
+            'fecha_nac' => '1989-10-10',
+            'telefono' => '(362) 446 - 3838',
+            'telefono_contacto' => '(362) 443 - 8325',
+            'email' => 'm.fdez_87@hotmail.com',
+            'direccion' => 'Juan Domingo Perón 396',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '16',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Martha',
+            'apellido' => 'Werle',
+            'sexo' => 'Femenino',
+            'dni' => '12270734',
+            'fecha_nac' => '1981-04-05',
+            'telefono' => '(362) 446 - 1311',
+            'telefono_contacto' => '(362) 443 - 8325',
+            'email' => 'reinald_34@hotmail.com',
+            'direccion' => 'Donovan 174',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '17',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Albertina G De',
+            'apellido' => 'Galarza',
+            'sexo' => 'Femenino',
+            'dni' => '12682277',
+            'fecha_nac' => '1963-04-10',
+            'telefono' => '(362) 443 - 5004',
+            'telefono_contacto' => '(362) 446 - 1311',
+            'email' => 'ibrahin@cied.rimed.cu',
+            'direccion' => 'Juan Domingo Perón 455',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '18',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Carlos',
+            'apellido' => 'Gonzalez',
+            'sexo' => 'Masculino',
+            'dni' => '16351202',
+            'fecha_nac' => '1989-08-08',
+            'telefono' => '(362) 444 - 7177',
+            'telefono_contacto' => '(362) 443 - 5004',
+            'email' => 'acampadaalcoy@gmail.com',
+            'direccion' => 'Salta 446',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '19',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Carolina E',
+            'apellido' => 'Galarza',
+            'sexo' => 'Femenino',
+            'dni' => '13115783',
+            'fecha_nac' => '1981-09-02',
+            'telefono' => '(362) 446 - 3069',
+            'telefono_contacto' => '(362) 444 - 7177',
+            'email' => 'acampada.algeciras@gmail.com',
+            'direccion' => 'Av. Belgrano 410',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '20',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Julio N',
+            'apellido' => 'Fernandez Nuñez',
+            'sexo' => 'Masculino',
+            'dni' => '27390202',
+            'fecha_nac' => '1955-07-16',
+            'telefono' => '(362) 446 - 3069',
+            'telefono_contacto' => '(362) 446 - 7445',
+            'email' => 'difusio.acampadabdn@gmail.com',
+            'direccion' => 'Av. Manuel Belgrano 511',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '21',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Magdalena N De',
+            'apellido' => 'Gomez Nuñez',
+            'sexo' => 'Femenino',
+            'dni' => '12075202',
+            'fecha_nac' => '1965-07-09',
+            'telefono' => '(362) 447 - 9854',
+            'telefono_contacto' => '(362) 442 - 3393',
+            'email' => 'dryburgos@gmail.com',
+            'direccion' => 'Jujuy 715',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '22',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Narvajas',
+            'apellido' => 'Gomez Nunez',
+            'sexo' => 'Masculino',
+            'dni' => '59427123',
+            'fecha_nac' => '1971-02-06',
+            'telefono' => '(362) 442 - 3177',
+            'telefono_contacto' => '(362) 442 - 4040',
+            'email' => 'castello15m@gmail.com',
+            'direccion' => 'Moreno 940',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '23',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Emilio Alberto',
+            'apellido' => 'Rached',
+            'sexo' => 'Masculino',
+            'dni' => '27789946',
+            'fecha_nac' => '1925-06-23',
+            'telefono' => '(362) 443 - 8052',
+            'telefono_contacto' => '(362) 443 - 2640',
+            'email' => 'iabarcae@yahoo.es',
+            'direccion' => 'Santiago del Estero, 3500',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '24',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Natalia Gabriela ',
+            'apellido' => 'Neme',
+            'sexo' => 'Femenino',
+            'dni' => '30231555',
+            'fecha_nac' => '1956-12-03',
+            'telefono' => '(362) 443 - 2640',
+            'telefono_contacto' => '(362) 446 - 7319',
+            'email' => 'alexus3@hotmail.com',
+            'direccion' => 'Av. 25 de Mayo 980',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '25',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+//Fin Personas que sirven para garantes (11-20)
+
+//Inicio Personas que sirven para propietarios únicamente (21-30)
+
+        DB::table('personas')->insert([
+            'nombre' => ' Marcelo Ramon de la Santisima Trinidad',
+            'apellido' => 'Lugones',
+            'sexo' => 'Masculino',
+            'dni' => '18758730',
+            'fecha_nac' => '1991-11-22',
+            'telefono' => '(362) 446 - 7319',
+            'telefono_contacto' => '(362) 448 - 8882',
+            'email' => 'luuuuuuci@hotmail.com',
+            'direccion' => 'S B D Mte Alto 55',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '26',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Juan',
+            'apellido' => 'Gonzales',
+            'sexo' => 'Masculino',
+            'dni' => '17333490',
+            'fecha_nac' => '1994-06-13',
+            'telefono' => '(362) 444 - 6866',
+            'telefono_contacto' => '(362) 448 - 8882',
+            'email' => 'kristian_siempre_azul@hotmail.com',
+            'direccion' => 'Calle Corrientes 905',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '27',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Paola Anabel',
+            'apellido' => 'Griggio',
+            'sexo' => 'Femenino',
+            'dni' => '34662263',
+            'fecha_nac' => '1989-11-11',
+            'telefono' => '(362) 442 - 7958',
+            'telefono_contacto' => '(362) 447 - 3172',
+            'email' => 'mapuchin@hotmail.com',
+            'direccion' => 'Marcelo T. de Alvear 1097',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '28',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Guillermo Antonio',
+            'apellido' => 'Novara',
+            'sexo' => 'Masculino',
+            'dni' => '38082134',
+            'fecha_nac' => '1992-01-02',
+            'telefono' => '(362) 446 - 6439',
+            'telefono_contacto' => '(362) 447 - 3172',
+            'email' => 'arahuetes@manquehue.net',
+            'direccion' => 'Marcelo T. de Alvear 1301',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '29',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Ricardo Luis',
+            'apellido' => 'Corbalan',
+            'sexo' => 'Masculino',
+            'dni' => '30226561',
+            'fecha_nac' => '1985-12-16',
+            'telefono' => '(362) 476 - 4523',
+            'telefono_contacto' => '(362) 443 - 5252',
+            'email' => 'eduardo.arancibia@grange.cl',
+            'direccion' => 'San Fernando 335',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '30',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Elba Cristina',
+            'apellido' => 'Alvarez',
+            'sexo' => 'Femenino',
+            'dni' => '13934021',
+            'fecha_nac' => '1987-05-06',
+            'telefono' => '(362) 441 - 7610',
+            'telefono_contacto' => '(362) 446 - 6439',
+            'email' => 'leonor.araya@gmail.com',
+            'direccion' => 'Av. Rivadavia 1130',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '31',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Ramón',
+            'apellido' => 'Goitea',
+            'sexo' => 'Masculino',
+            'dni' => '23423358',
+            'fecha_nac' => '1976-09-11',
+            'telefono' => '(362) 444 - 0105',
+            'telefono_contacto' => '(362) 441 - 7610',
+            'email' => 'paulifran@hotmail.com',
+            'direccion' => 'La Rioja 1199',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '32',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Guillermo Elias Ruben',
+            'apellido' => 'Ganón',
+            'sexo' => 'Masculino',
+            'dni' => '20596506',
+            'fecha_nac' => '1980-02-06',
+            'telefono' => '(362) 443 - 4581',
+            'telefono_contacto' => '(362) 444 - 0105',
+            'email' => 'bad.girl.-@hotmail.es',
+            'direccion' => 'Fotheringam 45',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '33',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Omar D',
+            'apellido' => 'Avalos Fernandez',
+            'sexo' => 'Masculino',
+            'dni' => '26387675',
+            'fecha_nac' => '1956-02-03',
+            'telefono' => '(362) 441 - 7610',
+            'telefono_contacto' => '(362) 476 - 4523',
+            'email' => 'aargomedo@hecsa.cl',
+            'direccion' => 'Jujuy 1870',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '34',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Rodrigo',
+            'apellido' => 'Alvarez Fernandez',
+            'sexo' => 'Masculino',
+            'dni' => '24771656',
+            'fecha_nac' => '1985-01-14',
+            'telefono' => '(362) 445 - 1462',
+            'telefono_contacto' => '(362) 476 - 4523',
+            'email' => 'joy_pao_@hotmail.com',
+            'direccion' => 'Mendoza 2662',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '35',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Gabriel N',
+            'apellido' => 'Banquero Fernandez',
+            'sexo' => 'Masculino',
+            'dni' => '27872450',
+            'fecha_nac' => '1975-08-10',
+            'telefono' => '(362) 442 - 1576',
+            'telefono_contacto' => '(362) 497 - 2426',
+            'email' => 'Sergio.Aspe@adretail.cl',
+            'direccion' => 'García Merou 2901',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '36',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Marcelo',
+            'apellido' => 'Marin',
+            'sexo' => 'Masculino',
+            'dni' => '32444888',
+            'fecha_nac' => '1987-12-16',
+            'telefono' => '3752499740',
+            'telefono_contacto' => '3752499740',
+            'email' => 'marcemarin@gmail.com',
+            'direccion' => 'Corientes 2247',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'user_id' => '37',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Alejandro',
+            'apellido' => 'Rodriguez',
+            'sexo' => 'Masculino',
+            'dni' => '36777888',
+            'fecha_nac' => '1991-10-21',
+            'telefono' => '3752887411',
+            'telefono_contacto' => '3752887411',
+            'email' => 'ale.rodriguez@gmail.com',
+            'direccion' => 'Corientes 2247',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'user_id' => '38',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Damian',
+            'apellido' => 'Freidenberger',
+            'sexo' => 'Masculino',
+            'dni' => '33223882',
+            'fecha_nac' => '1987-03-06',
+            'telefono' => '3752112233',
+            'telefono_contacto' => '3752112233',
+            'email' => 'damian.freidenberger@gmail.com',
+            'direccion' => 'Corientes 2247',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'user_id' => '39',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Alejandro',
+            'apellido' => 'Alba Posse',
+            'sexo' => 'Masculino',
+            'dni' => '36005888',
+            'fecha_nac' => '1991-04-16',
+            'telefono' => '3752895623',
+            'telefono_contacto' => '3752895623',
+            'email' => 'ale.alba@gmail.com',
+            'direccion' => 'Corientes 2247',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'user_id' => '40',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([
+            'nombre' => 'Sergio',
+            'apellido' => 'Sanabria',
+            'sexo' => 'Masculino',
+            'dni' => '36021954',
+            'fecha_nac' => '1991-08-20',
+            'telefono' => '3752748596',
+            'telefono_contacto' => '3752748596',
+            'email' => 'sergio.sanab@gmail.com',
+            'direccion' => 'Corientes 2247',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '5',
+            'pais_id' => '1',
+            'user_id' => '41',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
+        DB::table('personas')->insert([ #PROPIETARIA DEPTO JUAMPY
+            'nombre' => 'Claudia',
+            'apellido' => 'Menéndez',
+            'sexo' => 'Femenino',
+            'dni' => '27555614',
+            'fecha_nac' => '1967-11-15',
+            'telefono' => '3743002233',
+            'telefono_contacto' => '3743002233',
+            'email' => 'claudiana@gmail.com',
+            'direccion' => 'San Luis 387',
+            'foto_perfil' => 'sin_imagen.png',
+            'localidad_id' => '1',
+            'pais_id' => '1',
+            'user_id' => '42',
+            'created_at' => date('Y-m-d H:m:s')
+        ]);
+
 
     }
 }
