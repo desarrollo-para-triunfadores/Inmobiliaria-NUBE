@@ -23,6 +23,8 @@ class CreateTableMovimientos extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             $table->integer('inquilino_id')->unsigned()->nullable();
             $table->foreign('inquilino_id')->references('id')->on('inquilinos')->onDelete('cascade'); 
+            $table->integer('tecnico_id')->unsigned()->nullable();
+            $table->foreign('tecnico_id')->references('id')->on('tecnicos')->onDelete('cascade'); 
             $table->integer('propietario_id')->unsigned()->nullable();
             $table->foreign('propietario_id')->references('id')->on('propietarios')->onDelete('cascade');     
             $table->integer('liquidacion_id')->unsigned()->nullable();

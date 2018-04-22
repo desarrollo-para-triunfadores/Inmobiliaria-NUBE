@@ -72,6 +72,7 @@ class GarantesController extends Controller {
                 $nombreImagen = 'persona_' . time() .'.png';
                 Storage::disk('personas')->put($nombreImagen, \File::get($file));
             }
+            
             $persona = new Persona($request->all());
             $persona->foto_perfil = $nombreImagen;            
             $persona->save();

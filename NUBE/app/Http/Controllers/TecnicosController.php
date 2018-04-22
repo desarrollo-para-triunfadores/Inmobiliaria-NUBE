@@ -48,28 +48,57 @@ class TecnicosController extends Controller
     }
 
     public function store(Request $request) {
-        $nombreImagen = 'sin imagen';
-        if ($request->file('imagen')) {
-            $file = $request->file('imagen');
-            $nombreImagen = 'persona_' . time() .'.png';
-            Storage::disk('personas')->put($nombreImagen, \File::get($file));
-        }
-        /* datos de persona */
-        $persona = new Persona($request->all());
-        $persona->foto_perfil = $nombreImagen;
+       
+        $persona_id = $request->persona_id;
 
-        $persona->save();
-        /* datos de tecnico */
+        if (is_null($request->persona_id)) {    
+            /**
+             * Si no llega un id de persona se crea un usuario, un persona y se notifica
+             */
+            
+            $nombreImagen = 'sin imagen';
+            if ($request->file('imagen')) {
+                $file = $request->file('imagen');
+                $nombreImagen = 'persona_' . time() .'.png';
+                Storage::disk('personas')->put($nombreImagen, \File::get($file));
+            }
+    
+            /**
+             * datos del usuario
+             */
+            $user_nuevo = new User();
+            $user_nuevo->name = $request->nombre . " " . $request->apellido;
+            $user_nuevo->email = $request->email;
+            $user_nuevo->password = bcrypt(rand());
+            $user_nuevo->imagen = $nombreImagen;
+            $user_nuevo->save();
+            $user_nuevo->assignRole('Personal');
+    
+            //Envío de correo para notificar la creación del nuevo usuario
+          
+            Mail::send('emails.confirmacion_inscripcion', ['user_nuevo' => $user_nuevo], function ($m) use ($user_nuevo) {
+                $m->from('sistemanube@gmail.com', 'Nube Propiedades | Notificación de creación de usuario');
+                $m->to($user_nuevo->email, $user_nuevo->name)->subject('No conteste este correo.');
+            });
+    
+            /**
+             * datos de persona
+             */
+            $persona = new Persona($request->all());
+            $persona->foto_perfil = $nombreImagen;
+            $persona->user_id = $user_nuevo->id;
+            $persona->save();
+            $persona_id = $persona->id;
+             
+        } 
+
+        /**
+         * datos del técnico
+         */
+
         $tecnico = new Tecnico($request->all());
-        $tecnico->persona_id = $persona->id;
-        $tecnico->save();
-        
-        $user = new User();
-        $user->name= $request->nombre." ".$reuest->apellido;                        
-        $password_sin_hash = str_random(6);
-        $user->password = Hash::make($password_sin_hash);
-        $user->email = $request->email;
-        $user->rol_id = 2;  //TECNICO
+        $tecnico->persona_id = $persona_id;
+        $tecnico->save();        
 
         Session::flash('message', 'Se ha registrado al nuevo personal de servicio técnico.');
         return redirect()->route('tecnicos.index');

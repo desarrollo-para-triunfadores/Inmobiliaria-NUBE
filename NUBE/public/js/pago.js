@@ -3,9 +3,41 @@ $("#side-liquidaciones-ul").addClass("menu-open");
 $("#side-ele-pagos").addClass("active");
 
 
-function abrir_modal_confirmar(id) {  
-    $('#form-update').attr('action', '/admin/pagos/' + id);
-    $('#boton-modal-update').click();
+function confirmar_pago(tipo, id) { 
+    console.log(tipo);
+    console.log(id);
+    bootbox.confirm({
+        title: "Confirmaci\u00f3n de pago",
+        message: "¿Se encuentra seguro de proseguir?",
+        className: 'modal-warning',
+        buttons: {
+            cancel: {
+                className: 'btn btn-outline pull-left',
+                label: 'Cancelar'
+            },
+            confirm: {
+                className: 'btn btn-outline pull-right',
+                label: 'Confirmar'
+            }
+        },
+        callback: function (result) {
+            console.log(result);
+            if(result){   
+                $.ajax({ // se envía
+                    url: '/admin/registrar_pago',
+                    data: {
+                       id: id,
+                       tipo: tipo
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        window.location.href = '/admin/pagos'
+                    }
+                })
+            }            
+        }
+    });
 }
 
 

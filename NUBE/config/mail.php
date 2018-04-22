@@ -63,7 +63,8 @@ return [
     ],
     */
     //'from' => ['address' => 'mail.delivery.robot@gmail.com', 'name' => 'Inmobiliaria Nube'],
-    'from' => ['address' => 'jpcaceres.nea@gmail.com', 'name' => 'Inmobiliaria Nube'],
+    'from' => ['address' => 'hacho.kuszniruk@gmail.com', 'name' => 'Inmobiliaria Nube'],
+    //'from' => ['address' => 'jpcaceres.nea@gmail.com', 'name' => 'Inmobiliaria Nube'],
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol

@@ -17,7 +17,8 @@ class ComposerServiceProvider extends ServiceProvider
         View::composers
         ([
             'App\Http\ViewComposers\NotificacionesComposer' => 'admin.partes.navtop.main',
-            'App\Http\ViewComposers\MensajesComposer' => 'admin.partes.navtop.mensajes',                
+            'App\Http\ViewComposers\MensajesComposer' => 'admin.partes.navtop.mensajes',   
+            'App\Http\ViewComposers\ConceptosLiquidacionesComposer' => ['admin.conceptos_liquidaciones_mensuales.create', 'admin.conceptos_liquidaciones_mensuales.main']
         ]);
     }
 

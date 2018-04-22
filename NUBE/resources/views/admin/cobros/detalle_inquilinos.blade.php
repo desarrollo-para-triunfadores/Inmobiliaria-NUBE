@@ -27,22 +27,22 @@
                                 <ul class="products-list product-list-in-box">
                                     @foreach($liquidacion->conceptos() as $concepto)                                            
                                         <li class="item">
-                                                    <div class="product-img">
-                                                        <span class="info-box-icon-modificado">                                                                    
-                                                            @if ($concepto->servicio->servicio_compartido)
-                                                                <i class="fa fa-users" aria-hidden="true"></i>
-                                                            @else
-                                                                <i class="fa fa-user" aria-hidden="true"></i>
-                                                            @endif
-                                                        </span>
-                                                    </div>
-                                                    <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">{{$concepto->servicio->nombre}}
-                                                            <span class="label label-warning pull-right">$ {{number_format($concepto->monto, 2) }} </span>
-                                                        </a>
-                                                        <span class="product-description">{{$concepto->servicio->descripcion}}</span>
-                                                    </div>
-                                                </li>
+                                            <div class="product-img">
+                                                <span class="info-box-icon-modificado">                                                                    
+                                                    @if ($concepto->servicio->servicio_compartido)
+                                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                                    @else
+                                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                                    @endif
+                                                </span>
+                                            </div>
+                                            <div class="product-info">
+                                                <a href="javascript:void(0)" class="product-title">{{$concepto->servicio->nombre}}
+                                                    <span class="label label-warning pull-right">$ {{number_format($concepto->monto, 2) }} </span>
+                                                </a>
+                                                <span class="product-description">{{$concepto->servicio->descripcion}}</span>
+                                            </div>
+                                        </li>
                                     @endforeach                                                            
                                 </ul>
                             </div>                                
@@ -60,15 +60,29 @@
                             </div>
                         </div>                                        
                         <div class="info-box">
-                                <span class="info-box-icon bg-yellow"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></span>                        
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Expensas</span>
-                                    <span class="info-box-number">Monto: ${{$liquidacion->calcular_total()}}</span>
-                                    <span class="product-description"> 
-                                            El monto corresponde a la suma de los conceptos detallados al lado.
-                                    </span>
-                                </div>                                                                                    
+                            <span class="info-box-icon bg-yellow"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></span>                        
+                            <div class="info-box-content">
+                                <span class="info-box-text">Expensas</span>
+                                <span class="info-box-number">Monto: ${{$liquidacion->calcular_total()}}</span>
+                                <span class="product-description"> 
+                                        El monto corresponde a la suma de los conceptos detallados al lado.
+                                </span>
+                            </div>                                                                                    
                         </div>
+                        
+                        @if($liquidacion->obtener_monto_por_repararaciones("inquilino") > 0)
+                            <div class="info-box">
+                                <span class="info-box-icon bg-green" style="background-color:#605ca8;"><i class="fa fa-wrench" style="color:#FFFFFF"></i></span>                                                                        
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Servicio técnico</span>
+                                    <span class="info-box-number">Monto: ${{$liquidacion->obtener_monto_por_repararaciones("inquilino")}}</span>
+                                    <span class="product-description"> 
+                                        Este monto es por trabajos que se realizaron en el inmueble durante el periodo.
+                                    </span>
+                                </div>
+                            </div>                       
+                        @endif
+
                         <div class="info-box">
                             <span class="info-box-icon bg-aqua"><i class="fa fa-desktop" aria-hidden="true"></i></span>                    
                             <div class="info-box-content">

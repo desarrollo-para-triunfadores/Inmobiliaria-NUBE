@@ -203,7 +203,7 @@
                 </li>
             @endcan
 
-        <!-- Liquidaciones mensuales -->
+            <!-- Liquidaciones mensuales -->
             @cannot('alta de liquidaciones')
 
             @else
@@ -217,7 +217,7 @@
                     </a>
                     <ul id="side-liquidaciones-ul" class="treeview-menu">
                         @can('alta de liquidaciones')
-                            <li id="side-ele-generar-liquidacion"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista de todos los registros de liquidación mensual que ya están listos para poder ser liquidados" href="/admin/liquidaciones/create"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros listos para liquidar</a></li>
+                            <li id="side-ele-generar-liquidacion"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista de todos los registros de liquidación mensual que ya están listos para poder ser liquidados" href="/admin/liquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros listos para liquidar</a></li>
                         @endcan
                         @can('cobro de liquidaciones')
                             <li id="side-ele-cobros"><a data-toggle="tooltip" data-placement="right"  title="cargar el cobro de una liquidación mensual a un cliente" href="/admin/cobros/create"><i class="fa fa-usd" aria-hidden="true"></i> Cobro de servicios</a></li>

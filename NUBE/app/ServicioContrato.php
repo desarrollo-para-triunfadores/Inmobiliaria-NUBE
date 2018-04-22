@@ -44,9 +44,13 @@ class ServicioContrato extends Model
         return $costos_expensas[$this->servicio->nombre];
     }
 
-    public function periodos_validos() //este método se encarga de devolver los periodos que pueden ser utilizados en la carga de impuestos
-    {
-        
+    public function periodos_validos(){ 
+       
+        /**
+         * Este método se encarga de devolver los periodos que pueden ser utilizados 
+         * en la carga de impuestos 
+         */
+          
         $año_inicio = $this->contrato->fecha_desde->format('Y'); //se usa para control
         $mes_inicio = $this->contrato->fecha_desde->format('m'); //se usa para control
         $año_inicio_loop = $this->contrato->fecha_desde->format('Y'); //se usa para el loop

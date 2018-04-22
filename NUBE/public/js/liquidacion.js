@@ -64,7 +64,7 @@ function enviar () {
                             label: 'cerrar',
                             className: 'btn btn-outline pull-right',
                             callback: function () {
-                                window.location.href = '/admin/liquidaciones/create'
+                                window.location.href = '/admin/liquidaciones'
                             }
                         }
                     }

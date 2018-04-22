@@ -50,7 +50,7 @@ function filtrar_contratos() {
 
     lineas = []
     $.ajax({
-        url: '/admin/conceptosliquidaciones',
+        url: '/admin/obtener_conceptos',
         data: {
             accion: pantalla,
             servicios: $('#servicio_id').val(),
@@ -249,11 +249,13 @@ function enviar() { //se envían los datos al controller para que lo registre
 
     if (lineas.length > 0) { // si la lista está vacía se informa al usuario al respecto
         var conceptos = []
+        
         lineas.forEach(function (valor) { // se convierte el array en una coleccion de objetos
             conceptos.push(valor)
         })
+
         $.ajax({ // se envía
-            url: '/admin/conceptosliquidaciones/create',
+            url: '/admin/registrar_conceptos',
             data: {
                 lista_conceptos: conceptos
             },

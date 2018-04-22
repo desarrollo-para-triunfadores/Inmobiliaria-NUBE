@@ -5,7 +5,7 @@
       <span class="label label-warning">{{$notificaciones->count()}}</span>
     @endif
   </a>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" style="width: 380px">
       @if ($notificaciones->count() > 0)
         <li class="header">Tienes <b>{{$notificaciones->count()}}</b> notificaciones sin leer</li>
       @else
