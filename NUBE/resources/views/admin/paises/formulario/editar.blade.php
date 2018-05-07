@@ -28,5 +28,4 @@
         </div>
     </div>
 </div>
-
 <button type="button" id="boton-modal-update" class="btn btn-primary btn-lg hide" data-toggle="modal" data-target="#modal-update"></button>

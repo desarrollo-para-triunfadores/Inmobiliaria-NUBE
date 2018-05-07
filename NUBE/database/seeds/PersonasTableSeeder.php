@@ -713,7 +713,7 @@ class PersonasTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
-        DB::table('personas')->insert([ #PROPIETARIA DEPTO JUAMPY
+        DB::table('personas')->insert([ // Técnico
             'nombre' => 'Claudia',
             'apellido' => 'Menéndez',
             'sexo' => 'Femenino',

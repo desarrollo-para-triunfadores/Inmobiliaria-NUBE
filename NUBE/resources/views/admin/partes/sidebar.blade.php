@@ -157,7 +157,7 @@
                             <li id="side-ele-opotunidades"><a data-toggle="tooltip" data-placement="right"  title="ver las oportunidades de negocio" href="/admin/oportunidades"><i class="fa fa-eye"></i> Oportunidades</a></li>
                         @endcan
                         @can('acceso a agenda')
-                            <li id="side-ele-agenda"><a href="/admin/agenda"><i class="fa fa-calendar"></i> Agenda</a></li>
+                            <li id="side-ele-agenda"><a href="/admin/indexoportunidades"><i class="fa fa-calendar"></i> Agenda</a></li>
                         @endcan
 
                     </ul>
@@ -178,6 +178,23 @@
                     </ul>
                 </li>
             @endcan
+
+         
+            <li id="side-agenda-usuarios-li" class="treeview">
+                <a href="#">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span>Agenda</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul id="side-agenda-usuarios-ul" class="treeview-menu">
+                    <li id="side-ele-agenda-usuarios"><a href="/admin/indexusurios" title="acceder a la agenda" data-toogle="tooltip"><i class="fa fa-calendar"></i> Agenda</a></li>
+                </ul>
+            </li>
+          
+
+
 
         <!-- Carga de Impuestos -->
             @cannot('acceso a impuestos','alta de impuestos')

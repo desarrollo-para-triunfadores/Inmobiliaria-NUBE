@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inmueble extends Model {
 
     protected $table = "inmuebles";
+
     protected $fillable = [
         'condicion',
         'valorVenta',
@@ -35,16 +36,28 @@ class Inmueble extends Model {
 
     protected $dates = ['fechaHabilitacion'];
 
+    /**
+     * Mutadores
+     */
+
     public function getFechaHabilitacionFormateadoAttribute(){
         return $this->fechaHabilitacion->format('d/m/Y');
     }
 
-    public function contratos(){        #devuelve el historial de contratos de un inmueble
-        return $this->hasMany('App\Contrato');
+    public function setFechaComienzoAttribute($value){
+        if(!is_null($value)){
+            $fecha= str_replace('/', '-', $value);
+            $this->attributes['fechaHabilitacion'] = date('Y-m-d', strtotime($fecha));
+        }       
     }
 
-    public function ultimo_contrato(){
-        return $this->contratos()->get()->sortByDesc('id')->first();
+
+    /**
+     * Relaciones
+     */
+
+    public function contratos(){ 
+        return $this->hasMany('App\Contrato');
     }
 
     public function tipo() {
@@ -71,10 +84,6 @@ class Inmueble extends Model {
         return $this->hasMany('App\ImagenInmueble');
     }
 
-    public function foto_slider(){
-        return $this->fotos()->where('seccion_imagen','slider')->get()->first();
-    }
-
     public function caracteristicas() {
         return $this->hasMany('App\CaracteristicaInmueble');
     }
@@ -83,4 +92,17 @@ class Inmueble extends Model {
         return $this->hasMany('App\Oportunidad');
     }
 
+
+    /**
+     * Métodos diversos
+     */
+
+    public function ultimo_contrato(){
+       // return $this->contratos()->get()->sortByDesc('id')->first();
+       return $this->contratos()->last();
+    }
+
+    public function foto_slider(){
+        return $this->fotos()->where('seccion_imagen','slider')->get()->first();
+    }
 }

@@ -12,11 +12,7 @@
               <!-- Mensajes -->
               @include('admin.partes.navtop.mensajes')
               <!-- Notificationes -->
-              @include('admin.partes.navtop.notificaciones')
-              <!-- Otras notificationes-->
-              @can('acceso a oportunidades','acceso a agenda')               
-                @include('admin.partes.navtop.notificaciones_oportunidades')    
-              @endcan              
+              @include('admin.partes.navtop.notificaciones')           
               <!-- Menu usuario -->
               @include('admin.partes.navtop.menu_usuario')
               <!-- Configuración interfaz -->

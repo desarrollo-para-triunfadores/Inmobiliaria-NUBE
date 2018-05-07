@@ -30,11 +30,11 @@ Agenda
     </section>
 </div>
 
-@include('admin.agenda.formulario.create')
-@include('admin.agenda.formulario.show')
+@include('admin.agenda_oportunidades.formulario.create')
+@include('admin.agenda_oportunidades.formulario.show')
 
 
 @endsection
 @section('script')
-    <script src="{{ asset('js/agenda.js') }}"></script>
+    <script src="{{ asset('js/agenda_oportunidades.js') }}"></script>
 @endsection

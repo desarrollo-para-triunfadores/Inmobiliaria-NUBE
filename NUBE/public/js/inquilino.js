@@ -35,7 +35,6 @@ function abrir_modal_borrar(id) {  // este método carga los datos de un registr
 }
 
 
-
 //Datatable - instaciación del plugin
 var table = $('#example').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
@@ -107,7 +106,6 @@ $('.datepicker').bootstrapMaterialDatePicker ({
     maxDate : moment(),
     time: false 
 });
-
 
 
 function mostrar_panel_persona () {

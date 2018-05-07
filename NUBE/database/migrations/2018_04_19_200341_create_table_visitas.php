@@ -15,12 +15,16 @@ class CreateTableVisitas extends Migration
     {
         Schema::create('visitas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo')->nullable();
-            $table->dateTime('inicio')->nullable();
-            $table->dateTime('fin')->nullable();
+            
+            /**Variables ajustadas para su uso con el plugin calendar */
+            $table->string('title')->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
             $table->boolean('allDay')->nullable();
-            $table->string('color')->nullable();
+            $table->string('backgroundColor')->nullable();
+            $table->string('borderColor')->nullable();
 
+            /**Resto de variables */
             $table->integer('confirmada')->unsigned()->nullable();
             $table->integer('realizada')->unsigned()->nullable();
             $table->integer('oportunidad_id')->unsigned()->nullable();

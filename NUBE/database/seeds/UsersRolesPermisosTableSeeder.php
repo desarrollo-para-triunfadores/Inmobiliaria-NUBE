@@ -312,7 +312,7 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         $user_42 = User::create([
             'name' =>  'Claudia',
-            'email' => 'claudiana@gmail.com',    
+            'email' => 'tecnico@gmail.com',    
             'password' => bcrypt('123123'),
             'imagen' => 'sin_imagen.png'
         ]);
@@ -432,10 +432,57 @@ class UsersRolesPermisosTableSeeder extends Seeder
         $role_admin->givePermissionTo('pagos de liquidaciones');
   
 
+        $role_personal->givePermissionTo('acceso a usuarios');
+
+        $role_personal->givePermissionTo('acceso a roles');
+
+        $role_personal->givePermissionTo('acceso a servicios');
+
+        $role_personal->givePermissionTo('acceso a paises');
+
+        $role_personal->givePermissionTo('acceso a provincias');
+
+        $role_personal->givePermissionTo('acceso a localidades');
+
+        $role_personal->givePermissionTo('acceso a barrios');
+
+        $role_personal->givePermissionTo('acceso a caracteristicas');
+
+        $role_personal->givePermissionTo('acceso a tipos de caracteristicas');
+
+        $role_personal->givePermissionTo('acceso a inmuebles');
+
+        $role_personal->givePermissionTo('acceso a edificios');
+
+        $role_personal->givePermissionTo('acceso a proyectos');
+
+        $role_personal->givePermissionTo('acceso a propiearios');
+
+        $role_personal->givePermissionTo('acceso a inquilinos');
+
+        $role_personal->givePermissionTo('acceso a garantes');
+
+        $role_personal->givePermissionTo('acceso a oportunidades');
+
+        $role_personal->givePermissionTo('acceso a agenda');
+
+        $role_personal->givePermissionTo('acceso a contratos');
+
+        $role_personal->givePermissionTo('acceso a impuestos');
+
+        $role_personal->givePermissionTo('alta de impuestos');
+
+        $role_personal->givePermissionTo('alta de liquidaciones');
+
+        $role_personal->givePermissionTo('cobro de liquidaciones');
+
+        $role_personal->givePermissionTo('pagos de liquidaciones');
+
+
 
         //Asignación de roles a usuarios administradores
 
-        $user_1->assignRole('Administrador');
+        $user_1->assignRole('Personal'); //Hacho
 
         $user_2->assignRole('Administrador');
 

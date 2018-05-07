@@ -43,6 +43,14 @@ function carga_lineas (id, vencimiento) {
 
 function enviar () {    
     if(lineas.length>0){
+        /**
+         * Avisamos del procesamiento
+         */
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center"><b>Procesando la liquidaci\u00f3n. Espere por favor...</b></p>',
+            closeButton: false
+        });       
+        
         var conceptos = []
         lineas.forEach(function (valor) { // se convierte el array en una coleccion de objetos
             conceptos.push(valor)
@@ -55,6 +63,9 @@ function enviar () {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
+                            
+                dialog.modal('hide');// escondemos el mensaje de procesamiento
+                
                 bootbox.dialog({
                     title: 'Registración exitosa',
                     message: 'Se ha registrado con éxito las liquidaciones pendientes.',

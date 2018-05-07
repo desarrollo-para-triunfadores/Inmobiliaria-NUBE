@@ -58,9 +58,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('mensajes', 'MensajesController');
     Route::resource('oportunidades', 'OportunidadesController');
     Route::resource('solicitudes_servicio', 'SolicitudesServicioController');
-    Route::resource('agenda', 'VisitasController');
     Route::resource('tecnicos', 'TecnicosController');
-
+    Route::resource('agenda', 'VisitasController');
+    Route::resource('agenda_usuario', 'AgendaUsuariosController');
     //Route::get('/verBoleta', 'EstadisticasController@verBoleta')->name('verBoleta');
     
     /*
@@ -86,7 +86,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
      */
 
     //Agenda
+
+
+    //Visitas
+  //  Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('cargaEventos{id?}', 'CalendarController@index');
+   // Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
+    
+    Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
+
+
+    //Agenda usuarios
+    Route::get('/indexoportunidades', 'AgendaUsuariosController@indexoportunidades')->name('indexoportunidades');
+    Route::get('/indexusurios', 'AgendaUsuariosController@indexusurios')->name('indexusurios');
+    Route::get('/obtener_datos_visita', 'AgendaUsuariosController@obtener_datos_visita')->name('obtener_datos_visita');
+    Route::get('/obtener_visitas_usuarios', 'AgendaUsuariosController@obtener_visitas_usuarios')->name('obtener_visitas_usuarios');
+    Route::get('/obtener_visitas_oportunidades', 'AgendaUsuariosController@obtener_visitas_oportunidades')->name('obtener_visitas_oportunidades');
+    Route::get('/actualizar_visita', 'AgendaUsuariosController@actualizar_visita')->name('actualizar_visita');
+    Route::get('/eliminar_visita', 'AgendaUsuariosController@eliminar_visita')->name('eliminar_visita');
 
     //Barrios
     Route::get('/obtener_inmuebles_barrios', 'BarriosController@obtener_inmuebles')->name('obtener_inmuebles_barrios');
@@ -117,7 +134,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     //Notificaciones
     Route::get('/ocultar_notificaciones', 'NotificacionesController@ocultar_notificaciones')->name('ocultar_notificaciones');
-   
+    Route::get('/confirmar_visita', 'NotificacionesController@confirmar_visita')->name('confirmar_visita');    
+
     //Pagos
     Route::get('/registrar_pago', 'PagosController@registrar_pago')->name('registrar_pago');
 
@@ -129,12 +147,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //Técnicos
     Route::name('tecnicos.tecnicosxrubro')->get('tecnicos/tecnicosxrubro/', 'TecnicosController@tecnicosxrubro');
 
-    //Visitas
-    Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
-    Route::get('cargaEventos{id?}', 'CalendarController@index');
-    Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
-    Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
-    Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
 
 
 });

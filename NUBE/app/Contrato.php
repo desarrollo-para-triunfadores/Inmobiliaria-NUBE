@@ -29,6 +29,10 @@ class Contrato extends Model
 
     protected $dates = ['fecha_desde', 'fecha_hasta'];
 
+    /**
+     * Mutadores
+     */
+
     public function getFechaDesdeFormateadoAttribute()
     {
         return $this->fecha_desde->format('d/m/Y');
@@ -39,17 +43,55 @@ class Contrato extends Model
         return $this->fecha_hasta->format('d/m/Y');
     }
 
+    public function setFechaHastaAttribute($value)
+    {
+        if (!is_null($value)) {
+            $fecha = str_replace('/', '-', $value);
+            $this->attributes['fecha_hasta'] = date('Y-m-d', strtotime($fecha));
+        }
+
+    }
+
+    public function setFechaDesdeAttribute($value)
+    {
+        if (!is_null($value)) {
+            $fecha = str_replace('/', '-', $value);
+            $this->attributes['fecha_desde'] = date('Y-m-d', strtotime($fecha));
+        }
+    }
+
+    public function setFechaHabilitacionAttribute($value)
+    {
+        if (!is_null($value)) {
+            $fecha = str_replace('/', '-', $value);
+            $this->attributes['fecha_habilitacion'] = date('Y-m-d', strtotime($fecha));
+        }
+    }
+
+    public function setMontoBasicoAttribute($value)
+    {
+        $this->attributes['monto_basico'] = ($value);
+    }
+   
+
+    /**
+     *  Comente esto de abajo porque produce una excepcion 
+     *  "A non well formed numeric value encountered"
+     */
+     
+  /*  public function setIncrementoAttribute($value)
+    {
+        $this->attributes['incremento'] = number_format($value , 2);
+    }     */
+
+
+    /**
+     * Relaciones
+     */
+
     public function garante()
     {
         return $this->belongsTo('App\Garante');
-    }
-
-    public function vigente()
-    {
-        $fecha_hoy = Carbon::now();
-        if ($this->fecha_hasta > $fecha_hoy) {
-            return true;
-        }
     }
 
     public function inquilino()
@@ -57,12 +99,6 @@ class Contrato extends Model
         return $this->belongsTo('App\Inquilino');
     }
 
-    /*
-    public function propietario()
-    {
-        return $this->belongsTo('App\Inmueble');
-    }    
-*/
     public function inmueble()
     {
         return $this->belongsTo('App\Inmueble');
@@ -88,17 +124,37 @@ class Contrato extends Model
         return $this->hasMany('App\LiquidacionMensual');
     }
 
-    public function ultima_liquidacion()
-    {
-        return $this->liquidaciones->last();
-    }
-
     public function periodos_contrato()
     {
         return $this->hasMany('App\PeriodoContrato');
     }
 
-    ### -- METODOS -- ###
+    public function solicitudes_servicio()
+    {
+        return $this->hasMany('App\SolicitudServicio');
+    }
+
+    /**
+     * Métodos diversos
+     */
+
+    public function vigente()
+    {
+        /**
+         * Indica si el contrato se encuentra o no vigente a día de hoy
+         */
+
+        $fecha_hoy = Carbon::now();
+        if ($this->fecha_hasta > $fecha_hoy) {
+            return true;
+        }
+    }
+
+    public function ultima_liquidacion()
+    {
+        return $this->liquidaciones->last();
+    }
+
 
     public function posee_servicio($id_servicio)
     {
@@ -112,15 +168,15 @@ class Contrato extends Model
     }
 
     public function eliminar_periodos()
-    {       
-        foreach ($this->periodos_contrato as $periodo_contrato) {   
+    {
+        foreach ($this->periodos_contrato as $periodo_contrato) {
             $periodo_contrato->delete();
         }
     }
 
     public function eliminar_servicios_contratos()
-    {        
-        foreach ($this->servicios_contrato as $servicio_contrato) {          
+    {
+        foreach ($this->servicios_contrato as $servicio_contrato) {
             $servicio_contrato->delete();
         }
     }
@@ -139,40 +195,5 @@ class Contrato extends Model
     {
         $liquidaciones = $this->liquidaciones();
     }
-    ### --/- METODOS 
-
-    #### MUTADORES ####
-
-    public function setFechaHastaAttribute($value)
-    {
-        $fecha = str_replace('/', '-', $value);
-        $this->attributes['fecha_hasta'] = date('Y-m-d', strtotime($fecha));
-    }
-
-    public function setFechaDesdeAttribute($value)
-    {
-        $fecha = str_replace('/', '-', $value);
-        $this->attributes['fecha_desde'] = date('Y-m-d', strtotime($fecha));
-    }
-
-    public function setFechaHabilitacionAttribute($value)
-    {
-        $fecha = str_replace('/', '-', $value);
-        $this->attributes['fecha_habilitacion'] = date('Y-m-d', strtotime($fecha));
-    }
-
-
-
-    public function setMontoBasicoAttribute($value)
-    {
-        $this->attributes['monto_basico'] = ($value);
-    }
-    /*  Comente esto porque produce una excepcion "A non well formed numeric value encountered"
-    public function setIncrementoAttribute($value)
-    {
-        $this->attributes['incremento'] = number_format($value , 2);
-    }
-     */
-
-
+    
 }

@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tecnico extends Model {
 
     protected $table = "tecnicos";
+
     protected $fillable = ['persona_id', 'rubroTecnico_id'];
 
+    /**
+     * Relaciones
+     */
 
     public function persona() {
         return $this->belongsTo('App\Persona');
@@ -19,8 +23,12 @@ class Tecnico extends Model {
     }
 
     public function solicitudes_servicio(){
-        return $this->hasMany('App\Solicitud_Servicio');
+        return $this->hasMany('App\SolicitudServicio');
     }
+
+    /**
+     * Métodos diversos
+     */
 
     public function ultimo_contrato(){
         return $this->contratos()->get()->sortByDesc('id')->first(); 
@@ -34,6 +42,5 @@ class Tecnico extends Model {
         return $this->hasMany('App\Movimientos');
     }
 
-    ######### Metodos #########
 
 }

@@ -12,7 +12,10 @@ class Mensaje extends Model
 {
     protected $table = "mensajes";
 
-    protected $fillable = ['conversacion_id', 'mensaje'];
+    protected $fillable = [
+        'conversacion_id',
+        'mensaje'
+    ];
 
     public function conversacion()
     {

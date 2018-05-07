@@ -15,7 +15,7 @@
       @endif
       <li>
         <!-- inner menu: contains the actual data -->
-        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
+        <div style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
           @foreach($conversaciones_nav_top as $conversacion_nav_top)                    
             <li><!-- start message -->
               <a href="#">
