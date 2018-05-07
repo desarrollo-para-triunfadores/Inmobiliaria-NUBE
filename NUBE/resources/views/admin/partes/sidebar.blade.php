@@ -249,18 +249,43 @@
                 </a>
             </li>
 
-        <!--Peticiones de Servicio Técnico -->
-            <li id="li16">
-                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/solicitudes_servicio/">
+        <!--TODAS las peticiones de Servicio Técnico -->
+        <li id="li16">
+            <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/solicitudes_servicio/">
+                <i class="fa fa-id-badge ">
+                    <div class="icon-bg bg-orange"></div>
+                </i>
+                <span class="menu-title">Soliciudes de Servicio</span>
+            </a>
+        </li>    
+
+            
+        <!--Bolsa de Servicio Técnico -->
+        @if( (Auth::user()->obtener_rol() != 'Propietario') && (Auth::user()->obtener_rol() != 'Inquilino') )
+        <li id="li17">
+            <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/bolsa">
+                <i class="fa fa-id-badge ">
+                    <div class="icon-bg bg-orange"></div>
+                </i>
+                <span class="menu-title">Bolsa de Soliciudes de Servicio</span>
+            </a>
+        </li>    
+        @endif
+{{--
+        <!--Espacio de cuentas para TECNICOS -->
+        @if(Auth::user()->obtener_rol() == 'Personal')
+            <li id="li18">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Seguimiento a mis solicitudes de servicio y sus estados"   href="/admin/solicitudes_servicio/">
                     <i class="fa fa-id-badge ">
                         <div class="icon-bg bg-orange"></div>
                     </i>
-                    <span class="menu-title">Solicitudes de Servicio</span>
+                    <span class="menu-title">Mis Solicitudes Atendidas</span>
                 </a>
             </li>    
-
+        @endif
+         --}}   
         <!--Backup de Datos -->
-            <li id="li17">
+            <li id="li25">
                 <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Backup de la información almacenada" onclick="backup()"  href="{{--  route('admin.backup.index') --}}">
                     <i class="fa fa-database">
                         <div class="icon-bg bg-orange"></div>

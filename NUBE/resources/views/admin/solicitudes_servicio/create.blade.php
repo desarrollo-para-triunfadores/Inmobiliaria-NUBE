@@ -58,9 +58,8 @@
                         </div>                       
                     </div>
                     <!--Datos de Evento (Visita en agenda)-->                     
-                         
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4">       
                             <div class="form-group">
                                 <label>Inicio:</label>
                                 <div class='input-group date datetimepicker'>                            
@@ -75,7 +74,7 @@
                             <div class="form-group">
                         <label>Fin:</label>
                         <div class='input-group date datetimepicker' >
-                                <input name="fin" id="create-inicio" type="text" placeholder="campo requerido" class="form-control datepicker disable">                            
+                                <input name="fin" id="fin" type="text" placeholder="campo requerido" class="form-control datepicker disable">                            
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>

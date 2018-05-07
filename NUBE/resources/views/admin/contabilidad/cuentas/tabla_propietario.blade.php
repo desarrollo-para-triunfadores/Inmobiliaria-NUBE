@@ -35,10 +35,8 @@
                         </a>
                     </td>
                 </tr>
-            @endforeach
-            
-            </tbody>
-        
+            @endforeach            
+            </tbody>        
         </table>
     </div>
     <!-- /.box-body -->
@@ -81,12 +79,13 @@
                             <td class="text-center text-bold text-red">VENCIDA ❌</td>  
                         @endif     
                     @endif 
-                                <td class="text-center text-bold">{{$liquidacion->periodo}}</td>
-                                <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->edificio->nombre}}</b> | Piso {{$liquidacion->contrato->inmueble->piso}} N° {{$liquidacion->contrato->inmueble->numDepto}}</td>
-                                <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->direccion}} ({{$liquidacion->contrato->inmueble->localidad->nombre}})</td>
-                                <td class="text-center" width="100">            
-                                    <a href="{{ route('contabilidad.show', $propietario->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
-                                        <i class="fa fa-list"></i>
+                    
+                    <td class="text-center text-bold">{{$liquidacion->periodo}}</td>
+                    <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->edificio->nombre}}</b> | Piso {{$liquidacion->contrato->inmueble->piso}} N° {{$liquidacion->contrato->inmueble->numDepto}}</td>
+                    <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->direccion}} ({{$liquidacion->contrato->inmueble->localidad->nombre}})</td>
+                    <td class="text-center" width="100">            
+                        <a href="{{ route('contabilidad.show', $propietario->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                            <i class="fa fa-list"></i>
                                     </a>
                                     <a href="{{ route('contabilidad.show', $propietario->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
                                         <i class="fa fa-download"></i>

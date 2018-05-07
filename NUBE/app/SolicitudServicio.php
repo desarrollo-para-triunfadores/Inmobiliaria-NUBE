@@ -17,7 +17,8 @@ class SolicitudServicio extends Model
         'motivo',
         'estado',
         'monto_final',
-        'fecha_cierre'
+        'fecha_cierre',
+        'calififacion'
     ]; 
 
     protected $dates = ['fecha_cierre'];

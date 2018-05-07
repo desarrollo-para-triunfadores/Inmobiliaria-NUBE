@@ -1,5 +1,6 @@
 //-------------
 //- PIE CHART -
+/* ESTO ESTA COMENTADO PORQUE GENERABA CONFLICTOS
 var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
 var pieChart = new Chart(pieChartCanvas);
 var PieData = [
@@ -67,6 +68,8 @@ var pieOptions = {
 //Create pie or douhnut chart
 // You can switch between pie and douhnut using the method below.
 pieChart.Doughnut(PieData, pieOptions);
+
+*/
 /******************************************************************************************************************* */
 
 
