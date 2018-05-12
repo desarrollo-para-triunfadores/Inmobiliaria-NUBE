@@ -20,7 +20,8 @@ class EstadisticasController extends Controller
 {
     public function index(Request $request)
     {
-        if((Auth::user()->rol_id == 1 )){   #Si el usuario es un administrador CloudProp
+        //dd(Auth::user()->obtener_rol());
+        if((Auth::user()->obtener_rol() == 'Administrador' )){   #Si el usuario es un administrador CloudProp
             $inquilinos = Inquilino::all();
             $propietarios = Propietario::all();
             $clientes = Persona::all();
@@ -75,7 +76,7 @@ class EstadisticasController extends Controller
                     ->with('localidades', $localidades); // se devuelven los registros;
         }
         else{   #--Si el usuario NO ES ADMINISTRADOR CloudProp (podria ser INQUILINO o PROPIETARIO)      
-            if(Auth::user()->persona->inquilino){    ########### si nuestro user vera la vista como INQUILINO ############
+            if(Auth::user()->obtener_rol() == 'Inquilino'){    ########### si nuestro user es INQUILINO ############
                 $inquilino = Auth::user()->persona->inquilino;                
                 /* 
                 ##Lineas comentadas --> Por ahora un inquilino solo podra tener un contrato vigente a la vez
@@ -102,8 +103,7 @@ class EstadisticasController extends Controller
                 $propietario = Auth::user()->persona->propietario;
                 $contratos = $propietario->contratos_vigentes();
                 $liquidaciones= [];
-                if($contratos!=null){
-                    
+                if($contratos!=null){                    
                     foreach($contratos as $contrato){
                         $liquidacion_de_contrato = LiquidacionMensual::where('contrato_id',$contrato->id)->get();
                         array_push($liquidaciones , $liquidacion_de_contrato);

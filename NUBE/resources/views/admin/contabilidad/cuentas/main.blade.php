@@ -44,7 +44,8 @@
     <script>
             /**** Cuando se selecciona un rubro de tecnico, desplegar los tecnicos que corresponden al rubro ****/
           $('select#rubrotecnico_id').on('change',function () {
-              $('select#tecnico_id').empty();   
+              $('select#tecnico_id').empty(); 
+               
               $.ajax({
                   dataType: 'JSON',
                   url: "/admin/tecnicos/tecnicosxrubro",      
@@ -59,8 +60,7 @@
                           $('select#tecnico_id').append("<option value='"+data[i].tecnico.id+"'> "+data[i].persona.nombre+" "+data[i].persona.apellido+"</option>");
                       }
                   }
-              });
-             
+              });             
           });
     </script>
 @endsection

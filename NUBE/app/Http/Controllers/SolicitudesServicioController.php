@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Inquilino;
 use App\Localidad;
@@ -10,6 +10,9 @@ use App\Persona;
 use App\Propietario;
 use App\SolicitudServicio;
 use App\Tecnico;
+use App\Conversacion;
+use App\UserConversacion;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
@@ -25,38 +28,96 @@ class SolicitudesServicioController extends Controller
     }
 
 
-    public function index()
-    {     
-        $solicitudes_servicio = SolicitudServicio::all();
-        $tecnicos = Tecnico::all();
-        $inquilinos = Inquilino::all();
-        $propietarios = Propietario::all();
-        return view('admin.solicitudes_servicio.main')
-            ->with('tecnicos',$tecnicos)
-            ->with('propietarios',$propietarios)
-            ->with('inquilinos',$inquilinos)
-            ->with('solicitudes_servicio',$solicitudes_servicio);
+    public function index(){
+        #si es un admin, mostrar todas las solicitudes    
+        if(Auth::user()->obtener_rol() == 'Administrador'){
+            $solicitudes_servicio = SolicitudServicio::all();
+            $tecnicos = Tecnico::all();
+            $inquilinos = Inquilino::all();
+            $propietarios = Propietario::all();
+            return view('admin.solicitudes_servicio.main')
+                ->with('tecnicos',$tecnicos)
+                ->with('propietarios',$propietarios)
+                ->with('inquilinos',$inquilinos)
+                ->with('solicitudes_servicio',$solicitudes_servicio);    
+        }
+        #--si es Tecnico → mostrar unicamente las solicitudes de ese tecnico 
+        if(Auth::user()->obtener_rol() == 'Personal'){
+            $tecnico = Tecnico::find(Auth::user()->persona->tecnico->id);
+            $ss = SolicitudServicio::where('tecnico_id', $tecnico->id)->get();
+            $inquilinos = Inquilino::all();
+            $propietarios = Propietario::all();
+            return view('admin.solicitudes_servicio.main')
+                ->with('tecnico',$tecnico)
+                ->with('propietarios',$propietarios)
+                ->with('inquilinos',$inquilinos)
+                ->with('solicitudes_servicio',$ss);
+        }
+        #--si es algun solicitante de servicio (Propietario o Inquilino)
+        if((Auth::user()->obtener_rol() == 'Propietario') || (Auth::user()->obtener_rol() == 'Inquilino')){
+            $solicitudes_servicio = SolicitudServicio::all();
+            $tecnicos = Tecnico::all();
+            $inquilinos = Inquilino::all();
+            $propietarios = Propietario::all();
+            return view('admin.solicitudes_servicio.main')
+                ->with('tecnicos',$tecnicos)
+                ->with('propietarios',$propietarios)
+                ->with('inquilinos',$inquilinos)
+                ->with('solicitudes_servicio',$solicitudes_servicio);    
+        }
+                
+    }
 
-        
+    public function bolsa_solicitudes(){
+        #si no es un solicitante, redirigir a "Bolsa de Trabajo"   --este control podria n estar
+        if((Auth::user()->obtener_rol() != 'Propietario') && (Auth::user()->obtener_rol() != 'Inquilino')){
+            $solicitudes_servicio = SolicitudServicio::all();
+            $tecnicos = Tecnico::all();
+            $inquilinos = Inquilino::all();
+            $propietarios = Propietario::all();
+            return view('admin.solicitudes_servicio.bolsa')
+                ->with('tecnicos',$tecnicos)
+                ->with('propietarios',$propietarios)
+                ->with('inquilinos',$inquilinos)
+                ->with('solicitudes_servicio',$solicitudes_servicio);    
+        }
     }
 
 
     public function create()
     {
      
+    }
+    
+    public function tecnico_reserva(Request $request){
+        $ss = SolicitudServicio::find($request->ss_id);
+        $ss->estado = 'tomada';
+        $ss->save();
+        #Abrir canal comunicacion
+        $conversacion = new Conversacion();
+        $conversacion->save();
+        #Ahora se crean "lineas" de conversacion individuales por cada interlocutor ↓
+        $conversacion_x_usuario = new UserConversacion(); #mensajes de Tecnico
+        $conversacion_x_usuario->conversacion_id = $conversacion->id;
+        $conversacion_x_usuario->user_id = Auth::user()->id;
+        $conversacion_x_usuario->save();
+        $conversacion_x_usuario = new UserConversacion(); #mensajes de Solicitantes
+        $conversacion_x_usuario->conversacion_id = $conversacion->id;
+        $conversacion_x_usuario->user_id = $ss->solicitante()->persona->user->id;
+        $conversacion_x_usuario->save();
 
+        return response()->json(json_encode($request));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function store(Request $request)
     {
         $solicitud = new SolicitudServicio();
+        if(Auth::user()->persona->inquilino){   #--si usuario que crea solicitur es Inquilino
+            $solicitud->responsable = 'inquilino';
+        }elseif(Auth::user()->persona->propietario){ #--si usuario que crea solicitur es Propietario
+            $solicitud->responsable = 'propietario';
+        }
         $solicitud->tecnico_id = $request->tecnico_id;
         $solicitud->rubrotecnico_id = $request->rubrotecnico_id;
         $solicitud->contrato_id = $request->contrato_id;         #resta mandarlo en la vista
@@ -64,8 +125,23 @@ class SolicitudesServicioController extends Controller
         $solicitud->estado = "inicial";
 
         $solicitud->save();
-        return json("Se proceso su solicitud correctamente.");
+        return response()->json(json_encode($request));
 
+    }
+
+    public function marcar_ss_concluida(Request $request){
+        $ss = SolicitudServicio::find($request->ss_id);
+        $ss->estado = 'concluida';
+        $ss->monto_final = $request->monto_total_solicitud;
+        $ss->fecha_cierre = 
+        $ss->save();
+        return response()->json("Se registro estado concluido satisfactoriamente.-");
+    }
+    public function calificar(Request $request){
+        $ss = SolicitudServicio::find($request->ss_id);
+        $ss->calificacion = $request->calificacion;
+        $ss->save();
+        return response()->json("Se registro estado concluido satisfactoriamente.-");
     }
 
 

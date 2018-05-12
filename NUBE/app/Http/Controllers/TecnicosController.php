@@ -35,6 +35,7 @@ class TecnicosController extends Controller
     }
 
     public function tecnicosxrubro(Request $request){    
+        //dd($request);
         $tecnicos = Tecnico::where('rubroTecnico_id',$request->id)->get();
         foreach($tecnicos as $tecnico){
             $persona = $tecnico->persona;

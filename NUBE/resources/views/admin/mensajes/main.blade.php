@@ -30,8 +30,12 @@
                                 <!-- Fin búsqueda -->                                
                               </ul>      
                             <ul class="products-list product-list-in-box" id="seccion_lista_conversaciones">                                
-                                <!-- Inicio bucle -->                               
-                                  @include('admin.mensajes.secciones.listado_conversaciones')                              
+                                <!-- Inicio bucle -->  
+                                @if($conversaciones)
+                                  @include('admin.mensajes.secciones.listado_conversaciones')   
+                                @else                             
+                                  no conversaciones
+                                @endif                             
                                 <!-- Fin bucle -->
                             </ul>
                           </div>

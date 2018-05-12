@@ -35,10 +35,8 @@
                         </a>
                     </td>
                 </tr>
-            @endforeach
-            
-            </tbody>
-        
+            @endforeach            
+            </tbody>        
         </table>
     </div>
     <!-- /.box-body -->
@@ -72,21 +70,22 @@
             <h3>{{$contrato->inquilino->persona->nombre}} {{$contrato->inquilino->persona->apellido}} (Gte: {{$contrato->garante->persona->nombre}} {{$contrato->garante->persona->apellido}})</h3>
             <tbody>                                
                 @foreach($contrato->liquidaciones as $liquidacion)                    
-                                @if($liquidacion->abonado)     
-                                    <td class="text-center text-bold">Pagada ✔️</td>                 
-                                @else
-                                    @if($liquidacion->vencimiento > \Carbon\Carbon::now())         
-                                        <td class="text-center text-bold text-purple">No pagada ❌</td>     
-                                    @else
-                                        <td class="text-center text-bold text-red">VENCIDA ❌</td>  
-                                    @endif     
-                                @endif 
-                                <td class="text-center text-bold">{{$liquidacion->periodo}}</td>
-                                <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->edificio->nombre}}</b> | Piso {{$liquidacion->contrato->inmueble->piso}} N° {{$liquidacion->contrato->inmueble->numDepto}}</td>
-                                <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->direccion}} ({{$liquidacion->contrato->inmueble->localidad->nombre}})</td>
-                                <td class="text-center" width="100">            
-                                    <a href="{{ route('contabilidad.show', $propietario->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
-                                        <i class="fa fa-list"></i>
+                    @if($liquidacion->abonado)     
+                        <td class="text-center text-bold">Pagada ✔️</td>                 
+                    @else
+                        @if($liquidacion->vencimiento > \Carbon\Carbon::now())         
+                            <td class="text-center text-bold text-purple">No pagada ❌</td>     
+                        @else
+                            <td class="text-center text-bold text-red">VENCIDA ❌</td>  
+                        @endif     
+                    @endif 
+                    
+                    <td class="text-center text-bold">{{$liquidacion->periodo}}</td>
+                    <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->edificio->nombre}}</b> | Piso {{$liquidacion->contrato->inmueble->piso}} N° {{$liquidacion->contrato->inmueble->numDepto}}</td>
+                    <td class="text-center text-bold">{{$liquidacion->contrato->inmueble->direccion}} ({{$liquidacion->contrato->inmueble->localidad->nombre}})</td>
+                    <td class="text-center" width="100">            
+                        <a href="{{ route('contabilidad.show', $propietario->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
+                            <i class="fa fa-list"></i>
                                     </a>
                                     <a href="{{ route('contabilidad.show', $propietario->id) }}" title="Descargar" class="btn btn-social-icon btn-sm btn-success">
                                         <i class="fa fa-download"></i>

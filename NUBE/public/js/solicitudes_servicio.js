@@ -59,3 +59,180 @@ function abrir_modal_borrar(id) {
 
 
 
+function reservar_servicio(ss_id){  //ss_id (Solicitud Servicio)
+    bootbox.confirm({
+        message: "<h3>Estás a punto de indicar que vas a atender esta solicitud, se te pondrá en contacto con el solicitante para programar la visita. </h3>",
+        buttons: {
+            confirm: {
+                label: 'Si, hagamoslo',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'No, dejaré la solicitud para que otro la atienda',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {            
+            if(result == true){
+                console.log('Se va a mandar solicitud ajax: ' + result);
+                $.ajax({
+                    url: "/admin/tecnico_reserva",
+                    data: {
+                        ss_id: ss_id,
+                    },
+                    dataType: 'JSON',
+                    success: function (data_cruda) {
+                         swal({
+                            title: 'Bien hecho! 👍',
+                            text: 'Te has asignado esta tarea, ahora podras coordinar una visita con el solicitante',
+                            type: 'success',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: 'grey',
+                            cancelButtonText: 'Mejor después',
+                            confirmButtonText: 'Bien. Llevame al chat para comenzar a organizar visita'
+                          }).then((result) => {
+                            if (result.value) { //si presiono "confirmar": redireccionar a la mensajeria
+                                window.location.href = '/admin/mensajes'
+                            }
+                          })
+                    },
+                });
+            }           
+        }
+    });
+}
+
+function completar_campos(ss) { // Solicitud Sercicio
+    $('#rubro_id').val(ss.rubro_id);
+    $('#tecnico_id').val(ss.tecnico_id);
+    /*
+    $('#sexo').val(inquilino.persona.sexo);
+    $('#fecha_nac').val("");
+    $('.datepicker').bootstrapMaterialDatePicker ('setDate', moment(inquilino.persona.fecha_nac));
+    $('#telefono').val(inquilino.persona.telefono);
+    $('#telefono_contacto').val(inquilino.persona.telefono_contacto);
+    $('#email').val(inquilino.persona.email);
+    $('#localidad_id').val(inquilino.persona.localidad_id).trigger("change");
+    $('#direccion').val(inquilino.persona.direccion);
+    $('#nombre').val(inquilino.persona.nombre);
+    $('#pais_id').val(inquilino.persona.pais_id).trigger("change");
+    $('#form-update').attr('action', '/admin/inquilinos/' + inquilino.id);
+    $('#modal-editar-ss').modal();
+    $("#modal-editar-ss").on('shown.bs.modal', function () {
+        */
+    $('#modal-editar-ss').modal();
+      
+}
+
+function marcar_concluida(ss){
+    bootbox.prompt({
+        title: "Ingrese el monto total de su mano de obra."+"<h2>Si has finalizado con los trabajos, ingresa el monto debajo y confirma la operacion.</h2>",
+        message: "<h2>Si has finalizado con los trabajos, ingresa el monto debajo y confirma la operacion.</h2>",
+        inputType: 'number',
+        buttons: {
+            confirm: {
+                label: 'Si, he terminado',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'Cancelar',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {            
+            if(result > 0){ //si el monto es valido → grabar como monto total de solicitud y cambiar estado de solicitud
+                console.log('Se va a mandar solicitud ajax: ' + result);
+                $.ajax({
+                    url: "/admin/marcar_ss_concluida",
+                    data: {
+                        ss_id: ss.id,
+                        monto_total_solicitud: result,
+                    },
+                    dataType: 'JSON',
+                    success: function (respuesta) {
+                         swal({
+                            title: '¡Gracias!',
+                            text: 'te notificaremos una vez el solicitante abone su liquidacion...y podras tener tu dinero disponible! 💵 ',
+                            type: 'success',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: 'grey',
+                            cancelButtonText: 'Cerrar',
+                            confirmButtonText: 'Entendido'
+                          }).then((result) => {
+                            if (result.value) { //si presiono "confirmar": redireccionar a la mensajeria
+                                window.location.href = '/admin/solicitudes_servicio'
+                            }
+                          })
+                    },
+                });
+            }           
+        }
+    });
+}
+
+function calificar(ss){
+    alert('se va a calificar');
+    bootbox.prompt({
+        title: "<h2>¿Que le parecio el servicio ofrecido por el tecnico?</h2>",
+        inputType: 'select',
+        inputOptions: [
+            {
+                text: 'Seleccione...',
+                value: '',
+            },
+            {
+                text: 'Muy malo',
+                value: '1',
+            },
+            {
+                text: 'Malo',
+                value: '2',
+            },
+            {
+                text: 'Bueno',
+                value: '3',
+            },
+            {
+                text: 'Muy Bueno',
+                value: '4',
+            },
+            {
+                text: 'Excelente',
+                value: '5',
+            }
+        ],
+        callback: function (result) {
+            console.log(result);
+            $.ajax({
+                url: "/admin/calificar",
+                data: {
+                    ss_id: ss.id,
+                    calificacion: result,
+                },
+                dataType: 'JSON',
+                success: function (respuesta) {
+                     swal({
+                        title: '<h1>¡Gracias!</h1>',
+                        text: 'Puntuar las atenciones de los tecnicos nos ayuda a brndarte un mejor servicio! ',
+                        type: 'success',                        
+                        confirmButtonColor: '#3085d6',                    
+                        confirmButtonText: 'Cerrar'
+                      }).then((result) => {
+                        if (result.value) { //si presiono "confirmar": redireccionar a la mensajeria
+                            window.location.href = '/admin/solicitudes_servicio'
+                        }
+                      })
+                },
+            });
+        }
+    });
+    
+}
+
+$(function() {
+    $('#rating').barrating({
+      theme: 'fontawesome-stars'
+    });
+ });

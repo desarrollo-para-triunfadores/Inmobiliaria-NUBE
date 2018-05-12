@@ -58,17 +58,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('mensajes', 'MensajesController');
     Route::resource('oportunidades', 'OportunidadesController');
     Route::resource('solicitudes_servicio', 'SolicitudesServicioController');
-    Route::resource('tecnicos', 'TecnicosController');
+    Route::get('bolsa', 'SolicitudesServicioController@bolsa_solicitudes')->name('bolsa_solicitudes');
+    //Reserva de tecnico de una solicitud de bolsa de trabajo ↓
+    Route::get('/tecnico_reserva', 'SolicitudesServicioController@tecnico_reserva')->name('tecnico_reserva');   //OK
+    Route::get('/marcar_ss_concluida', 'SolicitudesServicioController@marcar_ss_concluida')->name('marcar_ss_concluida'); 
+    #Para que propietario/inquilino puedan calificar el servicio tecnico
+    Route::get('/calificar', 'SolicitudesServicioController@calificar')->name('caificar'); 
+    
     Route::resource('agenda', 'VisitasController');
     Route::resource('agenda_usuario', 'AgendaUsuariosController');
     //Route::get('/verBoleta', 'EstadisticasController@verBoleta')->name('verBoleta');
     
-    /*
-    Route::get('contabilidad/verBoleta', function()
-    {       
-        return View::make('contabilidad.verBoleta'); 
-    });
-    */
+  
     
   //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
 
@@ -146,7 +147,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     //Técnicos
     Route::name('tecnicos.tecnicosxrubro')->get('tecnicos/tecnicosxrubro/', 'TecnicosController@tecnicosxrubro');
-
+    Route::resource('tecnicos', 'TecnicosController');
+    //Visitas
+    Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
+    Route::get('cargaEventos{id?}', 'CalendarController@index');
+    Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
+    Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
+    Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
 
 
 });
