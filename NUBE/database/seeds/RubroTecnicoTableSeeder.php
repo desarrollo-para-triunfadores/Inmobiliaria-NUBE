@@ -2,15 +2,14 @@
 
 use Illuminate\Database\Seeder;
 
-class RubrosTecnicosTableSeeder extends Seeder
-{
+class RubroTecnicoTableSeeder extends Seeder {
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         DB::table('rubrosTecnicos')->insert([
             'nombre' => 'Plomero',
             'created_at' => date('Y-m-d H:m:s')
@@ -40,4 +39,5 @@ class RubrosTecnicosTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:m:s')
         ]);
     }
+
 }

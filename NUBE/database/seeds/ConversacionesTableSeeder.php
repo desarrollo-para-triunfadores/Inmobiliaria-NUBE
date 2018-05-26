@@ -30,7 +30,7 @@ class ConversacionesTableSeeder extends Seeder
         ]);
 
         DB::table('users_conversaciones')->insert([
-            'user_id' => '2',
+            'user_id' => '42',
             'conversacion_id' => '1',
             'created_at' => date('Y-m-d H:m:s')
         ]);
@@ -80,7 +80,7 @@ class ConversacionesTableSeeder extends Seeder
 
         DB::table('estado_users_mensajes')->insert([
             'mensaje_id' => '1',
-            'user_id' => '2',
+            'user_id' => '42',
             'leido' => true,
             'created_at' => date('Y-m-d H:m:s')
         ]);
@@ -88,7 +88,7 @@ class ConversacionesTableSeeder extends Seeder
         /** Mensaje 2 */
         DB::table('estado_users_mensajes')->insert([
             'mensaje_id' => '2',
-            'user_id' => '2',
+            'user_id' => '42',
             'enviado' => true,
             'created_at' => date('Y-m-d H:m:s')
         ]);
@@ -110,7 +110,7 @@ class ConversacionesTableSeeder extends Seeder
 
         DB::table('estado_users_mensajes')->insert([
             'mensaje_id' => '3',
-            'user_id' => '2',
+            'user_id' => '42',
             'leido' => true,
             'created_at' => date('Y-m-d H:m:s')
         ]);
@@ -118,7 +118,7 @@ class ConversacionesTableSeeder extends Seeder
         /** Mensaje 4 */
         DB::table('estado_users_mensajes')->insert([
             'mensaje_id' => '4',
-            'user_id' => '2',
+            'user_id' => '42',
             'enviado' => true,
             'created_at' => date('Y-m-d H:m:s')
         ]);
