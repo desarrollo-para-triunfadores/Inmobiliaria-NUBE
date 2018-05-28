@@ -201,7 +201,6 @@ class ConceptosLiquidacionesController extends Controller
                     $diferencia = $contrato->fecha_desde->diff($fecha_periodo);
                     $mes_alquiler = ($diferencia->y * 12) + $diferencia->m + 1; //se suma 1 porque al momento de entrar (momento cero) ya está corriendo el monto para el mes 1
 
-
                     $periodo_contrato = PeriodoContrato::all()
                         ->where('contrato_id', $contrato->id)
                         ->where('inicio_periodo', '<=', $mes_alquiler)

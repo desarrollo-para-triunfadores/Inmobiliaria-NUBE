@@ -62,7 +62,7 @@ class PropietariosTableSeeder extends Seeder
         ]);
 
         DB::table('propietarios')->insert([ ## Propietaria deptos de HORACIO
-            'persona_id' => '39',
+            'persona_id' => '5',    #Mirta Larsson
             'created_at' => date('Y-m-d H:m:s')
         ]);
         DB::table('propietarios')->insert([ ## Propietaria depto de JUAMPY

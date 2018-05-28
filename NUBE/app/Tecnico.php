@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\SolicitudServicio;
 
 class Tecnico extends Model {
 
@@ -18,7 +19,7 @@ class Tecnico extends Model {
         return $this->belongsTo('App\Persona');
     }
 
-    public function rubrotecnico() {
+    public function rubro() {
         return $this->belongsTo('App\RubroTecnico');
     }
 
@@ -26,20 +27,38 @@ class Tecnico extends Model {
         return $this->hasMany('App\SolicitudServicio');
     }
 
-    /**
-     * Métodos diversos
-     */
-
-    public function ultimo_contrato(){
-        return $this->contratos()->get()->sortByDesc('id')->first(); 
-    }
-
-    public function ultimo_contrato_vigente(){
-        $this->contratos()->get()->sortByDesc('id')->first(); 
-    }
+    /******************************** Métodos ************************************/
 
     public function movimientos(){
         return $this->hasMany('App\Movimientos');
+    }
+
+    public function ocupado(){  #Devuelve true si el tecnico esta con alguna Solicitud de Servicio sin cerrar 
+        $solicitudesDelTecnico = SolicitudServicio::where('tecnico_id', $this->id)->whereNull('fecha_cierre')->get();
+        foreach ($solicitudesDelTecnico as $ss){
+            if($solicitudesDelTecnico){
+                return true;
+            }
+        }        
+        return false;        
+    }
+    
+    public function get_total_recaudado(){
+        $total = 0;
+        $solicitudesDelTecnico = SolicitudServicio::where('tecnico_id', $this->id)->where('fecha_cierre')->get();
+        foreach($solicitudesDelTecnico as $ss){
+            $total+= $ss->monto_final;
+        }
+        return $total;
+    }
+
+    public function cantidad_solicitudes_por_cobrar(){
+        $solicitudesDelTecnico = SolicitudServicio::where('tecnico_id', $this->id)->where('estado','<>','finalizada')->get();
+        return $solicitudesDelTecnico->count();
+    }
+
+    public function dinero_por_cobrar(){
+        return $solicitudesDelTecnico = SolicitudServicio::where('tecnico_id', $this->id)->where('estado','concluido')->sum('monto_final');
     }
 
 

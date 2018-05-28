@@ -488,11 +488,11 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         $user_1->assignRole('Personal'); //Hacho
 
-        $user_2->assignRole('Administrador');
+        $user_2->assignRole('Administrador');   //JP
 
-        $user_3->assignRole('Administrador');
+        $user_3->assignRole('Administrador');   
 
-        $user_4->assignRole('Administrador');
+        $user_4->assignRole('Inquilino');   //Andrea "peti"
 
         $user_5->assignRole('Propietario');
 

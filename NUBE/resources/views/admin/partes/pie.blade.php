@@ -1,7 +1,7 @@
    <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 0.5
+      <b>Version</b> Alpha 0.185.1 
     </div>
-    <strong>NEA Soft © 2017</strong>
+    <strong><b>Cloudprop</b> | powered by NEA Soft 👨🏻‍💻 </strong>
   </footer>

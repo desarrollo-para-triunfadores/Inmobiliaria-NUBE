@@ -98,8 +98,8 @@ class Inmueble extends Model {
      */
 
     public function ultimo_contrato(){
-       // return $this->contratos()->get()->sortByDesc('id')->first();
-       return $this->contratos()->last();
+        return $this->contratos()->get()->sortByDesc('id')->first();
+       //return $this->contratos()->last();
     }
 
     public function foto_slider(){

@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class MovimientosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
@@ -25,10 +20,10 @@ class MovimientosController extends Controller
     {
         //dd($request);
         $movimiento = new Movimiento($request->all());
-        $movimiento = $request->monto_mov;
+        $movimiento->monto = $request->monto_mov;
         $movimiento->fecha_hora = \Carbon\Carbon::now('America/Buenos_Aires');
-        $movimiento->user_id = Auth::user()->id;
-        //dd($request);
+        $movimiento->user_id = Auth::user()->id;        
+        $movimiento->tipo_mov_id = $request->tipo_mov_id;
         if($request->descripcion != ''){                # hardcodeado | 0="Otro"
             $movimiento->descripcion = $request->descripcion;   #si tiene descripcion → no es un movimiento predefinido (tiene descripcion personalizada)
         }else{

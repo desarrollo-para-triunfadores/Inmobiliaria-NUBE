@@ -90,11 +90,7 @@ class LiquidacionMensual extends Model
      */
 
     public function calcular_total(){ 
-
-        /**
-         * Este método calcula el valor total por los servicios asociados.
-         */
-
+        /** Este método calcula el valor total por los servicios asociados. */
         $total = DB::table('conceptos_liquidaciones_mensuales')
             ->where('liquidacionmensual_id', $this->id)
             ->sum('monto');
@@ -102,22 +98,15 @@ class LiquidacionMensual extends Model
     }
 
     public function calcular_total_a_propietario(){ 
-
-        /**
-         * Este método calcula el monto a pagar por el propietario por los servicios prestados.
-         */
-
+        /*** Este método calcula el monto a pagar por el propietario por los servicios prestados.  */
         $total = $this->comision_a_propietario + $this->obtener_monto_por_repararaciones("propietario");
         return $total;
     }
 
-    public function detalle_conceptos(){ 
-        
-        /**
-         * Este método devuelve un detalle indicando concepto y monto de todos los conceptos 
+    public function detalle_conceptos(){         
+        /** Este método devuelve un detalle indicando concepto y monto de todos los conceptos 
          * de la liquidación. Se utiliza en la generación de la boleta.  
-         */
-    
+         */    
         $conceptos_liquidaciones= ConceptoLiquidacion::all()->where('liquidacionmensual_id', $this->id); 
         $conceptos_para_factura = [];
         foreach ($conceptos_liquidaciones as $valor) {
@@ -131,14 +120,10 @@ class LiquidacionMensual extends Model
         return $conceptos_para_factura;
     } 
 
-    public function obtener_monto_por_repararaciones($responsable){
-        
-        /**
-         * Este método calcula el monto total por todas las reparaciones que se hicieron
+    public function obtener_monto_por_repararaciones($responsable){        
+        /*** Este método calcula el monto total por todas las reparaciones que se hicieron
          * en el periodo de acuerdo a lo solicitado (inquilino o propietario).
          */
-
-
         $total = DB::table('solicitudesServicio')->where('liquidacionmensual_id', $this->id)->where('responsable', $responsable)->sum('monto_final');
         return $total;
     }
@@ -150,13 +135,8 @@ class LiquidacionMensual extends Model
         }
     }
 
-    public function calcular_mora() {
-        
-        /**
-         * Este método calcula y devuelve el monto total por mora por todos los días
-         * que se haya pasado de la fecha de vencimiento.
-         */
-        
+    public function calcular_mora() {        
+        /*** Este método calcula y devuelve el monto total por mora por todos los días que se haya pasado de la fecha de vencimiento. */        
         $fecha_hoy = Carbon::now();
         if($this->vencimiento > $fecha_hoy){
             return 0;
@@ -166,4 +146,5 @@ class LiquidacionMensual extends Model
         }
     }
 
+    
 }

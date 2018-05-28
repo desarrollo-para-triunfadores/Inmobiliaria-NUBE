@@ -56,8 +56,93 @@ function abrir_modal_borrar(id) {
     $('#boton-modal-borrar').click();
 }
 
+//Datatable - instaciación del plugin
+var table = $('#tabla-solicitante').DataTable({
+    "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
+    /*
+    "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.      
+      null,//Inmueble      
+      {"visible": false}, //Edificio      
+      null,//Vigente
+      null,//Desde    
+      null,//Hasta
+      null,//Inquilino    
+      {"visible": false},//Garante
+      {"visible": false},//Fecha alta
+      null//Acciones
+    ]
+    */
+  });
+  
+  // Datatables | filtro individuales - instanciación de los filtros
+  $('#tabla-solicitante tfoot th').each(function () {
+    var title = $(this).text()
+    if (title !== '') {
+      if (title !== 'Acciones') { // ignoramos la columna de los botones
+        $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
+      }
+    }
+  })
+  
+  // Datatables | filtro individuales - búsqueda
+  table.columns().every(function () {
+    var that = this
+    $('input', this.footer()).on('keyup change', function () {
+      if (that.search() !== this.value) {
+        that.search(this.value).draw()
+      }
+    })
+  })
+  
+  //Datatables | ocultar/visualizar columnas dinámicamente
+  $('a.toggle-vis').on('click', function (e) {
+    e.preventDefault();
+    // Get the column API object
+    var column = table.column($(this).attr('data-column'));
+    // Toggle the visibility
+    column.visible(!column.visible());
+    instaciar_filtros();
+  });
+  
+  //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
+  $('#tabla-solicitante tbody').on('mouseenter', 'td', function () {
+    var colIdx = table.cell(this).index().column;
+    $(table.cells().nodes()).removeClass('highlight');
+    $(table.column(colIdx).nodes()).addClass('highlight');
+  });
 
+  /********************************* Tabla para la bolsa de trabajo ***************************/
+  var table = $('#tabla-bolsa').DataTable({
+    "language": tabla_traducida,
+  });
+  //filtro individuales - instanciación de los filtros
+  $('#tabla-bolsa tfoot th').each(function () {
+    var title = $(this).text()
+    if (title !== '') {
+      if (title !== 'Acciones') { // ignoramos la columna de los botones
+        $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
+      }
+    }
+  })  
+  // filtro individuales - búsqueda
+  table.columns().every(function () {
+    var that = this
+    $('input', this.footer()).on('keyup change', function () {
+      if (that.search() !== this.value) {
+        that.search(this.value).draw()
+      }
+    })
+  })
+    
+  //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
+  $('#tabla-bolsa tbody').on('mouseenter', 'td', function () {
+    var colIdx = table.cell(this).index().column;
+    $(table.cells().nodes()).removeClass('highlight');
+    $(table.column(colIdx).nodes()).addClass('highlight');
+  });
+  /************************************************************************************** */
 
+  
 
 function reservar_servicio(ss_id){  //ss_id (Solicitud Servicio)
     bootbox.confirm({
@@ -83,8 +168,8 @@ function reservar_servicio(ss_id){  //ss_id (Solicitud Servicio)
                     dataType: 'JSON',
                     success: function (data_cruda) {
                          swal({
-                            title: 'Bien hecho! 👍',
-                            text: 'Te has asignado esta tarea, ahora podras coordinar una visita con el solicitante',
+                            title: 'Te has asignado esta tarea 👍',
+                            text: ' ahora podrás coordinar una visita con el solicitante',
                             type: 'success',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
@@ -141,7 +226,7 @@ function marcar_concluida(ss){
             }
         },
         callback: function (result) {            
-            if(result > 0){ //si el monto es valido → grabar como monto total de solicitud y cambiar estado de solicitud
+            if(result > 0 ){ //si el monto es valido → grabar como monto total de solicitud y cambiar estado de solicitud
                 console.log('Se va a mandar solicitud ajax: ' + result);
                 $.ajax({
                     url: "/admin/marcar_ss_concluida",
@@ -167,15 +252,24 @@ function marcar_concluida(ss){
                           })
                     },
                 });
-            }           
+            }    
+            else{
+                swal({
+                    title: 'Monto Invalido',
+                    text: 'Carga el monto final que debes cobrar por tu servicio ',
+                    type: 'error',                   
+                    confirmButtonColor: '#3085d6',                                     
+                    confirmButtonText: 'Entendido'
+                  })
+            }       
         }
     });
 }
 
 function calificar(ss){
-    alert('se va a calificar');
+    //alert('se va a calificar');
     bootbox.prompt({
-        title: "<h2>¿Que le parecio el servicio ofrecido por el tecnico?</h2>",
+        title: "<h2>¿Que le parecio el servicio ofrecido por el técnico?</h2>",
         inputType: 'select',
         inputOptions: [
             {
@@ -183,23 +277,23 @@ function calificar(ss){
                 value: '',
             },
             {
-                text: 'Muy malo',
+                text: 'Muy malo ⭐️ ',
                 value: '1',
             },
             {
-                text: 'Malo',
+                text: 'Malo ⭐️⭐️ ',
                 value: '2',
             },
             {
-                text: 'Bueno',
+                text: 'Bueno ⭐️⭐️⭐️ ',
                 value: '3',
             },
             {
-                text: 'Muy Bueno',
+                text: 'Muy Bueno ⭐️⭐️⭐️⭐️ ',
                 value: '4',
             },
             {
-                text: 'Excelente',
+                text: 'Excelente 🌟🌟🌟🌟🌟',
                 value: '5',
             }
         ],
@@ -215,7 +309,7 @@ function calificar(ss){
                 success: function (respuesta) {
                      swal({
                         title: '<h1>¡Gracias!</h1>',
-                        text: 'Puntuar las atenciones de los tecnicos nos ayuda a brndarte un mejor servicio! ',
+                        text: 'Puntuar las atenciones de los tecnicos nos ayuda a brindarte un mejor servicio 👍',
                         type: 'success',                        
                         confirmButtonColor: '#3085d6',                    
                         confirmButtonText: 'Cerrar'
@@ -227,12 +321,17 @@ function calificar(ss){
                 },
             });
         }
-    });
-    
+    });    
 }
 
+/** Estrellas para select de calificacion SS, con click */
 $(function() {
     $('#rating').barrating({
       theme: 'fontawesome-stars'
     });
  });
+
+
+ function addClassByClick(button){
+    $('#btn-concluir').addClass("animated shake");
+}

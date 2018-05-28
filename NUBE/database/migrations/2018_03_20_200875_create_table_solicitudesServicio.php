@@ -28,6 +28,7 @@ class CreateTableSolicitudesServicio extends Migration
             $table->string('motivo')->nullable(); 
             $table->enum('estado', ['inicial', 'tomada', 'concluida', 'finalizada']); //Estado Solicitud
             $table->double('monto_final', 10, 2)->nullable();
+            $table->date('fecha_inicio')->nullable();
             $table->date('fecha_cierre')->nullable();
 
             $table->integer('calificacion')->nullable();

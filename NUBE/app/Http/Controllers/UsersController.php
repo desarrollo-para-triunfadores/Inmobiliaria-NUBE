@@ -33,21 +33,12 @@ class UsersController extends Controller {
             ->with('roles', $roles);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+       
     public function create() {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request) {
         $nombreImagen = 'sin_imagen.png';
         if ($request->file('imagen')) {

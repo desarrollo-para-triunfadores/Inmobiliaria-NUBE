@@ -30,9 +30,16 @@ Route::get('/home', 'HomeController@index');
 
 /** ADMIN-Side* */
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-
-    //Rutas para métodos genéricos
+    
     Route::resource('usuarios', 'UsersController');
+    # metodo para cerrar sesion
+    Route::get('/logout', function(){
+      Session::flush();
+      Auth::logout();
+      return Redirect::to("/login")
+        ->with('message', array('type' => 'success', 'text' => 'Has cerado sesion correctamente :)'));
+  });
+
     Route::resource('roles', 'RolesController');
     Route::resource('paises', 'PaisesController');
     Route::resource('provincias', 'ProvinciasController');
@@ -67,9 +74,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     
     Route::resource('agenda', 'VisitasController');
     Route::resource('agenda_usuario', 'AgendaUsuariosController');
-    //Route::get('/verBoleta', 'EstadisticasController@verBoleta')->name('verBoleta');
-    
-  
     
   //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
 
@@ -78,8 +82,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
    //Route::post('cargar_archivo_correo', 'Mail_contacto_OportunidadesController@store'); //se llama por ajax (post)
    //Route::post('enviar_correo', 'Mail_contacto_OportunidadesController@enviar');
    //Route::get('form_enviar_correo', 'Mail_contacto_OportunidadesController@crear');
-
-
    
 
     /**
@@ -88,14 +90,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     //Agenda
 
-
-    //Visitas
-  //  Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('cargaEventos{id?}', 'CalendarController@index');
-   // Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
-
 
     //Agenda usuarios
     Route::get('/indexoportunidades', 'AgendaUsuariosController@indexoportunidades')->name('indexoportunidades');
@@ -116,7 +113,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     //Contabilidad
     Route::name('contabilidad.verBoleta')->get('contabilidad/verBoleta/{id}', 'EstadisticasController@verBoleta');
-
+    Route::name('contabilidad.ingresos')->get('contabilidad/ingresosMensuales/', 'EstadisticasController@ingresos');
+    Route::get('/contabilidad/coso', function(){
+      $ingresos_mensuales_empresa = "Config::getIngresosXmes()";
+        return response()->json('ingresos_mensuales',$ingresos_mensuales_empresa);   
+  });
+    //Route::get('/ingresosMensuales', 'EstadisticasController@ingresosMensuales')->name('ingresosMensuales');
     //Edificios
     Route::get('/obtener_inmuebles_edificio', 'EdificiosController@obtener_inmuebles')->name('obtener_inmuebles_edificio');
 

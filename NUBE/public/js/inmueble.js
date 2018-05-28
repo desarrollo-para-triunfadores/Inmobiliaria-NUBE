@@ -6,7 +6,7 @@ $("#side-ele-lugares-propiedades").addClass("active");
 //Datatable - instaciación del plugin
 var table = $('#example').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
-    "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.
+    /*"columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.
         null,                   //0--Condición
         {"visible": false},     //1--Tipo
         null,                   //2--Dirección
@@ -17,7 +17,7 @@ var table = $('#example').DataTable({
         null,                   //7--Contrato de alquiler
         null,                   //8--Fecha de Registro
         null                    //11--Acciones
-    ]
+    ]*/
 });
 
 
@@ -61,7 +61,7 @@ $('#example tbody').on('mouseenter', 'td', function () {
     $(table.cells().nodes()).removeClass('highlight');
     $(table.column(colIdx).nodes()).addClass('highlight');
 });
-
+/************************************************************************************************ */
 
 var etapas_instanciadas = {
     propietario: false,

@@ -17,7 +17,8 @@ class Movimiento extends Model
         'inquilino_id',
         'tecnico_id',
         'propietario_id',
-        'liquidacion_id'
+        'liquidacion_id',
+        'tipo_mov_id'       #Nuevo, tipo de movimiento
     ];
 
     protected $dates = ['fecha_hora'];
@@ -61,6 +62,10 @@ class Movimiento extends Model
     	return $this->belongsTo('App\LiquidacionMensual');
     }
 
+    public function tipo_categoria(){
+    	return $this->belongsTo('App\TipoMovimiento');
+    }
+
 
     /**
      * Métodos diversos
@@ -99,4 +104,15 @@ class Movimiento extends Model
         return $total;
     }
 
+    public static function getGastosCategorizados(){
+        $movimientos_salida = Movimiento::where('tipo_movimiento','salida')->whereNotNull('tipo_mov_id')->get();
+        if($movimientos_salida){
+            $array_gastos = ['Marketing'=>0,'Impuestos'=>0, 'Seguro Inmobiliario'=>0 , 'Mto y Reparaciones'=>0, 'Otros'=>0];
+            foreach($movimientos_salida as $ms){               
+                $categoria = TipoMovimiento::find($ms->tipo_mov_id)->nombre;                  
+                $array_gastos[$categoria]+= $ms->monto;
+            }
+            return $array_gastos;
+        }        
+    }
 }

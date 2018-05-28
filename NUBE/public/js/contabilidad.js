@@ -1,84 +1,77 @@
-//-------------
-//- PIE CHART -
-/* ESTO ESTA COMENTADO PORQUE GENERABA CONFLICTOS
-var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-var pieChart = new Chart(pieChartCanvas);
-var PieData = [
-    {
-        value: 700,
-        color: "#f56954",
-        highlight: "#f56954",
-        label: "Sueldos Personal"
-    },
-    {
-        value: 500,
-        color: "#00a65a",
-        highlight: "#00a65a",
-        label: "Limpieza"
-    },
-    {
-        value: 400,
-        color: "#f39c12",
-        highlight: "#f39c12",
-        label: "Mantenimiento"
-    },
-    {
-        value: 600,
-        color: "#00c0ef",
-        highlight: "#00c0ef",
-        label: "Seguros"
-    },
-    {
-        value: 300,
-        color: "#3c8dbc",
-        highlight: "#3c8dbc",
-        label: "Marketing"
-    },
-    {
-        value: 100,
-        color: "#d2d6de",
-        highlight: "#d2d6de",
-        label: "Inmpuesto Inmobiliario"
-    }
-];
-var pieOptions = {
-    //Boolean - Whether we should show a stroke on each segment
-    segmentShowStroke: true,
-    //String - The colour of each segment stroke
-    segmentStrokeColor: "#fff",
-    //Number - The width of each segment stroke
-    segmentStrokeWidth: 2,
-    //Number - The percentage of the chart that we cut out of the middle
-    percentageInnerCutout: 50, // This is 0 for Pie charts
-    //Number - Amount of animation steps
-    animationSteps: 100,
-    //String - Animation easing effect
-    animationEasing: "easeOutBounce",
-    //Boolean - Whether we animate the rotation of the Doughnut
-    animateRotate: true,
-    //Boolean - Whether we animate scaling the Doughnut from the centre
-    animateScale: false,
-    //Boolean - whether to make the chart responsive to window resizing
-    responsive: true,
-    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-    maintainAspectRatio: true,
-    //String - A legend template
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-};
-//Create pie or douhnut chart
-// You can switch between pie and douhnut using the method below.
-pieChart.Doughnut(PieData, pieOptions);
 
-*/
+
+var ctx = document.getElementById('grafico_ingresos').getContext("2d")
+var ene = $('#ingresos_enero').val();
+var feb = $('#ingresos_febrero').val();
+var mar = $('#ingresos_marzo').val();
+var abr = $('#ingresos_abril').val();
+var may = $('#ingresos_mayo').val();
+var jun = $('#ingresos_junio').val();
+var jul = $('#ingresos_julio').val();
+var ago = $('#ingresos_agosto').val();
+var sep = $('#ingresos_septiembre').val();
+var oct = $('#ingresos_octubre').val();
+var nov = $('#ingresos_noviembre').val();
+var dic = $('#ingresos_diciembre').val();
+
+var myChart = new Chart(ctx, {
+type: 'line',
+data: {
+    labels: ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"],
+    datasets: [{
+        label: "Ingresos Mensuales",
+        borderColor: "#80b6f4",
+        pointBorderColor: "#80b6f4",
+        pointBackgroundColor: "#80b6f4",
+        pointHoverBackgroundColor: "#80b6f4",
+        pointHoverBorderColor: "#80b6f4",
+        pointBorderWidth: 10,
+        pointHoverRadius: 10,
+        pointHoverBorderWidth: 1,
+        pointRadius: 3,
+        fill: false,
+        borderWidth: 4,
+        data: [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]    //Ingresos x Mes
+    }]
+},
+options: {
+    legend: {
+        position: "bottom"
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                fontColor: "rgba(0,0,0,0.5)",
+                fontStyle: "bold",
+                beginAtZero: true,
+                maxTicksLimit: 5,
+                padding: 20
+            },
+            gridLines: {
+                drawTicks: false,
+                display: false
+            }
+}],
+        xAxes: [{
+            gridLines: {
+                zeroLineColor: "transparent"
+},
+            ticks: {
+                padding: 20,
+                fontColor: "rgba(0,0,0,0.5)",
+                fontStyle: "bold"
+            }
+        }]
+    }
+}
+});
 /******************************************************************************************************************* */
 
-
-/** En seccion TABLA MOVIMIENTOS **/
+/** En seccion TABLA MOVIMIENTOS en "Contabilidad" General**/
 //Datatable | instaciación del plugin
 var table_mov = $('#tabla_movimientos').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
 });
-
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
     var colIdx = table_mov.cell(this).index().column;
@@ -97,7 +90,7 @@ function instaciar_filtros_movimientos() {
             }
         }
     });
-//Datatables | filtro individuales - búsqueda
+// filtro individuales - búsqueda
     table_mov.columns().every(function () {
         var that = this;
         $('input', this.footer()).on('keyup change', function () {
@@ -107,56 +100,54 @@ function instaciar_filtros_movimientos() {
         });
     });
 }
-//Datatables | ocultar/visualizar columnas dinámicamente
-/*
-$('a.toggle-vis').on('click', function (e) {
-    e.preventDefault();
-    var column = table_mov.column($(this).attr('data-column'));
-    column.visible(!column.visible());
-    instaciar_filtros_movimientos();
-});
-*/
+
 //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
 $('#tabla_movimientos tbody').on('mouseenter', 'td', function () {
     var colIdx = table_mov.cell(this).index().column;
     $(table_mov.cells().nodes()).removeClass('highlight');
     $(table_mov.column(colIdx).nodes()).addClass('highlight');
 });
-/******************************************************************************************************************* */
+  
 
+  /********************************* Tabla para la contabilidad - GENERAL - CLIENTES ***************************/
+  
 
-//Datatable - instaciación del plugin
-/** TABLA CLIENTES **** En seccion TABLA CLIENTES **/
-//Datatable | instaciación del plugin
-var table_c = $('#tabla_clientes').DataTable({
-    "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
-});
-//Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
-$('#tabla_clientes tbody').on('mouseenter', 'td', function () {
-    var colIdx = table_c.cell(this).index().column;
-    $(table_c.cells().nodes()).removeClass('highlight');
-    $(table_c.column(colIdx).nodes()).addClass('highlight');
-});
-
-instaciar_filtros_clientes();
-function instaciar_filtros_clientes() {
+instanciar_tabla_resumen_x_clientes();
+function instanciar_tabla_resumen_x_clientes() {
+    var tabla_resumen_x_clientes = $('#tabla_resumen_x_clientes').DataTable({
+        "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
+    });
+    //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
+    $('#tabla_resumen_x_clientes tbody').on('mouseenter', 'td', function () {
+        var colIdx = tabla_resumen_x_clientes.cell(this).index().column;
+        $(tabla_resumen_x_clientes.cells().nodes()).removeClass('highlight');
+        $(tabla_resumen_x_clientes.column(colIdx).nodes()).addClass('highlight');
+    });
     //Datatables | filtro individuales - instanciación de los filtros
-    $('#tabla_clientes tfoot th').each(function () {
-        var title = $(this).text();
-        if (title !== "") {
-            if (title !== 'Acciones') { //ignoramos la columna de los botones
-                $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />');
+    $('#tabla_resumen_x_clientes tfoot th').each(function () {
+        var tabla_cli_title = $(this).text();
+        if (tabla_cli_title !== "") {
+            if (tabla_cli_title !== 'Acciones') { //ignoramos la columna de los botones
+                $(this).html('<input nombre="' + tabla_cli_title + '" type="text" placeholder="Buscar ' + tabla_cli_title + '" />');
             }
         }
     });
 //Datatables | filtro individuales - búsqueda
-    table_c.columns().every(function () {
+    tabla_resumen_x_clientes.columns().every(function () {
         var that = this;
         $('input', this.footer()).on('keyup change', function () {
             if (that.search() !== this.value) {
                 that.search(this.value).draw();
             }
         });
+    });
+
+    
+    //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
+    $('#tabla_resumen_x_clientes tbody').on('mouseenter', 'td', function () {
+        var colIdx = tabla_resumen_x_clientes.cell(this).index().column;
+        $(tabla_resumen_x_clientes.cells().nodes()).removeClass('highlight');
+        $(tabla_resumen_x_clientes.column(colIdx).nodes()).addClass('highlight');
     });
 }
 
@@ -165,11 +156,11 @@ function validarMovimiento_Otro(valor_select){
     if($('#concepto_mov').val()==0){
         console.log("Se entro en validarMovimiento_Otro = "+valor_select.value);
         $('#descripcion').removeClass('hide');
-        $("#conv_mov").hide();
-        alert('sedeberia mostrar el campo para DESCRIPCION');
+        //$("#conv_mov").hide();
+        //alert('sedeberia mostrar el campo para DESCRIPCION');
     }else{
-        $("#descripcion").hide();
-        alert('sedeberia OCULTAR campo Descripcion');
+        //$("#descripcion").hide();
+        //alert('sedeberia OCULTAR campo Descripcion');
     }
 }
 /*****  Mascaras para decimales  ******/
@@ -184,6 +175,10 @@ function ver_boleta(liquidacion_id){    //Abre boletas anteriores en pestaña nu
         data: {
             liquidacion_id: liquidacion_id,            
         },       
-    });
-      
+    });      
 }
+
+
+
+/***************************************************************************************************************** */
+

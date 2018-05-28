@@ -200,50 +200,53 @@
             @cannot('acceso a impuestos','alta de impuestos')
 
             @else
-                <li id="side-impuestos-li" class="treeview">
-                    <a href="#">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        <span>Impuestos</span>
-                        <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                    </a>
-                    <ul id="side-impuestos-ul" class="treeview-menu">
-                       
-                        @can('alta de impuestos')
-                            <li id="side-ele-cargar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="cargar los montos para los impuestos asociados a los contratos" href="/admin/conceptosliquidaciones/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carga de impuestos</a></li>
-                        @endcan
-                        @can('acceso a impuestos')
-                            <li id="side-ele-visualizar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista filtrada de todos los impuestos y servicios cargados" href="/admin/conceptosliquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Historial</a></li>
-                        @endcan
-                    </ul>
-                </li>
+                @if(Auth::user()->obtener_rol()=='Administrador')
+                    <li id="side-impuestos-li" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <span>Impuestos</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul id="side-impuestos-ul" class="treeview-menu">
+                        
+                            @can('alta de impuestos')
+                                <li id="side-ele-cargar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="cargar los montos para los impuestos asociados a los contratos" href="/admin/conceptosliquidaciones/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carga de impuestos</a></li>
+                            @endcan
+                            @can('acceso a impuestos')
+                                <li id="side-ele-visualizar-impuestos"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista filtrada de todos los impuestos y servicios cargados" href="/admin/conceptosliquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Historial</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
             @endcan
 
             <!-- Liquidaciones mensuales -->
-            @cannot('alta de liquidaciones')
-
+            @cannot('alta de liquidaciones')            
             @else
-                <li id="side-liquidaciones-li" class="treeview">
-                    <a href="#">
-                        <i class="fa fa-calculator" aria-hidden="true"></i>
-                        <span>Liquidaciones mensuales</span>
-                        <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                    </a>
-                    <ul id="side-liquidaciones-ul" class="treeview-menu">
-                        @can('alta de liquidaciones')
-                            <li id="side-ele-generar-liquidacion"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista de todos los registros de liquidación mensual que ya están listos para poder ser liquidados" href="/admin/liquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros listos para liquidar</a></li>
-                        @endcan
-                        @can('cobro de liquidaciones')
-                            <li id="side-ele-cobros"><a data-toggle="tooltip" data-placement="right"  title="cargar el cobro de una liquidación mensual a un cliente" href="/admin/cobros/create"><i class="fa fa-usd" aria-hidden="true"></i> Cobro de servicios</a></li>
-                        @endcan
-                        @can('pagos de liquidaciones')
-                            <li id="side-ele-pagos"><a data-toggle="tooltip" data-placement="right"  title="listado de pagos pendientes a clientes" href="/admin/pagos"><i class="fa fa-usd" aria-hidden="true"></i> Pagos pendientes</a></li>
-                        @endcan
-                    </ul>
-                </li>
+                @if(Auth::user()->obtener_rol()=='Administrador')
+                    <li id="side-liquidaciones-li" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-calculator" aria-hidden="true"></i>
+                            <span>Liquidaciones mensuales</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul id="side-liquidaciones-ul" class="treeview-menu">
+                            @can('alta de liquidaciones')
+                                <li id="side-ele-generar-liquidacion"><a data-toggle="tooltip" data-placement="right"  title="visualizar una lista de todos los registros de liquidación mensual que ya están listos para poder ser liquidados" href="/admin/liquidaciones"><i class="fa fa-list-alt" aria-hidden="true"></i> Registros listos para liquidar</a></li>
+                            @endcan
+                            @can('cobro de liquidaciones')
+                                <li id="side-ele-cobros"><a data-toggle="tooltip" data-placement="right"  title="cargar el cobro de una liquidación mensual a un cliente" href="/admin/cobros/create"><i class="fa fa-usd" aria-hidden="true"></i> Cobro de servicios</a></li>
+                            @endcan
+                            @can('pagos de liquidaciones')
+                                <li id="side-ele-pagos"><a data-toggle="tooltip" data-placement="right"  title="listado de pagos pendientes a clientes" href="/admin/pagos"><i class="fa fa-usd" aria-hidden="true"></i> Pagos pendientes</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif    
         @endcan
 
         <!--CONTABILIDAD -->
@@ -258,7 +261,7 @@
 
         <!-- TECNICOS -->
             <li id="li15">
-                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/contabilidad/">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/tecnicos/">
                     <i class="fa fa-wrench">
                         <div class="icon-bg bg-orange"></div>
                     </i>
@@ -278,15 +281,15 @@
 
             
         <!--Bolsa de Servicio Técnico -->
-        @if( (Auth::user()->obtener_rol() != 'Propietario') && (Auth::user()->obtener_rol() != 'Inquilino') )
-        <li id="li17">
-            <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/bolsa">
-                <i class="fa fa-id-badge ">
-                    <div class="icon-bg bg-orange"></div>
-                </i>
-                <span class="menu-title">Bolsa de Soliciudes de Servicio</span>
-            </a>
-        </li>    
+        @if(Auth::user()->obtener_rol() == 'Personal') 
+            <li id="li17">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Fichas del personal de servicio técnico "   href="/admin/bolsa">
+                    <i class="fa fa-id-badge ">
+                        <div class="icon-bg bg-orange"></div>
+                    </i>
+                    <span class="menu-title">Bolsa de Soliciudes de Servicio</span>
+                </a>
+            </li>    
         @endif
 {{--
         <!--Espacio de cuentas para TECNICOS -->

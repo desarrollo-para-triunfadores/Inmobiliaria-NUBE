@@ -10,6 +10,9 @@ class UserConversacion extends Model
 
     protected $fillable = ['conversacion_id', 'user_id']; 
 
+    /*
+     * Relaciones
+     */
     public function conversacion(){
         return $this->belongsTo('App\Conversacion');
     }
@@ -17,5 +20,5 @@ class UserConversacion extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    
+      
 }

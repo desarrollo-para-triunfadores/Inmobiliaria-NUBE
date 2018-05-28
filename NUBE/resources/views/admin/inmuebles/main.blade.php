@@ -40,9 +40,9 @@
 								<a class="toggle-vis" href="" data-column="7">Contrato de alquiler</a> -
 								<a class="toggle-vis" href="" data-column="8">Fecha de Alta</a> -				
 								<a class="toggle-vis" href="" data-column="9">Acciones</a>
-							</div>
-							<br>
-							<table id="example" class="display responsive" cellspacing="0" width="100%">
+						</div>
+						<br>
+						<table id="example" class="display datatable responsive" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th class="text-center">Condición</th>
@@ -68,37 +68,44 @@
 									@endif
 
 									@if($inmueble->edificio)
-									<td class="text-center bold"><b>{{$inmueble->edificio->nombre}}</b> | {{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
+										<td class="text-center bold"><b>{{$inmueble->edificio->nombre}}</b> | {{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
 									@else
-									<td class="text-center bold">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
-									@endif
-									
+										<td class="text-center bold">{{$inmueble->direccion}} ({{$inmueble->localidad->nombre}})</td>
+									@endif									
 									{{--<td class="text-center">{{$inmueble->cantidadAmbientes}}</td>	--}}
 									@if($inmueble->condicion!=='alquiler')
-									<td class="text-center">${{$inmueble->valorVenta}}</td>
+										<td class="text-center">${{$inmueble->valorVenta}}</td>
 									@else
-									<td class="text-center">Solo alquiler</td>
-									@endif @if($inmueble->condicion !=='venta')
-									<td class="text-center">${{$inmueble->valorAlquiler}}</td>
+										<td class="text-center">Solo alquiler</td>
+									@endif 
+									@if($inmueble->condicion !=='venta')
+										<td class="text-center">${{$inmueble->valorAlquiler}}</td>
 									@else
-									<td class="text-center">Solo venta</td>
+										<td class="text-center">Solo venta</td>
 									@endif
 									<td class="text-center">{{$inmueble->FechaHabilitacionFormateado}}</td>
-									@if ($inmueble->contratos->count()<1) 
-                                        <td class="text-center text-red">Inmueble libre</td>
-									@elseif ($inmueble->ultimo_contrato()->vigente())
+
+									@if (($inmueble->contratos->count()>=1) && ($inmueble->ultimo_contrato()->vigente())) 
 										<td class="text-center text-green">Sí (hasta {{$inmueble->ultimo_contrato()->FechaHastaFormateado}})</td>
 									@else
 										<td class="text-center text-red">Inmueble libre</td>
 									@endif
+									
 									<td class="text-center">{{$inmueble->propietario->persona->nombre}} {{$inmueble->propietario->persona->apellido}}</td>
-                                    <td class="text-center">
-                                        <a title="Ver este inmueble" href="{{ route('inmuebles.edit', $inmueble->id) }}" class="btn btn-social-icon btn-warning btn-sm">
+
+
+                                    <td>
+										<a title="Ver este inmueble" href="{{ route('inmuebles.show', $inmueble->id) }}" class="btn btn-social-icon btn-info btn-sm">
                                             <i class="fa fa-eye"></i>
                                         </a>
+                                        <a title="Editar éste inmueble" href="{{ route('inmuebles.edit', $inmueble->id) }}" class="btn btn-social-icon btn-info btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+										{{--
                                         <a onclick="abrir_modal_borrar({{$inmueble->id}})" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger">
                                             <i class="fa fa-trash"></i>
                                         </a>
+										--}}
                                     </td>
 								</tr>
 								@endforeach
@@ -108,15 +115,15 @@
 										<th class="text-center">Condición</th>
 										<th class="text-center">Tipo</th>
 										<th class="text-center">Dirección</th>
-										<th class="text-center">Cant.Ambientes</th>
+										{{--<th class="text-center">Cant.Ambientes</th> --}}
 										<th class="text-center">Precio venta</th>
 										<th class="text-center">Precio alquiler</th>
 										<th class="text-center">F.Habilitación</th>
 										<th class="text-center">Contrato de alquiler</th>
-										<th class="text-center">Fecha de Alta</th>
+										<th class="text-center">Propietario</th>
 										<th class="text-center">Acciones</th>
 									</tr>
-								</tfoot>
+							</tfoot>
 						</table>
 					</div>
 
@@ -131,13 +138,9 @@
 									</div>
 								</div>
 							</div>
-						</div>
-
-		
+						</div>		
 				</div>
 			</div>
-
-
 		</div>
 	</section>
 </div>

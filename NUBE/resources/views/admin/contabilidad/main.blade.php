@@ -6,7 +6,7 @@
 	<div class="content-wrapper" style="min-height: 916px;">
 		<section class="content-header">
 			<h1>
-				Modulo Contable
+				Modulo Contable | CloudProp
 			</h1>
 			<ol class="breadcrumb">
 				<li>
@@ -36,5 +36,7 @@
 
 
 @endsection @section('script')
+<script>
+</script>
 	<script src="{{ asset('js/contabilidad.js') }}"></script>
 @endsection

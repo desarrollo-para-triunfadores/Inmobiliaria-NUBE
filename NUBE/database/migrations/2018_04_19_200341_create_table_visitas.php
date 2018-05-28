@@ -4,19 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableVisitas extends Migration
-{
+class CreateTableVisitas extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('visitas', function (Blueprint $table) {
             $table->increments('id');
-            
-            /**Variables ajustadas para su uso con el plugin calendar */
+
+            /*             * Variables ajustadas para su uso con el plugin calendar */
             $table->string('title')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
@@ -24,7 +23,11 @@ class CreateTableVisitas extends Migration
             $table->string('backgroundColor')->nullable();
             $table->string('borderColor')->nullable();
 
-            /**Resto de variables */
+            /*
+             * Resto de variables
+             */
+            
+            $table->string('observacion', 2000)->nullable();
             $table->integer('confirmada')->unsigned()->nullable();
             $table->integer('realizada')->unsigned()->nullable();
             $table->integer('oportunidad_id')->unsigned()->nullable();
@@ -40,8 +43,8 @@ class CreateTableVisitas extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('visitas');
     }
+
 }

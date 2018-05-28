@@ -27,7 +27,6 @@ class SolicitudesServicioController extends Controller
         Carbon::setlocale('es'); // Instancio en Español el manejador de fechas de Laravel
     }
 
-
     public function index(){
         #si es un admin, mostrar todas las solicitudes    
         if(Auth::user()->obtener_rol() == 'Administrador'){
@@ -115,25 +114,27 @@ class SolicitudesServicioController extends Controller
         $solicitud = new SolicitudServicio();
         if(Auth::user()->persona->inquilino){   #--si usuario que crea solicitur es Inquilino
             $solicitud->responsable = 'inquilino';
+            $solicitud->contrato_id = Auth::user()->persona->inquilino->ultimo_contrato_vigente()->id;
         }elseif(Auth::user()->persona->propietario){ #--si usuario que crea solicitur es Propietario
             $solicitud->responsable = 'propietario';
+            $solicitud->contrato_id = $request->contrato_id;
         }
         $solicitud->tecnico_id = $request->tecnico_id;
         $solicitud->rubrotecnico_id = $request->rubrotecnico_id;
-        $solicitud->contrato_id = $request->contrato_id;         #resta mandarlo en la vista
+        //$solicitud->contrato_id = $request->contrato_id;         #resta mandarlo en la vista
         $solicitud->motivo = $request->titulo;
+        $solicitud->fecha_inicio = $request->fecha_inicio;
         $solicitud->estado = "inicial";
 
         $solicitud->save();
-        return response()->json(json_encode($request));
-
+        return view('admin.solicitudes_servicio.main');
     }
 
     public function marcar_ss_concluida(Request $request){
         $ss = SolicitudServicio::find($request->ss_id);
         $ss->estado = 'concluida';
         $ss->monto_final = $request->monto_total_solicitud;
-        $ss->fecha_cierre = 
+        $ss->fecha_cierre = \Carbon\Carbon::now('America/Buenos_Aires');
         $ss->save();
         return response()->json("Se registro estado concluido satisfactoriamente.-");
     }

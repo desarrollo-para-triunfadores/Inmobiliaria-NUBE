@@ -23,25 +23,37 @@
                 <form id="form-create" action="/admin/movimientos" method="POST" enctype="multipart/form-data">
                     <input id="token-create" type="hidden" name="_token" value="{{ csrf_token() }}">
                     <br>
-                    <div class="form-group"><label class="col-sm-3 control-label">Concepto</label>
+                    <div class="form-group"><label class="col-sm-3 control-label">Tipo de Gasto</label>
                         <div class="col-sm-9 controls">
                             <div class="row">
                                 <div class="col-xs-10">
                                     <div class="input-icon right">
-                                        <select  style="width: 100%"  name="concepto_mov" id="concepto_mov"  onchange="validarMovimiento_Otro(this)" placeholder="campo requerido"  class="select2 form-control">
-                                            {{$conceptos = \App\Servicio::all()}}
-                                            @foreach($conceptos as $concepto)
-                                                <option value="{{$concepto->nombre}}">{{--$concepto->id--}}{{$concepto->nombre}}</option>
+                                        <select  style="width: 100%"  name="tipo_mov_id" id="tipo_mov_id"  /*onchange="validarMovimiento_Otro(this)"*/ placeholder="campo requerido"  class="select2 form-control">
+                                            {{$tipos_movimientos = \App\TipoMovimiento::all()}}
+                                            @foreach($tipos_movimientos as $tipo)
+                                                <option value="{{$tipo->id}}">{{--$concepto->id--}}{{$tipo->nombre}}</option>
                                             @endforeach
                                             <option value="0">Otro</option>
                                         </select>
-                                        <input id="descripcion" name="descripcion" class="form-control hide animated shake" placeholder="ingrese el motivo del movimiento" >
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Descripcion de el movimiento -->
+                    <div class="form-group"><label class="col-sm-3 control-label">Concepto</label>
+                        <div class="col-sm-9 controls">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <div class="input-icon right">
+                                        <input id="descripcion" name="descripcion" class="form-control animated shake" placeholder="ingrese el motivo del movimiento" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tipo (Entrada/Salida) -->
                     <div class="form-group"><label class="col-sm-3 control-label">Tipo</label>
                         <div class="col-sm-9 controls">
                             <div class="row">
@@ -65,7 +77,6 @@
                             </div>
                         </div>
                     </div>
-
                    
                     <button id="boton_submit_crear" type="submit" class="btn btn-primary hide"></button>
                 </form>
@@ -81,5 +92,17 @@
 </div>
 
 @section('script')
-	<script src="{{ asset('js/contabilidad.js') }}"></script>
+    <script>
+        var gastos_marketing = {{$array_grafico_gastos['Marketing']}};
+        var gastos_impuestos = {{$array_grafico_gastos['Impuestos']}};
+        var gastos_seguros = {{$array_grafico_gastos['Seguro Inmobiliario']}};
+        var gastos_mto_y_reparaciones = {{$array_grafico_gastos['Mto y Reparaciones']}};
+        var gastos_otros = {{$array_grafico_gastos['Otros']}};
+        console.log(gastos_marketing);
+        {{--
+        var array_gastos = {{ JSON.parse($array_grafico_gastos) }};
+        console.log(array_gastos);
+        --}}
+    </script>
+    <script src="{{ asset('js/contabilidad.js') }}"></script>
 @endsection

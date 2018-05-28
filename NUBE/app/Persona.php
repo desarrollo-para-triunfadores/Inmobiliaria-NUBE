@@ -88,4 +88,9 @@ class Persona extends Model {
         if($this->inquilino || $this->propietario)
             return true;
     }
+
+    public function getEdad(){
+        $edad = Carbon::parse($this->fecha_nac)->age; 
+        return $edad; 
+    }
 }
