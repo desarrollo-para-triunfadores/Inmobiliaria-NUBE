@@ -327,7 +327,10 @@ function calificar(ss){
 /** Estrellas para select de calificacion SS, con click */
 $(function() {
     $('#rating').barrating({
-      theme: 'fontawesome-stars'
+      theme: 'fontawesome-stars',
+      //nuevo↓
+      readonly: true,
+      initialRating: $('#rating').data('current-rating')
     });
  });
 

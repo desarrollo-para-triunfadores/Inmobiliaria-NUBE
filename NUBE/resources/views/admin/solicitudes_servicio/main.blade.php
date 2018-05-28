@@ -191,7 +191,7 @@
                                 <td class="text-center">{{$ss->fecha_cierre->format('d/m/Y')}}</td>
                                 @if($ss->calificacion)
                                     <td>
-                                        <select id="rating" name="rating" autocomplete="off">
+                                        <select id="rating" name="rating" data-current-rating="{{ $ss->calificacion }}" autocomplete="on">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
