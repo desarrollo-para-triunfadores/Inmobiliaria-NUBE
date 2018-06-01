@@ -42,5 +42,11 @@ class Inquilino extends Model {
         }
     }
 
+    public function solicitudes_servicio(){
+        $ids_contratos = $this->contratos->pluck('id')->toArray();
+        return$solicitudes = SolicitudServicio::all()->whereIn('contrato_id',$ids_contratos);
+        //dd($solicitudes);
+    }
+
 
 }

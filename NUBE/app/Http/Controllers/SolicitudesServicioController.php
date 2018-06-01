@@ -30,15 +30,10 @@ class SolicitudesServicioController extends Controller
     public function index(){
         #si es un admin, mostrar todas las solicitudes    
         if(Auth::user()->obtener_rol() == 'Administrador'){
-            $solicitudes_servicio = SolicitudServicio::all();
+            $ss = SolicitudServicio::all();
             $tecnicos = Tecnico::all();
             $inquilinos = Inquilino::all();
-            $propietarios = Propietario::all();
-            return view('admin.solicitudes_servicio.main')
-                ->with('tecnicos',$tecnicos)
-                ->with('propietarios',$propietarios)
-                ->with('inquilinos',$inquilinos)
-                ->with('solicitudes_servicio',$solicitudes_servicio);    
+            $propietarios = Propietario::all();             
         }
         #--si es Tecnico → mostrar unicamente las solicitudes de ese tecnico 
         if(Auth::user()->obtener_rol() == 'Personal'){
@@ -53,17 +48,21 @@ class SolicitudesServicioController extends Controller
                 ->with('solicitudes_servicio',$ss);
         }
         #--si es algun solicitante de servicio (Propietario o Inquilino)
-        if((Auth::user()->obtener_rol() == 'Propietario') || (Auth::user()->obtener_rol() == 'Inquilino')){
-            $solicitudes_servicio = SolicitudServicio::all();
-            $tecnicos = Tecnico::all();
-            $inquilinos = Inquilino::all();
-            $propietarios = Propietario::all();
-            return view('admin.solicitudes_servicio.main')
+        if(Auth::user()->obtener_rol() == 'Propietario'){
+           $ss = Auth::user()->persona->propietario->solicitudes_servicio();
+        }
+        if(Auth::user()->obtener_rol() == 'Inquilino'){
+            $ss = Auth::user()->persona->inquilino->solicitudes_servicio();
+        }
+
+        $tecnicos = Tecnico::all();
+        $inquilinos = Inquilino::all();
+        $propietarios = Propietario::all();
+        return view('admin.solicitudes_servicio.main')
                 ->with('tecnicos',$tecnicos)
                 ->with('propietarios',$propietarios)
                 ->with('inquilinos',$inquilinos)
-                ->with('solicitudes_servicio',$solicitudes_servicio);    
-        }
+                ->with('solicitudes_servicio',$ss);  
                 
     }
 
