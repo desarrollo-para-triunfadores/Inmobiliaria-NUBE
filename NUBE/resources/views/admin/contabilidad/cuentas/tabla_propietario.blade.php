@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="box-body ">
-        <table id="tabla-boletas-propietario" class="display responsive" cellspacing="0" width="100%">
+        <table id="tabla-boletas-propietario" class="dataTable table-bordered display responsive" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th class="text-center">Factura</th>
@@ -48,8 +48,7 @@
 @foreach($contratos as $contrato)
     <div class="box box-default">
         <div class="box-header with-border">
-            <h2 class="box-title animated bounce"><b> {{$contrato->inquilino->persona->nombre}} {{$contrato->inquilino->persona->apellido}}</b>   &nbsp &nbsp🏠 <b>{{$contrato->inmueble->edificio->nombre}} | {{$contrato->inmueble->tipo->nombre}} en Piso {{$contrato->inmueble->piso}} N° {{$contrato->inmueble->numDepto}} 🏠</h2>
-            
+            <h2 class="box-title animated flash"><b> {{$contrato->inquilino->persona->nombre}} {{$contrato->inquilino->persona->apellido}}</b>   &nbsp &nbsp🏠 <b>{{$contrato->inmueble->edificio->nombre}} | {{$contrato->inmueble->tipo->nombre}} en Piso {{$contrato->inmueble->piso}} N° {{$contrato->inmueble->numDepto}} 🏠</h2>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -60,7 +59,7 @@
         <!-- /.box-header -->
         <div class="box-body ">
             
-            <table id="tabla-inquilinos-propietario" class="display responsive" cellspacing="0" width="100%">
+            <table id="tabla-inquilinos-propietario" class="dataTable table-bordered table-responsive display responsive" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th class="text-center">Factura</th>
@@ -116,7 +115,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body ">
-        <table id="tabla-extracciones-propietario" class="display responsive" cellspacing="0" width="100%">
+        <table id="tabla-extracciones-propietario" class="dataTable table-bordered table-responsive display responsive" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th class="text-center">Inquilino</th>
@@ -169,6 +168,7 @@
 
 @section('script')
     <script>
+        alert('se entra a instanciar tablas');
         /************ Tabla para la contabilidad - extracciones para propietario************/
         var tableprop3 = $('#tabla-extracciones-propietario').DataTable({
             "language": tabla_traducida,
@@ -181,7 +181,7 @@
                 $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
             }
             }
-        })  
+        })
         // filtro individuales - búsqueda
         tableprop3.columns().every(function () {
             var that = this
@@ -191,14 +191,14 @@
             }
             })
         })
-            
+
         //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
         $('#tabla-extracciones-propietario tbody').on('mouseenter', 'td', function () {
             var colIdx = table.cell(this).index().column;
             $(tableprop3.cells().nodes()).removeClass('highlight');
             $(tableprop3.column(colIdx).nodes()).addClass('highlight');
         });
-    
+
 /********************** Tabla para la contabilidad - boletas inquilinos de propietario *******************/
   var tableprop2 = $('#tabla-inquilinos-propietario').DataTable({
     "language": tabla_traducida,
@@ -211,7 +211,7 @@
         $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
       }
     }
-  })  
+  });
   // filtro individuales - búsqueda
   tableprop2.columns().every(function () {
     var that = this
@@ -220,15 +220,15 @@
         that.search(this.value).draw()
       }
     })
-  })
-    
+  });
+
   //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
   $('#tabla-inquilinos-propietario tbody').on('mouseenter', 'td', function () {
     var colIdx = table.cell(this).index().column;
     $(tableprop2.cells().nodes()).removeClass('highlight');
     $(tableprop2.column(colIdx).nodes()).addClass('highlight');
   });
-  
+
   /********************************* Tabla para la contabilidad - boletas propietario ***************************/
     var tableprop1 = $('#tabla-boletas-propietario').DataTable({
         "language": tabla_traducida,
@@ -241,7 +241,7 @@
             $(this).html('<input nombre="' + title + '" type="text" placeholder="Buscar ' + title + '" />')
         }
         }
-    })  
+    }) ;
     // filtro individuales - búsqueda
     tableprop1.columns().every(function () {
         var that = this
@@ -250,15 +250,15 @@
             that.search(this.value).draw()
         }
         })
-    })
-        
+    });
+
     //Datatables | asocio el evento sobre el body de la tabla para que resalte fila y columna
     $('#tabla-boletas-propietario tbody').on('mouseenter', 'td', function () {
         var colIdx = table.cell(this).index().column;
         $(tableprop1.cells().nodes()).removeClass('highlight');
         $(tableprop1.column(colIdx).nodes()).addClass('highlight');
     });
-    
-    
+
+
     </script>
 @endsection

@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Schema::defaultStringLength(191);
         //\Carbon::setLocate(config('app.locate'));   #Añadido por JUAMPY, cambia la instancia estatica de Carbon x la configurada en la aplicacion "config/app.php"
     }

@@ -28,8 +28,7 @@
 
                 </tfoot>
             </table>
-            <table id="tabla_resumen_deudas_inquilino" class="display responsive " cellspacing="0" width="100%">
-                
+            <table id="tabla_resumen_deudas_inquilino" class="dataTable table-responsive table-bordered" cellspacing="0" width="100%">
                 @if($persona->inquilino->ultimo_contrato()->ultima_liquidacion())  
                     <thead>
                     <!-- #si el inquilino tiene alguna boleta, mostrarla -->
@@ -64,7 +63,7 @@
         <!-- /.box-header -->
         <div class="box-body ">
     
-            <table id="example" class="display responsive" cellspacing="0" width="80%">
+            <table id="example" class="dataTable table-bordered display responsive" cellspacing="0" width="80%">
                 <tbody>
                     <tr>
                         <th class="text-center text-bold text-green" style="font-size: 70px">Total a pagar:</th>

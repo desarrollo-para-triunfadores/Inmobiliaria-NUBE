@@ -42,7 +42,7 @@ class CobrosController extends Controller
             $saldo_cuenta = 0;
 
             $liquidaciones = LiquidacionMensual::all()->where("fecha_pago", null)->where("abonado", null)->where("vencimiento", "<>", null)->where("contrato_id", $contrato_id);
-            $liquidacion_posterior = LiquidacionMensual::all() //este se utiliza para comprobar que el saldo diponible no hay asido utilizado.
+            $liquidacion_posterior = LiquidacionMensual::all() //este se utiliza para comprobar que el saldo diponible no haya sido utilizado.
             ->where("contrato_id",$contrato_id)
                 ->where("abonado",'<>', null)
                 ->sortBy('id')->first();
@@ -53,11 +53,9 @@ class CobrosController extends Controller
             return response()->json(view('admin.cobros.detalle_inquilinos', compact('liquidaciones', 'saldo_cuenta'))->render());
         
         }else{
-
             /**
              * Enviamos el detalle para el cobro a un propietario 
              */
-
             $fecha_hoy = Carbon::now();
     
             $inmuebles_array = Inmueble::all()
@@ -149,7 +147,7 @@ class CobrosController extends Controller
             $movimiento = new Movimiento();
             $movimiento->user_id = Auth::user()->id;     
             $movimiento->fecha_hora = Carbon::now();        
-            $movimiento->user_id = Auth::user()->id;
+            $movimiento->inquilino_id = $liquidacion->contrato->inquilino->id;
             $movimiento->fecha_hora = Carbon::now();            
             $movimiento->tipo_movimiento = "entrada";
             $movimiento->monto = $liquidacion->abonado;

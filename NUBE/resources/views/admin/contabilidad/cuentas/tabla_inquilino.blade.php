@@ -10,13 +10,13 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body ">
-        <table id="tabla_contabilidad_historia_inquilino" class="display responsive" cellspacing="0" width="100%">
+        <table id="tabla_contabilidad_historia_inquilino" class="dataTable table-bordered table-responsive display responsive" cellspacing="0" width="100%">
             <thead>
             <tr>                
-                <th class="text-center">Periodo</th>
-                <th class="text-center">Monto</th>
-                <th class="text-center">Estado</th>
-                <th class="text-center">Acciones</th>
+                <th class="text-center text-teal">Periodo</th>
+                <th class="text-center text-teal">Monto</th>
+                <th class="text-center text-teal">Estado</th>
+                <th class="text-center text-teal">Acciones</th>
             </tr>
             </thead>
             <tbody>

@@ -33,7 +33,7 @@ class AgendaUsuariosController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function indexoportunidades() {
-        $oportunidades = Oportunidad::all()->where('estado_id', 1);
+        $oportunidades = Oportunidad::all();
         return view('admin.agenda_oportunidades.main')->with('oportunidades', $oportunidades);
     }
 

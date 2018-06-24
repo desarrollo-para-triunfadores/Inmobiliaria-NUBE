@@ -295,8 +295,5 @@ var tabla_solicitudes_servicio_tecnico = $('#tabla_solicitudes_servicio_tecnico'
       
     </script>
     <script src="{{ asset('js/solicitudes_servicio.js') }}"></script>
-    
-    <script>
 
-    </script>
 @endsection

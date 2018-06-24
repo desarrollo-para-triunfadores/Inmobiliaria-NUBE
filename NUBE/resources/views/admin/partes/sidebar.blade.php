@@ -1,7 +1,7 @@
 <aside class="main-sidebar">
     <section class="sidebar">
         <ul class="sidebar-menu">
-            <li class="header" align="center">menú principal</li>
+            <li class="header" align="center"><!--menú principal--></li>
             <!-- Gestión de Usuarios -->
             @cannot('acceso a usuarios','acceso a roles')
 
@@ -154,7 +154,7 @@
                     <ul id="side-oportunidades-ul" class="treeview-menu">
 
                         @can('acceso a oportunidades')
-                            <li id="side-ele-opotunidades"><a data-toggle="tooltip" data-placement="right"  title="ver las oportunidades de negocio" href="/admin/oportunidades"><i class="fa fa-eye"></i> Oportunidades</a></li>
+                            <li id="side-ele-opotunidades"><a data-toggle="tooltip" data-placement="right"  title="ver las oportunidades de negocio" href="/admin/oportunidades"><i class="fa fa-eye"></i> Ver Negociaciones</a></li>
                         @endcan
                         @can('acceso a agenda')
                             <li id="side-ele-agenda"><a href="/admin/indexoportunidades"><i class="fa fa-calendar"></i> Agenda</a></li>
@@ -165,33 +165,13 @@
             @endcan
         <!-- Contratos -->
             @can('acceso a contratos')
-                <li id="side-contratos-li" class="treeview">
-                    <a href="#">
-                        <i class="fa fa-handshake-o" aria-hidden="true"></i>
-                        <span>Contratos</span>
-                        <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                    </a>
-                    <ul id="side-contratos-ul" class="treeview-menu">
-                        <li id="side-ele-contratos"><a href="/admin/contratos" title="ver historial de contratos" data-toogle="tooltip"><i class="fa fa-handshake-o"></i> Contratos</a></li>
-                    </ul>
+                <li id="side-ele-contratos"><a href="/admin/contratos" title="ver historial de contratos" data-toogle="tooltip"><i class="fa fa-handshake-o"></i> Contratos</a>
                 </li>
             @endcan
-
          
-            <li id="side-agenda-usuarios-li" class="treeview">
-                <a href="#">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <span>Agenda</span>
-                    <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                </a>
-                <ul id="side-agenda-usuarios-ul" class="treeview-menu">
-                    <li id="side-ele-agenda-usuarios"><a href="/admin/indexusurios" title="acceder a la agenda" data-toogle="tooltip"><i class="fa fa-calendar"></i> Agenda</a></li>
-                </ul>
-            </li>
+            @if(Auth::user()->obtener_rol() != 'Administrador') <!-- Administradores no puede ver esta Agenda de servicio tecnico -->
+                <li id="side-ele-agenda-usuarios"><a href="/admin/indexusurios" title="acceder a la agenda" data-toogle="tooltip"><i class="fa fa-calendar"></i> Agenda</a></li>
+            @endif
           
 
 
@@ -291,19 +271,28 @@
                 </a>
             </li>    
         @endif
-{{--
-        <!--Espacio de cuentas para TECNICOS -->
-        @if(Auth::user()->obtener_rol() == 'Personal')
+
             <li id="li18">
-                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Seguimiento a mis solicitudes de servicio y sus estados"   href="/admin/solicitudes_servicio/">
-                    <i class="fa fa-id-badge ">
+                <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="ir al canal de mensajeria" href="/admin/mensajes">
+                    <i class="fa fa-wechat ">
                         <div class="icon-bg bg-orange"></div>
                     </i>
-                    <span class="menu-title">Mis Solicitudes Atendidas</span>
+                    <span class="menu-title">Mensajeria</span>
                 </a>
-            </li>    
-        @endif
-         --}}   
+            </li>
+        {{--
+                <!--Espacio de cuentas para TECNICOS -->
+                @if(Auth::user()->obtener_rol() == 'Personal')
+                    <li id="li18">
+                        <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Seguimiento a mis solicitudes de servicio y sus estados"   href="/admin/solicitudes_servicio/">
+                            <i class="fa fa-id-badge ">
+                                <div class="icon-bg bg-orange"></div>
+                            </i>
+                            <span class="menu-title">Mis Solicitudes Atendidas</span>
+                        </a>
+                    </li>
+                @endif
+                 --}}
         <!--Backup de Datos -->
             <li id="li25">
                 <a data-toggle="tooltip" data-placement="right"  data-placement="top" title="Backup de la información almacenada" onclick="backup()"  href="{{--  route('admin.backup.index') --}}">

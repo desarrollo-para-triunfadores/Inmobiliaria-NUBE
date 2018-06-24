@@ -43,7 +43,8 @@
                             <table id="example" class="display responsive" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Inmueble</th>
+                                    <th class="text-center">Inmueble
+                                    <th class="text-center">Propietario</th>
                                     <th class="text-center">Edificio</th>
                                     <th class="text-center">Vigente</th>
                                     <th class="text-center">Desde</th>
@@ -68,6 +69,9 @@
                                         @else
                                             <td class="text-center text-bold">{{$contrato->inmueble->tipo->nombre}} en {{$contrato->inmueble->direccion}} ({{$contrato->inmueble->localidad->nombre}})</td>
                                         @endif
+                                        <td class="text-center">
+                                            <a href="{{route('propietarios.show', $contrato->inmueble->propietario->id)}}">{{ $contrato->inmueble->propietario->persona->nombreCompleto }}</a>
+                                        </td>
                                         @if($contrato->inmueble->edificio)
                                             <td class="text-center"><a href="{{route('edificios.show', $contrato->inmueble->edificio->id)}}"> {{$contrato->inmueble->edificio->nombre}} ({{$contrato->inmueble->localidad->nombre}})️</a></td>
                                         @else
@@ -98,6 +102,7 @@
                                 <tfoot>
                                 <tr>
                                     <th class="text-center">Inmueble</th>
+                                    <th class="text-center">Propietario</th>
                                     <th class="text-center">Edificio</th>
                                     <th class="text-center">Vigente</th>
                                     <th class="text-center">Desde</th>

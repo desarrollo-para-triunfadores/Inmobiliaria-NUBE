@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-    <title>NUBE | Resumen de cuenta</title>
+    <title>CloudProp | Resumen de cuenta</title>
 
     <link rel="stylesheet" type="text/css" href="{{'admin/emails/boleta/style.css'}}" />
     {{--
@@ -92,9 +92,11 @@
 
 
 <body>
+
     <?php
     //dd($liquidacion);
     use Carbon\Carbon;
+        setlocale(LC_TIME, 'es_ES');
         Carbon::setLocale('es');
         $periodo_liquidado = \Carbon\Carbon::createFromFormat('m/Y', $liquidacion->periodo);         
     ?>

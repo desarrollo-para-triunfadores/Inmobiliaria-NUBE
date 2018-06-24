@@ -246,7 +246,7 @@ function marcar_concluida(ss){
                             cancelButtonText: 'Cerrar',
                             confirmButtonText: 'Entendido'
                           }).then((result) => {
-                            if (result.value) { //si presiono "confirmar": redireccionar a la mensajeria
+                            if(result.value){ //si presiono "confirmar": redireccionar a la mensajeria
                                 window.location.href = '/admin/solicitudes_servicio'
                             }
                           })
@@ -314,7 +314,7 @@ function calificar(ss){
                         confirmButtonColor: '#3085d6',                    
                         confirmButtonText: 'Cerrar'
                       }).then((result) => {
-                        if (result.value) { //si presiono "confirmar": redireccionar a la mensajeria
+                        if(result.value){ //si presiono "confirmar": redireccionar a la mensajeria
                             window.location.href = '/admin/solicitudes_servicio'
                         }
                       })

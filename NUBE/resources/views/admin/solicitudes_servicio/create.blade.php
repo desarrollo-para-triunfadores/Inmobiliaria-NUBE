@@ -61,7 +61,7 @@
                             </div>                       
                         </div>
                     @endif
-                    
+
                     <!--Datos de Evento (Visita en agenda)-->                     
                     <div class="row">
                         <div class="col-md-4">       
@@ -95,15 +95,51 @@
             </div>    
             <button id="boton_submit_crear" type="submit" class="btn btn-primary hide"></button>
         </form>    
-    </div>
+        </div>
     <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">volver</button>
-                <button type="button" class="btn btn-primary" onclick="$('#boton_submit_crear').click()">Registrar Visita</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">volver</button>
+        <button type="button" class="btn btn-primary" onclick="$('#boton_submit_crear').click()">Registrar Visita</button>
      </div>
- </div>          
+     </div>
     </div>
+
+    @section('script')
+        <script>
+            /**** Cuando se selecciona un rubro de tecnico, desplegar los tecnicos que corresponden al rubro ****/
+            $('select#rubrotecnico_id').on('change',function () {
+                //alert('anda');
+                $('select#tecnico_id').empty();
+                $.ajax({
+                    dataType: 'JSON',
+                    url: "/admin/tecnicos/tecnicosxrubro",
+                    data: {
+                        id: $('#rubrotecnico_id').val()
+                    },
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        //factura.tipo_cbre = data.tipo_cbre;
+                        $('select#tecnico_id').append("<option value=>*Nunguno en particular*</option>");
+                        for(i=0; i<data.length; i++){
+                            $('select#tecnico_id').append("<option value='"+data[i].tecnico.id+"'> "+data[i].persona.nombre+" "+data[i].persona.apellido+"</option>");
+                        }
+                    }
+                });
+            });
+
+            //Bootstrap Material Date picker para "fecha inicio de servicio tecnico" solicitado
+            $('.datepicker').bootstrapMaterialDatePicker({
+                format: 'DD/MM/YYYY',
+                lang: 'es',
+                weekStart: 1,
+                switchOnClick : true,
+                cancelText: 'Cerrar',
+                okText: 'Seleccionar',
+                minDate : moment(),
+                maxDate : moment().add(30, 'year'),
+                time: false
+            });
+        </script>
+    @endsection
 </div>
 
-<script>
 
-</script>

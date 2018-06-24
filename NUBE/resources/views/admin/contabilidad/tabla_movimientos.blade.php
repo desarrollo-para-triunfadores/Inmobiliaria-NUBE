@@ -14,7 +14,7 @@
             <thead>
             <tr>
                 <th class="text-center">Concepto</th>
-                <th class="text-center">Inquilino</th>
+                <th class="text-center">Cliente</th>
                 <th class="text-center">Tipo</th>
                 <th class="text-center">Monto</th>
                 <th class="text-center">Fecha</th>
@@ -25,8 +25,10 @@
             @foreach($movimientos as $movimiento)
                 <tr>
                     <td class="text-center text-bold"><i>"{{$movimiento->descripcion}}"</i></td>
-                    @if($movimiento->inquilino)
+                    @if($movimiento->inquilino_id)
                         <td class="text-center text-bold">{{$movimiento->inquilino->persona->nombrecompleto}}</td>
+                    @elseif($movimiento->propietario_id)
+                        <td class="text-center text-bold">{{$movimiento->propietario->persona->nombrecompleto}}</td>
                     @else
                         <td class="text-center text-bold">-</td>
                     @endif
