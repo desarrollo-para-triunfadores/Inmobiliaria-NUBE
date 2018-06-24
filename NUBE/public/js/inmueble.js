@@ -51,7 +51,7 @@ var table = $('#example').DataTable({
         null, //7--Contrato de alquiler
         null, //8--Fecha de Registro
         null                    //11--Acciones
-    ]
+    ]*/
 });
 
 function instaciar_filtros() {
@@ -91,6 +91,7 @@ $('#example tbody').on('mouseenter', 'td', function () {
     $(table.cells().nodes()).removeClass('highlight');
     $(table.column(colIdx).nodes()).addClass('highlight');
 });
+/************************************************************************************************ */
 
 function bloquear_datos_depto() {
     /*

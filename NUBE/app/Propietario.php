@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Propietario extends Model
 {
@@ -99,7 +100,11 @@ class Propietario extends Model
         return $respuesta;
     }
 
-
+    public function solicitudes_servicio(){
+        $ids_inmuebles_de_propietario = $this->inmuebles->pluck('id')->toArray();
+        $id_contratos = Contrato::all()->whereIn('inmueble_id',$ids_inmuebles_de_propietario)->pluck('id')->toArray();
+        return $solicitudes = SolicitudServicio::all()->whereIn('contrato_id',$id_contratos)/*->where('responsable','propietario')*/;     
+    }
 
     public function total_comisiones_pendientes_pago()
     {      #Dinero que el propietario adeuda a la inmobiliaria en concepto de servicio por uso del sistema

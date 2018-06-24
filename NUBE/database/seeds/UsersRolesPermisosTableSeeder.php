@@ -325,6 +325,10 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         $role_personal = Role::create(['name' => 'Personal']);
 
+        $role_personal = Role::create(['name' => 'Propietario']);
+
+        $role_personal = Role::create(['name' => 'Inquilino']);
+
         //Creación de los permisos
 
         /**
@@ -484,13 +488,13 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         $user_1->assignRole('Personal'); //Hacho
 
-        $user_2->assignRole('Administrador');
+        $user_2->assignRole('Administrador');   //JP
 
-        $user_3->assignRole('Administrador');
+        $user_3->assignRole('Administrador');   
 
-        $user_4->assignRole('Administrador');
+        $user_4->assignRole('Inquilino');   //Andrea "peti"
 
-        $user_5->assignRole('Administrador');
+        $user_5->assignRole('Propietario');
 
 
         //Asignación de permisos al rol de clientes

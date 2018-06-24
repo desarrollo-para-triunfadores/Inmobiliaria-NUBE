@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="modal-show">
     <div class="modal-dialog modal-lg" style="width: 80%">
         <div class="modal-content">

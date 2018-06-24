@@ -1,7 +1,7 @@
 <header class=" bg-black-active main-header">
     <a href="index2.html" class="logo">
-        <span class="logo-mini"><b>NUBE</b></span>
-        <span class="logo-lg"><b>Inmobiliaria</b> NUBE</span>
+        <span class="logo-mini"><b>🏬 </b></span>
+        <span class="logo-lg"><b>CloudProp</b></span>
     </a>
     <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" id="boton_sidebar" data-toggle="offcanvas" role="button">

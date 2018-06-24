@@ -5,6 +5,7 @@ namespace App;
 use App\Visita;
 use App\Conversacion;
 use App\UserConversacion;
+use DB;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +22,11 @@ class SolicitudServicio extends Model {
         'motivo',
         'estado',
         'monto_final',
-        'fecha_cierre'
-    ];
+        'fecha_inicio',
+        'fecha_cierre',
+        'calififacion'
+    ]; 
+
     protected $dates = ['fecha_cierre'];
 
     /**
@@ -125,8 +129,7 @@ class SolicitudServicio extends Model {
     public function visitas_del_dia() {
 
         /**
-         * Este método devuelve las visitas para el día asociados a la solicitud
-         * 
+         * Este método devuelve las visitas para el día asociados a la solicitud         
          */
         $fecha_hoy = Carbon::now();
         $fecha_control = Carbon::now()->addDay(); //sumamos un día 
@@ -139,6 +142,20 @@ class SolicitudServicio extends Model {
         return $visitas_hoy;
     }
 
+    public function tiene_visita_realizada(){   #este metodo responde si el tecnico realizo almenos una visita al solicitante
+        /** Estea Query fue necesaria porque $this->visitas armaba mal al consulta ('solicitudes_servicio_id' en vez de 'solcitudservicio_id') */
+        $visitas = DB::table('solicitudesservicio')->join('visitas', function ($join) {
+            $join->on('solicitudesservicio.id', '=', 'visitas.solicitudservicio_id');
+        }) ->where('solicitudesservicio.id', $this->id)->where('realizada',true)->get();
+
+        if($visitas->count()){  #si la query respondio "algo"
+            return true;          
+        }
+        return false;
+    }
+
+    public function solicitante()
+    {
     public function solicitante() {
         /**
          * Devuelve el el obj propietario o inquilino segun la marca de quién

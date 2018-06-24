@@ -3,24 +3,24 @@ $("#side-inmueble-ul").addClass("menu-open");
 $("#side-ele-inquilinos").addClass("active");
 
 
-/*
-function completar_campos(inquilino) {
+
+function completar_campos(tecnico) {
     console.log(tecnico);
-    $('#apellido').val(inquilino.persona.apellido);
-    $('#dni').val(inquilino.persona.dni);
-    $('#sexo').val(inquilino.persona.sexo);
-    $('#fecha_nac').val(inquilino.persona.fecha_nac);
-    $('#telefono').val(inquilino.persona.telefono);
-    $('#telefono_contacto').val(inquilino.persona.telefono_contacto);
-    $('#email').val(inquilino.persona.email);
-    $('#localidad_id').val(inquilino.persona.localidad_id).trigger("change");
-    $('#direccion').val(inquilino.persona.direccion);
-    $('#nombre').val(inquilino.persona.nombre);
-    $('#pais_id').val(inquilino.persona.pais_id).trigger("change");
-    $('#form-update').attr('action', '/admin/inquilinos/' + inquilino.id);
+    $('#apellido').val(tecnico.persona.apellido);
+    $('#dni').val(tecnico.persona.dni);
+    $('#sexo').val(tecnico.persona.sexo);
+    $('#fecha_nac').val(tecnico.persona.fecha_nac);
+    $('#telefono').val(tecnico.persona.telefono);
+    $('#telefono_contacto').val(tecnico.persona.telefono_contacto);
+    $('#email').val(tecnico.persona.email);
+    $('#localidad_id').val(tecnico.persona.localidad_id).trigger("change");
+    $('#direccion').val(tecnico.persona.direccion);
+    $('#nombre').val(tecnico.persona.nombre);
+    $('#pais_id').val(tecnico.persona.pais_id).trigger("change");
+    $('#form-update').attr('action', '/admin/tecnicos/' + tecnico.id);
     $('#boton-modal-update').click();
 }
-*/
+
 
 function abrir_modal_borrar(id) {
     $('#form-borrar').attr('action', '/admin/tecnicos/' + id);
@@ -28,10 +28,11 @@ function abrir_modal_borrar(id) {
 }
 
 
-/*
+
 //Datatable - instaciación del plugin
 var table = $('#example').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
+    /*
     "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.
         null,                   //0--AyNombre
         {"visible": false},     //1--Sexo
@@ -46,8 +47,9 @@ var table = $('#example').DataTable({
         {"visible": false},     //10--Fecha_Alta
         null                    //11--Acciones
     ]
+    */
 });
-*/
+
 
 instaciar_filtros();
 
@@ -98,13 +100,12 @@ $('.datepicker').bootstrapMaterialDatePicker ({
     lang: 'es',
     weekStart: 1, 			
     switchOnClick : true,
-    cancelText: 'Cancelar',
-    okText: 'Seleccionar',
+    cancelText: 'cerrar',
+    okText: 'ok',
     minDate : moment().add(-100, 'year'),
     maxDate : moment(),
     time: false 
 });
-
 
 //Croppie.js | create
 
@@ -200,10 +201,7 @@ $('.actionUpload-update input').on('change', function () {
 // Enviar datos.
 
 function mandar(tipo_form) { //tipo_form puede ser create o update
-
-    var redireccion = "/admin/inquilinos/";
-
-
+    var redireccion = "/admin/tecnicos/";
 //// Este método sirve para ver el contenido del formdata
 //for (var pair of formData.entries())
 //{
@@ -213,7 +211,6 @@ function mandar(tipo_form) { //tipo_form puede ser create o update
     var url = form.attr("action");
     var token = $("#token-" + tipo_form).val();
     var formData = new FormData(document.getElementById("form-" + tipo_form));
-
 
     if (tipo_form === 'create') {
         if (basic_nuevo_cam === "") {

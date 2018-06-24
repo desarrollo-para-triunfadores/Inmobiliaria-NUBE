@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Actualizar inquilino</h4>
+                <h4 class="modal-title">Actualizar Técnico</h4>
             </div>
             <div class="modal-body">
                 @include('admin.partes.msj_lista_errores')
@@ -58,7 +58,7 @@
                                         <label>País de origen:</label>
                                         <select style="width: 100%"  id="pais_id" name="pais_id" placeholder="campo requerido"  class="select2 form-control">
                                             @foreach($paises as $pais)
-                                            <option value="{{$pais->id}}">{{$pais->nombre}}</option>                                                    
+                                                <option value="{{$pais->id}}">{{$pais->nombre}}</option>                                                    
                                             @endforeach
                                         </select> 
                                     </div>
@@ -69,21 +69,23 @@
                             <br>                                         
                             <h3>Contacto y dirección</h3>
                             <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Teléfono:</label>
-                                        <input name="telefono" id="telefono" type="tel" maxlength="50" class="form-control" placeholder="campo requerido" required>                            
-                                    </div>
-                                </div>  
+                            <div class="row">                                 
+                                {{--
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Teléfono de contacto</label>
                                         <input id="telefono_contacto" name="telefono_contacto" type="tel" maxlength="50" class="form-control" placeholder="campo requerido" required>                            
                                     </div>
                                 </div> 
+                                --}}
                             </div>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Teléfono:</label>
+                                        <input name="telefono" id="telefono" type="tel" maxlength="50" class="form-control" placeholder="campo requerido" required>                            
+                                    </div>
+                                </div> 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
@@ -100,15 +102,13 @@
                                         </select> 
                                     </div>
                                 </div>  
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Dirección</label>
                                         <input id="direccion" name="direccion" type="text" maxlength="50" class="form-control" placeholder="campo requerido" required>                            
                                     </div>
-                                </div>                        
-                            </div>  
+                                </div>  
+                            </div> 
                         </div>  
                         <div class="col-md-1">
                         </div>  

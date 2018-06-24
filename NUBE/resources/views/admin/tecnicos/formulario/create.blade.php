@@ -57,7 +57,7 @@
                                         <label class="text-yellow">Rubro:</label>
                                         <select style="width: 100%"  name="rubrotecnico_id" id="rubrotecnico_id" placeholder="campo requerido"  class="select2 form-control">
                                             @foreach($rubrostecnicos as $rubrotecnico)
-                                            <option value="{{$rubrotecnico->id}}">{{$rubrotecnico->nombre}}</option>                                                    
+                                                <option value="{{$rubrotecnico->id}}">{{$rubrotecnico->nombre}}</option>                                                    
                                             @endforeach
                                         </select> 
                                     </div>

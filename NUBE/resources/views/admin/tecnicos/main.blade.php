@@ -64,35 +64,45 @@
 									@foreach($tecnicos as $tecnico)
 										<tr>
 											<td class="text-center text-bold">{{$tecnico->persona->nombrecompleto}}</td>
-											@if($tecnico->rubrotecnico)
-												<td class="text-center">{{$tecnico->rubrotecnico->nombre}}</td>
+											@if($tecnico->rubroTecnico_id)
+											<!-- Es un asco esta parte pero no me andaba de la manera "convencional" -->
+												<?php 
+													$rubro= App\RubroTecnico::find($tecnico->rubroTecnico_id);
+												?>
+												<td class="text-center">{{ $rubro->nombre }} </td>
 											@else
 												<td class="text-center">Sin especialidad</td>
 											@endif
-											<td class="text-center">-</td>
-											
-											<td class="text-center">-{{--$tecnico->persona->email--}}</td>
-											<td class="text-center">{{$tecnico->estado}}</td>
+
+											@if($tecnico->persona->telefono)
+												<td class="text-center">{{ $tecnico->persona->telefono }}</td>
+											@else
+												<td class="text-center">No se registro</td>
+											@endif
+											<td class="text-center">{{ $tecnico->persona->email }}</td>
+											@if($tecnico->ocupado() == true)
+												<td class="text-center">Si</td>
+											@else
+												<td class="text-center">No</td>
+											@endif	
 											<td class="text-center">{{$tecnico->persona->localidad->nombre}}</td>
 											<td class="text-center">{{$tecnico->persona->direccion}}</td>
 											@if($tecnico->persona->fecha_nac)
-												<td class="text-center">{{$tecnico->persona->fechanacformateado}} (xx años)</td>
+												<td class="text-center">{{$tecnico->persona->fechanacformateado}} ({{$tecnico->persona->getEdad()}} años)</td>
 											@else
 											<td class="text-center">No se registro</td>
 											@endif
 											
 											<td class="text-center">{{$tecnico->created_at->format('d/m/Y')}}</td>
-											<td class="text-center" width="100">
-												{{--
+											<td class="text-center" width="100">												
 												<a onclick="completar_campos({{$tecnico}})" title="Editar este registro" class="btn btn-social-icon btn-warning btn-sm">
 													<i class="fa fa-pencil"></i>
-												</a>
-												--}}
-												<a onclick="abrir_modal_borrar({{$tecnico->id}})" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger">
-													<i class="fa fa-trash"></i>
-												</a>
+												</a>									
 												<a href="{{ route('tecnicos.show', $tecnico->id) }}" title="Visualizar el detalle de este registro" class="btn btn-social-icon btn-sm btn-info">
 													<i class="fa fa-list"></i>
+												</a>
+												<a onclick="abrir_modal_borrar({{$tecnico->id}})" title="Eliminar este registro" class="btn btn-social-icon btn-sm btn-danger">
+													<i class="fa fa-trash"></i>
 												</a>
 											</td>
 										</tr>
@@ -131,10 +141,9 @@
 			</div>
 		</section>
 	</div>
-
 	@include('admin.tecnicos.formulario.create') 
-	{{-- @include('admin.tecnicos.formulario.editar') --}}
-	 @include('admin.tecnicos.formulario.confirmar')
+	@include('admin.tecnicos.formulario.editar') 
+	@include('admin.tecnicos.formulario.confirmar')
 	 
 @endsection @section('script')
 	<script src="{{ asset('js/tecnicos.js') }}"></script>

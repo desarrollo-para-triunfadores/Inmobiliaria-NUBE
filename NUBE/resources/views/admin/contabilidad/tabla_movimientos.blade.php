@@ -24,21 +24,21 @@
             <tbody>
             @foreach($movimientos as $movimiento)
                 <tr>
-                    <td class="text-center text-bold">{{$movimiento->descripcion}}</td>
+                    <td class="text-center text-bold"><i>"{{$movimiento->descripcion}}"</i></td>
                     @if($movimiento->inquilino)
                         <td class="text-center text-bold">{{$movimiento->inquilino->persona->nombrecompleto}}</td>
                     @else
                         <td class="text-center text-bold">-</td>
                     @endif
                     @if($movimiento->tipo_movimiento == 'entrada')
-                        <td class="text-center text-bold text-green">{{ $movimiento->tipo_movimiento }}</td>
+                        <td class="text-center text-bold text-green">{{ $movimiento->tipo_movimiento }} ↓</td>
                         <td class="text-center text-bold text-green">$ {{ $movimiento->monto }}</td>
                     @elseif($movimiento->tipo_movimiento == 'salida')
-                        <td class="text-center text-bold text-red">{{ $movimiento->tipo_movimiento }}</td>
+                        <td class="text-center text-bold text-red">{{ $movimiento->tipo_movimiento }} ↑</td>
                         <td class="text-center text-bold text-red">$ {{ $movimiento->monto }}</td>
                     @endif
                     <td class="text-center text-bold text-green">{{ $movimiento->fecha_hora->format('d/m/Y') }}</td>
-                    <td class="text-center text-bold text-facebook">{{ $movimiento->usuario }}</td>
+                    <td class="text-center text-secondary">{{ $movimiento->user->name }}</td>
 
                 </tr>
             @endforeach

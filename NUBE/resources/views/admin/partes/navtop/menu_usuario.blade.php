@@ -1,16 +1,16 @@
 <li title="Menú del usuario" class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
         @if (Auth::user()->imagen === "sin imagen")                                                                                                                                    
-        <img style="width:26px;height:26px" alt="User Image" class="user-image" src="{{ asset('imagenes/usuarios/sin-logo.png') }}" alt="User Avatar">                                                               
+        <img style="width:26px;height:26px" alt="User Image" class="user-image" src="{{ asset('imagenes/usuarios/sin_imagen.png') }}" alt="User Avatar">                                                               
         @else
-        <img style="width:26px;height:26px" alt="User Image" class="user-image" src="{{ asset('imagenes/usuarios/' . Auth::user()->imagen) }} " alt="User Avatar">                                
+        <img style="width:26px;height:26px" alt="User Image" class="user-image" src="{{ asset('imagenes/usuarios/'.Auth::user()->imagen) }} " alt="User Avatar">                                
         @endif  
         <span class="hidden-xs">{{ Auth::user()->name }} </span>
     </a>
     <ul class="dropdown-menu">
         <li class="user-header">
             @if (Auth::user()->imagen === "sin imagen")                                                                                                                                    
-            <img style="width:90px;height:90px" alt="User Image" class="img-circle" src="{{ asset('imagenes/usuarios/sin-logo.png') }}" alt="User Avatar">                                                               
+                <img style="width:90px;height:90px" alt="User Image" class="img-circle" src="{{ asset('imagenes/usuarios/sin-logo.png') }}" alt="User Avatar">                                                               
             @else
             <img style="width:90px;height:90px" alt="User Image" class="img-circle" src="{{ asset('imagenes/usuarios/' . Auth::user()->imagen) }} " alt="User Avatar">                                
             @endif
@@ -27,7 +27,7 @@
                 </button>
             </div>
             <div class="pull-right">
-                <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"><i class="fa fa-btn fa-sign-out"></i>Salir</a>
+                <a href="{{ url('/admin/logout') }}" class="btn btn-default btn-flat"><i class="fa fa-btn fa-sign-out"></i>Salir</a>
             </div>
         </li>
     </ul>
