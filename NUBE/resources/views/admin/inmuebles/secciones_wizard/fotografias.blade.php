@@ -20,7 +20,7 @@
 </div>
 <br>
 <div class="row">     
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="control-group">
             <br>
             <label>Foto de carrusel:</label>
@@ -34,69 +34,7 @@
                 <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
             </div>
         </div> 
-    </div>
-    {{--
-    <div class="col-md-6">
-        <div class="control-group">
-            <br>
-            <label>Foto de carrusel 2:</label>
-            <div class="controls">
-                <img id="main-cropper-foto-carrusel-2">
-            </div>
-            <div class="controls">
-                <a class="button actionUpload-fotografias-nuevo">                   
-                    <input type="file" id="foto-carrusel-2" value="Escoja una imagen" accept="image/*">
-                </a>                       
-                <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
-            </div>
-        </div> 
     </div>  
-    <div class="col-md-6">
-        <div class="control-group">
-            <br>
-            <label>Foto de carrusel 3:</label>
-            <div class="controls">
-                <img id="main-cropper-foto-carrusel-3">
-            </div>
-            <div class="controls">
-                <a class="button actionUpload-fotografias-nuevo">                   
-                    <input type="file" id="foto-carrusel-3" value="Escoja una imagen" accept="image/*">
-                </a>                       
-                <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
-            </div>
-        </div> 
-    </div> 
-    <div class="col-md-6">
-        <div class="control-group">
-            <br>
-            <label>Foto de carrusel 4:</label>
-            <div class="controls">
-                <img id="main-cropper-foto-carrusel-4">
-            </div>
-            <div class="controls">
-                <a class="button actionUpload-fotografias-nuevo">                   
-                    <input type="file" id="foto-carrusel-4" value="Escoja una imagen" accept="image/*">
-                </a>                       
-                <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
-            </div>
-        </div> 
-    </div>  
-    <div class="col-md-6">
-        <div class="control-group">
-            <br>
-            <label>Foto de carrusel 5:</label>
-            <div class="controls">
-                <img id="main-cropper-foto-carrusel-5">
-            </div>
-            <div class="controls">                
-                <a class="button actionUpload-fotografias-nuevo">                   
-                    <input type="file" id="foto-carrusel-5" value="Escoja una imagen" accept="image/*">
-                </a>                       
-                <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
-            </div>
-        </div> 
-    </div>
-    --}}
 </div>
 <br>
 <br>

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Inmueble extends Model {
 
     protected $table = "inmuebles";
-
     protected $fillable = [
         'condicion',
         'valorVenta',
@@ -33,33 +32,25 @@ class Inmueble extends Model {
         'barrio_id',
         'edificio_id'
     ];
-
     protected $dates = ['fechaHabilitacion'];
 
     /**
      * Mutadores
      */
-
-    public function getFechaHabilitacionFormateadoAttribute(){
+    public function getFechaHabilitacionFormateadoAttribute() {
         return $this->fechaHabilitacion->format('d/m/Y');
     }
 
-    public function setFechaComienzoAttribute($value){
-        if(!is_null($value)){
-            $fecha= str_replace('/', '-', $value);
+    public function setFechaHabilitacionAttribute($value) {
+        if (!is_null($value)) {
+            $fecha = str_replace('/', '-', $value);
             $this->attributes['fechaHabilitacion'] = date('Y-m-d', strtotime($fecha));
-        }       
+        }
     }
-
 
     /**
      * Relaciones
      */
-
-    public function contratos(){ 
-        return $this->hasMany('App\Contrato');
-    }
-
     public function tipo() {
         return $this->belongsTo('App\Tipo');
     }
@@ -80,6 +71,10 @@ class Inmueble extends Model {
         return $this->belongsTo('App\Edificio');
     }
 
+    public function contratos() {
+        return $this->hasMany('App\Contrato');
+    }
+
     public function fotos() {
         return $this->hasMany('App\ImagenInmueble');
     }
@@ -88,21 +83,34 @@ class Inmueble extends Model {
         return $this->hasMany('App\CaracteristicaInmueble');
     }
 
-    public function oportunidades(){
+    public function oportunidades() {
         return $this->hasMany('App\Oportunidad');
     }
-
 
     /**
      * Métodos diversos
      */
-
-    public function ultimo_contrato(){
-       // return $this->contratos()->get()->sortByDesc('id')->first();
-       return $this->contratos()->last();
+    public function ultimo_contrato() {
+        return $this->contratos->last();
     }
 
-    public function foto_slider(){
-        return $this->fotos()->where('seccion_imagen','slider')->get()->first();
+    public function disponible_eliminacion() {
+        /*
+         * Para saber si se puede borrar o no un inmueble se verifica unicamente 
+         * que no tenga un contrato vigente.
+         */
+        
+        $respuesta = true;
+
+        if ($this->contratos->count() > 0) {
+            $respuesta = !$this->contratos->last()->vigente();           
+        }
+
+        return $respuesta;
     }
+
+    public function foto_slider() {
+        return $this->fotos->where('seccion_imagen', 'slider')->get()->first();
+    }
+
 }

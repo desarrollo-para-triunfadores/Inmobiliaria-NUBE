@@ -53,8 +53,8 @@ class PagosController extends Controller
             $movimiento->user_id = Auth::user()->id;  
             $movimiento->fecha_hora = Carbon::now();      
             $movimiento->tipo_movimiento = "salida";
-            $movimiento->monto = $liquidacion->abonado;
-            $movimiento->descripcion = "Se realiza un pago por $".$liquidacion->abonado." al propietario. Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
+            $movimiento->monto = $liquidacion->abonado - $liquidacion->gastos_administrativos;
+            $movimiento->descripcion = "Se realiza un pago por $".$liquidacion->abonado - $liquidacion->gastos_administrativos." al propietario. Correspondiente a la liquidación del periodo ".$liquidacion->periodo.".";
             $movimiento->liquidacion_id = $liquidacion->id;
             $movimiento->save();
     

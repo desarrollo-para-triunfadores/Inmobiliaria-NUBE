@@ -3,9 +3,6 @@
 <h3>Fotografía de presentación</h3>
 <br>
 <div class="row">                                           
-
-
-
     <div class="col-md-12">
         <div class="control-group">
             <label>Foto de presentación:</label>
@@ -32,7 +29,7 @@
 
     @foreach($imagenes_carrusel as $imagen)
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="control-group">
             <br>
             <label>Foto de carrusel {{$imagen["indice"]}}:</label>
@@ -60,8 +57,6 @@
 <h3>Fotografías de detalle</h3>
 <br>
 <div class="row">      
-
-
     @foreach($imagenes_detalle as $imagen)
     <div class="col-md-6">
         <div class="control-group">
@@ -95,7 +90,6 @@
         <br><br>
     </div> 
     @endforeach
-
 </div> 
 
 <hr/>  

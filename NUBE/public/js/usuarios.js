@@ -66,7 +66,8 @@ function mandar(tipo_form) { //tipo_form puede ser create o update
         processData: false,
         contentType: false,
         success: function (data) {
-            window.location.href = redireccion;
+            console.log(data);
+            //window.location.href = redireccion;
         },
         error: function () {
             console.log('Upload error');

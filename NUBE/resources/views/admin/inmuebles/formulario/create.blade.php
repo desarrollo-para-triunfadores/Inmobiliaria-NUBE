@@ -54,28 +54,28 @@ Inmuebles Registrados
                             <div class="box-body ">                            
                                 <div class="tab-content">
                                     <div class="tab-pane" id="tab1">
-                                        @include('admin.inmuebles.partes_create.datos_basicos')
+                                        @include('admin.inmuebles.secciones_wizard.datos_basicos')
                                     </div>
 
                                     <div class="tab-pane" id="tab2">
-                                        @include('admin.inmuebles.partes_create.propietario')
+                                        @include('admin.inmuebles.secciones_wizard.propietario')
                                     </div>
 
                                     <div class="tab-pane" id="tab3">
-                                        @include('admin.inmuebles.partes_create.ubicacion')
+                                        @include('admin.inmuebles.secciones_wizard.ubicacion')
                                     </div> 
 
                                     <div class="tab-pane" id="tab4">
-                                        @include('admin.inmuebles.partes_create.caracteristicas')
+                                        @include('admin.inmuebles.secciones_wizard.caracteristicas')
                                     </div> 
 
                                     <div class="tab-pane" id="tab5">
 
-                                        @include('admin.inmuebles.partes_create.fotografias')
+                                        @include('admin.inmuebles.secciones_wizard.fotografias')
                                     </div> 
 
                                     <div class="tab-pane" id="tab6">
-                                        @include('admin.inmuebles.partes_create.confirmacion')
+                                        @include('admin.inmuebles.secciones_wizard.confirmacion')
                                     </div>
                                     <ul class="pager wizard">
                                         <li class="previous">
@@ -115,15 +115,13 @@ Inmuebles Registrados
 @endsection
 @section('script') 
 
+<script src="{{ asset('js/configuracion_google_maps.js') }}"></script>
+<script src="{{ asset('js/imagen_croppie.js') }}"></script>
+<script src="{{ asset('js/imagenes_inmueble.js') }}"></script>
+<script src="{{ asset('js/inmueble.js') }}"></script>
+
 <script>
-    var marcador = {
-        lat: -27.450834,
-        lng: -58.986901
-    };
+    var marcador = {lat: -27.451082, lng: -58.986562};
     var formulario_update = false;
 </script>
-
-<script src="{{ asset('js/camara.js') }}"></script>
-<script src="{{ asset('js/inmueble.js') }}"></script>
-<script src="{{ asset('js/imagenes_inmueble.js') }}"></script>
 @endsection

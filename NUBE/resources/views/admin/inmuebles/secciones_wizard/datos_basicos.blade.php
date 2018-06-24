@@ -83,7 +83,7 @@
             <label>Fecha de habilitación:</label>
             <div class="controls">
                 @if (isset($inmueble))
-                <input name="fechaHabilitacion" id="fechaHabilitacion" value="{{$inmueble->fechaHabilitacion}}" type="text" placeholder="campo requerido" class="form-control pull-right datepicker" required>
+                <input name="fechaHabilitacion" id="fechaHabilitacion" value="{{$inmueble->FechaHabilitacionFormateado}}" type="text" placeholder="campo requerido" class="form-control pull-right datepicker" required>
                 @else
                 <input name="fechaHabilitacion" id="fechaHabilitacion"type="text" placeholder="campo requerido" class="form-control pull-right datepicker" required>
                 @endif
@@ -98,9 +98,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
                     @if (isset($inmueble))
-                    <input name="valorVenta" id="valorVenta" type="text" value="{{$inmueble->valorVenta}}" placeholder="campo requerido"  class="form-control" required>
+                    <input name="valorVenta" id="valorVenta" type="number" max="999999999" min="1" max="999" value="{{$inmueble->valorVenta}}" placeholder="campo opcional"  class="form-control">
                     @else
-                    <input name="valorVenta" id="valorVenta" type="text" placeholder="campo requerido" class="form-control" required>
+                    <input name="valorVenta" id="valorVenta" type="number" max="999999999" min="1" max="999" placeholder="campo opcional" class="form-control">
                     @endif
                 </div>
             </div>
@@ -113,9 +113,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
                     @if (isset($inmueble))
-                    <input name="valorReal" id="valorReal" type="text" value="{{$inmueble->valorReal}}" placeholder="campo requerido" class="form-control" required>
+                    <input name="valorReal" id="valorReal" type="number" max="999999999" min="1" max="999" value="{{$inmueble->valorReal}}" placeholder="campo opcional" class="form-control">
                     @else
-                    <input name="valorReal" id="valorReal" type="text" placeholder="campo requerido" class="form-control" required>
+                    <input name="valorReal" id="valorReal" type="number" max="999999999" min="1" max="999" placeholder="campo opcional" class="form-control">
                     @endif
                 </div>
             </div>
@@ -131,9 +131,9 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
                     @if (isset($inmueble))
-                    <input name="valorAlquiler" id="valorAlquiler" type="text" value="{{$inmueble->valorAlquiler}}" placeholder="campo requerido" class="form-control">
+                    <input name="valorAlquiler" id="valorAlquiler" type="number" max="999999999" min="1" max="999" value="{{$inmueble->valorAlquiler}}" placeholder="campo opcional" class="form-control">
                     @else
-                    <input name="valorAlquiler" id="valorAlquiler" type="text" placeholder="campo requerido"class="form-control">
+                    <input name="valorAlquiler" id="valorAlquiler" type="number" max="999999999" min="1" max="999" placeholder="campo opcional"class="form-control">
                     @endif
                 </div>
             </div>
@@ -147,7 +147,7 @@
                     @if (isset($inmueble))
                     <input name="cantidadAmbientes" id="cantidadAmbientes" type="number" value="{{$inmueble->cantidadAmbientes}}" placeholder="campo requerido" max="999999999" min="1" max="999" class="form-control" required>
                     @else
-                    <input name="cantidadAmbientes" id="cantidadAmbientes" type="number" placeholder="campo requerido" max="999999999" min="1" max="999" class="form-control" required>
+                    <input name="cantidadAmbientes" id="cantidadAmbientes" type="number" max="999999999" min="1" max="999"  placeholder="campo requerido" class="form-control" required>
                     @endif
                     <span class="input-group-addon"><i class="fa fa-coffee"></i></span>
                 </div>

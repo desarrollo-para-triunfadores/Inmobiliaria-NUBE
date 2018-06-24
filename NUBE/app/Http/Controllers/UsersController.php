@@ -116,6 +116,8 @@ class UsersController extends Controller {
 
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
+            response()->json($request);
+                     // dd($file);
             $nombreImagen = 'usuario_' . time() .'.png';                        
             if ((Storage::disk('usuarios')->exists($usuario->imagen)) && ($usuario->imagen !== "sin_imagen.png")) {
                 Storage::disk('usuarios')->delete($usuario->imagen);   // Borramos la imagen anterior.      

@@ -1,31 +1,31 @@
 <legend>Propietario</legend>
 <div class="row">                                           
     <div class="col-md-8">
-        <div class="control-group">
+        <div class="control-group">                       
             <label>Propietario del inmueble:</label>
             <div class="controls">
                 <select style="width: 100%"  name="propietario_id" id="propietario_id" class="select2 form-control" required>
-                    <option value="">-</option>
+                    <option></option>
                     @foreach($propietarios as $propietario)
-                    <option value="{{$propietario->id}}">{{$propietario->persona->nombre}}, {{$propietario->persona->apellido}}</option>
+                    <option value="{{$propietario->id}}">{{$propietario->persona->NombreCompleto}} | DNI: {{$propietario->persona->dni}}</option>
                     @endforeach
                 </select>
-                <small class="form-text text-muted"><strong>Información:</strong> si el propietario aún no fue registrado puede hacerlo tildando la casilla: <b>Dar de alta a un propietario</b> para habilitar el ingreso de datos para el nuevo propietario.</small>
+                <small class="form-text text-muted"><strong>Información:</strong> si el propietario aún no fue registrado puede hacerlo tildando la casilla: <b>Dar de alta a un propietario</b> para habilitar el ingreso de datos para el nuevo garante.</small>
             </div>
         </div>
     </div>   
     <div class="col-md-4">
         <div class="form-check">
             <br>
-            <label class="form-check-label">
-                <input type="checkbox" name="propietario_nuevo" onchange="mostrar_panel_propitario()" id="propietario_nuevo" class="form-check-input">
+            <label class="form-check-label">                
+                <input type="checkbox" name="propietario_nuevo" onchange="mostrar_panel_persona()" id="propietario_nuevo" class="form-check-input">
                 Dar de alta a un propietario
             </label>
         </div>
     </div>  
 </div>
 <br>
-<div id="panel_propietario_nuevo" style="display: none;" class="row animated fadeIn">
+<div id="panel_persona_nueva" style="display: none;" class="row animated fadeIn">
     <div class="col-md-7">
         <hr/>  
         <h3>Información general</h3>
@@ -91,7 +91,6 @@
                             @endforeach
                         </select>
                     </div>
-
                 </div>
             </div>  
         </div>                          
@@ -111,9 +110,9 @@
             </div>  
             <div class="col-md-6">
                 <div class="control-group">
-                    <label>Teléfono 2</label>
+                    <label>Teléfono de contacto</label>
                     <div class="controls">
-                        <input name="telefono_contacto" type="tel" maxlength="30" class="form-control" placeholder="campo requerido" >
+                        <input name="telefono_contacto" type="tel" maxlength="30" class="form-control" placeholder="campo opcional">                            
                     </div>
 
                 </div>
@@ -159,25 +158,6 @@
     <div class="col-md-1">
     </div>  
     <div class="col-md-4">
-        <hr/>  
-        <h3>Imagen de perfil</h3>
-        <br>
-        <div class="form-group">
-            <label>Subir imagen de perfil:</label>
-                <img id="main-cropper-imagen-nuevo" src=""/>                      
-            <a class="button actionUpload-nuevo">                   
-                <input type="file" id="imagen-nuevo" value="Escoja una imagen" accept="image/*">
-            </a>                       
-            <small class="form-text text-muted"><strong>Información:</strong> si no escoge una imagen nueva se utilizará una imagen prestablecida.</small>
-        </div> 
-        <div class="form-group">
-            <label for="exampleInputFile">Tomar imagen de perfil desde la cámara:</label><br>
-            <div id="contenido_foto_nuevo"></div>       
-            <button id="start_nuevo"><i class="fa fa-camera" aria-hidden="true"></i>&nbsp; Iniciar cámara</button>   
-            <video id="video_nuevo" width="565" height="360" autoplay="true" class="hide"></video>
-            <canvas id="canvas_nuevo" name="imagen2" type="file" width="1280" height="720" class="hide"></canvas>  
-            <button id="capture_nuevo" class="hide"> <i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;Capturar imágen</button>
-        </div>
+        @include('admin.inmuebles.secciones_wizard.imagen_propietario_create')
     </div> 
 </div>    
-

@@ -27,12 +27,6 @@ class SolicitudesServicioController extends Controller
 
     public function index()
     {     
-        
-        $solicitud = SolicitudServicio::find(1);
-        $solicitud->iniciar_conversación();
-        dd($solicitud);
-        
-        
         $solicitudes_servicio = SolicitudServicio::all();
         $tecnicos = Tecnico::all();
         $inquilinos = Inquilino::all();

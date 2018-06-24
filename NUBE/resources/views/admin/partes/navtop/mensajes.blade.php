@@ -18,7 +18,7 @@
         <div style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
           @foreach($conversaciones_nav_top as $conversacion_nav_top)                    
             <li><!-- start message -->
-              <a href="#">
+              <a href="/admin/mensajes">
                 <div class="pull-left">
                   <img src="{{ asset('imagenes/usuarios/'.$conversacion_nav_top->obtener_usuario_restante()->user->imagen) }} " class="img-circle" alt="User Image">
                 </div>

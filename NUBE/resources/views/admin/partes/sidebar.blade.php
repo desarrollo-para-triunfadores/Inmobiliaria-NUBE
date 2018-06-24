@@ -25,7 +25,7 @@
             @endcan
 
 
-        <!-- Parametros Generales -->
+        <!-- Parámetros Generales -->
 
             @cannot('acceso a paises','acceso a provincias', 'acceso a localidades','acceso a barrios', 'acceso a caracteristicas', 'acceso a tipos de caracteristicas')
 
