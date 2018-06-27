@@ -51,7 +51,7 @@ var table = $('#example').DataTable({
         null, //7--Contrato de alquiler
         null, //8--Fecha de Registro
         null                    //11--Acciones
-    ]*/
+    ]
 });
 
 function instaciar_filtros() {
