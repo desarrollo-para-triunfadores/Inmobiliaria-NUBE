@@ -24,12 +24,12 @@
                 </div>
                 <h4>
                   {{$conversacion_nav_top->obtener_usuario_restante()->user->name}}
-                  <small>{{$conversacion_nav_top->mensajes->last()->created_at->format('d/m/Y h:i A')}}</small>
+                  <small>{{--$conversacion_nav_top->mensajes->last()->created_at->format('d/m/Y h:i A')--}}</small>
                 </h4>
                 @if($conversacion_nav_top->cant_mensajes_sin_leer()>0)
                   <span class="label label-warning">mensajes sin leer: {{$conversacion_nav_top->cant_mensajes_sin_leer()}}</span>
                 @endif
-                <p>{{$conversacion_nav_top->mensajes->last()->mensaje}}</p>
+                <p>{{--$conversacion_nav_top->mensajes->last()->mensaje--}}</p>
               </a>
             </li>
           @endforeach

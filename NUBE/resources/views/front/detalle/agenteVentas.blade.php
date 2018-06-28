@@ -61,7 +61,6 @@
                 </div><!-- /.col-md-5 -->
             </section><!-- /.agent-form -->
         </div><!-- /.row -->
-        @include('front.detalle.mensaje_exitoso')
     </section><!-- /#contact-agent -->
 <section>
     <script src="{{ asset('js/oportunidades_front.js') }}"></script>

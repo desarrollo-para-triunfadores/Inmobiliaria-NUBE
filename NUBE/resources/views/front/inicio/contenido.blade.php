@@ -1,8 +1,7 @@
 <div id="page-content">
     
         @include('front.partes.banner')
-    
-    
+
         <section id="our-services" class="block">
             <div class="container">
                 <header class="section-title"><h2>Nuestros Servicios</h2></header>
