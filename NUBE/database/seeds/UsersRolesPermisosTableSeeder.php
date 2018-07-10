@@ -15,7 +15,9 @@ class UsersRolesPermisosTableSeeder extends Seeder
     public function run()
     {
         //Creacion de usuarios
-
+        /**
+         * Usuarios sin personas registradas
+         */
         $user_1 = User::create([
             'name' => 'Hacho Kuszniruk',
             'email' => 'hacho_k@outlook.com',
@@ -51,7 +53,281 @@ class UsersRolesPermisosTableSeeder extends Seeder
             'imagen' => 'mirta_larsson.png'
         ]);
 
-        $role = Role::create(['name' => 'Administrador']);
+        
+        /**
+         * Usuarios con personas registradas
+         */
+
+        $user_6 = User::create([
+            'name' => 'Norma G',
+            'email' => 'juribe@idiomas.udea.edu.co',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_7 = User::create([
+            'name' => 'Andrea',
+            'email' => 'hersy@epm.net.co',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_8 = User::create([
+            'name' => 'Analia L',
+            'email' => 'urestrepo@idiomas.udea.edu.co',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_9 = User::create([
+            'name' => 'Isaac E',
+            'email' => 'vivian_981@yahoo.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_10 = User::create([
+            'name' => 'Carmen E',
+            'email' => 'julianaparis2@hotmail.com',        
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_11 = User::create([
+            'name' => 'Roque G',
+            'email' => 'domini26@latinmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_12 = User::create([
+            'name' => 'Alberto A',
+            'email' => 'julianaparis@hotmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_13 = User::create([
+            'name' => 'Carlos R',
+            'email' => ' yessy_39@hotmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_14 = User::create([
+            'name' => 'Graciela L',
+            'email' => 'ashida_barak@yahoo.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_15 = User::create([
+            'name' => 'Jose',
+            'email' => 'menadel@hotmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+       
+        $user_16 = User::create([
+            'name' => 'Hector Ruben',
+            'email' => 'm.fdez_87@hotmail.com',    
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_17 = User::create([
+            'name' =>'Martha',
+            'email' => 'reinald_34@hotmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_18 = User::create([
+            'name' => 'Albertina G De',
+            'email' => 'ibrahin@cied.rimed.cu',  
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_19 = User::create([
+            'name' => 'Carlos',
+            'email' => 'acampadaalcoy@gmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_20 = User::create([
+            'name' => 'Carolina E',
+            'email' => 'acampada.algeciras@gmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_21 = User::create([
+            'name' => 'Julio N',
+            'email' => 'difusio.acampadabdn@gmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_22 = User::create([
+            'name' => 'Magdalena N De',
+            'email' => 'dryburgos@gmail.com',    
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_23 = User::create([
+            'name' => 'Narvajas',
+            'email' => 'castello15m@gmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_24 = User::create([
+            'name' => 'Emilio Alberto',
+            'email' => 'iabarcae@yahoo.es',    
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_25 = User::create([
+            'name' => 'Natalia Gabriela ',
+            'email' => 'alexus3@hotmail.com',      
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_26 = User::create([
+            'name' => 'Marcelo Ramon de la Santisima Trinidad',
+            'email' => 'luuuuuuci@hotmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_27 = User::create([
+            'name' => 'Juan',
+            'email' => 'kristian_siempre_azul@hotmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_28 = User::create([
+            'name' => 'Paola Anabel',
+            'email' => 'mapuchin@hotmail.com',
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_29 = User::create([
+            'name' => 'Guillermo Antonio',
+            'email' => 'arahuetes@manquehue.net', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_30 = User::create([
+            'name' => 'Ricardo Luis',
+            'email' => 'eduardo.arancibia@grange.cl',   
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_31 = User::create([
+            'name' => 'Elba Cristina',
+            'email' => 'leonor.araya@gmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_32 = User::create([
+            'name' =>'Ramón',
+            'email' => 'paulifran@hotmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+        
+        $user_33 = User::create([
+            'name' => 'Guillermo Elias Ruben',
+            'email' => 'bad.girl.-@hotmail.es', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_34 = User::create([
+            'name' => 'Omar D',
+            'email' => 'aargomedo@hecsa.cl', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_35 = User::create([
+            'name' => 'Rodrigo',
+            'email' => 'joy_pao_@hotmail.com',  
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_36 = User::create([
+            'name' => 'Gabriel N',
+            'email' => 'Sergio.Aspe@adretail.cl', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_37 = User::create([
+            'name' => 'Marcelo',
+            'email' => 'marcemarin@gmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_38 = User::create([
+            'name' => 'Alejandro',
+            'email' => 'ale.rodriguez@gmail.com', 
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_39 = User::create([
+            'name' => 'Damian',
+            'email' => 'damian.freidenberger@gmail.com',  
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_40 = User::create([
+            'name' => 'Alejandro',
+            'email' => 'ale.alba@gmail.com',  
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_41 = User::create([
+            'name' => 'Sergio',
+            'email' =>  'sergio.sanab@gmail.com',    
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+        $user_42 = User::create([
+            'name' =>  'Claudia',
+            'email' => 'tecnico@gmail.com',    
+            'password' => bcrypt('123123'),
+            'imagen' => 'sin_imagen.png'
+        ]);
+
+       
+
+        $role_admin = Role::create(['name' => 'Administrador']);
+
+        $role_cliente = Role::create(['name' => 'Cliente']);
+
+        $role_personal = Role::create(['name' => 'Personal']);
+
+        $role_personal = Role::create(['name' => 'Propietario']);
+
+        $role_personal = Role::create(['name' => 'Inquilino']);
 
         //Creación de los permisos
 
@@ -109,64 +385,201 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         Permission::create(['name' => 'pagos de liquidaciones']);
 
-        //Asignación de permisos a los roles
+        
+        
+        //Asignación de permisos al rol de administrador
 
-        $role->givePermissionTo('acceso a usuarios');
+        $role_admin->givePermissionTo('acceso a usuarios');
 
-        $role->givePermissionTo('acceso a roles');
+        $role_admin->givePermissionTo('acceso a roles');
 
-        $role->givePermissionTo('acceso a servicios');
+        $role_admin->givePermissionTo('acceso a servicios');
 
-        $role->givePermissionTo('acceso a paises');
+        $role_admin->givePermissionTo('acceso a paises');
 
-        $role->givePermissionTo('acceso a provincias');
+        $role_admin->givePermissionTo('acceso a provincias');
 
-        $role->givePermissionTo('acceso a localidades');
+        $role_admin->givePermissionTo('acceso a localidades');
 
-        $role->givePermissionTo('acceso a barrios');
+        $role_admin->givePermissionTo('acceso a barrios');
 
-        $role->givePermissionTo('acceso a caracteristicas');
+        $role_admin->givePermissionTo('acceso a caracteristicas');
 
-        $role->givePermissionTo('acceso a tipos de caracteristicas');
+        $role_admin->givePermissionTo('acceso a tipos de caracteristicas');
 
-        $role->givePermissionTo('acceso a inmuebles');
+        $role_admin->givePermissionTo('acceso a inmuebles');
 
-        $role->givePermissionTo('acceso a edificios');
+        $role_admin->givePermissionTo('acceso a edificios');
 
-        $role->givePermissionTo('acceso a proyectos');
+        $role_admin->givePermissionTo('acceso a proyectos');
 
-        $role->givePermissionTo('acceso a propiearios');
+        $role_admin->givePermissionTo('acceso a propiearios');
 
-        $role->givePermissionTo('acceso a inquilinos');
+        $role_admin->givePermissionTo('acceso a inquilinos');
 
-        $role->givePermissionTo('acceso a garantes');
+        $role_admin->givePermissionTo('acceso a garantes');
 
-        $role->givePermissionTo('acceso a oportunidades');
+        $role_admin->givePermissionTo('acceso a oportunidades');
 
-        $role->givePermissionTo('acceso a agenda');
+        $role_admin->givePermissionTo('acceso a agenda');
 
-        $role->givePermissionTo('acceso a contratos');
+        $role_admin->givePermissionTo('acceso a contratos');
 
-        $role->givePermissionTo('acceso a impuestos');
+        $role_admin->givePermissionTo('acceso a impuestos');
 
-        $role->givePermissionTo('alta de impuestos');
+        $role_admin->givePermissionTo('alta de impuestos');
 
-        $role->givePermissionTo('alta de liquidaciones');
+        $role_admin->givePermissionTo('alta de liquidaciones');
 
-        $role->givePermissionTo('cobro de liquidaciones');
+        $role_admin->givePermissionTo('cobro de liquidaciones');
 
-        $role->givePermissionTo('pagos de liquidaciones');
+        $role_admin->givePermissionTo('pagos de liquidaciones');
+  
 
-        //Asignación de roles a usuarios
+        $role_personal->givePermissionTo('acceso a usuarios');
 
-        $user_1->assignRole('Administrador');
+        $role_personal->givePermissionTo('acceso a roles');
 
-        $user_2->assignRole('Administrador');
+        $role_personal->givePermissionTo('acceso a servicios');
 
-        $user_3->assignRole('Administrador');
+        $role_personal->givePermissionTo('acceso a paises');
 
-        $user_4->assignRole('Administrador');
+        $role_personal->givePermissionTo('acceso a provincias');
 
-        $user_5->assignRole('Administrador');
+        $role_personal->givePermissionTo('acceso a localidades');
+
+        $role_personal->givePermissionTo('acceso a barrios');
+
+        $role_personal->givePermissionTo('acceso a caracteristicas');
+
+        $role_personal->givePermissionTo('acceso a tipos de caracteristicas');
+
+        $role_personal->givePermissionTo('acceso a inmuebles');
+
+        $role_personal->givePermissionTo('acceso a edificios');
+
+        $role_personal->givePermissionTo('acceso a proyectos');
+
+        $role_personal->givePermissionTo('acceso a propiearios');
+
+        $role_personal->givePermissionTo('acceso a inquilinos');
+
+        $role_personal->givePermissionTo('acceso a garantes');
+
+        $role_personal->givePermissionTo('acceso a oportunidades');
+
+        $role_personal->givePermissionTo('acceso a agenda');
+
+        $role_personal->givePermissionTo('acceso a contratos');
+
+        $role_personal->givePermissionTo('acceso a impuestos');
+
+        $role_personal->givePermissionTo('alta de impuestos');
+
+        $role_personal->givePermissionTo('alta de liquidaciones');
+
+        $role_personal->givePermissionTo('cobro de liquidaciones');
+
+        $role_personal->givePermissionTo('pagos de liquidaciones');
+
+
+
+        //Asignación de roles a usuarios administradores
+
+        $user_1->assignRole('Administrador'); //Hacho
+
+        $user_2->assignRole('Administrador');   //JP
+
+        $user_3->assignRole('Administrador');   
+
+        $user_4->assignRole('Inquilino');   //Andrea "peti"
+
+        $user_5->assignRole('Propietario');
+
+
+        //Asignación de permisos al rol de clientes
+
+       /**
+        * Es mejor si después desde el sistema se escojen los permisos para el rol. 
+        * Acá solo vamos a asignar el rol a los usuarios por ahora.
+        */
+
+        //Asignación de roles a usuarios clientes
+
+        $user_6->assignRole('Cliente');
+
+        $user_7->assignRole('Cliente');
+        
+        $user_8->assignRole('Cliente');
+
+        $user_9->assignRole('Cliente');
+
+        $user_10->assignRole('Cliente');
+
+        $user_11->assignRole('Cliente');
+
+        $user_12->assignRole('Cliente');
+
+        $user_13->assignRole('Cliente');
+
+        $user_14->assignRole('Cliente');
+
+        $user_15->assignRole('Cliente');
+
+        $user_16->assignRole('Cliente');
+
+        $user_17->assignRole('Cliente');
+
+        $user_18->assignRole('Cliente');
+
+        $user_19->assignRole('Cliente');
+
+        $user_20->assignRole('Cliente');
+
+        $user_21->assignRole('Cliente');
+
+        $user_22->assignRole('Cliente');
+
+        $user_23->assignRole('Cliente');
+
+        $user_24->assignRole('Cliente');
+
+        $user_25->assignRole('Cliente');
+
+        $user_26->assignRole('Cliente');
+
+        $user_27->assignRole('Cliente');
+
+        $user_28->assignRole('Cliente');
+
+        $user_29->assignRole('Cliente');
+
+        $user_30->assignRole('Cliente');
+
+        $user_31->assignRole('Cliente');
+
+        $user_32->assignRole('Cliente');
+
+        $user_33->assignRole('Cliente');
+
+        $user_34->assignRole('Cliente');
+
+        $user_35->assignRole('Cliente');
+
+        $user_36->assignRole('Cliente');
+
+        $user_37->assignRole('Cliente');
+
+        $user_38->assignRole('Cliente');
+
+        $user_39->assignRole('Cliente');
+
+        $user_40->assignRole('Cliente');
+
+        $user_41->assignRole('Cliente');
+
+        $user_42->assignRole('Cliente');
+        
+
     }
 }

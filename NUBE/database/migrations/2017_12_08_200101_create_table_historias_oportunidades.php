@@ -15,6 +15,14 @@ class CreateTableHistoriasOportunidades extends Migration
     {
         Schema::create('historias_oportunidades', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('titulo');             
+            $table->string('detalle')->nullable();
+            $table->string('estado_previo')->nullable();
+            $table->string('estado_actual')->nullable();                                  
+            $table->dateTime('fecha')->nullable();
+            $table->boolean('cambio_estado')->nullable();  
+            $table->integer('oportunidad_id')->unsigned()->nullable();
+            $table->foreign('oportunidad_id')->references('id')->on('inmuebles')->onDelete('cascade');        
             $table->timestamps();
         });
     }

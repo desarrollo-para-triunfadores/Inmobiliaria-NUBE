@@ -27,14 +27,26 @@ class LiquidacionMensual extends Model
         'saldo_periodo'
     ];
 
-    protected $dates = ['vencimiento',
+    protected $dates = [
+        'vencimiento',
         'fecha_cobro_inquilino',
         'fecha_pago_propietario',
-        'fecha_cobro_propietario'];
+        'fecha_cobro_propietario'
+    ];
 
-    ############ -- MUTADORES-- #########    
+    /**
+     * Mutadores
+     */
+
     public function getVencimientoFormateadoAttribute(){
         return $this->vencimiento->format('d/m/Y');
+    }
+
+    public function setVencimientoAttribute($value){
+        if(!is_null($value)){
+            $fecha= str_replace('/', '-', $value);
+            $this->attributes['vencimiento'] = date('Y-m-d', strtotime($fecha));
+        }       
     }
 
     public function getFechaCobroInquilinoFormateadoAttribute(){
@@ -49,26 +61,12 @@ class LiquidacionMensual extends Model
         return $this->fecha_cobro_propietario->format('d/m/Y');
     }
     public function getComisionAPropietarioFormateadoAttribute(){
-        return number_format($this->comision_a_propietario,2);
+        return number_format($this->comision_a_propietario, 2);
     }
-     ########## --/ MUTADORES-- ##########    
-
-    public function comprobar_vencimiento() {
-        $fecha_hoy = Carbon::now();
-        if($this->vencimiento < $fecha_hoy){
-            return true;
-        }
-    }
-
-    public function calcular_mora() {
-        $fecha_hoy = Carbon::now();
-        if($this->vencimiento > $fecha_hoy){
-            return 0;
-        }else{
-            $cantidad_dias = $fecha_hoy->diffInDays($this->vencimiento);
-            return ($this->contrato->monto_basico * 2 /100) * $cantidad_dias;
-        }
-    }
+    
+     /**
+     * Relaciones
+     */  
 
     public function movimientos(){
         return $this->hasMany('App\Movimiento');
@@ -83,14 +81,32 @@ class LiquidacionMensual extends Model
         return $conceptos;
     }
 
-    public function calcular_total(){ // este método calcula el valor total por los servicios asociados (por ahora no cuenta las expensas del edificio)
+    public function solicitudes_servicios(){
+        return $this->hasMany('App\SolicitudServicio');
+    }
+
+    /**
+     * Métodos diversos
+     */
+
+    public function calcular_total(){ 
+        /** Este método calcula el valor total por los servicios asociados. */
         $total = DB::table('conceptos_liquidaciones_mensuales')
             ->where('liquidacionmensual_id', $this->id)
             ->sum('monto');
         return $total;
     }
 
-    public function detalle_conceptos(){//este método devuelve un detalle indicando concepto y monto de todos los conceptos de la liquidación. Se utiliza en la generación de la boleta   
+    public function calcular_total_a_propietario(){ 
+        /*** Este método calcula el monto a pagar por el propietario por los servicios prestados.  */
+        $total = $this->comision_a_propietario + $this->obtener_monto_por_repararaciones("propietario");
+        return $total;
+    }
+
+    public function detalle_conceptos(){         
+        /** Este método devuelve un detalle indicando concepto y monto de todos los conceptos 
+         * de la liquidación. Se utiliza en la generación de la boleta.  
+         */    
         $conceptos_liquidaciones= ConceptoLiquidacion::all()->where('liquidacionmensual_id', $this->id); 
         $conceptos_para_factura = [];
         foreach ($conceptos_liquidaciones as $valor) {
@@ -103,4 +119,32 @@ class LiquidacionMensual extends Model
         }
         return $conceptos_para_factura;
     } 
+
+    public function obtener_monto_por_repararaciones($responsable){        
+        /*** Este método calcula el monto total por todas las reparaciones que se hicieron
+         * en el periodo de acuerdo a lo solicitado (inquilino o propietario).
+         */
+        $total = DB::table('solicitudesServicio')->where('liquidacionmensual_id', $this->id)->where('responsable', $responsable)->sum('monto_final');
+        return $total;
+    }
+
+    public function comprobar_vencimiento() {
+        $fecha_hoy = Carbon::now();
+        if($this->vencimiento < $fecha_hoy){
+            return true;
+        }
+    }
+
+    public function calcular_mora() {        
+        /*** Este método calcula y devuelve el monto total por mora por todos los días que se haya pasado de la fecha de vencimiento. */        
+        $fecha_hoy = Carbon::now();
+        if($this->vencimiento > $fecha_hoy){
+            return 0;
+        }else{
+            $cantidad_dias = $fecha_hoy->diffInDays($this->vencimiento);
+            return ($this->contrato->monto_basico * 2 /100) * $cantidad_dias;
+        }
+    }
+
+    
 }

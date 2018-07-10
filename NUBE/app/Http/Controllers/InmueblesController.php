@@ -65,7 +65,7 @@ class InmueblesController extends Controller {
     public function create() {
         $caracteristicas = Caracteristica::all();
         $edificios = Edificio::all();
-      
+
         $paises = Pais::all();
         $provincias = Provincia::all();
         $localidades = Localidad::all();
@@ -75,7 +75,6 @@ class InmueblesController extends Controller {
         $personas = Persona::all();
         $propietarios = Propietario::all();
         return view('admin.inmuebles.formulario.create')
-                       
                         ->with('tipos', $tipos)
                         ->with('edificios', $edificios)
                         ->with('paises', $paises)
@@ -88,37 +87,62 @@ class InmueblesController extends Controller {
                         ->with('caracteristicas', $caracteristicas);
     }
 
-    /* 'condicion','valorVenta','valorAlquiler', 'superficie', 'direccion', 'piso', 'numDepto', 'fechaHabilitacion', 'fechaFinContrato',
-      'linkVideo','expensaValor', 'expensaDescripcion', 'longitud', 'latitud', 'cantidadAmbientes', 'disponible',
-      'descripcion', 'tipo_id', 'garante_id', 'inquilino_id', 'propietario_id', 'barrio_id','edificio_id' */
-
+ 
     public function store(Request $request) {
 
         $inmueble = new Inmueble($request->all());
         $inmueble->localidad_id = $request->ubicacion_localidad_id;
         $inmueble->direccion = $request->ubicacion_direccion;
-        $inmueble->disponible = 'si';
+        $inmueble->disponible = 1;
 
 
-        if (!is_null($request->fechaHabilitacion)){ //si se cargó una fecha de Habilitacion se formatea para guardar en la base
-            $fechaHabilitacion = str_replace('/', '-', $request->fechaHabilitacion);
-            $inmueble->fechaHabilitacion = date('Y-m-d', strtotime($fechaHabilitacion));                
-        }
+        if (!is_null($request->propietario_nuevo)) {// si no se recibe una persona asignada como propietario creamos una
 
+            /*
+             * Inicio de sección Propietario
+             */
 
-        /*         * * Datos de Propietario ** */
-        if (!is_null($request->propietario_nuevo)) {     //*si no se recibe una persona asignada como propietario, crear una
             $nombreImagen = 'sin imagen';
             if ($request->file('imagen')) {
                 $file = $request->file('imagen');
-                $nombreImagen = 'persona_' . time() . '.' . $file->getClientOriginalExtension();
+                $nombreImagen = 'persona_' . time() . '.png';
                 Storage::disk('personas')->put($nombreImagen, \File::get($file));
             }
-            /* datos de persona */
+
+            /*
+             * datos del usuario
+             */
+            
+            $user_nuevo = new User();
+            $user_nuevo->name = $request->nombre . " " . $request->apellido;
+            $user_nuevo->email = $request->email;
+            $user_nuevo->password = bcrypt(rand());
+            $user_nuevo->imagen = $nombreImagen;
+            $user_nuevo->save();
+            $user_nuevo->assignRole('Cliente');
+
+            /*
+             * Envío de correo para notificar la creación del nuevo usuario                                  
+             */
+            
+            Mail::send('emails.confirmacion_inscripcion', ['user_nuevo' => $user_nuevo], function ($m) use ($user_nuevo) {
+                $m->from('sistemanube@gmail.com', 'Nube Propiedades | Notificación de creación de usuario');
+                $m->to($user_nuevo->email, $user_nuevo->name)->subject('No conteste este correo.');
+            });
+
+            /*
+             * datos de persona
+             */
+            
             $persona = new Persona($request->all());
             $persona->foto_perfil = $nombreImagen;
+            $persona->user_id = $user_nuevo->id;
             $persona->save();
-            /* datos de propietario */
+
+            /*
+             * datos de propietario
+             */
+            
             $propietario = new Propietario($request->all());
             $propietario->persona_id = $persona->id;
             $propietario->save();
@@ -126,8 +150,11 @@ class InmueblesController extends Controller {
         }
 
         $inmueble->save();
-
-        /*         * ** Caracteristicas del Inmueble ** */
+                
+        /*
+         * Caracteristicas del Inmueble 
+         */
+        
         $cantidad_caracteristicas = (int) $request->cantidad_caracteristicas;
         for ($i = 1; $i <= $cantidad_caracteristicas; $i++) {
             $caracteristica = new CaracteristicaInmueble();
@@ -135,13 +162,15 @@ class InmueblesController extends Controller {
             $caracteristica->inmueble_id = $inmueble->id;
             $caracteristica->save();
         }
-
-        /*         * ** Imagenes de Inmueble ** */
+        
+        /*
+         * Imágenes del inmueble
+         */
+        
         if ($request->file('foto_presentacion_nuevo')) {
             $file = $request->file('foto_presentacion_nuevo');
-            $nombreImagen = 'INube_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
-            //Creación y asociación del registro de Logo con su respectiva Marca.
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
             $imagen->inmueble_id = $inmueble->id;
@@ -152,51 +181,7 @@ class InmueblesController extends Controller {
 
         if ($request->file('foto_carrusel_1')) {
             $file = $request->file('foto_carrusel_1');
-            $nombreImagen = 'INube_slide1_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
-            Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
-            $imagen = new ImagenInmueble();
-            $imagen->nombre = $nombreImagen;
-            $imagen->inmueble_id = $inmueble->id;
-            $imagen->seccion_imagen = 'slider';
-            $imagen->espacio_id = null; //associate($marca);
-            $imagen->save();
-        }
-        if ($request->file('foto_carrusel_2')) {
-            $file = $request->file('foto_carrusel_2');
-            $nombreImagen = 'INube_slide2_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
-            Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
-            $imagen = new ImagenInmueble();
-            $imagen->nombre = $nombreImagen;
-            $imagen->inmueble_id = $inmueble->id;
-            $imagen->seccion_imagen = 'slider';
-            $imagen->espacio_id = null; //associate($marca);
-            $imagen->save();
-        }
-        if ($request->file('foto_carrusel_3')) {
-            $file = $request->file('foto_carrusel_3');
-            $nombreImagen = 'INube_slide3_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
-            Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
-            $imagen = new ImagenInmueble();
-            $imagen->nombre = $nombreImagen;
-            $imagen->inmueble_id = $inmueble->id;
-            $imagen->seccion_imagen = 'slider';
-            $imagen->espacio_id = null; //associate($marca);
-            $imagen->save();
-        }
-        if ($request->file('foto_carrusel_4')) {
-            $file = $request->file('foto_carrusel_4');
-            $nombreImagen = 'INube_slide4_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
-            Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
-            $imagen = new ImagenInmueble();
-            $imagen->nombre = $nombreImagen;
-            $imagen->inmueble_id = $inmueble->id;
-            $imagen->seccion_imagen = 'slider';
-            $imagen->espacio_id = null; //associate($marca);
-            $imagen->save();
-        }
-        if ($request->file('foto_carrusel_5')) {
-            $file = $request->file('foto_carrusel_5');
-            $nombreImagen = 'INube_slide5_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_slide1_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -207,7 +192,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_1')) {     //←1° imagen de detalle
             $file = $request->file('foto_detalle_1');
-            $nombreImagen = 'INube_detalle1_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle1_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -218,7 +203,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_2')) {     //←2° imagen de detalle
             $file = $request->file('foto_detalle_2');
-            $nombreImagen = 'INube_detalle2_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle2_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -229,7 +214,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_3')) {     //←3° imagen de detalle
             $file = $request->file('foto_detalle_3');
-            $nombreImagen = 'INube_detalle3_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle3_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -240,7 +225,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_4')) {     //←4° imagen de detalle
             $file = $request->file('foto_detalle_4');
-            $nombreImagen = 'INube_detalle4_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle4_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -251,7 +236,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_plano_1')) {     //←1° Plano de casa
             $file = $request->file('foto_plano_1');
-            $nombreImagen = 'INube_plano1_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_plano1_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -262,7 +247,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_plano_2')) {     //←2° Plano de casa
             $file = $request->file('foto_plano_2');
-            $nombreImagen = 'INube_plano2_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_plano2_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -402,9 +387,9 @@ class InmueblesController extends Controller {
         $inmueble = Inmueble::find($id);
         $inmueble->fill($request->all());
 
-        if (!is_null($request->fechaHabilitacion)){ //si se cargó una fecha de Habilitacion se formatea para guardar en la base
+        if (!is_null($request->fechaHabilitacion)) { //si se cargó una fecha de Habilitacion se formatea para guardar en la base
             $fechaHabilitacion = str_replace('/', '-', $request->fechaHabilitacion);
-            $inmueble->fechaHabilitacion = date('Y-m-d', strtotime($fechaHabilitacion));                
+            $inmueble->fechaHabilitacion = date('Y-m-d', strtotime($fechaHabilitacion));
         }
 
         $inmueble->localidad_id = $request->ubicacion_localidad_id;
@@ -421,7 +406,7 @@ class InmueblesController extends Controller {
         /*         * ** Imagenes de Inmueble ** */
         if ($request->file('foto_presentacion_nuevo')) {
             $file = $request->file('foto_presentacion_nuevo');
-            $nombreImagen = 'INube_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             //Creación y asociación del registro de Logo con su respectiva Marca.
             $imagen = new ImagenInmueble();
@@ -434,7 +419,7 @@ class InmueblesController extends Controller {
 
         if ($request->file('foto_carrusel_1')) {
             $file = $request->file('foto_carrusel_1');
-            $nombreImagen = 'INube_slide1_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_slide1_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -445,7 +430,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_carrusel_2')) {
             $file = $request->file('foto_carrusel_2');
-            $nombreImagen = 'INube_slide2_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_slide2_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -456,7 +441,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_carrusel_3')) {
             $file = $request->file('foto_carrusel_3');
-            $nombreImagen = 'INube_slide3_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_slide3_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -467,7 +452,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_carrusel_4')) {
             $file = $request->file('foto_carrusel_4');
-            $nombreImagen = 'INube_slide4_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_slide4_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -478,7 +463,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_carrusel_5')) {
             $file = $request->file('foto_carrusel_5');
-            $nombreImagen = 'INube_slide5_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_slide5_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -489,7 +474,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_1')) {     //←1° imagen de detalle
             $file = $request->file('foto_detalle_1');
-            $nombreImagen = 'INube_detalle1_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle1_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -500,7 +485,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_2')) {     //←2° imagen de detalle
             $file = $request->file('foto_detalle_2');
-            $nombreImagen = 'INube_detalle2_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle2_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -511,7 +496,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_3')) {     //←3° imagen de detalle
             $file = $request->file('foto_detalle_3');
-            $nombreImagen = 'INube_detalle3_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle3_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -522,7 +507,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_detalle_4')) {     //←4° imagen de detalle
             $file = $request->file('foto_detalle_4');
-            $nombreImagen = 'INube_detalle4_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_detalle4_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -533,7 +518,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_plano_1')) {     //←1° Plano de casa
             $file = $request->file('foto_plano_1');
-            $nombreImagen = 'INube_plano1_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_plano1_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;
@@ -544,7 +529,7 @@ class InmueblesController extends Controller {
         }
         if ($request->file('foto_plano_2')) {     //←2° Plano de casa
             $file = $request->file('foto_plano_2');
-            $nombreImagen = 'INube_plano2_' . time() . '.jpg'; // Le damos un nombre por defecto: la primera parte es IN + momento + "."extensión
+            $nombreImagen = 'INube_plano2_' . time() . '.png'; 
             Storage::disk('inmuebles')->put($nombreImagen, File::get($file));
             $imagen = new ImagenInmueble();
             $imagen->nombre = $nombreImagen;

@@ -23,6 +23,7 @@ class CreateTableEdificios extends Migration
             $table->string('imagen')->nullable();
             $table->boolean('cochera')->nullable();
             $table->integer('cant_ascensores')->nullable();
+            $table->integer('cant_pisos')->nullable();            
             $table->integer('cant_deptos')->nullable();
             $table->double('costo_sueldos_personal', 10, 2)->nullable();
             $table->double('valor_ascensores', 10, 2)->nullable();

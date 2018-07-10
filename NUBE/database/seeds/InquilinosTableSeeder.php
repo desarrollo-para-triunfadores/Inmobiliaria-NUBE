@@ -17,12 +17,12 @@ class InquilinosTableSeeder extends Seeder
         ]);
 
         DB::table('inquilinos')->insert([
-            'persona_id' => '2',
+            'persona_id' => '3',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 
         DB::table('inquilinos')->insert([
-            'persona_id' => '3',
+            'persona_id' => '2',
             'created_at' => date('Y-m-d H:m:s')
         ]);
 

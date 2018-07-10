@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inquilino extends Model {
 
     protected $table = "inquilinos";
+
     protected $fillable = ['persona_id', 'descripcion'];
 
 
@@ -18,18 +19,34 @@ class Inquilino extends Model {
         return $this->hasMany('App\Contrato');
     }
 
-    public function ultimo_contrato(){
-        return $this->contratos()->get()->sortByDesc('id')->first(); 
-    }
-
-    public function ultimo_contrato_vigente(){
-        $this->contratos()->get()->sortByDesc('id')->first(); 
-    }
-
     public function movimientos(){
         return $this->hasMany('App\Movimientos');
     }
 
-    ######### Metodos #########
+
+    /**
+     * Métodos diversos
+     */
+
+    public function ultimo_contrato(){
+        return $this->contratos->last();    #asi anda → no tocar!
+    }
+
+
+    
+    public function ultimo_contrato_vigente()
+    {
+        $contrato = $this->ultimo_contrato();
+        if($contrato->vigente()){
+            return $contrato;
+        }
+    }
+
+    public function solicitudes_servicio(){
+        $ids_contratos = $this->contratos->pluck('id')->toArray();
+        return$solicitudes = SolicitudServicio::all()->whereIn('contrato_id',$ids_contratos);
+        //dd($solicitudes);
+    }
+
 
 }

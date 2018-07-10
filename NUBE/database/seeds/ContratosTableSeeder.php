@@ -39,7 +39,7 @@ class ContratosTableSeeder extends Seeder
             'comision_inquilino' => '3.15',
             'monto_basico' => '14500',
             'sujeto_a_gastos_compartidos' => true,
-            'inquilino_id' => '2',
+            'inquilino_id' => '7',
             'inmueble_id'  => '2',
             'garante_id' => '2',
             'created_at' => date('Y-m-d H:m:s')

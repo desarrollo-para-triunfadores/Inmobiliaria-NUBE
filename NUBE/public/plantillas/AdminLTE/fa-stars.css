@@ -1,0 +1,11 @@
+.br-theme-fontawesome-stars-o .br-widget a{
+    font-size: 20px;
+}
+
+.br-theme-fontawesome-stars-o .br-widget a.br-selected:after {
+    color: #555;
+}
+
+.br-theme-fontawesome-stars-o .br-widget a.br-active:after {
+    color: #555;
+}

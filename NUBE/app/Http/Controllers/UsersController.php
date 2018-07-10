@@ -33,21 +33,12 @@ class UsersController extends Controller {
             ->with('roles', $roles);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+       
     public function create() {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request) {
         $nombreImagen = 'sin_imagen.png';
         if ($request->file('imagen')) {
@@ -116,6 +107,8 @@ class UsersController extends Controller {
 
         if ($request->file('imagen')) {
             $file = $request->file('imagen');
+            response()->json($request);
+                     // dd($file);
             $nombreImagen = 'usuario_' . time() .'.png';                        
             if ((Storage::disk('usuarios')->exists($usuario->imagen)) && ($usuario->imagen !== "sin_imagen.png")) {
                 Storage::disk('usuarios')->delete($usuario->imagen);   // Borramos la imagen anterior.      

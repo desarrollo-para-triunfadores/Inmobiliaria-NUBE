@@ -34,16 +34,25 @@ Notificaciones
                                 @foreach($notificaciones as $notificacion)
                                     <li>
                                         <a href="#">     
-                                        <h4><b>
-                                            @if ($notificacion->tipo === "pago")
-                                            <i class="fa fa-usd text-success"></i>  Boleta lista
-                                            @elseif ($notificacion->tipo === "vencimiento")
-                                            <i class="fa fa-exclamation-circle text-warning"></i>  Vencimiento
-                                                @elseif ($notificacion->tipo === "agenda")
-                                                <i class="fa fa-calendar text-danger"></i> Agenda
-                                                @elseif ($notificacion->tipo === "oportunidad")
-                                                <i class="fa fa-child text-aqua"></i> Oportunidad                                                                                                                 
-                                            @endif
+                                        <h4>
+                                            <b>                                        
+                                            @if ($notificacion->tipo === 'oportunidad')
+                                            <i class="fa fa-child text-aqua"></i> Oportunidad
+                                            @elseif ($notificacion->tipo === 'calificacion')
+                                            <i class="fa fa-star-o" aria-hidden="true"></i> ¿Qué te pareció el servicio que recibiste?
+                                            @elseif ($notificacion->tipo === 'pago')
+                                            <i class="fa fa-usd text-success"></i> Boleta lista
+                                            @elseif ($notificacion->tipo === 'vencimiento')
+                                            <i class="fa fa-exclamation-circle text-warning"></i> Vencimiento
+                                            @elseif ($notificacion->tipo === 'confirmacion_visita')
+                                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Confirmación de visita
+                                            @elseif ($notificacion->tipo === 'visita')
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> Visita
+                                            @elseif ($notificacion->tipo === 'agenda')
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> Cita de oportunidad
+                                            @elseif ($notificacion->tipo === 'visita_del_dia')
+                                            <i class="fa fa-calendar text-warning" aria-hidden="true"></i> Hoy tienes una visita
+                                            @endif                                                
                                             </b>
                                             <div class="pull-right">                                                
                                                 <small><i class="fa fa-clock-o"></i> {{$notificacion->created_at->diffForHumans()}} </small>
@@ -54,6 +63,16 @@ Notificaciones
                                             </div>                                            
                                         </h4>
                                         <p>{{$notificacion->mensaje}}</p>
+                                        @if(!is_null($notificacion->visita))
+                                            @if(is_null($notificacion->visita->confirmada))                                                                   
+                                                <button type="button" onclick="confirmar_visita ('{{$notificacion->id}}', 1,'main')" class="btn-actualizar btn-sm btn btn-success">                    
+                                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> confirmar cita
+                                                </button>
+                                                <button type="button" onclick="confirmar_visita ('{{$notificacion->id}}', 0,'main')" class="btn-actualizar btn btn-danger btn-sm">
+                                                    <i class="fa fa-times-circle" aria-hidden="true"></i> rechazar cita
+                                                </button>                                                    
+                                            @endif
+                                        @endif
                                         </a>
                                     </li>
                                 @endforeach
@@ -78,5 +97,10 @@ Notificaciones
 </div>
 
 
+@endsection
+@section('script')
+    <script>
+        var pantalla_notificaciones = true;
+    </script>   
 @endsection
 

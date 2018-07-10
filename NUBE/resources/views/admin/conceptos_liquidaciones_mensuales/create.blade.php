@@ -8,14 +8,14 @@ Carga de impuestos
 <div class="content-wrapper" style="min-height: 916px;">
 	<section class="content-header">
 		<h1>
-			Carga de impuestos			
+			Carga de Servicios
 		</h1>
 		<ol class="breadcrumb">
 			<li>
 				<a href="#">
-					<i class="fa fa-suitcase"></i> Impuestos</a>
+					<i class="fa fa-suitcase"></i> Servicios liquidados</a>
 			</li>
-			<li class="active">Carga de Impuestos</li>
+			<li class="active">Carga de Servicios</li>
 		</ol>
 	</section>
 	<section class="content animated fadeIn">
@@ -127,9 +127,9 @@ Carga de impuestos
 
 @endsection @section('script')
 <script>
-	$("#side-impuestos-li").addClass("active");
-	$("#side-impuestos-ul").addClass("menu-open");
-	$("#side-ele-cargar-impuestos").addClass("active");			
+    $("#side-impuestos-li").addClass("active");
+    $("#side-impuestos-ul").addClass("menu-open");
+    $("#side-ele-cargar-impuestos").addClass("active");
     var pantalla = "cargar";
 </script>
 <script src="{{ asset('js/impuestos.js') }}"></script>

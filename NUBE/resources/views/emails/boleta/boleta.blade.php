@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-    <title>NUBE | Resumen de cuenta</title>
+    <title>CloudProp | Resumen de cuenta</title>
 
     <link rel="stylesheet" type="text/css" href="{{'admin/emails/boleta/style.css'}}" />
     {{--
@@ -89,8 +89,17 @@
     </style>
 </head>
 
+
+
 <body>
 
+    <?php
+    //dd($liquidacion);
+    use Carbon\Carbon;
+        setlocale(LC_TIME, 'es_ES');
+        Carbon::setLocale('es');
+        $periodo_liquidado = \Carbon\Carbon::createFromFormat('m/Y', $liquidacion->periodo);         
+    ?>
 <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
@@ -102,8 +111,8 @@
                         </td>
 
                         <td>
-                            Resumen período {{$periodo}}<br>
-
+                            Resumen período {{$periodo_liquidado->format('F Y')}}  ({{$periodo_liquidado->format('m/Y')}})<br>
+                            Vencimiento {{$liquidacion->vencimiento->format('d/m/Y')}}
                             <br>
                             <br>
                         </td>
@@ -111,13 +120,16 @@
                 </table>
             </td>
         </tr>
+
+        <hr size="3">   
+
+
         <!--
         <tr class="information">
             <td colspan="2">
                 <table>
                     <tr>
-
-
+                        Vencimiento {{$liquidacion->vencimiento->format('d/m/Y')}}
                     </tr>
                 </table>
             </td>
@@ -129,13 +141,16 @@
             </td>
 
             <td>
-                $ {{$monto_alquiler}}
+                $ {{$liquidacion->alquiler}}
             </td>
         </tr>
 
         <tr class="details">
             <td>
-                Alquiler de $mes
+                <?php
+                    $periodo_liquidado = \Carbon\Carbon::createFromFormat('m/Y', $liquidacion->periodo) 
+                ?>
+                Alquiler de {{$periodo_liquidado->format('F Y')}}
             </td>
 
             <td>
@@ -149,13 +164,28 @@
             </td>
 
             <td>
-                $ {{--$monto_expensas--}}
+                 {{--$monto_expensas--}}
             </td>
         </tr>
+
         {{-- Expensas compartidas por edificio --}}
-        @foreach($conceptos as $concepto)
-        
+        @foreach($conceptos as $concepto)        
             @if ($concepto["concepto_compartido"])
+                <tr class="item">
+                    <td>
+                        {{ $concepto["concepto"] }}
+                    </td>
+                    <td>
+                         $ {{$concepto["monto"]}}*
+                    </td>
+                </tr>
+            @endif
+       
+    @endforeach
+        {{-- FIN -- Expensas compartidas por edificio --}}
+
+        @foreach($conceptos as $concepto)
+            @if (!$concepto["concepto_compartido"])
                 <tr class="item">
                     <td>
                         {{ $concepto["concepto"] }}
@@ -166,29 +196,16 @@
                     </td>
                 </tr>
             @endif
-       
-    @endforeach
-        {{-- FIN -- Expensas compartidas por edificio --}}
-
-        @foreach($conceptos as $concepto)
-        @if (!$concepto["concepto_compartido"])
-        <tr class="item">
-            <td>
-                {{ $concepto["concepto"] }}
-            </td>
-
-            <td>
-                $ {{$concepto["monto"]}}
-            </td>
-        </tr>
-    @endif
         @endforeach
         <tr class="total">
             <td></td>
             <td>
-                Total: <b>$ {{$total}}</b>
+                Total: <b>$ {{$liquidacion->total}}</b>
             </td>
         </tr>
+        <tfoot>
+            *= Gastos compartidos entre inquilinos
+        </tfoot>
     </table>
 </div>
 </body>

@@ -1,5 +1,5 @@
 var lineas = [],
-    fecha_desde, fecha_hasta
+        fecha_desde, fecha_hasta
 
 /**
  * En la variable lineas se van guardando los servicios que se cargan como pagados. 
@@ -8,11 +8,18 @@ var lineas = [],
 
 function instanciar_elementos() {
 
+    instanciar_calendario();
+
     var table = $('#example').DataTable({
         'language': tabla_traducida // esta variable esta instanciada donde están declarados todos los js.
-    })
+    });
 
-    //Bootstrap Material Date picker
+    table.on('draw', function () {
+        instanciar_calendario();
+    });
+}
+
+function instanciar_calendario() {
     $('.datepicker').bootstrapMaterialDatePicker({
         format: 'DD/MM/YYYY',
         lang: 'es',
@@ -24,8 +31,8 @@ function instanciar_elementos() {
         maxDate: moment().add(100, 'year'),
         time: false
     });
-
 }
+
 
 function cargar_monto_sugerido(id, monto) {
 
@@ -50,7 +57,7 @@ function filtrar_contratos() {
 
     lineas = []
     $.ajax({
-        url: '/admin/conceptosliquidaciones',
+        url: '/admin/obtener_conceptos',
         data: {
             accion: pantalla,
             servicios: $('#servicio_id').val(),
@@ -70,148 +77,157 @@ function filtrar_contratos() {
     })
 }
 
-function filtrar_select(item) {
-    var options_select_elementos = [];
-    switch (item) {
-        case "localidad_id":
-            /**
-             * Se solicitan y se cargan los barrios de la localidad
-             */
-            $.ajax({ 
-                url: '/admin/obtener_barrios_localidad',
-                data: {
-                    lista_ids: $("#localidad_id").val()
-                },
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {                    
-                    options_select_elementos = [];
-                    data.forEach(function (element) {
-                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
-                    });   
-                    $("#barrio_id").html(options_select_elementos);        
-                }
-            })
-            /**
-             * Se solicitan y se cargan los edificios de la localidad
-             */
-            $.ajax({ 
-                url: '/admin/obtener_edificios_localidad',
-                data: {
-                    lista_ids: $("#localidad_id").val()
-                },
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {                    
-                    options_select_elementos = [];
-                    data.forEach(function (element) {
-                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
-                    });   
-                    $("#edificio_id").html(options_select_elementos);        
-                             
-                }
-            })
-            /**
-             * Se solicitan y se cargan los inmuebles de la localidad
-             */
-            $.ajax({ 
-                url: '/admin/obtener_inmuebles_localidad',
-                data: {
-                    lista_ids: $("#localidad_id").val()
-                },
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {                    
-                    options_select_elementos = [];
-                    data.forEach(function (element) {
-                        options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: '+element.piso+'. Departamento: '+element.numDepto+'</option>');
-                    });   
-                    $("#inmueble_id").html(options_select_elementos);        
-                             
-                }
-            })           
-            break;
-        case "barrio_id":
-            /**
-             * Se solicitan y se cargan los edificios de la localidad
-             */
 
-            if($("#barrio_id").val()===null){
-                /**
-                 * si el select de barrio está vacio se resetea el contenido de los select 
-                 * desde el select padre ya que corrige los otros select que hayan sido alterados
-                 */
-                filtrar_select("localidad_id");
-            }else{
-                $.ajax({ 
-                    url: '/admin/obtener_edificios_barrios',
-                    data: {
-                        lista_ids: $("#barrio_id").val()
-                    },
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        options_select_elementos = [];
-                        data.forEach(function (element) {
-                            options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
-                        });   
-                        $("#edificio_id").html(options_select_elementos);        
-                                 
-                    }
-                })
-                /**
-                 * Se solicitan y se cargan los inmuebles de la localidad
-                 */
-                $.ajax({ 
-                    url: '/admin/obtener_inmuebles_barrios',
-                    data: {
-                        lista_ids: $("#barrio_id").val()
-                    },
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        options_select_elementos = [];
-                        data.forEach(function (element) {
-                            options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: '+element.piso+'. Departamento: '+element.numDepto+'</option>');
-                        });   
-                        $("#inmueble_id").html(options_select_elementos);        
-                                 
-                    }
-                })     
-            }     
-            break;
-        case "edificio_id":
-            /**
-             * Se solicitan y se cargan los inmuebles de la localidad
-             */
 
-            if($("#edificio_id").val()===null){
-                /**
-                 * si el select de edificio está vacio se resetea el contenido de los select 
-                 * desde el select padre ya que corrige los otros select que hayan sido alterados
-                 */
-                filtrar_select("barrio_id");
-            }else{
-                $.ajax({ 
-                    url: '/admin/obtener_inmuebles_edificio',
-                    data: {
-                        lista_ids: $("#edificio_id").val()
-                    },
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        options_select_elementos = [];
-                        data.forEach(function (element) {
-                            options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: '+element.piso+'. Departamento: '+element.numDepto+'</option>');
-                        });   
-                        $("#inmueble_id").html(options_select_elementos);        
-                                
-                    }
-                }) 
-            } 
-            break;       
-    }
-}
+
+
+//function filtrar_select(item) {
+//
+//ESTE METODO VA A SERVIR PARA SETEAR TODOS LOS SELECTS DE LA SECCION UBICACION
+//
+//
+//
+//    var options_select_elementos = [];
+//    switch (item) {
+//        case "localidad_id":
+//            /**
+//             * Se solicitan y se cargan los barrios de la localidad
+//             */
+//            $.ajax({
+//                url: '/admin/obtener_barrios_localidad',
+//                data: {
+//                    lista_ids: $("#localidad_id").val()
+//                },
+//                type: 'GET',
+//                dataType: 'json',
+//                success: function (data) {
+//                    options_select_elementos = [];
+//                    data.forEach(function (element) {
+//                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+//                    });
+//                    $("#barrio_id").html(options_select_elementos);
+//                }
+//            })
+//            /**
+//             * Se solicitan y se cargan los edificios de la localidad
+//             */
+//            $.ajax({
+//                url: '/admin/obtener_edificios_localidad',
+//                data: {
+//                    lista_ids: $("#localidad_id").val()
+//                },
+//                type: 'GET',
+//                dataType: 'json',
+//                success: function (data) {
+//                    options_select_elementos = [];
+//                    data.forEach(function (element) {
+//                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+//                    });
+//                    $("#edificio_id").html(options_select_elementos);
+//
+//                }
+//            })
+//            /**
+//             * Se solicitan y se cargan los inmuebles de la localidad
+//             */
+//            $.ajax({
+//                url: '/admin/obtener_inmuebles_localidad',
+//                data: {
+//                    lista_ids: $("#localidad_id").val()
+//                },
+//                type: 'GET',
+//                dataType: 'json',
+//                success: function (data) {
+//                    options_select_elementos = [];
+//                    data.forEach(function (element) {
+//                        options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: ' + element.piso + '. Departamento: ' + element.numDepto + '</option>');
+//                    });
+//                    $("#inmueble_id").html(options_select_elementos);
+//
+//                }
+//            })
+//            break;
+//        case "barrio_id":
+//            /**
+//             * Se solicitan y se cargan los edificios de la localidad
+//             */
+//
+//            if ($("#barrio_id").val() === null) {
+//                /**
+//                 * si el select de barrio está vacio se resetea el contenido de los select 
+//                 * desde el select padre ya que corrige los otros select que hayan sido alterados
+//                 */
+//                filtrar_select("localidad_id");
+//            } else {
+//                $.ajax({
+//                    url: '/admin/obtener_edificios_barrios',
+//                    data: {
+//                        lista_ids: $("#barrio_id").val()
+//                    },
+//                    type: 'GET',
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        options_select_elementos = [];
+//                        data.forEach(function (element) {
+//                            options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+//                        });
+//                        $("#edificio_id").html(options_select_elementos);
+//
+//                    }
+//                })
+//                /**
+//                 * Se solicitan y se cargan los inmuebles de la localidad
+//                 */
+//                $.ajax({
+//                    url: '/admin/obtener_inmuebles_barrios',
+//                    data: {
+//                        lista_ids: $("#barrio_id").val()
+//                    },
+//                    type: 'GET',
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        options_select_elementos = [];
+//                        data.forEach(function (element) {
+//                            options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: ' + element.piso + '. Departamento: ' + element.numDepto + '</option>');
+//                        });
+//                        $("#inmueble_id").html(options_select_elementos);
+//
+//                    }
+//                })
+//            }
+//            break;
+//        case "edificio_id":
+//            /**
+//             * Se solicitan y se cargan los inmuebles de la localidad
+//             */
+//
+//            if ($("#edificio_id").val() === null) {
+//                /**
+//                 * si el select de edificio está vacio se resetea el contenido de los select 
+//                 * desde el select padre ya que corrige los otros select que hayan sido alterados
+//                 */
+//                filtrar_select("barrio_id");
+//            } else {
+//                $.ajax({
+//                    url: '/admin/obtener_inmuebles_edificio',
+//                    data: {
+//                        lista_ids: $("#edificio_id").val()
+//                    },
+//                    type: 'GET',
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        options_select_elementos = [];
+//                        data.forEach(function (element) {
+//                            options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: ' + element.piso + '. Departamento: ' + element.numDepto + '</option>');
+//                        });
+//                        $("#inmueble_id").html(options_select_elementos);
+//
+//                    }
+//                })
+//            }
+//            break;
+//    }
+//}
 
 
 
@@ -249,11 +265,13 @@ function enviar() { //se envían los datos al controller para que lo registre
 
     if (lineas.length > 0) { // si la lista está vacía se informa al usuario al respecto
         var conceptos = []
+
         lineas.forEach(function (valor) { // se convierte el array en una coleccion de objetos
             conceptos.push(valor)
         })
-        $.ajax({ // se envía
-            url: '/admin/conceptosliquidaciones/create',
+
+        $.ajax({// se envía
+            url: '/admin/registrar_conceptos',
             data: {
                 lista_conceptos: conceptos
             },
@@ -272,7 +290,8 @@ function enviar() { //se envían los datos al controller para que lo registre
                 cancel: {
                     label: 'cerrar',
                     className: 'btn btn-outline pull-right',
-                    callback: function () {}
+                    callback: function () {
+                    }
                 }
             }
         });
@@ -284,17 +303,7 @@ function enviar() { //se envían los datos al controller para que lo registre
  * Inicio de métodos y eventos sobre las fechas
  */
 
-$('.datepicker').bootstrapMaterialDatePicker({
-    format: 'DD/MM/YYYY',
-    lang: 'es',
-    weekStart: 1,
-    switchOnClick: true,
-    cancelText: 'cerrar',
-    okText: 'ok',
-    minDate: moment().add(-100, 'year'),
-    time: false
-});
-
+instanciar_calendario();
 
 $('#fecha_desde').change(function () { // control de verificacion de fechas
     var fecha_formateada = new Date($('#fecha_desde').val().split('/').reverse().join('-'))

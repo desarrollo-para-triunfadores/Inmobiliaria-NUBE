@@ -35,6 +35,8 @@
     });
 </script>
 
+<!--bootbox-->
+<script src="{{ asset('plantillas/AdminLTE/plugins/bootbox/bootbox.min.js') }}"></script>
 
 
 

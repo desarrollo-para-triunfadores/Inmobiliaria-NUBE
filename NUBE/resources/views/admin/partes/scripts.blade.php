@@ -13,9 +13,15 @@ $.widget.bridge('uibutton', $.ui.button);
 
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="{{ asset('plantillas/AdminLTE/plugins/chartjs/Chart.min.js') }}"></script>
 <script src="{{ asset('plantillas/AdminLTE/plugins/morris/morris.min.js') }}"></script>
+<!-- ChartJS 2.7 -->
+<script src="{{ asset('plantillas/AdminLTE/plugins/chartjs2/dist/Chart.js') }}"></script>
 
+<!--Barrating-->
+<script src="{{asset('plantillas/AdminLTE/plugins/rating/dist/star-rating.min.js')}}">
+    $('#star-rating').starrating();
+
+</script>
 
 <!-- Sparkline -->
 <script src="{{ asset('plantillas/AdminLTE/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
@@ -216,3 +222,4 @@ $(".my-colorpicker2").colorpicker({
         url_imagenes_edificios = "{{ asset('imagenes/edificios/') }}/";
 </script>
 
+<script src="{{ asset('plantillas/AdminLTE/plugins/bar-rating/dist/jquery.barrating.min.js') }}"></script>

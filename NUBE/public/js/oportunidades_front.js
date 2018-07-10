@@ -3,7 +3,7 @@
  */
 function mensaje_desde_front(){
     if($('#telefono').val() == ""){
-        alert('El campo de teléfono es obligarorio.')
+        alert('El campo de telÃ©fono es obligarorio.')
     }
     else{
         $.ajax({

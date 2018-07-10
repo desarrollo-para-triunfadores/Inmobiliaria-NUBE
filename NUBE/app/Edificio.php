@@ -14,6 +14,7 @@ class Edificio extends Model
         'localidad_id',
         'direccion',
         'nombre',
+        'cant_pisos',
         'cant_deptos',
         'costo_sueldos_personal',
         'cant_ascensores',

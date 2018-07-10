@@ -3,25 +3,56 @@ $("#side-inmueble-ul").addClass("menu-open");
 $("#side-ele-lugares-propiedades").addClass("active");
 
 
+var etapas_instanciadas = {
+    /*
+     * Variables la instanciación de los plugins en los distintas secciones del wizard
+     */
+    propietario: false,
+    ubicacion: false,
+    fotografias: false
+};
+
+function abrir_modal_borrar(id, disponible_eliminar) {
+    /*
+     * Si el registro no dispone de ningún contrato activo relacionado se puede eliminar
+     */
+    if (disponible_eliminar === 1) {
+        $('#form-borrar').attr('action', '/localidades/' + id);
+        $('#boton-modal-borrar').click();
+    } else {
+        bootbox.dialog({
+            title: '¡Atención!',
+            message: 'Este registro no puede ser eliminado ya que tiene un contrato vigente asociado.',
+            className: 'modal-warning',
+            buttons: {
+                cancel: {
+                    label: 'cerrar',
+                    className: 'btn btn-outline pull-right',
+                    callback: function () {
+                    }
+                }
+            }
+        });
+    }
+}
+
+
 //Datatable - instaciación del plugin
 var table = $('#example').DataTable({
     "language": tabla_traducida, // esta variable esta instanciada donde están declarados todos los js.
     "columns": [//defino propiedades para la columnas, en este caso indico cuales quiero que se inicien ocultas.
-        null,                   //0--Condición
-        {"visible": false},     //1--Tipo
-        null,                   //2--Dirección
-        {"visible": false},     //3--Cant.Ambientes
-        {"visible": false},     //4--Precio venta
-        null,                   //5--Precio alquiler
-        {"visible": false},     //6--F.Habilitación
-        null,                   //7--Contrato de alquiler
-        null,                   //8--Fecha de Registro
+        null, //0--Condición
+        {"visible": false}, //1--Tipo
+        null, //2--Dirección
+        {"visible": false}, //3--Cant.Ambientes
+        {"visible": false}, //4--Precio venta
+        null, //5--Precio alquiler
+        {"visible": false}, //6--F.Habilitación
+        null, //7--Contrato de alquiler
+        null, //8--Fecha de Registro
         null                    //11--Acciones
     ]
 });
-
-
-instaciar_filtros();
 
 function instaciar_filtros() {
     //Datatables | filtro individuales - instanciación de los filtros
@@ -33,7 +64,6 @@ function instaciar_filtros() {
             }
         }
     });
-
 //Datatables | filtro individuales - búsqueda 
     table.columns().every(function () {
         var that = this;
@@ -51,7 +81,7 @@ $('a.toggle-vis').on('click', function (e) {
     // Get the column API object
     var column = table.column($(this).attr('data-column'));
     // Toggle the visibility
-    column.visible(!column.visible()); 
+    column.visible(!column.visible());
     instaciar_filtros();
 });
 
@@ -61,15 +91,34 @@ $('#example tbody').on('mouseenter', 'td', function () {
     $(table.cells().nodes()).removeClass('highlight');
     $(table.column(colIdx).nodes()).addClass('highlight');
 });
+/************************************************************************************************ */
 
+function bloquear_datos_depto() { 
+    /*
+     * Este método bloquea los inputs que no corresponden si no se escoge un edificio
+     */
+    var edificio_id = $('#edificio_id').val();
 
-var etapas_instanciadas = {
-    propietario: false,
-    ubicacion: false,
-    fotografias: false
-};
+    if (edificio_id === 'sin_edificio') {
+        $("#piso").val("");
+        $("#numDepto").val("");
+        $("#piso").attr("disabled", true);
+        $("#numDepto").attr("disabled", true);
+        $("#piso").attr("placeholder", "campo no requerido");
+        $("#numDepto").attr("placeholder", "campo no requerido");
+    } else {
+        $("#piso").attr("disabled", false);
+        $("#numDepto").attr("disabled", false);
+        $("#piso").attr("placeholder", "campo requerido");
+        $("#numDepto").attr("placeholder", "campo requerido");
+    }
+}
+
 
 $(document).ready(function () {
+
+    instaciar_filtros();
+
     jQuery.extend(jQuery.validator.messages, {
         required: "Este campo es obligatorio.",
         remote: "Por favor, rellena este campo.",
@@ -108,6 +157,7 @@ $(document).ready(function () {
         }
     });
 
+
 //Instancio el Wizard
     $('#rootwizard').bootstrapWizard({
         tabClass: 'nav nav-pills',
@@ -125,13 +175,10 @@ $(document).ready(function () {
                             instanciar_mapa();
                         }
                         break;
-                    case 2:                                                                      
+                    case 2:
                         if (!etapas_instanciadas.fotografias) {
                             etapas_instanciadas.fotografias = true;
-                            
-                            console.log();
-                            
-                            instanciar_cropie(index);
+                            instanciar_cropie();
                         }
                         break;
                 }
@@ -140,25 +187,30 @@ $(document).ready(function () {
                     case 1:
                         if (!etapas_instanciadas.propietario) {
                             etapas_instanciadas.propietario = true;
-                            instanciar_cropie(index);
                         }
                         break;
+                        $('body').removeClass("sidebar-collapse");
                     case 2:
                         if (!etapas_instanciadas.ubicacion) {
                             etapas_instanciadas.ubicacion = true;
                             instanciar_mapa();
                         }
+                        $('body').removeClass("sidebar-collapse");
                         break;
                     case 4:
                         if (!etapas_instanciadas.fotografias) {
                             etapas_instanciadas.fotografias = true;
-                            instanciar_cropie(index);
+                            instanciar_cropie();
+                            $('body').addClass("sidebar-collapse");
                         }
                         break;
+                    default :
+                        $('body').removeClass("sidebar-collapse");
                 }
             }
-
-
+        },
+        onTabClick: function (tab, navigation, index) {
+            return false;
         },
         onTabShow: function (tab, navigation, index) {
             var $total = navigation.find('li').length;
@@ -172,55 +224,29 @@ $(document).ready(function () {
     });
 });
 
-
-function mostrar_panel_propitario() {
-    if ($('#panel_propietario_nuevo').is(':hidden')) {
-        $('#panel_propietario_nuevo').show();
+function mostrar_panel_persona() {
+    if ($('#panel_persona_nueva').is(':hidden')) {
+        $('#panel_persona_nueva').show()
+        $('#propietario_id').removeAttr('required')
+        $('#propietario_id').attr('disabled', true)
     } else {
-        $('#panel_propietario_nuevo').hide();
+        $('#panel_persona_nueva').hide()
+        $('#propietario_id').attr('required', true)
+        $('#propietario_id').removeAttr('disabled')
     }
 }
-
-function instanciar_mapa() {
- 
-    var map = new google.maps.Map(document.getElementById('map'), {//instancio mapa
-        zoom: 12,
-        center: marcador,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-    });
-    var marker = new google.maps.Marker({//instancio marcador
-        map: map,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        position: marcador
-    });
-    marker.addListener('dragend', function () { //este es el evento que detecta las coordenadas al mover el marcador y setea los inputs ocultos en en el form.
-        $("#latitud").val(marker.getPosition().lat());
-        $("#longitud").val(marker.getPosition().lng());
-    });
-    marker.addListener('click', toggleBounce);
-}
-
-
-function toggleBounce() { //función para la animación del marcador
-    if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-    } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-}
-
 
 //Date picker --instacniición y configuración
+
 //Bootstrap Material Date picker
-$('.datepicker').bootstrapMaterialDatePicker ({
+$('.datepicker').bootstrapMaterialDatePicker({
     format: 'DD/MM/YYYY',
     lang: 'es',
-    weekStart: 1, 			
-    switchOnClick : true,
+    weekStart: 1,
+    switchOnClick: true,
     cancelText: 'cerrar',
-    okText: 'ok',    
-    time: false 
+    okText: 'ok',
+    time: false
 });
 
 
@@ -229,7 +255,6 @@ $('.datepicker').bootstrapMaterialDatePicker ({
 
 var caracteristicas_seleccionadas = [];
 var caracteristicas_id = [];
-
 
 function agregar_característica() {
     var cambio = false;
@@ -273,9 +298,7 @@ $(document).on('click', '.borrar', function (event) {
     $(this).closest('tr').remove();
 });
 
-
 function agregar_a_tabla(caracteristica, num_fila) {
-    console.log(caracteristica);
     var tabla = document.getElementById("tabla_caracteristicas");
     var row = tabla.insertRow(0);
     var cell1 = row.insertCell(0);
@@ -289,6 +312,208 @@ function agregar_a_tabla(caracteristica, num_fila) {
 }
 
 
+function filtrar_select(item) {
+
+    /*
+     * Esta función se encarga de setear los select de la sección ubicación
+     */
+
+    var options_select_elementos = [];
+    switch (item) {
+
+
+        case "provincia_select":
+
+            /**
+             * Se solicitan y se cargan los barrios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_localidades_provincia',
+                data: {
+                    lista_ids: $("#provincia_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#localidad_select").html(options_select_elementos);
+                }
+            });
+
+
+            /**
+             * Se solicitan y se cargan los barrios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_barrios_localidad',
+                data: {
+                    lista_ids: $("#localidad_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#barrio_id").html(options_select_elementos);
+                }
+            });
+            /**
+             * Se solicitan y se cargan los edificios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_edificios_localidad',
+                data: {
+                    lista_ids: $("#localidad_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#edificio_id").html(options_select_elementos);
+
+                }
+            });
+
+            break;
+
+
+
+
+
+
+
+        case "localidad_select":
+            /**
+             * Se solicitan y se cargan los barrios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_barrios_localidad',
+                data: {
+                    lista_ids: $("#localidad_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#barrio_id").html(options_select_elementos);
+                }
+            });
+            /**
+             * Se solicitan y se cargan los edificios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_edificios_localidad',
+                data: {
+                    lista_ids: $("#localidad_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#edificio_id").html(options_select_elementos);
+
+                }
+            });
+
+            break;
+        case "barrio_id":
+            /**
+             * Se solicitan y se cargan los edificios de la localidad
+             */
+
+            if ($("#barrio_id").val() === null) {
+                /**
+                 * si el select de barrio está vacio se resetea el contenido de los select 
+                 * desde el select padre ya que corrige los otros select que hayan sido alterados
+                 */
+                filtrar_select("localidad_select");
+            } else {
+                $.ajax({
+                    url: '/admin/obtener_edificios_barrios',
+                    data: {
+                        lista_ids: $("#barrio_id").val()
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        options_select_elementos = [];
+                        data.forEach(function (element) {
+                            options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                        });
+                        $("#edificio_id").html(options_select_elementos);
+
+                    }
+                });
+            }
+            break;
+        case "edificio_id":
+            /**
+             * Se solicitan y se cargan los inmuebles de la localidad
+             */
+
+            if ($("#edificio_id").val() === null) {
+                /**
+                 * si el select de edificio está vacio se resetea el contenido de los select 
+                 * desde el select padre ya que corrige los otros select que hayan sido alterados
+                 */
+                filtrar_select("barrio_id");
+            }
+            if ($("#edificio_id").val() === 'sin_edificio') {
+                $("#piso").val('');
+                $("#numDepto").val('');
+                $("#piso").attr("disabled", true);
+                $("#numDepto").attr("disabled", true);
+                $("#piso").attr("placeholder", "campo no requerido");
+                $("#numDepto").attr("placeholder", "campo no requerido");
+            }
+            else {
+                $("#piso").attr("disabled", false);
+                $("#numDepto").attr("disabled", false);
+                $("#piso").attr("placeholder", "campo requerido");
+                $("#numDepto").attr("placeholder", "campo requerido");
+                $.ajax({
+                    url: '/admin/obtener_inmuebles_edificio',
+                    data: {
+                        lista_ids: $("#edificio_id").val()
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        options_select_elementos = [];
+                        data.forEach(function (element) {
+                            options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: ' + element.piso + '. Departamento: ' + element.numDepto + '</option>');
+                        });
+                        $("#inmueble_id").html(options_select_elementos);
+
+                    }
+                })
+            }
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 // Enviar datos.
 
@@ -300,24 +525,11 @@ function mandar() {
     var url = form.attr("action");
     var token = $("#token-create").val();
     var formData = new FormData(document.getElementById("form-create"));
-
     if (fotos.foto_presentacion_nuevo !== "") {
         formData.append('foto_presentacion_nuevo', fotos.foto_presentacion_nuevo);
     }
     if (fotos.foto_carrusel_1 !== "") {
         formData.append('foto_carrusel_1', fotos.foto_carrusel_1);
-    }
-    if (fotos.foto_carrusel_2 !== "") {
-        formData.append('foto_carrusel_2', fotos.foto_carrusel_2);
-    }
-    if (fotos.foto_carrusel_3 !== "") {
-        formData.append('foto_carrusel_3', fotos.foto_carrusel_3);
-    }
-    if (fotos.foto_carrusel_4 !== "") {
-        formData.append('foto_carrusel_4', fotos.foto_carrusel_4);
-    }
-    if (fotos.foto_carrusel_5 !== "") {
-        formData.append('foto_carrusel_5', fotos.foto_carrusel_5);
     }
     if (fotos.foto_detalle_1 !== "") {
         formData.append('foto_detalle_1', fotos.foto_detalle_1);
@@ -353,7 +565,7 @@ function mandar() {
         data: formData,
         processData: false,
         contentType: false,
-        success: function (data) {            
+        success: function (data) {
             window.location.href = redireccion;
         },
         error: function () {
@@ -364,22 +576,16 @@ function mandar() {
 
 
 
-
-
-
 function completar_campos(inmueble) {
-    
+
     console.log("inmueble");
     var contact = JSON.parse(inmueble);
-   
 //    console.log(dedo2);
     console.log(dedo);
     console.log(contact);
-
     $('#tipo_id').val(inmueble.tipo_id).trigger("change");
     $('#disponible').val(inmueble.disponible).trigger("change");
     $('#condicion').val(inmueble.condicion).trigger("change");
-
     $('#fechaHabilitacion').val(inmueble.fechaHabilitacion);
     $('#valorVenta').val(inmueble.valorVenta);
     $('#valorReal').val(inmueble.valorReal);
@@ -390,206 +596,20 @@ function completar_campos(inmueble) {
     $('#cantidadDormitorios').val(inmueble.cantidadDormitorios);
     $('#superficie').val(inmueble.superficie);
     $('#descripcion').val(inmueble.descripcion);
-
-
-
-
 }
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//var caracteristicas_seleccionadas = [];
-//
-//
-//function agregar_característica() {
-//    $("#combo option:selected").each(function () {
-//        var caracteristica = JSON.parse($(this).attr('value'));
-//        if (!caracteristicas_seleccionadas.includes(caracteristica.id)) {
-//            agregar_a_tabla(caracteristica);
-//        } else {
-//            $("#boton-modal-elemento-seleccionado").click();
-//        }
-//        $("#combo").val(null).trigger("change");
-//        $("#boton_cerrar_crear").click();
-//    });
-//}
-//
-//$(document).on('click', '.borrar', function (event) {
-//    event.preventDefault();
-//    var caracteristica = $($(this).closest('tr')["0"].lastElementChild).find("input")["0"].value;
-//    caracteristicas_seleccionadas.splice(caracteristicas_seleccionadas.indexOf(caracteristica), 1);
-//    $(this).closest('tr').remove();
-//});
-//
-//
-//function agregar_a_tabla(caracteristica) {
-//    var tabla = document.getElementById("tabla_caracteristicas");
-//    var row = tabla.insertRow(0);
-//    //var cell0 = row.insertCell(0);
-//    var cell1 = row.insertCell(0);
-//    var cell2 = row.insertCell(1);
-//    var cell3 = row.insertCell(2);
-//    var cell4 = row.insertCell(3);
-//    //cell0.innerHTML = caracteristica.id;
-//    cell1.innerHTML = caracteristica.nombre;
-//    cell2.innerHTML = caracteristica.descripcion;
-//    cell3.innerHTML = '<input type="button" class="borrar" value="Eliminar" />';
-//    cell4.innerHTML = '<input type="text" name="caracteristica' + caracteristica.id + '" class="hide" value="' + caracteristica.id + '" />';
-//    caracteristicas_seleccionadas.push(caracteristica.id);
-//    $('#caracteristicas').val(caracteristicas_seleccionadas);
-//    $('#cantidad_caracteristicas').val(caracteristicas_seleccionadas.length);
-//}
-//
-//function cerrar_modal_amarillo() { //jaja
-//    $('#boton-cerrar-elemento-seleccionado').click();
-//    $('#boton-modal-crear').click();
-//}
-//
-////$(document).ready(function () {
-////    $(".content .clearfix").css("background-color", "#fff");
-////});
-//
-///** Google Map **/
-////function initMap() {
-////    
-////    var resistencia = {
-////        lat: -27.450834,
-////        lng: -58.986901
-////    };
-////    var map = new google.maps.Map(document.getElementById('map'), {//instancio mapa
-////        zoom: 12,
-////        center: resistencia,
-////        mapTypeId: google.maps.MapTypeId.TERRAIN
-////    });
-////    var marker = new google.maps.Marker({//instancio marcador
-////        map: map,
-////        draggable: true,
-////        animation: google.maps.Animation.DROP,
-////        position: resistencia
-////    });
-////    marker.addListener('dragend', function () { //este es el evento que detecta las coordenadas al mover el marcador y setea los inputs ocultos en en el form.
-////        $("#latitud").val(marker.getPosition().lat());
-////        $("#longitud").val(marker.getPosition().lng());
-////        console.log($("#latitud").val());
-////        console.log($("#longitud").val());
-////    });
-////    marker.addListener('click', toggleBounce); //evento de animación de marcador al clickear}
-////}
-
-//
-///** Mostrar el formulario de 'Carga de Propietario' **/
-//function mostrarFormPropietario() {
-//    if ($("#add-propietario_chk").is(":checked")) {
-//        $('#form-agregarPropietario').removeClass("hide");
-//        $('#persona_id').prop('disabled', true);
-//    } else {
-//        $('#form-agregarPropietario').hide();
-//        //document.getElementById('add-propietario_chk').checked = true
-//        $('#persona_id').prop('disabled', false);
-//    }
-//}
-//$('#tipoOperacion').on('change', function () {
-//    if ($('#tipoOperacion').val() == 'Venta') {
-//        $('#valorAlquiler').prop('disabled', true);
-//    } else {
-//        $('#valorAlquiler').prop('disabled', false);
-//    }
-//});
-//
-//
-//
-///**** Cuando se selecciona un pais, desplegar las provincias que le corresponden ****/
-//$('select#pais_select').on('change', function () {
-//    $('select#provincia_select').empty();
-//    $('select#localidad_select').empty();
-//    $.ajax({
-//        dataType: 'json',
-//        url: "/admin/paises", //ruta que contendra el metodo para obtener lo que necesitamos, dentro del contolador
-//        data: {
-//            id: $('#pais_select').val()
-//        },
-//        success: function (data) {
-//            console.log(data);
-//            for (i = 0; i < data.length; i++) {
-//                $('select#provincia_select').append("<option value='" + data[i].id + "'> " + data[i].nombre + "</option>");
-//            }
-//        }
-//    });
-//    buscarLocalidades();
-//});
-//$('select#provincia_select').on('change', function () {
-//    $('select#localidad_select').empty();
-//    buscarLocalidades();
-//});
-//
-//$('select#localidad_select').on('change', function () {
-//    $('select#barrio_id').empty();
-//    buscarBarrios();
-//});
-///**** Cuando se selecciona una provincia, desplegar las localidades que le corresponden ****/
-//function buscarLocalidades() {
-//    $('select#localidad_select').empty();
-//    $.ajax({
-//        dataType: 'json',
-//        url: "/admin/provincias", //ruta que contendra el metodo para obtener lo que necesitamos, dentro del contolador
-//        data: {
-//            id: $('#provincia_select').val()
-//        },
-//        success: function (data) {
-//            console.log(data);
-//            for (i = 0; i < data.length; i++) {
-//                $('select#localidad_select').append("<option value='" + data[i].id + "'> " + data[i].nombre + "</option>");
-//            }
-//        }
-//    });
-//    buscarBarrios();
-//}
-///**** Cuando se selecciona una localidad, desplegar los barrios que le corresponden ****/
-//function buscarBarrios() {
-//    $('select#barrio_id').empty();
-//    $.ajax({
-//        dataType: 'json',
-//        url: "/admin/localidades", //ruta que contendra el metodo para obtener lo que necesitamos, dentro del contolador
-//        data: {
-//            id: $('#localidad_select').val()
-//        },
-//        success: function (data) {
-//            console.log(data);
-//            for (i = 0; i < data.length; i++) {
-//                $('select#barrio_id').append("<option value='" + data[i].id + "'> " + data[i].nombre + "</option>");
-//            }
-//        }
-//    });
-//}
-
-/**Funcion para cuando se seleccione el edificio se seteen todos los otros campos**/
-$('select#edificio_id').on('change', function () {
-    $('direccion').empty();
-    $('select#provincia_select').empty();
-    $('select#localidad_select').empty();
-    $.ajax({
-        dataType: 'json',
-        url: "/admin/edificios", //ruta que contendra el metodo para obtener lo que necesitamos, dentro del contolador
-        data: {
-            id: $('#edificio_id').val()
-        },
-        success: function (data) {
-            console.log(data);
-            $('direccion').val(edificio.direccion);
-        }
-    });
-});
 
 
-/*****  Mascaras para decimales  ******/
-$('#valorVenta').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-$('#valorAlquiler').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-$('#valorReal').maskMoney({prefix:'', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-/***************************************************************************************************************** */
+
+
+
+
+
+//
+///*****  Mascaras para decimales  ******/
+//$('#valorVenta').maskMoney({prefix: '', allowNegative: false, thousands: '.', decimal: ',', affixesStay: false});
+//$('#valorAlquiler').maskMoney({prefix: '', allowNegative: false, thousands: '.', decimal: ',', affixesStay: false});
+//$('#valorReal').maskMoney({prefix: '', allowNegative: false, thousands: '.', decimal: ',', affixesStay: false});
+///***************************************************************************************************************** */

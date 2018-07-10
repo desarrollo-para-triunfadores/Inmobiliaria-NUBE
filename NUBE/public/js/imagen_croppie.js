@@ -1,6 +1,6 @@
-var imagen_cropie = { //Esta variable es necesaria porque en ella se guardan las imégenes resultantes de la interacción con cropie.js
-    create : "",
-    update : ""
+var imagen_cropie = {//Esta variable es necesaria porque en ella se guardan las imégenes resultantes de la interacción con cropie.js
+    create: "",
+    update: ""
 };
 
 
@@ -32,9 +32,9 @@ var basic_create = $('#main_cropper_create').croppie({
     viewport: {width: 275, height: 275, type: 'circle'},
     boundary: {width: 275, height: 275},
     update: function (data) {
-      basic_create.croppie('result', 'blob').then(function (html) {
-        imagen_cropie.create = html
-      })
+        basic_create.croppie('result', 'blob').then(function (html) {
+            imagen_cropie.create = html
+        })
     }
 })
 
@@ -42,7 +42,7 @@ var basic_create = $('#main_cropper_create').croppie({
 //evento sobre el botón subir una imagen
 
 $('.action_upload_create input').on('change', function () {
-     
+
     $('#main_cropper_create').removeClass('hide');
     $("#video_create").addClass("hide");
     $("#capture_create").addClass("hide");
@@ -65,12 +65,12 @@ $('.action_upload_create input').on('change', function () {
 if (isInPage(document.querySelector('#canvas_create'))) { //compruebo si el elemento está siendo utilizado en la vista
 
     var canvas_create = document.querySelector('#canvas_create'),
-        ctx_create = canvas_create.getContext('2d'),
-        video_create = document.querySelector('#video_create'),
-        start_create = document.querySelector('#start_create'),
-        capture_create = document.querySelector('#capture_create'),
-        MediaStream_create = "";
- 
+            ctx_create = canvas_create.getContext('2d'),
+            video_create = document.querySelector('#video_create'),
+            start_create = document.querySelector('#start_create'),
+            capture_create = document.querySelector('#capture_create'),
+            MediaStream_create = "";
+
 
     start_create.addEventListener('click', function (e) {
         e.preventDefault();
@@ -79,7 +79,7 @@ if (isInPage(document.querySelector('#canvas_create'))) { //compruebo si el elem
         $("#video_create").removeClass("hide");
         $("#start_create").addClass("hide");
         $("#capture_create").removeClass("hide");
-        
+
         navigator.getUserMedia({
             video: true
         }, function (stream) {
@@ -90,23 +90,23 @@ if (isInPage(document.querySelector('#canvas_create'))) { //compruebo si el elem
             console.log(e);
         });
 
-        capture_create.addEventListener('click', function (e) {           
+        capture_create.addEventListener('click', function (e) {
             e.preventDefault();
             ctx_create.drawImage(video_create, 0, 0, canvas_create.width, canvas_create.height);
             var data_create = canvas_create.toDataURL('image/png');
-           
+
             $('#main_cropper_create').croppie('bind', {
                 url: data_create
-            });             
+            });
 
             MediaStream_create.stop();
-            video_create.src  = null;
+            video_create.src = null;
 
             $('#main_cropper_create').removeClass("hide");
             $("#video_create").addClass("hide");
             $("#capture_create").addClass("hide");
             $("#start_create").removeClass("hide");
-           
+
 
         }, false);
 
@@ -124,7 +124,7 @@ if (isInPage(document.querySelector('#canvas_create'))) { //compruebo si el elem
 
 //se instancia el plugin para cuando se sube una imagen 
 
-function instanciar_croppie_update(url_imagen){ 
+function instanciar_croppie_update(url_imagen) {
 
     console.log(url_imagen);
     /**
@@ -132,7 +132,7 @@ function instanciar_croppie_update(url_imagen){
      * el modal de update ya que sino no se refresca el cuadro de la imagen y por enede no aparece la imagen.
      */
 
-    if(imagen_cropie.update !== ""){     
+    if (imagen_cropie.update !== "") {
         /**
          * Acá actualizo dos veces (una en blanco y otra con la imagen)
          * ya que me da problemas con el zoom y de esta manera muestra bien.
@@ -143,34 +143,34 @@ function instanciar_croppie_update(url_imagen){
         $('#main_cropper_update').croppie('bind', {
             url: url_imagen
         });
-    }else{ 
+    } else {
         var basic_update = $('#main_cropper_update').croppie({
-            url: url_imagen,  
+            url: url_imagen,
             enableExif: true,
             viewport: {width: 275, height: 275, type: 'circle'},
             boundary: {width: 275, height: 275},
             update: function (data) {
-            basic_update.croppie('result', 'blob').then(function (html) {
-                imagen_cropie.update = html
-            })
+                basic_update.croppie('result', 'blob').then(function (html) {
+                    imagen_cropie.update = html
+                })
             }
         });
 
         //evento sobre el botón subir una imagen
         $('.action_upload_update input').on('change', function () {
-                       
+
             $('#main_cropper_update').removeClass('hide');
             $("#video_update").addClass("hide");
             $("#capture_update").addClass("hide");
             $("#start_update").removeClass("hide");
-            
+
             if (this.files && this.files[0]) {
-                var reader_update= new FileReader();
+                var reader_update = new FileReader();
                 reader_update.onload = function (e) {
                     $('#main_cropper_update').croppie('bind', {
                         url: e.target.result
                     });
-                };        
+                };
                 reader_update.readAsDataURL(this.files[0]);
             }
 
@@ -186,10 +186,10 @@ function instanciar_croppie_update(url_imagen){
 if (isInPage(document.querySelector('#canvas_update'))) { //compruebo si el elemento está siendo utilizado en la vista
 
     var start_update = document.querySelector('#start_update'),
-        capture_update = document.querySelector('#capture_update'),       
-        canvas_update = document.querySelector('#canvas_update'),
-        ctx_update = canvas_update.getContext('2d'),
-        video_update = document.querySelector('#video_update');
+            capture_update = document.querySelector('#capture_update'),
+            canvas_update = document.querySelector('#canvas_update'),
+            ctx_update = canvas_update.getContext('2d'),
+            video_update = document.querySelector('#video_update');
 
 
     start_update.addEventListener('click', function (e) {
@@ -199,7 +199,7 @@ if (isInPage(document.querySelector('#canvas_update'))) { //compruebo si el elem
         $("#video_update").removeClass("hide");
         $("#start_update").addClass("hide");
         $("#capture_update").removeClass("hide");
-        
+
         navigator.getUserMedia({
             video: true
         }, function (stream) {
@@ -214,19 +214,19 @@ if (isInPage(document.querySelector('#canvas_update'))) { //compruebo si el elem
             e.preventDefault();
             ctx_update.drawImage(video_update, 0, 0, canvas_update.width, canvas_update.height);
             var data_update = canvas_update.toDataURL('image/png');
-           
+
             $('#main_cropper_update').croppie('bind', {
                 url: data_update
             });
 
             MediaStream_update.stop();
-            video_update.src  = null;
+            video_update.src = null;
 
             $('#main_cropper_update').removeClass("hide");
             $("#video_update").addClass("hide");
             $("#capture_update").addClass("hide");
             $("#start_update").removeClass("hide");
-        
+
         }, false);
     });
 

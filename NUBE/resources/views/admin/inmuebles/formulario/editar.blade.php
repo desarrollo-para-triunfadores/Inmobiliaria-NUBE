@@ -52,19 +52,19 @@ Inmuebles Registrados
                             <div class="box-body ">                            
                                 <div class="tab-content">
                                     <div class="tab-pane" id="tab1">
-                                        @include('admin.inmuebles.partes_create.datos_basicos')
+                                        @include('admin.inmuebles.secciones_wizard.datos_basicos')
                                     </div>
 
                                     <div class="tab-pane" id="tab2">
-                                        @include('admin.inmuebles.partes_create.ubicacion')
+                                        @include('admin.inmuebles.secciones_wizard.ubicacion')
                                     </div>
 
                                     <div class="tab-pane" id="tab3">
-                                        @include('admin.inmuebles.partes_create.fotografias_update')
+                                        @include('admin.inmuebles.secciones_wizard.fotografias_update')
                                     </div> 
 
                                     <div class="tab-pane" id="tab4">
-                                        @include('admin.inmuebles.partes_create.confirmacion')
+                                        @include('admin.inmuebles.secciones_wizard.confirmacion')
                                     </div> 
 
 
@@ -105,20 +105,29 @@ Inmuebles Registrados
 
 @endsection
 @section('script') 
+<script src="{{ asset('js/configuracion_google_maps.js') }}"></script>
+<script src="{{ asset('js/imagen_croppie.js') }}"></script>
+<script src="{{ asset('js/imagenes_inmueble.js') }}"></script>
+<script src="{{ asset('js/inmueble.js') }}"></script>
 
 <script>
-    var marcador = {
-        lat: parseFloat("{{$inmueble->latitud}}"),
-        lng: parseFloat("{{$inmueble->longitud}}")
-    };
-    var formulario_update = true;
+var marcador = {lat: parseFloat("{{$inmueble->latitud}}"),
+    lng: parseFloat("{{$inmueble->longitud}}")};
+var formulario_update = true;
+
+$('#pais_select').val('{{$inmueble->barrio->localidad->provincia->pais_id}}').trigger("change");
+$('#provincia_select').val('{{$inmueble->barrio->localidad->provincia_id}}').trigger("change");
+$('#localidad_select').val('{{$inmueble->barrio->localidad_id}}').trigger("change");
+$('#barrio_id').val('{{$inmueble->barrio_id}}').trigger("change");
+
+if ('{{$inmueble->edificio_id}}') {
+    $('#edificio_id').val('{{$inmueble->edificio_id}}').trigger("change");
+    $('#piso').attr("max", '{{$inmueble->edificio->cant_pisos}}');
+} else {
+    $("#piso").attr("disabled", true);
+    $("#numDepto").attr("disabled", true);
+}
+
 </script>
-
-
-<script src="{{ asset('js/camara.js') }}"></script>
-<script src="{{ asset('js/inmueble.js') }}"></script>
-<script src="{{ asset('js/imagenes_inmueble.js') }}"></script>
-
-
 
 @endsection

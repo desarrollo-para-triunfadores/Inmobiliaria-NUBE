@@ -16,8 +16,8 @@
     <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>{{App\Propietario::all()->count()}} ({{App\Inquilino::all()->count()}})</h3>
-                <p>Propietarios Registrados</p>
+                <h3>{{App\Propietario::all()->count()}} ({{App\Inquilino::all()->count()}} I)</h3>
+                <p>Clientes Registrados</p>
                
             </div>
             <div class="icon">

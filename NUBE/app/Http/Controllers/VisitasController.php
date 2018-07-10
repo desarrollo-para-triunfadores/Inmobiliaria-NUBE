@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Historia_Oportunidad;
 use Illuminate\Http\Request;
-use App\Oportunidad;
-use App\Visita;
 use App\Estado_Oportunidad;
-use App\Notificacion;
-use Carbon\Carbon;
-use Laracasts\Flash\Flash;
+use App\Historia_Oportunidad;
 use App\Http\Requests\LocalidadRequestCreate;
 use App\Http\Requests\LocalidadRequestEdit;
+use App\Notificacion;
+use App\Oportunidad;
+use App\Visita;
+use Carbon\Carbon;
+use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -40,10 +40,14 @@ class VisitasController extends Controller {
         }
 
         $oportunidades = Oportunidad::all();
-        $visitas = Visita::all();
-        return view('/admin/agenda/main')
-                        ->with('visitas', response()->json(json_encode($visitas, true)))
-                        ->with('oportunidades', $oportunidades);
+        $visitas = Visita::all()->where('oportunidad_id', '<>',null);
+       
+        
+      // dd($visitas);
+
+        return view('/admin/agenda_oportunidades/main')
+            ->with('visitas',$visitas)
+            ->with('oportunidades', $oportunidades);
     }
 
     /**
@@ -202,7 +206,6 @@ class VisitasController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        dd("eee");
     }
 
     public function destroy($id) {

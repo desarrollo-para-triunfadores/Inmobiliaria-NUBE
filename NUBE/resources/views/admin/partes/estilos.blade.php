@@ -69,6 +69,20 @@
 <link rel="stylesheet" href="{{asset('plantillas/AdminLTE/plugins/bootstrap-material-datetimepicker/bootstrap-material-datetimepicker.css')}}"/>
 
 
+
+<style type="text/css">
+
+    html,body{
+    
+    margin:0px;
+    
+    height:100%;
+    
+    }
+    
+    </style>
+
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -83,13 +97,15 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/AdminLTE/sacado_KAdmin/main.css') }}">
-
+<link type="text/css" rel="stylesheet" href="{{ asset('plantillas/AdminLTE/fa-stars.css') }}">
 
 <!--Estilos propios-->
 <link type="text/css" rel="stylesheet" href="{{ asset('css/estilos_propios.css') }}">
-
+<link type="text/css" rel="stylesheet" href="{{ asset('plantillas/AdminLTE/rating/dist/star-rating.css') }}">
 <style>
     #miCameraOnline video{width:320px;height:240px;margin:15px;float:left;}
     #miCameraOnline canvas{width:320px;height:240px;margin:15px;float:left;}
     #miCameraOnline button{clear:both;margin:30px;}
     </style>
+
+
