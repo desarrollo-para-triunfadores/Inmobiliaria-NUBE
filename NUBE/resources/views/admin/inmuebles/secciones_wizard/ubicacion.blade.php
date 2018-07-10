@@ -4,10 +4,10 @@
         <div class="control-group">
             <label>Pais:</label>
             <div class="controls">
-                <select style="width: 100%"  id="pais_select" onchange="buscarProvincias()" class="select2 form-control">
+                <select style="width: 100%"  id="pais_select" onchange="" class="select2 form-control">
                     <option></option>
                     @foreach($paises as $pais)
-                    <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                    <option relacionados="{{$pais->provincias}}" value="{{$pais->id}}">{{$pais->nombre}}</option>
                     @endforeach
                 </select>
             </div>
@@ -17,10 +17,10 @@
         <div class="control-group">
             <label>Provincia:</label>
             <div class="controls">
-                <select style="width: 100%" id="provincia_select" onchange="buscarLocalidades()" class="select2 form-control">
+                <select style="width: 100%" id="provincia_select" onchange="" class="select2 form-control">
                     <option></option>
                     @foreach($provincias as $provincia)
-                    <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                    <option relacionados="{{$provincia->localidades}}" value="{{$provincia->id}}">{{$provincia->nombre}}</option>
                     @endforeach
                 </select>
             </div>
@@ -33,11 +33,7 @@
                 <select style="width: 100%"  id="localidad_select" name="ubicacion_localidad_id" required placeholder="campo requerido"  class="select2 form-control">                                                           
                     <option></option>
                     @foreach($localidades as $localidad)
-                    @if (isset($inmueble)) && $inmueble->localidad_id)
-                    <option selected value="{{$localidad->id}}">{{$localidad->nombre}}</option>
-                    @else
-                    <option value="{{$localidad->id}}">{{$localidad->nombre}}</option>
-                    @endif
+                        <option value="{{$localidad->id}}">{{$localidad->nombre}}</option>
                     @endforeach
                 </select>
             </div>
@@ -50,12 +46,8 @@
                 <select style="width: 100%"  id="barrio_id" name="barrio_id" placeholder="campo opcional" class="select2 form-control">                                        
                     <option></option>
                     <option value="sin_barrio">No se especifica barrio</option>
-                    @foreach($barrios as $barrio)
-                    @if (isset($inmueble)) && $inmueble->barrio_id)
-                    <option selected value="{{$barrio->id}}">{{$barrio->nombre}}</option>
-                    @else
-                    <option value="{{$barrio->id}}">{{$barrio->nombre}}</option>
-                    @endif
+                    @foreach($barrios as $barrio)                   
+                        <option value="{{$barrio->id}}">{{$barrio->nombre}}</option>                   
                     @endforeach
                 </select>
             </div>
@@ -86,12 +78,8 @@
                 <select style="width: 100%"  onchange="bloquear_datos_depto()" id="edificio_id" name="edificio_id" class="select2 form-control">
                     <option></option>
                     <option value="sin_edificio">No corresponde</option>
-                    @foreach($edificios as $edificio)
-                    @if (isset($inmueble)) && $inmueble->edificio_id)
-                    <option selected value="{{$edificio->id}}">{{$edificio->nombre}}</option>
-                    @else
-                    <option value="{{$edificio->id}}">{{$edificio->nombre}}</option>
-                    @endif
+                    @foreach($edificios as $edificio)                 
+                        <option value="{{$edificio->id}}">{{$edificio->nombre}}</option>                   
                     @endforeach
                 </select>
             </div>

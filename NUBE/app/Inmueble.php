@@ -110,6 +110,6 @@ class Inmueble extends Model {
     }
 
     public function foto_slider() {
-        return $this->fotos->where('seccion_imagen', 'slider')->get()->first();
+        return $this->fotos->where('seccion_imagen', 'slider')->last();//->get()->first();
     }
 }

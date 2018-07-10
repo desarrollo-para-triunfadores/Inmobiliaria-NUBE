@@ -486,7 +486,7 @@ class UsersRolesPermisosTableSeeder extends Seeder
 
         //Asignación de roles a usuarios administradores
 
-        $user_1->assignRole('Personal'); //Hacho
+        $user_1->assignRole('Administrador'); //Hacho
 
         $user_2->assignRole('Administrador');   //JP
 
