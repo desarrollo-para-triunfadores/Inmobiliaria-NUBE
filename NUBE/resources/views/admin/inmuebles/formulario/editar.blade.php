@@ -114,6 +114,20 @@ Inmuebles Registrados
 var marcador = {lat: parseFloat("{{$inmueble->latitud}}"),
     lng: parseFloat("{{$inmueble->longitud}}")};
 var formulario_update = true;
+
+$('#pais_select').val('{{$inmueble->barrio->localidad->provincia->pais_id}}').trigger("change");
+$('#provincia_select').val('{{$inmueble->barrio->localidad->provincia_id}}').trigger("change");
+$('#localidad_select').val('{{$inmueble->barrio->localidad_id}}').trigger("change");
+$('#barrio_id').val('{{$inmueble->barrio_id}}').trigger("change");
+
+if ('{{$inmueble->edificio_id}}') {
+    $('#edificio_id').val('{{$inmueble->edificio_id}}').trigger("change");
+    $('#piso').attr("max", '{{$inmueble->edificio->cant_pisos}}');
+} else {
+    $("#piso").attr("disabled", true);
+    $("#numDepto").attr("disabled", true);
+}
+
 </script>
 
 @endsection

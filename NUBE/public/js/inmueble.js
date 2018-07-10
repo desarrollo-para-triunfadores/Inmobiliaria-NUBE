@@ -93,24 +93,22 @@ $('#example tbody').on('mouseenter', 'td', function () {
 });
 /************************************************************************************************ */
 
-function bloquear_datos_depto() {
+function bloquear_datos_depto() { 
     /*
      * Este método bloquea los inputs que no corresponden si no se escoge un edificio
      */
     var edificio_id = $('#edificio_id').val();
 
     if (edificio_id === 'sin_edificio') {
+        $("#piso").val("");
+        $("#numDepto").val("");
         $("#piso").attr("disabled", true);
         $("#numDepto").attr("disabled", true);
-        $("#piso").attr("required", false);
-        $("#numDepto").attr("required", false);
         $("#piso").attr("placeholder", "campo no requerido");
         $("#numDepto").attr("placeholder", "campo no requerido");
     } else {
         $("#piso").attr("disabled", false);
         $("#numDepto").attr("disabled", false);
-        $("#piso").attr("required", true);
-        $("#numDepto").attr("required", true);
         $("#piso").attr("placeholder", "campo requerido");
         $("#numDepto").attr("placeholder", "campo requerido");
     }
@@ -322,7 +320,30 @@ function filtrar_select(item) {
 
     var options_select_elementos = [];
     switch (item) {
-        case "localidad_select":
+
+
+        case "provincia_select":
+
+            /**
+             * Se solicitan y se cargan los barrios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_localidades_provincia',
+                data: {
+                    lista_ids: $("#provincia_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#localidad_select").html(options_select_elementos);
+                }
+            });
+
+
             /**
              * Se solicitan y se cargan los barrios de la localidad
              */
@@ -340,7 +361,7 @@ function filtrar_select(item) {
                     });
                     $("#barrio_id").html(options_select_elementos);
                 }
-            })
+            });
             /**
              * Se solicitan y se cargan los edificios de la localidad
              */
@@ -359,12 +380,22 @@ function filtrar_select(item) {
                     $("#edificio_id").html(options_select_elementos);
 
                 }
-            })
+            });
+
+            break;
+
+
+
+
+
+
+
+        case "localidad_select":
             /**
-             * Se solicitan y se cargan los inmuebles de la localidad
+             * Se solicitan y se cargan los barrios de la localidad
              */
             $.ajax({
-                url: '/admin/obtener_inmuebles_localidad',
+                url: '/admin/obtener_barrios_localidad',
                 data: {
                     lista_ids: $("#localidad_select").val()
                 },
@@ -373,12 +404,31 @@ function filtrar_select(item) {
                 success: function (data) {
                     options_select_elementos = [];
                     data.forEach(function (element) {
-                        options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: ' + element.piso + '. Departamento: ' + element.numDepto + '</option>');
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
                     });
-                    $("#inmueble_id").html(options_select_elementos);
+                    $("#barrio_id").html(options_select_elementos);
+                }
+            });
+            /**
+             * Se solicitan y se cargan los edificios de la localidad
+             */
+            $.ajax({
+                url: '/admin/obtener_edificios_localidad',
+                data: {
+                    lista_ids: $("#localidad_select").val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    options_select_elementos = [];
+                    data.forEach(function (element) {
+                        options_select_elementos.push('<option value="' + element.id + '">' + element.nombre + '</option>');
+                    });
+                    $("#edificio_id").html(options_select_elementos);
 
                 }
-            })
+            });
+
             break;
         case "barrio_id":
             /**
@@ -407,26 +457,7 @@ function filtrar_select(item) {
                         $("#edificio_id").html(options_select_elementos);
 
                     }
-                })
-                /**
-                 * Se solicitan y se cargan los inmuebles de la localidad
-                 */
-                $.ajax({
-                    url: '/admin/obtener_inmuebles_barrios',
-                    data: {
-                        lista_ids: $("#barrio_id").val()
-                    },
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        options_select_elementos = [];
-                        data.forEach(function (element) {
-                            options_select_elementos.push('<option value="' + element.id + '">Direcci\u00f3n: ' + element.direccion + '. Piso: ' + element.piso + '. Departamento: ' + element.numDepto + '</option>');
-                        });
-                        $("#inmueble_id").html(options_select_elementos);
-
-                    }
-                })
+                });
             }
             break;
         case "edificio_id":
@@ -442,18 +473,16 @@ function filtrar_select(item) {
                 filtrar_select("barrio_id");
             }
             if ($("#edificio_id").val() === 'sin_edificio') {
+                $("#piso").val('');
+                $("#numDepto").val('');
                 $("#piso").attr("disabled", true);
                 $("#numDepto").attr("disabled", true);
-                $("#piso").attr("required", false);
-                $("#numDepto").attr("required", false);
                 $("#piso").attr("placeholder", "campo no requerido");
                 $("#numDepto").attr("placeholder", "campo no requerido");
             }
             else {
                 $("#piso").attr("disabled", false);
                 $("#numDepto").attr("disabled", false);
-                $("#piso").attr("required", true);
-                $("#numDepto").attr("required", true);
                 $("#piso").attr("placeholder", "campo requerido");
                 $("#numDepto").attr("placeholder", "campo requerido");
                 $.ajax({

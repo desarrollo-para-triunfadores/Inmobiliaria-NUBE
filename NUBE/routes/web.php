@@ -30,15 +30,15 @@ Route::get('/home', 'HomeController@index');
 
 /** ADMIN-Side* */
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    
+
     Route::resource('usuarios', 'UsersController');
     # metodo para cerrar sesion
-    Route::get('/logout', function(){
-      Session::flush();
-      Auth::logout();
-      return Redirect::to("/login")
-        ->with('message', array('type' => 'success', 'text' => 'Has cerado sesion correctamente :)'));
-  });
+    Route::get('/logout', function() {
+        Session::flush();
+        Auth::logout();
+        return Redirect::to("/login")
+                        ->with('message', array('type' => 'success', 'text' => 'Has cerado sesion correctamente :)'));
+    });
 
     Route::resource('roles', 'RolesController');
     Route::resource('paises', 'PaisesController');
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('propietarios', 'PropietariosController');
     Route::resource('garantes', 'GarantesController');
     Route::resource('inquilinos', 'InquilinosController');
-    Route::resource('contratos', 'ContratosController');    
+    Route::resource('contratos', 'ContratosController');
     Route::resource('liquidaciones', 'LiquidacionMensualController');
     Route::resource('conceptosliquidaciones', 'ConceptosLiquidacionesController');
     Route::resource('movimientos', 'MovimientosController');
@@ -68,30 +68,28 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('bolsa', 'SolicitudesServicioController@bolsa_solicitudes')->name('bolsa_solicitudes');
     //Reserva de tecnico de una solicitud de bolsa de trabajo ↓
     Route::get('/tecnico_reserva', 'SolicitudesServicioController@tecnico_reserva')->name('tecnico_reserva');   //OK
-    Route::get('/marcar_ss_concluida', 'SolicitudesServicioController@marcar_ss_concluida')->name('marcar_ss_concluida'); 
+    Route::get('/marcar_ss_concluida', 'SolicitudesServicioController@marcar_ss_concluida')->name('marcar_ss_concluida');
     #Para que propietario/inquilino puedan calificar el servicio tecnico
-    Route::get('/calificar', 'SolicitudesServicioController@calificar')->name('caificar'); 
-    
+    Route::get('/calificar', 'SolicitudesServicioController@calificar')->name('caificar');
+
     Route::resource('agenda', 'VisitasController');
     Route::resource('agenda_usuario', 'AgendaUsuariosController');
-    
-  //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
 
-   //Route::resource('oportunidades', 'OportunidadesController');
-   //Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
-   //Route::post('cargar_archivo_correo', 'Mail_contacto_OportunidadesController@store'); //se llama por ajax (post)
-   //Route::post('enviar_correo', 'Mail_contacto_OportunidadesController@enviar');
-   //Route::get('form_enviar_correo', 'Mail_contacto_OportunidadesController@crear');
-   
+    //  Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
+    //Route::resource('oportunidades', 'OportunidadesController');
+    //Route::resource('mail_oportunidad', 'Mail_contacto_OportunidadesController');
+    //Route::post('cargar_archivo_correo', 'Mail_contacto_OportunidadesController@store'); //se llama por ajax (post)
+    //Route::post('enviar_correo', 'Mail_contacto_OportunidadesController@enviar');
+    //Route::get('form_enviar_correo', 'Mail_contacto_OportunidadesController@crear');
+
 
     /**
      * Rutas de métodos específicos 
      */
-
     //Agenda
 
     Route::get('cargaEventos{id?}', 'CalendarController@index');
-    
+
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
 
     //Agenda usuarios
@@ -114,10 +112,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //Contabilidad
     Route::name('contabilidad.verBoleta')->get('contabilidad/verBoleta/{id}', 'EstadisticasController@verBoleta');
     Route::name('contabilidad.ingresos')->get('contabilidad/ingresosMensuales/', 'EstadisticasController@ingresos');
-    Route::get('/contabilidad/coso', function(){
-      $ingresos_mensuales_empresa = "Config::getIngresosXmes()";
-        return response()->json('ingresos_mensuales',$ingresos_mensuales_empresa);   
-  });
+    Route::get('/contabilidad/coso', function() {
+        $ingresos_mensuales_empresa = "Config::getIngresosXmes()";
+        return response()->json('ingresos_mensuales', $ingresos_mensuales_empresa);
+    });
     //Route::get('/ingresosMensuales', 'EstadisticasController@ingresosMensuales')->name('ingresosMensuales');
     //Edificios
     Route::get('/obtener_inmuebles_edificio', 'EdificiosController@obtener_inmuebles')->name('obtener_inmuebles_edificio');
@@ -137,7 +135,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     //Notificaciones
     Route::get('/ocultar_notificaciones', 'NotificacionesController@ocultar_notificaciones')->name('ocultar_notificaciones');
-    Route::get('/confirmar_visita', 'NotificacionesController@confirmar_visita')->name('confirmar_visita');    
+    Route::get('/confirmar_visita', 'NotificacionesController@confirmar_visita')->name('confirmar_visita');
 
     //Pagos
     Route::get('/registrar_pago', 'PagosController@registrar_pago')->name('registrar_pago');
@@ -156,7 +154,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
-
-
 });
 Auth::routes();
