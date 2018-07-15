@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand nav" id="brand">
-                    <a href="{{ route('index') }}"><img src=" {{asset('imagenes/LOGO-NUBE-editado.png')}}" alt="brand"></a>
+                    <a href="{{ route('index') }}"><img src=" {{asset('imagenes/LOGO-NUBE.png')}}" alt="logo"></a>
                 </div>
             </div>
             <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">

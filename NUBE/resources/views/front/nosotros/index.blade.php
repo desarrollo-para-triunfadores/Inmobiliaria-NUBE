@@ -7,7 +7,7 @@
 
     @include('front.partes.estilos')
 
-    <title>Inmubiliaria NUBE | Sistema de gestión inmobiliaria</title>
+    <title>Inmubiliaria NUBE | Sistema de gestiï¿½n inmobiliaria</title>
 
 </head>
 
@@ -18,7 +18,11 @@
 
     @include('front.nosotros.contenido')
 
+
+
+{{--
     @include('front.partes.pie')
+    --}}
     <!-- end Page Footer -->
 </div>
 

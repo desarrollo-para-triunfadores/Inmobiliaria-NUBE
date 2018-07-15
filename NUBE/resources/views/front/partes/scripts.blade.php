@@ -87,3 +87,5 @@
 
     google.maps.event.addDomListener(window, 'load', contactUsMap(_latitude,_longitude));
 </script>
+
+<script type="text/javascript" src="{{ asset('plantillas/plugins/CircleHoverEffects/js/modernizr.custom.79639.js') }}"></script>
