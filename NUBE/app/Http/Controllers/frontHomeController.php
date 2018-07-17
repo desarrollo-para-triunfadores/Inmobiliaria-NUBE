@@ -23,11 +23,9 @@ class frontHomeController extends Controller
                                          ->with('imagenesInmuebles', $imagenesInmuebles);
     }
 
-    /*
-    public function mantenimiento()
+
+    public function comoFunciona()
     {
-        Flash::overlay('Bien! su mensaje se envio correctamente');
-        return Redirect::to('/');
+        return view('front.comofunciona.index');
     }
-    */
 }

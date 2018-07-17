@@ -1,7 +1,7 @@
-<section id="descripcion_2">
+<section id="descripcion_3">
     <div class="container">
         <div class="row">
-            <img src={{asset('imagenes/home/tablet.jpg')}} data-speed="1.75" class="img-parallax">
+            <img src={{asset('imagenes/home/mockup2.png')}} data-speed="1.75" class="img-parallax">
             <div class="block_juampy">
 
 
