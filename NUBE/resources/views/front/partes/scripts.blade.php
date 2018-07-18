@@ -58,7 +58,7 @@
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/icheck.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/retina-1.1.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/jquery.raty.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/jquery.magnific-popup.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/jquery.magnific-popup.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/jshashtable-2.1_src.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/jquery.numberformatter-1.2.3.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/tmpl.js') }}"></script>
@@ -70,6 +70,13 @@
 <!--[if gt IE 8]>
 <script type="text/javascript" src="{{ asset('plantillas/zonner/assets/js/ie.js') }}"></script>
 <![endif]-->
+
+
+<!--JS Propios-->
+<script type="text/javascript" src="{{ asset('js/front/home.js') }}"></script>
+
+
+
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCZ6feoOdCWYThPUIoyFcoZOmPI1Brutr4"></script>
 <script type="text/javascript">

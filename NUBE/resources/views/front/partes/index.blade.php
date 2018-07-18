@@ -7,19 +7,19 @@
 
     @include('front.partes.estilos')
 
-    <title>Inmubiliaria NUBE | Sistema de gestión inmobiliaria</title>
+    <title>Cloudprop | Sistema de gestiÃ³n inmobiliaria</title>
 
 </head>
 
-<body class="page-homepage navigation-fixed-top page-slider page-slider-search-box" id="page-top" data-spy="scroll" data-target=".navigation" data-offset="90">
+<body>
 <!-- Wrapper -->
 <div class="wrapper">
     @include('front.partes.navbar')
     <!-- Slider -->
-    @include('front.partes.slider')
+    @include('front.partes.portada')
     <!-- end Slider -->
     <!-- Search Box -->
-    @include('front.partes.searchbox')
+
     <!-- end Search Box -->
     <!-- Page Content -->
 
