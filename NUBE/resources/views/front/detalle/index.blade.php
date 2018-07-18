@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="NeaSoft">
 
-    <title>NUBE | Detalle de Inmueble</title>
+    <title>CloudProp | Detalle de Inmueble</title>
     @include('front.partes.estilos')
 </head>
 

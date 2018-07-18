@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @include('front.partes.estilos')
+    <title>Inmubiliaria CloudProp | Sistema de gestión inmobiliaria</title>
 
     <title>Cloudprop | Sistema de gestión inmobiliaria</title>
 
@@ -24,8 +25,6 @@
     <!-- Page Content -->
 
     @include('front.inicio.contenido')
-    <!-- end Page Content -->
-    <!-- Page Footer -->
 
     @include('front.partes.pie')
     <!-- end Page Footer -->
@@ -34,5 +33,6 @@
 <div id="overlay"></div>
 
 @include('front.partes.scripts')
+
 </body>
 </html>

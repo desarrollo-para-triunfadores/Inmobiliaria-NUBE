@@ -56,11 +56,20 @@
                             </div>
                         </section><!-- /#video-presentation -->
 
-                        <a href="agent-detail.html" class="image"><img alt="" src="assets/img/agent-01.jpg"></a>
+                        {{--
                         <a href="agent-detail.html"><h3>Juan Rubio</h3></a>
                         <figure class="subtitle">CEO</figure>
                         <div class="background-image"><img alt="" src="assets/img/about-us-bg.jpg"></div>
+--}}
+
+                        @include('front.nosotros.equipo')
+
+
+
                     </section><!-- /#ceo-section -->
+
+
+
                     <div class="divider-image center"><img alt="" src="assets/img/sine-wave.png"></div>
 
                     {{--

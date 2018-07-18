@@ -19,6 +19,7 @@ Route::resource('/inmueble', 'RolesController');
 Route::resource('enviar_consulta', 'OportunidadesFrontController'); //Enviar email interesado ? a sistema (se crea Oportunidad en backend)
 Route::resource('/detalle', 'frontDetalleController');
 Route::resource('/nosotros', 'frontNosotrosController');
+Route::name('/comofunciona')->get('/comofunciona/', 'frontHomeController@comofunciona');
 Route::resource('/listapropiedades', 'frontListadoController');
 Route::resource('/contacto', 'ContactoFrontController');
 Route::resource('/mail', 'MailFrontController');
