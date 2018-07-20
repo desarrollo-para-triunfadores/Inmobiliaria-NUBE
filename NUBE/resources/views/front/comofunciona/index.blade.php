@@ -12,12 +12,19 @@
 
 <body class="page-sub-page page-property-detail" id="page-top">
 <!-- Wrapper -->
-<div class="wrapper">
+<div class=""> <!--class era wrapper -->
     <!-- Navigation -->
     @include('front.partes.navbar')
     <!-- end Navigation -->
     <!-- Page Content -->
     @include('front.comofunciona.contenido')
+    @include('front.comofunciona.descripcion_1')
+    <hr class="divider">
+    @include('front.comofunciona.descripcion_2')
+    <hr class="divider">
+    @include('front.comofunciona.descripcion_3')
+    <hr class="divider">
+@include('front.comofunciona.descripcion_4')
     <!-- end Page Content -->
     <!-- Page Footer -->
     @include('front.partes.pie')

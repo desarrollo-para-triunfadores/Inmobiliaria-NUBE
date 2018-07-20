@@ -31,6 +31,22 @@ and open the template in the editor.
     text-align: center;
 }
 
+/*ComoFunciona→Portada Parallax*/
+.parallax-comofunciona {
+    background-image: url("../imagenes/comofunciona/Portada.png");
+    min-height: 650px;
+    min-width: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
 .parallax-container {
     width: 650px;
 }

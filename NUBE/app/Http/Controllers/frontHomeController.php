@@ -27,5 +27,6 @@ class frontHomeController extends Controller
     public function comoFunciona()
     {
         return view('front.comofunciona.index');
+        //return view('front.comofunciona.example');
     }
 }

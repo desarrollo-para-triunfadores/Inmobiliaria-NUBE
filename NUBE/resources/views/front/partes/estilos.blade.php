@@ -22,8 +22,10 @@
 <link type="text/css" rel="stylesheet" href="{{ asset('css/estilos_portada.css') }}">
 <link href="https://fonts.googleapis.com/css?family=Raleway:200,400" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="{{ asset('css/animate.css') }}">
-    <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/plugins/CircleHoverEffects/css/style6.css') }}">
-
+<link type="text/css" rel="stylesheet" href="{{ asset('plantillas/plugins/CircleHoverEffects/css/style6.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/plugins/ArticleIntroEffects/css/normalize.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/plugins/ArticleIntroEffects/css/demo.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/plugins/ArticleIntroEffects/css/component.css') }}">
  <!-- Magnific Popup core CSS file -->
 <link type="text/css" rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
 

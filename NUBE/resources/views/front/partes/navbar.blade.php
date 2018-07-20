@@ -5,7 +5,7 @@
                 <figure>
                     <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<strong>Teléfono:</strong>+1 810-991-3842</figure>
                 <figure>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<strong>Email:</strong>zoner@example.com</figure>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<strong>Email:</strong>info@cloudprop.com</figure>
             </div>
             <div class="user-area">
                 <div class="actions">
@@ -187,12 +187,14 @@
                 </ul>
             </nav>
             <!-- /.navbar collapse-->
+            {{--
             <div class="add-your-property">
                 <a href="submit.html" class="btn btn-default">
                     <i class="fa fa-plus"></i>
                     <span class="text">Conoce cómo funciona</span>
                 </a>
             </div>
+            --}}
         </header>
         <!-- /.navbar -->
     </div>
