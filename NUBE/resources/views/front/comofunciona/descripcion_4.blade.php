@@ -1,10 +1,10 @@
 <section class="bloque-trio-h">
     <div class="container">
         <div class="row text-left">
-            <div class="col-xs-12 col-sm-6 col-md-6 hidden-xs">
+            <div class="col-xs-12 col-sm-6 col-md-6 hidden-xs wow fadeInRight">
                 <img src="{{ asset('imagenes/comofunciona/ServicioTecnico.jpg') }}" class="img-responsive fullwidth">
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6 wow fadeInLeft">
                 <div class="bloque-descripcion">
                     <div class="item-descripcion-titulo no-check"><strong>Reparación y mantenimiento</strong></div>
                     <div class="item-descripcion-info">

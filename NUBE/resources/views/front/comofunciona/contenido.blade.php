@@ -11,7 +11,7 @@
 </head>
 
 
-		<div id="container" class="intro-effect-push">
+		<div id="container" class="{{-- intro-effect-push --}}">
 			<!-- Top Navigation -->
 			<header class="header">
 				<div class="parallax-comofunciona"></div>
@@ -34,7 +34,8 @@
 
 		</div><!-- /container -->
 		<script src="{{asset('plantillas/plugins/ArticleIntroEffects/js/classie.js')}}"></script>
-		<script>
+		{{--
+        <script>
 			(function() {
 
 				// detect if IE : from http://stackoverflow.com/a/16657946
@@ -176,5 +177,6 @@
 				trigger.addEventListener( 'click', function() { toggle( 'reveal' ); } );
 			})();
 		</script>
+		--}}
 
 </html>

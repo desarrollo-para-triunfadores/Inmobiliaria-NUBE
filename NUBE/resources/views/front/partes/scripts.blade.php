@@ -96,3 +96,20 @@
 </script>
 
 <script type="text/javascript" src="{{ asset('plantillas/plugins/CircleHoverEffects/js/modernizr.custom.79639.js') }}"></script>
+
+
+
+
+
+
+
+
+<!-- Smoothscroll -->
+<script type="text/javascript" src="{{asset('js/front/jquery.corner.js')}}"></script>
+<script src="{{asset('js/front/wow.min.js')}}"></script>
+<script>
+    new WOW().init();
+</script>
+<!-- Magnific Popup core JS file -->
+<script src="asset('js/front/js/jquery.magnific-popup.js')}}"></script>
+

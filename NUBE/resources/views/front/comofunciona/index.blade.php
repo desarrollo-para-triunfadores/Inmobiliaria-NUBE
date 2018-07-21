@@ -19,12 +19,14 @@
     <!-- Page Content -->
     @include('front.comofunciona.contenido')
     @include('front.comofunciona.descripcion_1')
-    <hr class="divider">
+    <hr class="divider"><br>
     @include('front.comofunciona.descripcion_2')
-    <hr class="divider">
+    <hr class="divider"><br>
     @include('front.comofunciona.descripcion_3')
-    <hr class="divider">
+    <hr class="divider"><br>
 @include('front.comofunciona.descripcion_4')
+    <br>
+
     <!-- end Page Content -->
     <!-- Page Footer -->
     @include('front.partes.pie')
