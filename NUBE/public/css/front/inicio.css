@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/07/2018, 18:07:05
+    Author     : hacho
+*/
+
+/* Parallax Portada-------------------------------------------------------------------------------------- */
+
+#parallax-portada {
+    background-image: url("../../imagenes/iconos/Portada.jpg");
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#parallax-portada .parallax-container {
+    width: 650px;
+}
+
+#parallax-portada h3 {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 300%;
+    font-weight: 400;
+}
+
+#parallax-portada h5 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 250%;
+    color: white;
+    font-weight: 350;
+}
+
+.sombra {
+    text-shadow: 3px 3px 2px rgb(25, 26, 25);
+    color: #666;
+}
+
+#parallax-portada a img {
+    cursor: pointer;
+}
+
+
+/* Banner búsqueda-------------------------------------------------------------------------------------- */
+
+#banner-busqueda {
+    background-image: url("../../imagenes/iconos/searchbox-bg.jpg");
+}
+
+#banner-busqueda .fondo-traslucido {
+    background-color: rgba(57, 162, 222, 0.8);
+}
+
+#banner-busqueda .btn-busqueda {
+    width: 100%;
+    background-color: #073855;
+    color: #fff;
+}
+

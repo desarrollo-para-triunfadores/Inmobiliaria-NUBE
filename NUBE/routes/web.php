@@ -14,6 +14,12 @@
 Route::auth();
 
 /** Web-Side * */
+/*
+Route::get('/', function() {
+    return view('front.inicio.main');
+});
+*/
+
 Route::resource('/', 'frontHomeController');
 Route::resource('/inmueble', 'RolesController');
 Route::resource('enviar_consulta', 'OportunidadesFrontController'); //Enviar email interesado ? a sistema (se crea Oportunidad en backend)

@@ -1,0 +1,381 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+/* 
+    Created on : 24/07/2018, 18:07:05
+    Author     : hacho
+*/
+
+
+/* Parallax Portada-------------------------------------------------------------------------------------- */
+
+#parallax-portada {
+    background-image: url("../../imagenes/comofunciona/Portada.png");
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#parallax-portada .parallax-container {
+    width: 750px;
+}
+
+#parallax-portada h3 {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 300%;
+    font-weight: 600;
+    margin:0 0 25px;
+    overflow:hidden;
+    padding:20px;
+    background-color: rgba(120, 119, 119, 0.5);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#parallax-portada h5 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 250%;
+    color: white;
+    font-weight: 350;
+}
+
+.sombra {
+    text-shadow: 3px 3px 2px rgb(25, 26, 25);
+    color: #666;
+}
+
+#parallax-portada a img {
+    cursor: pointer;
+}
+
+
+
+/* Section Iconos-------------------------------------------------------------------------------------- */
+
+#section-iconos {
+    display: block;
+    padding: 50px 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    text-align: center
+}
+
+#section-iconos * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+#section-iconos h1,
+#section-iconos h2,
+#section-iconos h4 {
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    border-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+#section-iconos h1,
+#section-iconos h2 {
+    margin-top: 20px;
+    margin-bottom: 10px
+}
+
+#section-iconos h1 {
+    font-size: 36px
+}
+
+#section-iconos h2 {
+    font-size: 30px
+}
+
+#section-iconos h4 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+#section-iconos p {
+    margin: 0 0 10px
+}
+
+#section-iconos .col-xs-6 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: left;
+    width: 50%
+}
+
+#section-iconos .col-md-3 {
+    float: left;
+    width: 25%
+}
+
+#section-iconos .row:after {
+    content: " ";
+    display: table;
+    clear: both
+}
+
+#section-iconos .strong-title {
+    font-weight: 400
+}
+
+#section-iconos .hidden-content {
+    display: none
+}
+
+#section-iconos .color-banner {
+    color: #fff
+}
+
+#section-iconos {
+    background: url('../../imagenes/iconos/fondo.png') no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover
+}
+
+#section-iconos h2,
+#section-iconos h4 {
+    color: #fff
+}
+
+#section-iconos .contribution-columns {
+    margin: 4em 0 2em
+}
+
+#section-iconos .contribution-columns .col-xs-6:first-of-type {
+    border-right: 1px solid #fff
+}
+
+#section-iconos #contribute-details {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    display: none;
+    -webkit-transition: background 0.5s;
+    transition: background 0.5s
+}
+
+#section-iconos #contribute-details .close-details {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5em;
+    font-weight: bold
+}
+
+#section-iconos #contribute-details .contribution-extended-details {
+    padding: 90px 90px;
+    color: #fff
+}
+
+#section-iconos #contribute-details .contribution-extended-details p {
+    font-size: 1.4em
+}
+
+#section-iconos .contribute-propietario,
+#section-iconos .contribute-inquilino {
+    height: 200px;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative
+}
+
+#section-iconos .contribute-propietario i,
+#section-iconos .contribute-inquilino i,
+#section-iconos .contribute-propietario h1,
+#section-iconos .contribute-inquilino h1,
+#section-iconos .contribute-propietario h4,
+#section-iconos .contribute-inquilino h4 {
+    -webkit-transition: -webkit-transform .5s, color .5s;
+    transition: transform 0.5s, color .5s ease;
+    z-index: 200
+}
+
+#section-iconos .contribute-propietario i,
+#section-iconos .contribute-inquilino i {
+    -webkit-transform: perspective(1000px) rotate3d(0, 1, 0, 0deg);
+    transform: perspective(1000px) rotate3d(0, 1, 0, 0deg)
+}
+
+#section-iconos .contribute-propietario:hover,
+#section-iconos .contribute-inquilino:hover {
+    cursor: pointer
+}
+
+#section-iconos .contribute-propietario:hover i,
+#section-iconos .contribute-inquilino:hover i,
+#section-iconos .contribute-propietario:hover h1,
+#section-iconos .contribute-inquilino:hover h1 {
+    color: #fff
+}
+
+#section-iconos .contribute-propietario h1,
+#section-iconos .contribute-inquilino h1 {
+    font-size: xx-large;
+}
+
+#section-iconos .contribute-propietario:hover h1,
+#section-iconos .contribute-inquilino:hover h1 {
+    font-size: x-large;
+}
+
+#section-iconos .contribute-propietario h1,
+#section-iconos .contribute-inquilino h1,
+#section-iconos .contribute-propietario h4,
+#section-iconos .contribute-inquilino h4 {
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: absolute
+}
+
+#section-iconos .contribute-propietario::before,
+#section-iconos .contribute-inquilino::before {
+    content: '';
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    border-radius: 100%;
+    top: -25px;
+    left: -25px;
+    z-index: 0;
+    background: #173f4f;
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0);
+    -webkit-transition: -webkit-transform .5s;
+    transition: transform 0.5s
+}
+
+#section-iconos .contribute-propietario:hover::before,
+#section-iconos .contribute-inquilino:hover::before {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1)
+}
+
+#section-iconos .contribute-propietario.active::before,
+#section-iconos .contribute-inquilino.active::before {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1)
+}
+
+#section-iconos .contribute-propietario.active,
+#section-iconos .contribute-inquilino.active {
+    cursor: pointer
+}
+
+#section-iconos .contribute-propietario.active i,
+#section-iconos .contribute-inquilino.active i,
+#section-iconos .contribute-propietario.active h1,
+#section-iconos .contribute-inquilino.active h1 {
+    color: #fff
+}
+
+#section-iconos .contribute-propietario.active i,
+#section-iconos .contribute-inquilino.active i {
+    -webkit-transform: perspective(1000px) rotate3d(0, 1, 0, 360deg);
+    transform: perspective(1000px) rotate3d(0, 1, 0, 360deg)
+}
+
+#section-iconos .contribute-propietario.active h4,
+#section-iconos .contribute-inquilino.active h4 {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+#section-iconos .contribute-propietario h4,
+#section-iconos .contribute-inquilino h4 {
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0;
+    bottom: 20px;
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+    -webkit-transition: -webkit-transform .5s, opacity .5s;
+    transition: transform 0.5s, opacity 0.5s
+}
+
+#section-iconos .contribute-propietario:hover i,
+#section-iconos .contribute-inquilino:hover i {
+    -webkit-transform: perspective(1000px) rotate3d(0, 1, 0, 360deg);
+    transform: perspective(1000px) rotate3d(0, 1, 0, 360deg)
+}
+
+#section-iconos .contribute-propietario:hover h4,
+#section-iconos .contribute-inquilino:hover h4 {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+
+@media (max-width: 768px) {
+    #section-iconos .contribute-propietario,
+    #section-iconos .contribute-inquilino {
+        height: 160px;
+        width: 160px
+    }
+    #section-iconos .contribute-propietario::before,
+    #section-iconos .contribute-inquilino::before {
+        height: 180px;
+        width: 180px;
+        top: -10px;
+        left: -10px
+    }
+    #section-iconos .contribute-propietario i.fa-5x,
+    #section-iconos .contribute-inquilino i.fa-5x {
+        font-size: 3em
+    }
+    #section-iconos #contribute-details .close-details {
+        font-size: 1.2em
+    }
+    #section-iconos #contribute-details .contribution-extended-details {
+        padding: 10px 20px
+    }
+    #section-iconos #contribute-details .contribution-extended-details h1 {
+        font-size: 22px
+    }
+}
+
+#section-iconos .espaciado {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#section-iconos ::selection {
+    background-color: black;
+    color: #fff;
+}
+
+#section-iconos ::-moz-selection {
+    background-color: black;
+    color: #fff;
+}
+
+.relleno {
+    padding-bottom: 150px;
+}
+
+
+/* Section Descripción 1, 2, 3 y 4-------------------------------------------------------------------------------------- */
+

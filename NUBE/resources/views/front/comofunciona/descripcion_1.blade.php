@@ -16,10 +16,10 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 hidden-xs animated fadeInRightBig"><img src="{{asset('imagenes/comofunciona/GestoriaProfesional.jpg')}}" class="img-responsive fullwidth">
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+</div>
+</div>
+</section>
 </div>
 --}}
 
@@ -40,9 +40,8 @@
                     <li>Gestión Contractual: Autorización de alquiler y gestión notarial del contrato</li>
                 </div>
                 <p class="lead">
-                   <!-- aca se puede meter texto mas pequeño -->
+                    <!-- aca se puede meter texto mas pequeño -->
                 </p>
-
                 <p>
                     <a class="btn btn-embossed btn-primary" href="#" role="button">Ver Detalles</a>
                     <a class="btn btn-embossed btn-info" href="#" role="button">Registrarme</a>

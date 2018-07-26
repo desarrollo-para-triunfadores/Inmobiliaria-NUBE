@@ -15,7 +15,7 @@ class frontListadoController extends Controller
     {
         $inmuebles = Inmueble::all();
         $imagenesInmuebles = ImagenInmueble::all();
-        return view('front.listado.index')
+        return view('front.listado.main')
             ->with('inmuebles', $inmuebles)
             ->with('imagenesInmuebles', $imagenesInmuebles);
     }

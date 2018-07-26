@@ -19,7 +19,7 @@ class frontDetalleController extends Controller
     {
         $inmueble = Inmueble::find($id);
         $imagenesInmueble = ImagenInmueble::where('inmueble_id',$id)->get();
-        return view('front.detalle.index')
+        return view('front.detalle.main')
             ->with('inmueble', $inmueble)
             ->with('imagenesInmueble', $imagenesInmueble);
     }

@@ -18,15 +18,15 @@ class frontHomeController extends Controller
         $inmuebles = Inmueble::where('disponible','1')->get();
         $proyectos = Proyecto::all();
         $imagenesInmuebles = ImagenInmueble::all();
-        return view('front.partes.index')->with('inmuebles', $inmuebles)
-                                         ->with('proyectos', $proyectos)
-                                         ->with('imagenesInmuebles', $imagenesInmuebles);
+        return view('front.inicio.main')->with('inmuebles', $inmuebles)
+                                        ->with('proyectos', $proyectos)
+                                        ->with('imagenesInmuebles', $imagenesInmuebles);
     }
 
 
     public function comoFunciona()
     {
-        return view('front.comofunciona.index');
-        //return view('front.comofunciona.example');
+//       // return view('front.comofunciona.index');
+        return view('front.comofunciona.main');
     }
 }

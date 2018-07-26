@@ -1,182 +1,86 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<section id="section-iconos">
 
-	@include('front.partes.estilos')
-	<title>Inmubiliaria CloudProp | Sistema de gestión inmobiliaria</title>
-
-	<title>Cloudprop | Sistema de gestión inmobiliaria</title>
-</head>
-
-
-		<div id="container" class="{{-- intro-effect-push --}}">
-			<!-- Top Navigation -->
-			<header class="header">
-				<div class="parallax-comofunciona"></div>
-				<div class="title">
-					<h1>Tus servicios inmobiliarios, en la nube</h1>
-				</div>
-			</header>
-			<button class="trigger" data-info="Saber más"><span>Trigger</span></button>
-
-			<article class="content">
-				<div>
-					<blockquote>
-						<!--
-						CloudProp es una empresa de servicios inmobiliarios que busca entregar una nueva experiencia en confort y seguridad a sus clientes a través de un software de administración exclusivo.
-						-->
-						Nuestra misión es brindar la máxima transparencia, seguridad y beneficios a nuestros clientes, con la intención de ser la mejor forma de buscar, encontrar y administrar tu inmueble ideal.
-						.</blockquote>
-				</div>
-			</article>
-
-		</div><!-- /container -->
-		<script src="{{asset('plantillas/plugins/ArticleIntroEffects/js/classie.js')}}"></script>
-		{{--
-        <script>
-			(function() {
-
-				// detect if IE : from http://stackoverflow.com/a/16657946
-				var ie = (function(){
-					var undef,rv = -1; // Return value assumes failure.
-					var ua = window.navigator.userAgent;
-					var msie = ua.indexOf('MSIE ');
-					var trident = ua.indexOf('Trident/');
-
-					if (msie > 0) {
-						// IE 10 or older => return version number
-						rv = parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-					} else if (trident > 0) {
-						// IE 11 (or newer) => return version number
-						var rvNum = ua.indexOf('rv:');
-						rv = parseInt(ua.substring(rvNum + 3, ua.indexOf('.', rvNum)), 10);
-					}
-
-					return ((rv > -1) ? rv : undef);
-				}());
-
-
-				// disable/enable scroll (mousewheel and keys) from http://stackoverflow.com/a/4770179
-				// left: 37, up: 38, right: 39, down: 40,
-				// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-				var keys = [32, 37, 38, 39, 40], wheelIter = 0;
-
-				function preventDefault(e) {
-					e = e || window.event;
-					if (e.preventDefault)
-					e.preventDefault();
-					e.returnValue = false;
-				}
-
-				function keydown(e) {
-					for (var i = keys.length; i--;) {
-						if (e.keyCode === keys[i]) {
-							preventDefault(e);
-							return;
-						}
-					}
-				}
-
-				function touchmove(e) {
-					preventDefault(e);
-				}
-
-				function wheel(e) {
-					// for IE
-					//if( ie ) {
-						//preventDefault(e);
-					//}
-				}
-
-				function disable_scroll() {
-					window.onmousewheel = document.onmousewheel = wheel;
-					document.onkeydown = keydown;
-					document.body.ontouchmove = touchmove;
-				}
-
-				function enable_scroll() {
-					window.onmousewheel = document.onmousewheel = document.onkeydown = document.body.ontouchmove = null;
-				}
-
-				var docElem = window.document.documentElement,
-					scrollVal,
-					isRevealed,
-					noscroll,
-					isAnimating,
-					container = document.getElementById( 'container' ),
-					trigger = container.querySelector( 'button.trigger' );
-
-				function scrollY() {
-					return window.pageYOffset || docElem.scrollTop;
-				}
-
-				function scrollPage() {
-					scrollVal = scrollY();
-
-					if( noscroll && !ie ) {
-						if( scrollVal < 0 ) return false;
-						// keep it that way
-						window.scrollTo( 0, 0 );
-					}
-
-					if( classie.has( container, 'notrans' ) ) {
-						classie.remove( container, 'notrans' );
-						return false;
-					}
-
-					if( isAnimating ) {
-						return false;
-					}
-
-					if( scrollVal <= 0 && isRevealed ) {
-						toggle(0);
-					}
-					else if( scrollVal > 0 && !isRevealed ){
-						toggle(1);
-					}
-				}
-
-				function toggle( reveal ) {
-					isAnimating = true;
-
-					if( reveal ) {
-						classie.add( container, 'modify' );
-					}
-					else {
-						noscroll = true;
-						disable_scroll();
-						classie.remove( container, 'modify' );
-					}
-
-					// simulating the end of the transition:
-					setTimeout( function() {
-						isRevealed = !isRevealed;
-						isAnimating = false;
-						if( reveal ) {
-							noscroll = false;
-							enable_scroll();
-						}
-					}, 1200 );
-				}
-
-				// refreshing the page...
-				var pageScroll = scrollY();
-				noscroll = pageScroll === 0;
-
-				disable_scroll();
-
-				if( pageScroll ) {
-					isRevealed = true;
-					classie.add( container, 'notrans' );
-					classie.add( container, 'modify' );
-				}
-
-				window.addEventListener( 'scroll', scrollPage );
-				trigger.addEventListener( 'click', function() { toggle( 'reveal' ); } );
-			})();
-		</script>
-		--}}
-
-</html>
+    <h2 class="strong-title wow fadeInDown sombra" lang="en">Trabajá con nosotros</h2>
+    <h4 class="strong-title wow fadeInDown sombra" data-wow-delay=".5s" lang="en">Para cada quién tenemos un conjunto de beneficios y facilidades para ofrecerle</h4>
+    <div class="row contribution-columns">
+        <div class="col-xs-6 contribution-propietario">
+            <div class="contribute-propietario">
+                <i class="fa fa-5x fa-home color-banner"></i>
+                <h1 class="color-banner sombra size-h1-contribution" lang="en">¿Querés alquilar tu propiedad?</h1>
+                <h4 class="sombra" lang="en">Saber más</h4>
+            </div>
+            <div class="hidden-content">
+                <div class="row">
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/registrar.png')}}">
+                        <p class="espaciado">Registras tu inmueble y entregas las llaves al corredor.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/seguimiento-de-etapas-de-venta.png')}}">
+                        <p class="espaciado">Sigues cada etapa de la negociación con los potenciales clientes y recibes toda la información
+                            sobre ellos.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/pulgar arriba.jpg')}}">
+                        <p class="espaciado">Apruebas o rechazas las solicitudes de alquiler.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/firmar contrato.jpg')}}">
+                        <p class="espaciado">Firmás el el contrato de alquiler y pagás al corredor el 1% del valor del contrato.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/check.png')}}">
+                        <p class="espaciado">Disfrutás de todos los beneficios de la plataforma.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/ahorro.png')}}">
+                        <p class="espaciado">Solo pagás el 3.85% al mes y te ahorrás hasta un 60%.</p>
+                    </div>
+                </div>
+                <div class="relleno"></div>
+            </div>
+        </div>
+        <div class="col-xs-6 contribution-inquilino">
+            <div class="contribute-inquilino">
+                <i class="fa fa-5x fa-building-o color-banner"></i>
+                <h1 class="color-banner sombra size-h1-contribution" lang="en">¿Estás buscando mudarte?</h1>
+                <h4 class="sombra" lang="en">Saber más</h4>
+            </div>
+            <div class="hidden-content">
+                <div class="row">
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/buscar.png')}}">
+                        <p class="espaciado">Busca y encuentra tu inmueble ideal.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/rellenar-formulario.png')}}">
+                        <p class="espaciado">Rellenas el formulario del inmueble que quieres alquilar y uno de nuestros corredores
+                            se comunicará con vos para brindarte toda la información.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/agendar.png')}}">
+                        <p class="espaciado">Agendás una visita.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/firmar contrato.jpg')}}">
+                        <p class="espaciado">Firmás el el contrato de alquiler.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/check.png')}}">
+                        <p class="espaciado">Disfrutás de todos los beneficios de la plataforma.</p>
+                    </div>
+                    <div class="col-hidden col-md-4">
+                        <img width="90" src="{{asset('imagenes/comofunciona/ahorro.png')}}">
+                        <p class="espaciado">Solo pagás el 3.15% al mes y te ahorrás hasta un 25%.</p>
+                    </div>
+                </div>
+                <div class="relleno"></div>
+            </div>
+        </div>
+    </div>
+    <div id="contribute-details" style='overflow-y: scroll;'></div>
+</section>
