@@ -1,12 +1,94 @@
-<div id="page-content">
-    <!-- Breadcrumb -->
-    <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="#">Inicio</a></li>
-            <li class="active">Quienes somos</li>
-        </ol>
+
+<div id="header">
+    <div class="bg-overlay"></div>
+    <div class="center text-center">
+        <div class="banner">
+            <h1 class="">CloudProp</h1>
+        </div>
+        <div class="subtitle"><h4>"inserte aqui un slogan cool</h4></div>
     </div>
-    <!-- end Breadcrumb -->
+    <div class="bottom text-center">
+        <a id="scrollDownArrow" href="#"><i class="fa fa-chevron-down"></i></a>
+    </div>
+</div>
+<!-- /#header -->
+
+<div id="story" class="light-wrapper">
+    <section class="ss-style-top"></section>
+    <div class="container inner">
+        <h2 class="section-title text-center">Venimos a revolucionar el mercado</h2>
+        <p class="lead main text-center"></p>
+        <div class="row text-center story">
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper"> <i class="fa fa-building"></i> </div>
+                    <h3>Todas las soluciones para alquilar en un solo lugar</h3>
+                    <p>Cloudprop es una plataforma para personas que desean alquilar o administrar sus alquileres y que buscan una
+                    alternativa de mayor calidad y menores costos a las inmobiliarias tradicionales</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper"> <i class="fa  fa-bar-chart"></i> </div>
+                    <h3>Es un marketplace de servicios inmobiliarios</h3>
+                    <p>Integramos los servicios de corredores inmobiliarios, profesionales de reparación y mantenimiento
+                    y aseguradoras en un solo lugar, proporcionandoles herramientas para la automatización de procesos
+                    lentos y complejos del viejo modelo de negocio.</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper"> <i class="fa fa-certificate"></i> </div>
+                    <h3>Más calidad, menos costos</h3>
+                    <p>La tecnologia nos permitio revolucionar un sector que ha quedado en el tiempo, y desarrollamos un modelo de
+                        negocio que ofrece <strong>más por menos</strong> a todas las partes</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.services -->
+    </div>
+    <!-- /.container -->
+    <section class="ss-style-bottom"></section>
+</div><!-- #story -->
+
+
+<div id="facts" class="parallax parallax2 facts">
+    <div class="container inner">
+        <div class="row text-center services-3">
+            <div class="col-sm-3">
+                <div class="col-wrapper">
+                    <div class="icon-border bm10"> <i class="fa fa-gears"></i> </div>
+                    <h5>Automatización de procesos</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-wrapper">
+                    <div class="icon-border bm10"> <i class="fa fa-trash-o"></i> </div>
+                    <h5>Servicio de limpieza bonificado</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-wrapper">
+                    <div class="icon-border bm10"> <i class="fa fa-handshake-o"></i> </div>
+                    <h5>Club de Beneficios de comercios adheridos</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-wrapper">
+                    <div class="icon-border bm10"> <i class="fa fa-wrench"></i> </div>
+                    <h5>Reparación y mantenimiento bonificado del hogar</h5>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div><!-- #facts -->
+<!-- Video -->
+
 
     <div class="container">
         <div class="row">
@@ -17,6 +99,7 @@
                     <header><h1>Quienes somos</h1></header>
                     <section id="ceo-section" class="center">
                         <header class="center"><div class="cite-title">Inmobiliaria NUBE</div></header>
+                        <!--
                         <div class="cite no-bottom-margin">
                             <p>Nube es una empresa de servicios inmobiliarios que busca entregar una nueva experiencia en confort y seguridad a sus clientes a través de un software de administración exclusivo.
                             </p>
@@ -26,26 +109,8 @@
                         </div>
 
                         <hr class="divider">
-
+                        -->
                         <div>
-                            <h3>Beneficios al Propietario</h3>
-                            •	Comisión administrativa al más bajo costo.
-                            •	Reportes online a la administración.
-                            •	Servicio de reparación y mantenimiento bonificado.
-                            •	Seguimiento de cobros y pagos.
-                            •	Envío automático de comprobantes de pagos y cobros por e-mail.
-                            •	Notificaciones de alerta de pagos.
-
-                        </div>
-<br><br>
-                        <div>
-                            <h3>Beneficios al Inquilino</h3>
-                            •	No pagas comisiones inmobiliarias anticipadas.
-                            •	Reportes online a la administración.
-                            •	Servicio de reparación y mantenimiento bonificado.
-                            •	Seguimiento de pagos.
-                            •	Envío automático de comprobantes de pagos por e-mail.
-                            •	Notificaciones de alerta de pagos.
 
                         </div>
 
@@ -236,4 +301,146 @@
             <!-- end Sidebar -->
         </div><!-- /.row -->
     </div><!-- /.container -->
-</div>
+
+<!--/Video -->
+<div id="reservation" class="light-wrapper">
+    <section class="ss-style-top"></section>
+    <div class="container inner">
+        <h2 class="section-title text-center">Contacto</h2>
+        <p class="lead main text-center">Reserve your table &amp; enjoy lorem Ipsum</p>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form form-table" method="post" name="">
+                    <div class="form-group">
+                        <h4>Fill the form for table reservation (all fields required)</h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label class="sr-only" for="first_name1">first name</label>
+                            <input class="form-control hint" type="text" id="first_name1" name="first_name" placeholder="First name" required="">
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label class="sr-only" for="last_name1">last name</label>
+                            <input class="form-control hint" type="text" id="last_name1" name="last_name" placeholder="Last name" required="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label class="sr-only" for="email1">email</label>
+                            <input class="form-control hint" type="email" id="email1" name="email" placeholder="info@cloudprop.com" required="">
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label class="sr-only" for="phone1">phone</label>
+                            <input class="form-control hint" type="text" id="phone1" name="phone" placeholder="Phone" required="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label class="sr-only" for="reserv_date1">reservation date</label>
+                            <input class="form-control datepicker hasDatepicker hint" type="text" id="reserv_date1" name="reserv_date" placeholder="Reservation date" required="">
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <label class="sr-only" for="numb_guests1">number of guests</label>
+                            <input class="form-control hint" type="text" id="numb_guests1" name="numb_guests" placeholder="Number of guests" required="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <button type="submit" class="btn btn-danger btn-lg">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- col-md-6 -->
+            <div class="col-md-5 col-md-offset-1">
+                <h3><i class="fa fa-clock-o fa-fw"></i>Hours</h3>
+                <h4>Breakfast</h4>
+                <p>Mon to Fri: 7:30 AM - 11:30 AM<br>Sat &amp; Sun: 8:00 AM - 9:00 AM</p>
+
+                <h3><i class="fa fa-map-marker fa-fw"></i>Directions</h3>
+                <p>4120 Lenox Avenue, New York, NY, 10035 76 Saint Nicholas Avenue</p>
+
+                <h3><i class="fa fa-mobile fa-fw"></i>Contacts</h3>
+                <p>Email: <a href="mailto:yourname@meatking.com">yourname@meatking.com</a></p>
+                <p>Phone: +234 3456 678</p>
+
+            </div><!-- col-md-6 -->
+        </div>
+        <!-- /.services -->
+    </div>
+    <!-- /.container -->
+    <section class="ss-style-bottom"></section>
+</div><!-- #reservation -->
+
+
+<div id="chefs" class="parallax pricing">
+    <div class="container inner">
+        <h2 class="section-title text-center">Un gran equipo detras</h2>
+        <!--<p class="lead main text-center">There is no sincerer love than the love of food!</p>-->
+        <div class="row text-center chefs">
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('imagenes/nosotros/jr.png') }}">
+                    </div>
+                    <h3>Juan Rubio</h3>
+                    <p>CEO & Founder</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('imagenes/nosotros/montajesdiscos4.jpg') }}">
+                    </div>
+                    <h3>Juan Pablo Cáceres</h3>
+                    <p>ASC - Developing</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('imagenes/nosotros/horacio_kuszniruk.jpg') }}">
+                    </div>
+                    <h3>Horacio Kuszniruk</h3>
+                    <p>ASC - Developing.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+</div><!-- /#chefs -->
+
+
+<footer id="footer" class="dark-wrapper">
+    <section class="ss-style-top"></section>
+    <div class="container inner">
+        <div class="row">
+            <div class="col-sm-6">
+                &copy; CloudProp 2018
+                <br/>Powered by <a class="themeBy" href="http://www.Themewagon.com">NeaSoft</a>
+            </div>
+            <div class="col-sm-6">
+                <div class="social-bar">
+                    <a href="#" class="fa fa-instagram tooltipped" title=""></a>
+                    <a href="#" class="fa fa-youtube-square tooltipped" title=""></a>
+                    <a href="#" class="fa fa-facebook-square tooltipped" title=""></a>
+                    <a href="#" class="fa fa-pinterest-square tooltipped" title=""></a>
+                    <a href="#" class="fa fa-google-plus-square tooltipped" title=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</footer>
+
+
+</body>

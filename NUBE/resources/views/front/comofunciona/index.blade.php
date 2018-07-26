@@ -34,5 +34,14 @@
 </div>
 
 @include('front.partes.scripts')
+<script src="{{ asset('parrillada/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+<!-- Smoothscroll -->
+<script type="text/javascript" src="{{asset('js/front/jquery.corner.js')}}"></script>
+<script src="{{asset('js/front/wow.min.js')}}"></script>
+<script>
+    new WOW().init();
+</script>
+<!-- Magnific Popup core JS file -->
+<script src="asset('js/front/js/jquery.magnific-popup.js')}}"></script>
 </body>
 </html>

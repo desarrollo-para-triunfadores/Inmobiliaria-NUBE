@@ -33,9 +33,11 @@
                 <p class="lead">
                 </p>
                 <ul class="descp lead2">
-                    <i class="glyphicon glyphicon-signal"></i> Empleamos metodos digitales para captar clientes a travez de todos los dispositivos, con campañas publicitarias en Google, redes sociales,  y mailing
-                    <i class="glyphicon glyphicon-refresh"></i> Analizamos y optimizamos el rendimiento de los anuncios
-                    <i class="glyphicon glyphicon-headphones"></i> Segmentamos clientes potenciales en "modo compra" de los buscadores y hacemos campañas de remarketing para alcanzarlos en el "modo ocio" de las redes sociales
+                    <i class="glyphicon glyphicon-cloud"></i>  Empleamos metodos digitales para captar clientes a travez de todos los dispositivos, con campañas publicitarias en Google, redes sociales,  y mailing
+                    <br>
+                    <i class="glyphicon glyphicon-tags"></i>  Analizamos y optimizamos el rendimiento de los anuncios
+                    <br>
+                    <i class="glyphicon glyphicon-screenshot"></i>  Segmentamos clientes potenciales en "modo compra" de los buscadores y hacemos campañas de remarketing para alcanzarlos en el "modo ocio" de las redes sociales
                 </ul>
             </div>
         </div>

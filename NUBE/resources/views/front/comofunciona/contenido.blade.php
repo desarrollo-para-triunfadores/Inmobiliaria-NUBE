@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	@include('front.partes.estilos')
-	<title>Inmubiliaria CloudProp | Sistema de gestión inmobiliaria</title>
+		@include('front.comofunciona.portada')
 
-	<title>Cloudprop | Sistema de gestión inmobiliaria</title>
-</head>
-
-
-		<div id="container" class="{{-- intro-effect-push --}}">
+		<section id="video-presentation">
+			<header><h1 class="animated shake">   &nbsp;&nbsp;¿Como Funciona?</h1></header>
+		</section><!-- /#video-presentation -->
+		{{--
+		<div id="container" class="intro-effect-push">
 			<!-- Top Navigation -->
 			<header class="header">
 				<div class="parallax-comofunciona"></div>
@@ -20,21 +14,20 @@
 				</div>
 			</header>
 			<button class="trigger" data-info="Saber más"><span>Trigger</span></button>
-
 			<article class="content">
 				<div>
 					<blockquote>
 						<!--
 						CloudProp es una empresa de servicios inmobiliarios que busca entregar una nueva experiencia en confort y seguridad a sus clientes a través de un software de administración exclusivo.
 						-->
-						Nuestra misión es brindar la máxima transparencia, seguridad y beneficios a nuestros clientes, con la intención de ser la mejor forma de buscar, encontrar y administrar tu inmueble ideal.
+						Nuestra misión es brindar la máxima transparencia, seguridad y beneficios a nuestros clientes, siendo la mejor forma de encontrar y administrar tu inmueble ideal.
 						.</blockquote>
 				</div>
 			</article>
 
 		</div><!-- /container -->
 		<script src="{{asset('plantillas/plugins/ArticleIntroEffects/js/classie.js')}}"></script>
-		{{--
+
         <script>
 			(function() {
 
@@ -178,5 +171,3 @@
 			})();
 		</script>
 		--}}
-
-</html>

@@ -1,3 +1,4 @@
+{{--
 <section>
     <div class="container">
         <hr class="divider">
@@ -10,8 +11,8 @@
             <div class="col-md-12">
                 <ul class="ch-grid">
                     <div class="col-md-4">
-                        <div class="ch-item ch-img-1">
-                            <div class="ch-info-wrap">
+                        <div class="">
+                            <div class="">
                                 <div class="ch-info">
                                     <div class="ch-info-front ch-img-1"></div>
                                     <div class="ch-info-back">
@@ -53,3 +54,5 @@
         </div>
     </div>
 </section>
+--}}
+
