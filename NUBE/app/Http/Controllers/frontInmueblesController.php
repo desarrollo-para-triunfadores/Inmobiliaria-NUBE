@@ -10,7 +10,7 @@ class frontInmueblesController extends Controller
 {
     public function index()
     {
-        return view('front.inmuebles.index');
+        return view('front.inmuebles.main');
     }
 
 }

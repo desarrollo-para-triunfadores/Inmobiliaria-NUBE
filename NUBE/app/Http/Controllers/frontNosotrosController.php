@@ -9,7 +9,7 @@ class frontNosotrosController extends Controller
 {
     public function index()
     {
-        return view('front.nosotros.index');
+        return view('front.nosotros.main');
     }
 
 }
