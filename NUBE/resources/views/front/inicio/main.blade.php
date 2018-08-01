@@ -13,7 +13,7 @@
 @include('front.inicio.portada')
 <div id="page-content">
     @include('front.inicio.banner_busqueda')
-    {{--@include('front.inicio.descripcion_1')--}}
+    @include('front.inicio.descripcion_1')
     {{--@include('front.inicio.descripcion_2')--}}
     {{--@include('front.inicio.descripcion_3')--}}
     @include('front.inicio.advertising')

@@ -1,10 +1,8 @@
 <section id="descripcion_1">
-    <div class="container">
+    <div class="wrapper">
         <div class="row">
             <img src={{asset('imagenes/home/tablet.jpg')}} data-speed="1.75" class="img-parallax">
             <div class="block_juampy">
-
-
                     <div class="col-md-5 col-sm-4">
                         <div class="">
                             <aside class="description">

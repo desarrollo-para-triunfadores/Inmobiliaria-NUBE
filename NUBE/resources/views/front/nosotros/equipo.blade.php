@@ -1,58 +1,37 @@
-{{--
-<section>
-    <div class="container">
-        <hr class="divider">
-        <br><br>
-        <div>
-            <h2>Un gran equipo detras</h2>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="ch-grid">
-                    <div class="col-md-4">
-                        <div class="">
-                            <div class="">
-                                <div class="ch-info">
-                                    <div class="ch-info-front ch-img-1"></div>
-                                    <div class="ch-info-back">
-                                        <h3>Juan Rubio</h3>
-                                        <p>CEO & Founder <a href="{{ asset('imagenes/nosotros/perfil.jpg') }}">Ver perfil</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div id="chefs" class="parallax pricing">
+    <div class="container inner">
+        <h2 class="section-title text-center">Un gran equipo detras</h2>
+        <!--<p class="lead main text-center">There is no sincerer love than the love of food!</p>-->
+        <div class="row text-center chefs">
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('imagenes/nosotros/jr.png') }}">
                     </div>
-                    <div class="col-md-4">
-                        <div class="ch-item ch-img-2">
-                            <div class="ch-info-wrap">
-                                <div class="ch-info">
-                                    <div class="ch-info-front ch-img-2"></div>
-                                    <div class="ch-info-back">
-                                        <h3>JP Cáceres</h3>
-                                        <p>Desarrollador <a href="{{ asset('imagenes/nosotros/perfil.jpg') }}">Ver perfil</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <h3>Juan Rubio</h3>
+                    <p>CEO & Founder</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('imagenes/nosotros/montajesdiscos4.jpg') }}">
                     </div>
-                    <div class="col-md-4">
-                        <div class="ch-item ch-img-3">
-                            <div class="ch-info-wrap">
-                                <div class="ch-info">
-                                    <div class="ch-info-front ch-img-3"></div>
-                                    <div class="ch-info-back">
-                                        <h3>Hacho Kuszniruk</h3>
-                                        <p>Desarrollador <a href="{{ asset('imagenes/nosotros/profile.jpg') }}">Ver perfil</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <h3>Juan Pablo Cáceres</h3>
+                    <p>ASC - Developing</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-wrapper">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('imagenes/nosotros/horacio_kuszniruk.jpg') }}">
                     </div>
-                </ul>
+                    <h3>Horacio Kuszniruk</h3>
+                    <p>ASC - Developing.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
---}}
 
+    </div>
+    <!-- /.container -->
+</div><!-- /#chefs -->

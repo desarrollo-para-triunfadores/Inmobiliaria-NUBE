@@ -20,9 +20,8 @@
 <!-- NavBar -->
 <link type="text/css" rel="stylesheet" href="{{ asset('css/front/navbar.css') }}">
 
-
-
-
+<!-- Fuente usada -->
+<link href="https://fonts.googleapis.com/css?family=Raleway:200,400" rel="stylesheet">
 
 <!--Estilos JUAMPY-->
 <!--<link type="text/css" rel="stylesheet" href="{{ asset('plantillas/plugins/CircleHoverEffects/css/style6.css') }}">-->

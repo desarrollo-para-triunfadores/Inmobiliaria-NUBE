@@ -22,8 +22,9 @@
 </section>
 </div>
 --}}
-
-<div id ="useit" class="content-section-a">
+<section id="" style="background-color: #0067da; color:white">
+    <br><br><br>
+    <div id ="useit" class="content-section-a">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 pull-right wow fadeInRightBig">
@@ -31,7 +32,7 @@
             </div>
 
             <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">
-                <div class="item-descripcion-titulo no-check"><strong>Gestoría Profesional</strong></div>
+                <div class="item-descripcion-titulo no-check"><h2><strong>Gestoría Profesional</strong></h2></div>
                 <div class="sub-title lead3">
                     <br>
                     <li>Fotografiado y promoción de tu inmueble</li>
@@ -51,7 +52,8 @@
     </div>
     <!-- /.container -->
 </div>
+    <br><br>
+</section>
 
-<br>
 
 

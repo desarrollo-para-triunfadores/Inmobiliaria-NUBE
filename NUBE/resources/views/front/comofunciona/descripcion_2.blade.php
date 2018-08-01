@@ -1,13 +1,13 @@
 
-<section class="bloque-trio-h">
-    <div class="container">
+<section class="bloque-trio-h" style="color: #0067da;">
+    <div class="container" >
         <div class="row text-left">
             <div class="col-xs-12 col-sm-6 col-md-6 hidden-xs wow fadeInLeftBig"  data-animation-delay="200">
                 <img src="{{ asset('imagenes/comofunciona/Seguros.jpg') }}" class="img-responsive fullwidth">
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 wow fadeInRightBig">
                 <div class="bloque-descripcion">
-                    <div class="item-descripcion-titulo no-check"><strong>Seguros de caución</strong></div>
+                    <div class="item-descripcion-titulo no-check" style=""><h2><strong>Seguros de caución</strong></h2></div>
                     <div class="item-descripcion-info">
 
                     </div>

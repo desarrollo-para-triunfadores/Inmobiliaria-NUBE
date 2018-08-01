@@ -8,6 +8,7 @@
 
     <title>CloudProp | ¿Como Funciona?</title>
     @include('front.partes.estilos')
+
 </head>
 
 <body class="page-sub-page page-property-detail" id="page-top">

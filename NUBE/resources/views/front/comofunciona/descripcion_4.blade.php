@@ -1,4 +1,4 @@
-<section class="bloque-trio-h">
+<section class="bloque-trio-h" style="color: #0067da;">
     <div class="container">
         <div class="row text-left">
             <div class="col-xs-12 col-sm-6 col-md-6 hidden-xs wow fadeInRight">
@@ -6,7 +6,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 wow fadeInLeft">
                 <div class="bloque-descripcion">
-                    <div class="item-descripcion-titulo no-check"><strong>Reparación y mantenimiento</strong></div>
+                    <div class="item-descripcion-titulo no-check"><h2><strong>Reparación y mantenimiento</strong></h2></div>
                     <div class="item-descripcion-info">
 
                     </div>

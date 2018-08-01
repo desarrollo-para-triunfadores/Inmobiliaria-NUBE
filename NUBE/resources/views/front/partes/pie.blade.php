@@ -1,11 +1,10 @@
-<footer id="page-footer">
+
+    <footer id="page-footer">
     <div class="inner">
         <aside id="footer-main">
             <div class="container">
                 <div class="row">
-
                     <div class="col-md-5 col-sm-5">
-                        {{--
                       <article>
                           <h3>Quienes Somos</h3>
                           <p>Nube es una empresa de servicios inmobiliarios que busca entregar una nueva experiencia en confort y seguridad a sus clientes a través de un software de administración exclusivo.
@@ -16,7 +15,6 @@
 
                           <hr>
                           <a href="#" class="link-arrow">Saber Mas</a>
-                          --}}
                         </article>
                     </div><!-- /.col-sm-3 -->
 
@@ -24,12 +22,12 @@
                         <article>
                             <h3>Contacto</h3>
                             <address>
-                                <strong>Inmobiliaria NUBE</strong><br>
+                                <strong>Inmobiliaria CloudProp</strong><br>
                                 Arturo Illia 1244<br>
                                 Resistencia, Chaco
                             </address>
                             +54 (3624) 23-4567<br>
-                            <a href="#">inmobiliariaNube@gmail.com</a>
+                            <a href="#">info@cloudprop.com</a>
                         </article>
                     </div><!-- /.col-sm-3 -->
                     <div class="col-md-3 col-sm-3">
@@ -49,9 +47,9 @@
         <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
         <aside id="footer-copyright">
             <div class="container">
-                <span>NEA Soft © 2017</span>
+                <span>CloudProp | powered by NEA Soft © 2018</span>
                 <span class="pull-right"><a href="#page-top" class="roll">Ir hacia arriba</a></span>
             </div>
         </aside>
     </div><!-- /.inner -->
-</footer>
+    </footer>

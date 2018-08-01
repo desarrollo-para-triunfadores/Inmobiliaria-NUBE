@@ -21,6 +21,8 @@
     </section>
 </div>
 --}}
+<section id="" style="background-color: #0067da; color:white">
+    <br><br>
 <div class="content-section-a">
     <div class="container">
         <div class="row">
@@ -29,7 +31,7 @@
             </div>
 
             <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="100">
-                <div class="item-descripcion-titulo no-check"><strong>Marketing Digital</strong></div>
+                <div class="item-descripcion-titulo no-check"><h2><strong>Marketing Digital</strong></h2></div>
                 <p class="lead">
                 </p>
                 <ul class="descp lead2">
@@ -44,4 +46,5 @@
     </div>
 </div>
 
-<br>
+<br><br>
+</section>

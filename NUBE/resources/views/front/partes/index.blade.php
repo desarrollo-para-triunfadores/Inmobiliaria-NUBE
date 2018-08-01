@@ -18,9 +18,13 @@
 
             <!-- Inicio  Pie de Página -->
             @include('front.partes.pie')
+            {{--
+            --}}
             <!-- Fin Pie de Página -->
         </div>
+        {{--
         <div id="overlay"></div>
+        --}}
         @include('front.partes.scripts')
         @yield('script')
     </body>
