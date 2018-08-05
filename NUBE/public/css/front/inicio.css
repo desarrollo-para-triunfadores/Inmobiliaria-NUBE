@@ -1,12 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 24/07/2018, 18:07:05
-    Author     : hacho
-*/
 
 /* Parallax Portada-------------------------------------------------------------------------------------- */
 
@@ -67,3 +58,68 @@ and open the template in the editor.
     color: #fff;
 }
 
+.texto-descriptivo{
+    background-color: #acddf0;
+    min-height: 200px;
+}
+.texto-descriptivo h2{
+    color: #000;
+    font:'Raleway', sans-serif;
+    font-size: 35px;
+}
+.texto-descriptivo h3{
+    color: #000;
+    font:Raleway;
+    font-size: 30px;
+}
+.texto-descriptivo h4{
+    color: #000;
+    font:Raleway;
+    font-size: 25px;
+}
+
+.bloques-home{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilo de efecto en scroll: https://codepen.io/RenanB/pen/GZeBNg */
+/*
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700);
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Amatic SC', cursive;
+}
+*/
+.block-parallax-jp{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+}
+.block-parallax-jp h2{
+    position: relative;
+    display: block;
+    text-align: center;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10vw;
+    color: white;
+    font-weight: 400;
+}
+.img-parallax {
+    width: 100vmax;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    pointer-events: none
+}

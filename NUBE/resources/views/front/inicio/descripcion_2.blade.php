@@ -1,26 +1,38 @@
-<section id="descripcion_2">
-    <div class="container">
-        <div class="row">
+<section id="descripcion_2" style="background-image: {{asset('imagenes/home/edificios.jpg')}}">
+    <div class="bloques-home">
+        <img src={{asset('imagenes/home/mobile.png')}}  class="background-image" style="background-position: top right;
+         padding-left: 1000px;
+        background-size: 120%">
+        <div class="container" style="">
+        <div class="row" style="min-height: 600px; ">
             {{--
-            <img src={{asset('imagenes/home/mobile.png')}} data-speed="-1.75" class="img-parallax">
+            <img src="{{asset('imagenes/home/edificios.jpg')}}" data-speed="-1" class="img-parallax">
             --}}
-            <div class="block_juampy">
-                <div class="col-md-5 col-sm-4">
+            <br><br><br>
+                <div class="col-md-7 col-sm-5 texto-descriptivo" style="border-style: dashed; border-color: black">
                     <div class="">
                         <aside class="description">
                             <header>
-                                <h3 class="text-bold">Más Calidad</h3>
+                                <h3 class="text-bold"><strong>Más Calidad</strong> ✔️</h3>
                             </header>
-                            <p>- Usamos herramientas de marketing digital para captar inquilinos ideales y optimizamos la inversión publicitaria</p>
-                            <p>- Recaudamos los pagos de tus inquilinos, los acreditamos y aseguramos. Administramos los gastos de expensas en los inmuebles con exactitud</p>
-                            <p>- Brindamos transparencia total en todos los procesos y notificamos todas las fechas de pago y eventos realacionados a tu inmueble</p>
-                            <p>Accedé a nuestro servicio de reparación y mantenimiento del hogar bonificado y a descuentos y ofertas exclusivas de comercios adheridos al Club de BEneficios de tu Ciudad</p>
+                            <h4>◽️ Usamos herramientas de marketing digital para captar inquilinos ideales y optimizamos la inversión publicitaria</h4>
+                            <h4>◽️ Recaudamos los pagos de tus inquilinos, los acreditamos y aseguramos. Administramos los gastos de expensas en los inmuebles con exactitud</h4>
+                            <h4>◽️ Brindamos transparencia total en todos los procesos y notificamos todas las fechas de pago y eventos realacionados a tu inmueble</h4>
+                            <h4>◽️ Accedé a nuestro servicio de reparación y mantenimiento del hogar bonificado y a descuentos y ofertas exclusivas de comercios adheridos al Club de BEneficios de tu Ciudad</h4>
                             <a href="{{ route('listapropiedades.index') }}" class="link-arrow">Más de Nosotros </a>
                         </aside>
                     </div><!-- /.feature-box -->
                 </div><!-- /.col-md-4 -->
-
-            </div>
+{{--
+            <img src={{asset('imagenes/home/mobile.png')}} data-speed="-1.75" class="" style="padding-left: 50px">
+            --}}
         </div>
     </div>
+    </div>
 </section>
+{{--
+<div class="block">
+    <img src="https://unsplash.it/1920/1920/?image=1005" data-speed="-1" class="img-parallax">
+    <h2>Parallax Speed -1</h2>
+</div>
+--}}

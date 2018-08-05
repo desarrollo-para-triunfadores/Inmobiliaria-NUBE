@@ -1,4 +1,5 @@
-<aside id="advertising" class="block">
+<section>
+    <aside id="advertising" class="block">
     <div class="container">
         <a href="{{ route('contacto.index') }}">
             <div class="banner">
@@ -10,3 +11,4 @@
         </a>
     </div>
 </aside>
+</section>

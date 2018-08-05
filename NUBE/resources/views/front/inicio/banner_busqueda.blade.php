@@ -6,12 +6,9 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
                             <select name="form-sale-country" style="display: none;">
-                                <option value="">País</option>
-                                <option value="1">France</option>
-                                <option value="2">Great Britain</option>
-                                <option value="3">Spain</option>
-                                <option value="4">Russia</option>
-                                <option value="5">United States</option>
+                                @foreach($paises as $pais)
+                                    <option value="{{$pais->id}}">{{$pais->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <!-- /.form-group -->
@@ -19,12 +16,9 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
                             <select name="form-sale-city" style="display: none;">
-                                <option value="">Provincia</option>
-                                <option value="1">New York</option>
-                                <option value="2">Los Angeles</option>
-                                <option value="3">Chicago</option>
-                                <option value="4">Houston</option>
-                                <option value="5">Philadelphia</option>
+                                @foreach($provincias as $provincia)
+                                    <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <!-- /.form-group -->
@@ -32,12 +26,9 @@
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
                             <select name="form-sale-district" style="display: none;">
-                                <option value="">Ciudad</option>
-                                <option value="1">Manhattan</option>
-                                <option value="2">The Bronx</option>
-                                <option value="3">Brooklyn</option>
-                                <option value="4">Queens</option>
-                                <option value="5">Staten Island</option>
+                                @foreach($localidades as $localidad)
+                                    <option value="{{$localidad->id}}">{{$localidad->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <!-- /.form-group -->
