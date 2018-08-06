@@ -20,13 +20,13 @@
                             sobre ellos.</p>
                     </div>
                     <div class="col-hidden col-md-4">
-                        <img width="90" src="{{asset('imagenes/comofunciona/pulgar arriba.jpg')}}">
+                        <img width="90" src="{{asset('imagenes/comofunciona/pulgar arriba.png')}}">
                         <p class="espaciado">Apruebas o rechazas las solicitudes de alquiler.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-hidden col-md-4">
-                        <img width="90" src="{{asset('imagenes/comofunciona/firmar contrato.jpg')}}">
+                        <img width="90" src="{{asset('imagenes/comofunciona/firmarcontrato.png')}}">
                         <p class="espaciado">Firmás el el contrato de alquiler y pagás al corredor el 1% del valor del contrato.</p>
                     </div>
                     <div class="col-hidden col-md-4">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="row">
                     <div class="col-hidden col-md-4">
-                        <img width="90" src="{{asset('imagenes/comofunciona/firmar contrato.jpg')}}">
+                        <img width="90" src="{{asset('imagenes/comofunciona/firmarcontrato.png')}}">
                         <p class="espaciado">Firmás el el contrato de alquiler.</p>
                     </div>
                     <div class="col-hidden col-md-4">

@@ -5,7 +5,7 @@
             <img src={{asset('imagenes/home/cafe.png')}} data-speed="1.75" class="img-parallax">
             <div class="">
                 <br><br><br>
-                    <div class="col-md-6 col-sm-4 texto-descriptivo">
+                    <div class="col-md-6 col-sm-4 texto-descriptivo" style="border-style: ridge;">
                         <div class="">
                             <aside class="description" style="">
                                 <header>
