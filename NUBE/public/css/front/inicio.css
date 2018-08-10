@@ -69,12 +69,12 @@
 }
 .texto-descriptivo h3{
     color: #000;
-    font:Raleway;
+    font:'Raleway', sans-serif;
     font-size: 30px;
 }
 .texto-descriptivo h4{
     color: #000;
-    font: Raleway;
+    font: 'Raleway', sans-serif;
     font-size: 25px;
 }
 
@@ -83,6 +83,7 @@
     height: 100%;
     position: relative;
     overflow: hidden;
+    /*background-image: url("../../imagenes/home/white-background.jpg"); */
 }
 
 /* Estilo de efecto en scroll: https://codepen.io/RenanB/pen/GZeBNg */

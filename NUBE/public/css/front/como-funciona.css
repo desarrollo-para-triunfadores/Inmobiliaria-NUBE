@@ -30,7 +30,7 @@ and open the template in the editor.
 }
 
 #parallax-portada h3 {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway:700', sans-serif;
     color: white;
     font-size: 300%;
     font-weight: 600;
@@ -79,7 +79,7 @@ and open the template in the editor.
 #section-iconos h1,
 #section-iconos h2,
 #section-iconos h4 {
-    font-weight: 500;
+    font-weight: 700;
     line-height: 1.1;
     color: inherit;
     border-bottom: 0px;
@@ -378,4 +378,25 @@ and open the template in the editor.
 
 
 /* Section Descripción 1, 2, 3 y 4-------------------------------------------------------------------------------------- */
+.contenedor-textos-descriptivos {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding-right: 27px;
+    padding-left: 27px;
+    margin-right: 40px;
+    margin-left: 40px;
+}
 
+.contenedor-textos-descriptivos li{
+    font-size: 25px;
+}
+.contenedor-textos-descriptivos p{
+    font-size: 25px;
+    color: white;
+}
+.contenedor-textos-descriptivos h1{
+    font-size: 30px;
+    border-bottom: none;    /* con esto le quitamos el guion bajo molesto */
+    font-weight: bolder;
+    font-family: 'Raleway:700', sans-serif;
+}

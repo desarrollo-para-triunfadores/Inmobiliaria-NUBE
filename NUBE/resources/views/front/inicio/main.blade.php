@@ -16,12 +16,12 @@
     @include('front.inicio.descripcion_1')
     @include('front.inicio.descripcion_2')
     @include('front.inicio.descripcion_3')
-    {{--
+
     @include('front.inicio.advertising')
     @include('front.inicio.nuestras_propiedades') 
     @include('front.inicio.partners')
     @include('front.inicio.slider_proyectos')
-    --}}
+
 </div>
 @endsection
 

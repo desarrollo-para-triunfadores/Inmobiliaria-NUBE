@@ -6,7 +6,9 @@
 
 @section('estilos') 
 <link type="text/css" rel="stylesheet" href="{{ asset('css/front/quienes-somos.css') }}">
+{{--
 <link rel="stylesheet" href="{{asset('css/front/inicio.css')}}">
+--}}
 @endsection 
 
 @section('content')

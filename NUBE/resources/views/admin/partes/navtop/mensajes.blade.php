@@ -12,8 +12,6 @@
         <li class="header">Tienes {{$cantidad_mensajes_sin_leer}} nuevo mensaje sin leer</li>
         @else
         <li class="header">No tienes nuevos mensajes</li>
-<<<<<<< HEAD
-      @endif
       <li>
         <!-- inner menu: contains the actual data -->
         <div style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">

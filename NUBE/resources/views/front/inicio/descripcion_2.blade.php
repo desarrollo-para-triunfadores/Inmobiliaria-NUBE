@@ -1,5 +1,8 @@
 <section id="descripcion_2" style="background-image: {{asset('imagenes/home/edificios.jpg')}}">
     <div class="bloques-home">
+        <img src={{asset('imagenes/home/white-background.jpg')}}  class="background-image" style="background-position: center center;
+         padding-left: 0px;
+        background-size: 100%">
         <img src={{asset('imagenes/home/mobile.png')}}  class="background-image" style="background-position: top right;
          padding-left: 1000px;
         background-size: 120%">
@@ -9,7 +12,7 @@
             <img src="{{asset('imagenes/home/edificios.jpg')}}" data-speed="-1" class="img-parallax">
             --}}
             <br><br><br>
-            <div class="col-md-7 col-sm-5 texto-descriptivo" style="border-style: ridge; border-color: black">
+            <div class="col-md-7 col-sm-5 texto-descriptivo" style="border-style: ridge; border-color: black; background-color: white" >
                 <div class="" >
                     <aside class="description">
                         <header>
