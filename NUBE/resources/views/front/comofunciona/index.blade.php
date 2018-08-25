@@ -24,9 +24,8 @@
     @include('front.comofunciona.descripcion_2')
     <hr class="divider"><br>
     @include('front.comofunciona.descripcion_3')
-    <hr class="divider"><br>
-@include('front.comofunciona.descripcion_4')
-    <br>
+    <hr class="divider">
+    @include('front.comofunciona.descripcion_4')
 
     <!-- end Page Content -->
     <!-- Page Footer -->

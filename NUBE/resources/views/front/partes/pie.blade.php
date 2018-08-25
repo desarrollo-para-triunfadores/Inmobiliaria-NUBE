@@ -4,6 +4,7 @@
         <aside id="footer-main">
             <div class="container">
                 <div class="row">
+                    {{--
                     <div class="col-md-5 col-sm-5">
                       <article>
                           <h3>Quienes Somos</h3>
@@ -17,6 +18,7 @@
                           <a href="#" class="link-arrow">Saber Mas</a>
                         </article>
                     </div><!-- /.col-sm-3 -->
+                    --}}
 
                     <div class="col-md-3 col-sm-3">
                         <article>

@@ -66,6 +66,7 @@
     color: #000;
     font:'Raleway', sans-serif;
     font-size: 35px;
+
 }
 .texto-descriptivo h3{
     color: #000;
@@ -75,7 +76,8 @@
 .texto-descriptivo h4{
     color: #000;
     font: 'Raleway', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .bloques-home{
@@ -123,4 +125,101 @@ html, body{
     left: 50%;
     transform: translate(-50%,0);
     pointer-events: none
+}
+
+/** Estilos para Moviles **/
+.home-secciones-movil h1{
+    left:50%;
+    font-size: 25px;
+    text-align: center;
+    color: black;
+    border-bottom: none;
+    margin-top: 10%;
+    margin-bottom: 0px;
+}
+.home-secciones-movil p{
+    left:50%;
+    font-size: 17px;
+    text-align: center;
+    color: black;
+}
+
+/** Inmuebles vistos en Home Movil */
+.contenedor-imagenes-moviles h1{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.contenedor-imagenes-moviles h4{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: white;
+    bottom: 20%;
+    left: 30%;
+    position: absolute;
+}
+
+.prueba {
+    position: relative;
+    width: 100%; /* for IE 6 */
+}
+h2 {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+}
+h2 span {
+
+    color: white;
+
+    font: bold 24px/45px Helvetica, Sans-Serif;
+
+    letter-spacing: -1px;
+
+    background: rgb(0, 0, 0);
+
+    background: rgba(0, 0, 0, 0.7);
+
+    padding: 10px;
+
+}
+h2 span.spacer {
+
+    padding:0 5px;
+}
+
+
+.proyectos_mobile{
+    text-align: left;
+    top: 10%;
+    left: 5%
+}
+h1{
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    text-shadow: none;
+}
+p{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    text-shadow: none;
+}
+a{
+    padding-top: 5%;
+    color: white;
+    font-style: inherit;
 }

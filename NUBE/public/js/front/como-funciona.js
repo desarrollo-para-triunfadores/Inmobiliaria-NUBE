@@ -169,6 +169,20 @@ var contributionInterpolation = function () {
 
 /*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
- * 
+ * JS para moviles en seccion "COMO FUNCIONA"
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ */
+var swiper = new Swiper('.swiper-container',{
+    scrollbar: {
+        el: '.swiper-scrollbar',
+        hide: true,
+    },
+    //swiper.width: 50,
+
+});
+
+/*
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * FIN
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */

@@ -23,14 +23,15 @@ and open the template in the editor.
     justify-content: center;
     align-items: center;
     text-align: center;
+
 }
 
 #parallax-portada .parallax-container {
-    width: 750px;
+    width: 800px;
 }
 
 #parallax-portada h3 {
-    font-family: 'Raleway:700', sans-serif;
+    font-family: 'Raleway', sans-serif;
     color: white;
     font-size: 300%;
     font-weight: 600;
@@ -143,11 +144,14 @@ and open the template in the editor.
 }
 
 #section-iconos {
-    background: url('../../imagenes/iconos/fondo.png') no-repeat center fixed;
+    background: url('../../imagenes/iconos/searchbox-bg.jpg') no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover
+}
+#section-iconos .fondo-traslucido {
+    background-color: rgba(57, 162, 222, 0.8);
 }
 
 #section-iconos h2,
@@ -379,7 +383,7 @@ and open the template in the editor.
 
 /* Section Descripción 1, 2, 3 y 4-------------------------------------------------------------------------------------- */
 .contenedor-textos-descriptivos {
-    padding-top: 25px;
+    padding-top: 20px;
     padding-bottom: 20px;
     padding-right: 27px;
     padding-left: 27px;
@@ -391,12 +395,67 @@ and open the template in the editor.
     font-size: 25px;
 }
 .contenedor-textos-descriptivos p{
-    font-size: 25px;
+    font-size: 23px;
     color: white;
+    opacity: 1;
 }
 .contenedor-textos-descriptivos h1{
     font-size: 30px;
     border-bottom: none;    /* con esto le quitamos el guion bajo molesto */
     font-weight: bolder;
+    margin-bottom: 5px;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+/*******************************************  Estilos para secciones MOVILES ****************************************/
+
+.contenedor-imagenes-moviles h1{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.contenedor-imagenes-moviles h4{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: white;
+    bottom: 20%;
+    left: 30%;
+    position: absolute;
+}
+
+/** texto explicativo para dispositivos moviles */
+.contenedor-textos-descriptivos-movil {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding-right: 0px;
+    padding-left: 27px;
+    margin-right: 35px;
+    margin-left: 0px;
+}
+
+.contenedor-textos-descriptivos-movil li{
+    font-size: 16px;
+    color: white;
+}
+.contenedor-textos-descriptivos-movil p{
+    font-size: 16px;
+    color: white;
+    margin-right: -22px;
+}
+.contenedor-textos-descriptivos-movil h1{
+    font-size: 25px;
+    border-bottom: none;    /* con esto le quitamos el guion bajo molesto */
+    font-weight: bolder;
     font-family: 'Raleway:700', sans-serif;
 }
+
+/*--FIN Estilos para diseño Movil --*/

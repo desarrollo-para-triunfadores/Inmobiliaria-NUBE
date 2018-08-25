@@ -12,7 +12,7 @@
                         </div>
                         <div class="sub-title lead3">
                             <li><strong>Fotografiado</strong> y <strong>promoción</strong> de tu inmueble</li>
-                            <li><strong>Análisis de solvencia económica</strong>: Reunion y documentacion y verificación de candidatos</li>
+                            <li><strong>Análisis de solvencia económica</strong>: Reunion de documentacion y verificación de candidatos</li>
                             <li><strong>Negociación</strong>: Visitas al inmueble y presentacion de solicitudes de alquiler</li>
                             <li><strong>Gestión Contractual</strong>: Autorización de alquiler y gestión notarial del contrato</li>
                         </div>
@@ -21,9 +21,9 @@
                           aca se puede meter texto mas pequeño
                         </p>
                         -->
-                        <p>
+                        <p style="margin-top: 15px">
                             <a class="btn btn-embossed btn-primary" href="#" role="button">Ver Detalles</a>
-                            <a class="btn btn-success" href="#" role="button">Registrarme</a>
+                            <a class="btn btn-bitbucket" href="#" role="button">Registrarme</a>
                         </p>
                     </div>
                 </div>

@@ -1,14 +1,12 @@
 @extends('front.partes.index') 
 
 @section('title')
-    CloudProp | ¿Cómo funciona?
+    CloudProp | Quienes Somos
 @endsection 
 
 @section('estilos') 
-<link type="text/css" rel="stylesheet" href="{{ asset('css/front/quienes-somos.css') }}">
-{{--
-<link rel="stylesheet" href="{{asset('css/front/inicio.css')}}">
---}}
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/front/quienes-somos.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 @endsection 
 
 @section('content')
@@ -20,6 +18,14 @@
 @section('script')
 <script>
     $("#nav-nosotros").addClass("active");
+</script>
+<script>
+    $('#boton-contacto').mouseover(function () {
+        $('#boton-contacto').addClass('animated rubberBand');
+    });
+    $('#boton-contacto').mouseleave(function () {
+        $('#boton-contacto').removeClass('animated rubberBand');
+    });
 </script>
 <script src="{{ asset('js/front/quienes-somos.js') }}"></script>
 <!--Template Parrillada -->
@@ -33,7 +39,7 @@
 <link rel="stylesheet" href="{{asset('plantillas/Parrillada/css/bootstrap-theme.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/front/quienes-somos.css')}}">
 
-<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Kreon:300,400,700'>
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 <link href="{{ asset('plantillas/AdminLTE/plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
 <!--/Template Parrillada -->
 @endsection

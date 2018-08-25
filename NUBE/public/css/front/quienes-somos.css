@@ -188,7 +188,7 @@ section::before,section::after {
 .section-title {
     font-size:36px;
     line-height:40px;
-    text-transform:uppercase;
+    font-family: Raleway;
     margin-bottom:15px;
     font-weight:600;
 }
@@ -228,13 +228,13 @@ section::before,section::after {
     05. parallax
 ========================================================================== */
 .parallax {
-    background:url(/imagenes/nosotros/Building.jpg) fixed no-repeat center center;
+    /*background:url(/imagenes/nosotros/Building.jpg) fixed no-repeat center center;
     -webkit-background-size:/*@@prefixmycss->No equivalent*/;
     -moz-background-size:cover;
     -o-background-size:/*@@prefixmycss->No equivalent*/;
     background-size:cover;
     position:relative;
-    color:#FFF;
+    color: #0b0b0b;
 }
 .parallax .inner {
     padding-top:130px;
@@ -252,7 +252,7 @@ section::before,section::after {
     margin-bottom:20px;
 }
 .parallax h1,.parallax h2,.parallax h3,.parallax h4,.parallax h5,.parallax h6 {
-    color:#fff;
+    color: #0b0b0b;
 }
 .facts p {
     font-size:16px;
@@ -516,4 +516,62 @@ section::before,section::after {
     font-size:35px;
     padding:0px 10px;
     /*padding-right: 30px;*/
+}
+
+.descripcion-nosotros{
+    display:inline-block;
+    color: black;
+    font-size:35px;
+    padding:15px 15px;
+    margin-right: -150px;
+    padding-left: 50px;
+    padding-top: 15px;
+    font-family: 'Raleway:700', sans-serif;
+
+    /*padding-right: 30px;*/
+}
+.descripcion-nosotros h1{
+    color: black;
+    font-size:30px;
+    padding:0px 15px;
+    border-bottom: none;
+    font-family: Raleway;
+    font-weight: 800;
+    /*padding-right: 30px;*/
+}
+
+.descripcion-nosotros h3{
+    padding:0px 15px;
+    font-family: Raleway;
+}
+
+
+/*Boton de contacto */
+.btn-contacto{
+    display: inline-block;
+    border:1px solid #C9AE34;
+    color: #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    font-family: Raleway;
+    font-weight: 600;
+    width: auto;
+    height: auto;
+    font-size: 16px;
+    padding: 13px 20px;
+    box-shadow: inset 0 1px 0 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D,0 2px 4px 0 #D4D4D4;
+    -moz-box-shadow: inset 0 1px 0 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D,0 2px 4px 0 #D4D4D4;
+    -webkit-box-shadow: inset 0 1px 0 0 #FFF6CE,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D,0 2px 4px 0 #D4D4D4;
+    background-color: #9CBE11;
+
+}
+.btn-contacto:hover, .btn-contacto:active{
+    border:1px solid #0A0901;
+    color: #FFFFFF;
+    box-shadow: 0 1px 0 0 #081217,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D;
+    -moz-box-shadow: 0 1px 0 0 #081217,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D;
+    -webkit-box-shadow: 0 1px 0 0 #081217,inset 0 -1px 0 0 #E3C852,inset 0 0 0 1px #FCE88D;
+    background-color: #9CBE11;
+
 }

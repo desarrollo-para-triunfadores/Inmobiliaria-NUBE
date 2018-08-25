@@ -12,28 +12,41 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="{{ asset('imagenes/proyectos/INube_1495908901.jpg') }}" alt="Chania">
-            <div class="carousel-caption">
-                <h1>La oportunidad de tu vida está acá
-                    <br>
-                    Mirá nuestros proyectos recientes..
-                </h1>
-
+            <img src="{{ asset('imagenes/proyectos/INube_1495908901.jpg') }}" alt="">
+            <div class="col-lg-offset-5 col-lg-12" style="">
+                <div class="carousel-caption" style="background-color: rgba(0,0,0,0.6); text-align: left;bottom: 0%">
+                    <div class="container" style="padding-top: 100%; padding-bottom: 30%">
+                        <h1 style="font-size:25px;">
+                            <strong>Torre París</strong>
+                        </h1>
+                        <p>Julio A. Roca 1401</p>
+                        <br>
+                        <p>Suites de lujo, garage, acceso a zona centrica, salon de usos múltiples.</p>
+                        <p>Departamentos de 45/55/65 y 70 metros cuadrados</p>
+                        <a href="property-detail.html" class="link-arrow" style="color: white; text-decoration: blink">¡Me interesa!</a>
+                    </div>
+                </div>
             </div>
         </div>
         @foreach($proyectos as $proyecto)
         <div class="item">
           
             <img src="{{ asset('imagenes/proyectos/'.$proyecto->foto_slider()->nombre) }}" alt="">
-           
-            <div class="carousel-caption">
-                <h1 class="text-banner" style="font-size:300%; background-color:#4f6785">
-                        <b>{{ $proyecto->tipo->nombre }}</b> en {{ $proyecto->localidad->nombre }} {{ $proyecto->localidad->provincia->nombre }}
-                </h1>
-                <h4 class="text-banner">{{ $proyecto->descripcion1}} </h4>
-                <h4 class="text-banner">{{ $proyecto->descripcion2}} </h4>
-                <p>Coutry privado</p>
-                <div class="tag price">{{ $proyecto->valorVenta  }}</div>
+            <div class="col-lg-offset-5 col-lg-12" style="">
+                <div class="carousel-caption" style="background-color: rgba(0,0,0,0.5); text-align: left;bottom: 0%">
+                    <div class="container" style="padding-top: 100%; padding-bottom: 30%">
+                        <h1 style="font-size:25px;">
+                            <strong>Torre París</strong>
+                        </h1>
+                        <p>Julio A. Roca 1401</p>
+                        <br>
+                        <p>Suites de lujo, garage, acceso a zona centrica, salon de usos múltiples.</p>
+                        <p>Departamentos de 45/55/65 y 70 metros cuadrados</p>
+                        <a href="property-detail.html" class="link-arrow" style="color: white; text-decoration: blink">¡Me interesa!</a>
+                    </div>
+
+
+                </div>
             </div>
         </div>
         @endforeach
