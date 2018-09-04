@@ -24,7 +24,7 @@
                             <h4>• ¿Querés mudarte? No comprometas a tus familiares o amigos como garantes. Obtene tu descuento para contratar un seguro de caución con nuestras aseguradoras asociadas.</h4>
                             <h4>• ¿Queres autoadministrar tu alquiler? Mientras la tasa sugerida por el Colegio de Corredores Inmobiliarios es de 10%, la suscripción al servicio de administración es de tan solo de 3.85%</h4>
 
-                            <a href="{{ route('listapropiedades.index') }}" class="link-arrow">Más de Nosotros </a>
+                            <a href="{{ route('propiedades.index') }}" class="link-arrow">Más de Nosotros </a>
                         </aside>
 
                     </div><!-- /.feature-box -->

@@ -36,8 +36,14 @@
 @endsection
 
 @section('script')
-<script>
-    $("#nav-inicio").addClass("active");
-</script>
 <script src="{{ asset('js/front/inicio.js') }}"></script>
+<script src="{{ asset('js/front/lista-propiedades.js') }}"></script>
+
+
+
+<script>
+     // señalo como activo el módulo en navtop     
+    $("#nav-inicio").addClass("active");
+    instanciar_slider_precio();
+</script>
 @endsection

@@ -10,7 +10,7 @@
             </div>
             <div class="user-area">
                 <div class="actions">
-                    <a href="sign-in.html"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;Ingresar</a>
+                    <a href="/login"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;Ingresar</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand nav" id="brand">
-                    <a href="index-google-map-fullscreen.html">
+                    <a href="/">
                         <img src="{{ asset('imagenes/iconos/logo_cloudprop.png') }}" style="float: left;" id="img-logo" width="220" alt="brand">
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                         <a href="/">Inicio</a>                     
                     </li>
                     <li id="nav-listapropiedades">
-                        <a href="/listapropiedades">Propiedades</a>                        
+                        <a href="/propiedades">Propiedades</a>                        
                     </li>
                     <li id="nav-nosotros">
                         <a href="/nosotros">Quiénes somos</a>                       

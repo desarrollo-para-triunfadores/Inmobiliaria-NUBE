@@ -5,9 +5,10 @@
         @include('front.partes.estilos')
         @yield('estilos')
     </head>
-    <body>
+    <body class="page-sub-page" id="page-top">
         <!-- Wrapper -->
         <div class="wrapper">
+            
             <!-- Inicio Navbar-->
             @include('front.partes.navbar')         
             <!-- Fin Navbar -->
@@ -18,13 +19,9 @@
 
             <!-- Inicio  Pie de Página -->
             @include('front.partes.pie')
-            {{--
-            --}}
             <!-- Fin Pie de Página -->
+            
         </div>
-        {{--
-        <div id="overlay"></div>
-        --}}
         @include('front.partes.scripts')
         @yield('script')
     </body>

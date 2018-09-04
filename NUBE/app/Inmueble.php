@@ -99,17 +99,63 @@ class Inmueble extends Model {
          * Para saber si se puede borrar o no un inmueble se verifica unicamente 
          * que no tenga un contrato vigente.
          */
-        
+
         $respuesta = true;
 
         if ($this->contratos->count() > 0) {
-            $respuesta = !$this->contratos->last()->vigente();           
+            $respuesta = !$this->contratos->last()->vigente();
         }
 
         return $respuesta;
     }
 
-    public function foto_slider() {
-        return $this->fotos->where('seccion_imagen', 'slider')->last();//->get()->first();
+    public function foto_portada() {
+        $nombre_foto = $this->fotos->where('seccion_imagen', 'portada')->last();
+
+        if ($nombre_foto) {
+            $nombre_foto = $nombre_foto->nombre;
+        } else {
+            $nombre_foto = false;
+        }
+
+
+        return $nombre_foto;
     }
+
+    public function fotos_planos() {
+        $nombres_fotos = $this->fotos->where('seccion_imagen', 'planoMin')->pluck('nombre')->toArray();
+        if (count($nombres_fotos) < 1) {
+            $nombres_fotos = false;
+        }
+        return $nombres_fotos;
+    }
+
+    public function fotos_detalle() {
+        $nombres_fotos = $this->fotos->where('seccion_imagen', '<>','planoMin')->pluck('nombre')->toArray();
+        if (count($nombres_fotos) < 1) {
+            $nombres_fotos = false;
+        }
+        return $nombres_fotos;
+    }
+
+    public function mostrar_condicion() {
+
+        /*
+         * Este método devuelve la condición formateado para mostrar en el sitio público
+         */
+
+        switch ($this->condicion) {
+            case "alquiler":
+                $condicion = "Alquiler";
+                break;
+            case "alquiler/venta":
+                $condicion = "Alquiler o Venta";
+                break;
+            case "venta":
+                $condicion = "Venta";
+                break;
+        }
+        return $condicion;
+    }
+
 }

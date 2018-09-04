@@ -1,67 +1,60 @@
 <section id="banner-busqueda">
     <div class="block center text-banner fondo-traslucido">
         <div class="container">
-            <form role="form">
+            <form role="form" id="form-sidebar" class="form-search" method="get" action="/propiedades">
+                <input id="orden" type="text" name="orden" class="hide" value=""> 
                 <div class="row">
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
-                            <select name="form-sale-country" style="display: none;">
-                                @foreach($paises as $pais)
-                                    <option value="{{$pais->id}}">{{$pais->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                    </div>
-                    <div class="col-md-2 col-sm-4">
-                        <div class="form-group">
-                            <select name="form-sale-city" style="display: none;">
+                            <select id="provincia_id" data-live-search="true" name="provincia_id" data-header="Provincia" onchange="cargar_localidades({{$localidades}})">
+                                <option localidades="" value="">Cualquier Provincia</option>
                                 @foreach($provincias as $provincia)
-                                    <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                                <option localidades="{{$provincia->localidades}}" value="{{$provincia->id}}">{{$provincia->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <!-- /.form-group -->
                     </div>
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
-                            <select name="form-sale-district" style="display: none;">
+                            <select data-live-search="true" id="localidad_id" name="localidad_id" data-header="Localidad">
+                                <option value="">Cualquier Localidad</option>
                                 @foreach($localidades as $localidad)
-                                    <option value="{{$localidad->id}}">{{$localidad->nombre}}</option>
+                                <option value="{{$localidad->id}}">{{$localidad->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <!-- /.form-group -->
-                    </div>
+                    </div>                  
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
-                            <select name="form-sale-property-type" style="display: none;">
-                                <option value="">Tipo Inmueble</option>
-                                <option value="1">Apartment</option>
-                                <option value="2">Condominium</option>
-                                <option value="3">Cottage</option>
-                                <option value="4">Flat</option>
-                                <option value="5">House</option>
+                            <select data-live-search="true" name="tipo_id" data-header="Tipo Inmueble">
+
+                                @foreach($tipos_inmuebles as $tipo_inmueble)
+                                <option value="{{$tipo_inmueble->id}}">{{$tipo_inmueble->nombre}}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <!-- /.form-group -->
                     </div>
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
-                            <select name="form-sale-price" style="display: none;">
-                                <option value="">Tipo Operación</option>
-                                <option value="1">$10,000 +</option>
-                                <option value="2">$50,000 +</option>
-                                <option value="3">$100,000 +</option>
-                                <option value="4">$500,000 +</option>
+                            <select data-live-search="true" data-header="Condición" id="condicion" name="condicion">                                
+                                <option rango="{{$rango_alquiler}}" value="alquiler">Alquiler</option>
+                                <option rango="{{$rango_alquiler_venta}}" value="alquiler/venta">Alquiler / Venta</option>
+                                <option rango="{{$rango_venta}}" value="venta">Venta</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <div class="form-group">
+                            <div  class="price-range">
+                                <!--Este input se instancia en la sección script de esta página con el fin de setear el valor máximo con el valor máximo que se dispone para un inmueble-->       
+                                <input id="precio_range" type="text" name="rango_precio" value=""> 
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4">
                         <div class="form-group">
                             <button type="submit" class="btn btn-busqueda">Buscar</button>
                         </div>
-                        <!-- /.form-group -->
                     </div>
                 </div>
             </form>

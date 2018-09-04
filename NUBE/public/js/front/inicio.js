@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
     /*Redefinimos el tamaño de la portada basado en el tamaño de la pantalla*/
-    resize_portada();    
+    resize_portada();
 });
 
 /*Evento asociado al cambio de resulción de la ventana del navegador*/
@@ -30,7 +30,6 @@ $(".img_scroll").hover(function () {
 $(".img_play").hover(function () {
     $(this).toggleClass("animated infinite pulse");
 });
-
 
 
 /*MagnificPopup*/
@@ -57,10 +56,10 @@ $('.image-link').magnificPopup({
 
 /* * * * * * * * * * * * * * *  Efectos de secciones de DESCRIPCION (Home) * * * * * * * * * * * * * */
 
-$('.img-parallax').each(function(){
+$('.img-parallax').each(function () {
     var img = $(this);
     var imgParent = $(this).parent();
-    function parallaxImg () {
+    function parallaxImg() {
         var speed = img.data('speed');
         var imgY = imgParent.offset().top;
         var winY = $(this).scrollTop();

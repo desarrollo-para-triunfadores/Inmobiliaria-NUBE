@@ -262,6 +262,8 @@ class InmueblesController extends Controller {
 
     public function show($id) {
         $inmueble = Inmueble::find($id);
+        
+        
         $imagenesInmueble = ImagenInmueble::where('inmueble_id', $id)->orderBy('id', 'desc')->get();
 
         $imagenes_detalle = [];

@@ -23,7 +23,7 @@
                         <br><h4>• Recaudamos los pagos de tus inquilinos, los acreditamos y aseguramos. Administramos los gastos de expensas en los inmuebles con exactitud</h4>            <br>
                         <h4>• Brindamos transparencia total en todos los procesos y notificamos todas las fechas de pago y eventos realacionados a tu inmueble</h4><br>
                         <h4>• Accedé a nuestro servicio de reparación y mantenimiento del hogar bonificado y a descuentos y ofertas exclusivas de comercios adheridos al Club de Beneficios de tu Ciudad</h4>
-                        <a href="{{ route('listapropiedades.index') }}" class="link-arrow">Más de Nosotros </a>
+                        <a href="{{ route('propiedades.index') }}" class="link-arrow">Más de Nosotros </a>
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->

@@ -12,6 +12,7 @@
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/zoner/assets/css/owl.carousel.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/zoner/assets/css/owl.transitions.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/zoner/assets/css/style.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ asset('plantillas/zoner/assets/css/sweetalert2.min.css') }}">
 
 <!-- Magnific Popup core CSS file -->
 <link type="text/css" rel="stylesheet" href="{{ asset('plantillas/zoner/assets/css/magnific-popup.css') }}">

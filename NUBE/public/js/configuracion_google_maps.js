@@ -1,4 +1,8 @@
 function instanciar_mapa() {//Mapa usado en la sección de ubicación
+    
+    console.log("marcador");
+    
+console.log(marcador);
 
     $("#latitud").val(marcador.lat);
     $("#longitud").val(marcador.lng);

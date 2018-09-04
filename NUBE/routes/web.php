@@ -26,7 +26,7 @@ Route::resource('enviar_consulta', 'OportunidadesFrontController'); //Enviar ema
 Route::resource('/detalle', 'frontDetalleController');
 Route::resource('/nosotros', 'frontNosotrosController');
 Route::name('/comofunciona')->get('/comofunciona/', 'frontHomeController@comofunciona');
-Route::resource('/listapropiedades', 'frontListadoController');
+Route::resource('/propiedades', 'frontInmueblesController');
 Route::resource('/contacto', 'ContactoFrontController');
 Route::resource('/mail', 'MailFrontController');
 //Route::resource('/contacto/store', 'ContactoFrontController');
@@ -95,7 +95,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
      */
     //Agenda
 
-    Route::get('cargaEventos{id?}', 'CalendarController@index');
+  //  Route::get('cargaEventos{id?}', 'CalendarController@index');
 
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');
 
@@ -157,7 +157,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('tecnicos', 'TecnicosController');
     //Visitas
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
-    Route::get('cargaEventos{id?}', 'CalendarController@index');
+//    Route::get('cargaEventos{id?}', 'CalendarController@index');
     Route::get('/actualizar_visita', 'VisitasController@actualizar')->name('actualizar_visita');
     Route::get('/eliminar_visita', 'VisitasController@eliminar')->name('eliminar_visita');
     Route::get('/datos_visita', 'VisitasController@eliminar')->name('datos_visita');

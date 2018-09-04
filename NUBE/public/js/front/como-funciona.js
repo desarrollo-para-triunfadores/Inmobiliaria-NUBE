@@ -5,14 +5,12 @@
  */
 
 $(document).ready(function () {
-    console.log(22);
     /*Redefinimos el tamaño de la portada basado en el tamaño de la pantalla*/
     resize_portada();    
 });
 
 /*Evento asociado al cambio de resulción de la ventana del navegador*/
 $(window).resize(function () {
-    console.log(33);
     resize_portada();
     // resize_section_iconos();
 });

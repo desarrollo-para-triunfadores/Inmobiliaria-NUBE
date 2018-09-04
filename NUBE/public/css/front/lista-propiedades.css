@@ -8,3 +8,7 @@ and open the template in the editor.
     Author     : hacho
 */
 
+.agent-form .agent-info {
+    padding-left: 0px;
+    position: relative;
+}

@@ -1,5 +1,5 @@
 <header class=" bg-black-active main-header">
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
         <span class="logo-mini"><b>🏬 </b></span>
         <span class="logo-lg"><b>CloudProp</b></span>
     </a>

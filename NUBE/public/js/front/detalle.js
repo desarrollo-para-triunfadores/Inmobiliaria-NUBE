@@ -5,3 +5,25 @@
  */
 
 
+
+var map;
+
+function initMap() {
+    console.log("swsw");
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: marcador,
+        zoom: 15
+    });
+
+    var marker = new google.maps.Marker({
+        position: marcador,
+        map: map,
+        title: 'Hello World!'
+    });
+
+//    marker.addListener('click', toggleBounce);
+}
+
+
+
+

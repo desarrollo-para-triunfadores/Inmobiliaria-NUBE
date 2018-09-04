@@ -7,15 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Session;
 
-class OportunidadesFrontController extends Controller
-{
+class OportunidadesFrontController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -24,29 +23,7 @@ class OportunidadesFrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-    {
-        if($request->ajax()){
-            $oportunidad = new Oportunidad();
-
-            $validator = Validator::make($request->all(), [
-                'nombre_interesado' => 'required|max:50|unique:oportunidades',
-                'email' => 'required|email|unique:oportunidades,email',
-                'telefono' => 'unique:oportunidades',
-            ]);
-            if ($validator->fails()) {  //si falla la validaci�n de datos ?
-                Session::flash('message', 'Verifica tus datos, el mensaje no se envio.');
-            }
-            $oportunidad->inmueble_id = $request->inmueble_id;
-            $oportunidad->mensaje = $request->mensaje;
-            $oportunidad->nombre_interesado = $request->nombre;
-            $oportunidad->email = $request->email;
-            $oportunidad->telefono = $request->telefono;
-            $oportunidad->estado_id = 1;
-            $oportunidad->save();
-            Session::flash('message', 'Tu mensaje fue enviado satisfactoriamente  ??');
-            //return redirect()->route('paises.index');
-        }
+    public function create(Request $request) {
     }
 
     /**
@@ -55,9 +32,12 @@ class OportunidadesFrontController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $oportunidad = new Oportunidad($request->all());
+        $oportunidad->estado_id = 1;
+        $oportunidad->save();
+        Session::flash('message', '<strong>¡Hola ' . $oportunidad->nombre_interesado . '!</strong>. Prontamente nos pondremos en contacto contigo por inmueble que te interesó. <strong>¡Hasta pronto!</strong>');
+        return redirect()->route('propiedades.show', $request->inmueble_id);
     }
 
     /**
@@ -66,8 +46,7 @@ class OportunidadesFrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -77,8 +56,7 @@ class OportunidadesFrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -89,8 +67,7 @@ class OportunidadesFrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -100,8 +77,8 @@ class OportunidadesFrontController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }
