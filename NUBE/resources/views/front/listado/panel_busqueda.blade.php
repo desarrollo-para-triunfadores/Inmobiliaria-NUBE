@@ -86,7 +86,7 @@
             <div class="form-group">
                 <div  class="price-range">
                     <!--Este input se instancia en la sección script de esta página con el fin de setear el valor máximo con el valor máximo que se dispone para un inmueble-->       
-                    @if(isset($parametros["rango_precio"]))
+                    @if(isset($parametros["rango_precio"]) && $parametros["rango_precio"])
                     <input id="precio_range" type="text" name="rango_precio" value="{{$parametros["rango_precio"]}}"> 
                     @else
                     <input id="precio_range" type="text" name="rango_precio" value=""> 

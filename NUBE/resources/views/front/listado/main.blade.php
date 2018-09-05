@@ -43,6 +43,6 @@
 <script src="{{ asset('js/front/lista-propiedades.js') }}"></script>
 <script>
     $("#nav-listapropiedades").addClass("active");
-    instanciar_slider_precio();
+    instanciar_slider_precio($("#precio_range").val());
 </script>
 @endsection

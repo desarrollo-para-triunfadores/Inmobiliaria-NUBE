@@ -5,9 +5,9 @@
  */
 
 
-function instanciar_slider_precio() {
+function instanciar_slider_precio(rango_busqueda) {
     
-    var rango_busqueda = $("#precio_range").val();
+    console.log(rango_busqueda);
     var combo = document.getElementById("condicion"),
             rango = combo.options[combo.selectedIndex].getAttribute("rango"),
             rango_split = rango.split(";");
