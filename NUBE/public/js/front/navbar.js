@@ -16,29 +16,32 @@ $(document).ready(function () {
 
 function cambiar_navbar() {
     if ($(window).scrollTop() > altura) {
+        $('.navigation').addClass('menu-fixed');
+        $('.secondary-navigation').addClass('hide');
+        $('.navbar').css('padding', '10px 0');
+        $('#img-logo').attr('width', '160');
+
+
         var ancho = $(window).width();
         if (ancho < 800) {
-            $('.secondary-navigation').addClass('hide');
-            $('.navbar').css('padding', '10px 0');
-            $('#img-logo').attr('width', '160');
             determinar_sentido_scroll();
         } else {
-            $('.navigation').addClass('menu-fixed');
-            $('.secondary-navigation').addClass('hide');
-            $('.navbar').css('padding', '10px 0');
-            $('#img-logo').attr('width', '160');
             $('.navigation').addClass('fadeInDown animated');
         }
+
     } else {
         $('.navigation').removeClass('menu-fixed');
         $('.secondary-navigation').removeClass('hide');
         $('.navbar').css('padding', '20px 0');
         $('#img-logo').attr('width', '220');
         $('.navigation').removeClass('fadeInDown animated');
+        $('.navigation').addClass('fadeIn animated');
+
     }
 }
 
 function determinar_sentido_scroll() {
+   
     var obj = $(document);          //objeto sobre el que quiero detectar scroll
     var obj_top = obj.scrollTop()   //scroll vertical inicial del objeto
     obj.scroll(function () {
@@ -47,8 +50,10 @@ function determinar_sentido_scroll() {
             //scroll hacia abajo
             $('.navigation').removeClass('menu-fixed');
             $('.navigation').removeClass('fadeInDown animated');
+            $('.navigation').addClass('fadeOutUp animated');
         } else {
             //scroll hacia arriba
+            $('.navigation').removeClass('fadeOutUp animated');
             $('.navigation').addClass('menu-fixed');
             $('.navigation').addClass('fadeInDown animated');
         }

@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-
-
 var map;
 
 function initMap() {

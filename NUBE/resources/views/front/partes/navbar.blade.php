@@ -1,6 +1,6 @@
 
 <div class="navigation">
-    <div class="secondary-navigation fadeIn animated animated">
+    <div class="secondary-navigation fadeIn animated">
         <div class="container">
             <div class="contact">
                 <figure>
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="container fadeIn animated animated">
+    <div class="container fadeIn animated">
         <header class="navbar" id="top" role="banner">
             <div class="navbar-header">
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
